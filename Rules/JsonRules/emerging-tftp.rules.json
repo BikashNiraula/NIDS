@@ -1,0 +1,225 @@
+[
+  {
+    "id": "2008117",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "69",
+    "classtype": "policy-violation",
+    "content": "|00 03|",
+    "depth": "2",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET TFTP Outbound TFTP Data Transfer",
+    "revision": "3"
+  },
+  {
+    "id": "2008118",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "69",
+    "classtype": "policy-violation",
+    "content": "|00 04|",
+    "depth": "2",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET TFTP Outbound TFTP ACK",
+    "revision": "3"
+  },
+  {
+    "id": "2008119",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "69",
+    "classtype": "policy-violation",
+    "content": "|00 05|",
+    "depth": "2",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET TFTP Outbound TFTP Error Message",
+    "revision": "3"
+  },
+  {
+    "id": "2100518",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "69",
+    "classtype": "bad-unknown",
+    "content": "|00 02|",
+    "depth": "2",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL TFTP Put",
+    "revision": "8"
+  },
+  {
+    "id": "2101442",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "69",
+    "classtype": "successful-admin",
+    "content": "shadow",
+    "depth": "2",
+    "offset": "2",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL TFTP GET shadow",
+    "revision": "5"
+  },
+  {
+    "id": "2101443",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "69",
+    "classtype": "successful-admin",
+    "content": "passwd",
+    "depth": "2",
+    "offset": "2",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL TFTP GET passwd",
+    "revision": "5"
+  },
+  {
+    "id": "2101289",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "69",
+    "classtype": "successful-admin",
+    "content": "admin.dll",
+    "depth": "2",
+    "offset": "2",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL TFTP GET Admin.dll",
+    "revision": "5"
+  },
+  {
+    "id": "2101441",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "69",
+    "classtype": "successful-admin",
+    "content": "nc.exe",
+    "depth": "2",
+    "offset": "2",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL TFTP GET nc.exe",
+    "revision": "5"
+  },
+  {
+    "id": "2101222",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "69",
+    "classtype": "attempted-admin",
+    "content": "|00 01 25 2E|",
+    "depth": "4",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL TFTP MISC TFTP32 Get Format string attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2008120",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "[$EXTERNAL_NET,!255.255.255.255]",
+    "destination_port": "69",
+    "classtype": "policy-violation",
+    "content": "|00 01|",
+    "depth": "2",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET TFTP Outbound TFTP Read Request",
+    "revision": "4"
+  },
+  {
+    "id": "2008116",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "[$EXTERNAL_NET,!255.255.255.255]",
+    "destination_port": "69",
+    "classtype": "policy-violation",
+    "content": "|00 02|",
+    "depth": "2",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET TFTP Outbound TFTP Write Request",
+    "revision": "4"
+  },
+  {
+    "id": "2015857",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "69",
+    "classtype": "policy-violation",
+    "content": "|0a 21 20|version|20|",
+    "depth": "2",
+    "metadata": {
+      "created_at": "2012_11_01"
+    },
+    "message": "ET TFTP Outbound TFTP Data Transfer with Cisco config",
+    "revision": "5"
+  },
+  {
+    "id": "2024481",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "69",
+    "classtype": "policy-violation",
+    "content": "NVRAM config last update",
+    "depth": "2",
+    "metadata": {},
+    "message": "ET TFTP Outbound TFTP Data Transfer With Cisco Config 2",
+    "revision": "2"
+  }
+]

@@ -1,0 +1,1143 @@
+[
+  {
+    "id": "2010819",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "5222",
+    "classtype": "policy-violation",
+    "content": "jabber|3A|client",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT Facebook Chat using XMPP",
+    "revision": "4"
+  },
+  {
+    "id": "2008298",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "8074",
+    "classtype": "policy-violation",
+    "content": "|15 00 00 00|",
+    "flow": "established,to_server",
+    "depth": "4",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT GaduGadu Chat Client Login Packet",
+    "revision": "3"
+  },
+  {
+    "id": "2008300",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "8074",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "policy-violation",
+    "content": "|09 00 00 00 00 00 00 00|",
+    "flow": "established,from_server",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT GaduGadu Chat Server Login Failed Packet",
+    "revision": "3"
+  },
+  {
+    "id": "2008301",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "8074",
+    "classtype": "policy-violation",
+    "content": "|02 00 00 00|",
+    "flow": "established,to_server",
+    "depth": "4",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT GaduGadu Chat Server Available Status Packet",
+    "revision": "3"
+  },
+  {
+    "id": "2008302",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "8074",
+    "classtype": "policy-violation",
+    "content": "|0b 00 00 00|",
+    "flow": "established,to_server",
+    "depth": "4",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT GaduGadu Chat Send Message",
+    "revision": "3"
+  },
+  {
+    "id": "2008303",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "8074",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "policy-violation",
+    "content": "|0a 00 00 00|",
+    "flow": "established,from_server",
+    "depth": "4",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT GaduGadu Chat Receive Message",
+    "revision": "3"
+  },
+  {
+    "id": "2008304",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "8074",
+    "classtype": "policy-violation",
+    "content": "|08 00 00 00|",
+    "flow": "established,to_server",
+    "depth": "4",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT GaduGadu Chat Keepalive PING",
+    "revision": "3"
+  },
+  {
+    "id": "2008305",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "8074",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "policy-violation",
+    "content": "|07 00 00 00|",
+    "flow": "established,from_server",
+    "depth": "4",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT GaduGadu Chat Keepalive PONG",
+    "revision": "3"
+  },
+  {
+    "id": "2008306",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "8074",
+    "classtype": "policy-violation",
+    "content": "|01 00 00 00|",
+    "flow": "established,to_server",
+    "depth": "4",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT GaduGadu Chat File Send Request",
+    "revision": "3"
+  },
+  {
+    "id": "2008307",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "8074",
+    "classtype": "policy-violation",
+    "content": "|03 00 00 00|",
+    "flow": "established,to_server",
+    "depth": "4",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT GaduGadu Chat File Send Details",
+    "revision": "3"
+  },
+  {
+    "id": "2008308",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "8074",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "policy-violation",
+    "content": "|06 00 00 00|",
+    "flow": "established,from_server",
+    "depth": "4",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT GaduGadu Chat File Send Accept",
+    "revision": "3"
+  },
+  {
+    "id": "2008309",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "8074",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "policy-violation",
+    "content": "|03 00 00 00|",
+    "flow": "established,from_server",
+    "depth": "4",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT GaduGadu Chat File Send Begin",
+    "revision": "3"
+  },
+  {
+    "id": "2001801",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "5190",
+    "classtype": "policy-violation",
+    "content": "|001900130005|",
+    "flow": "from_client,established",
+    "depth": "6",
+    "offset": "4",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT ICQ Status Invisible",
+    "revision": "5"
+  },
+  {
+    "id": "2001802",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "5190",
+    "classtype": "policy-violation",
+    "content": "|000E00010011|",
+    "flow": "from_client,established",
+    "depth": "6",
+    "offset": "4",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT ICQ Status Change (1)",
+    "revision": "6"
+  },
+  {
+    "id": "2001803",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "5190",
+    "classtype": "policy-violation",
+    "content": "|00120001001E|",
+    "flow": "from_client,established",
+    "depth": "6",
+    "offset": "4",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT ICQ Status Change (2)",
+    "revision": "6"
+  },
+  {
+    "id": "2001804",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "5190",
+    "classtype": "policy-violation",
+    "content": "|00010001|",
+    "flow": "from_client,established",
+    "depth": "4",
+    "offset": "8",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT ICQ Login",
+    "revision": "5"
+  },
+  {
+    "id": "2002327",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "5222",
+    "classtype": "policy-violation",
+    "content": "jabber",
+    "flow": "established,to_server",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT Google Talk (Jabber) Client Login",
+    "revision": "4"
+  },
+  {
+    "id": "2000355",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "misc-activity",
+    "content": "Looking up your hostname...",
+    "flow": "established",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT IRC authorization message",
+    "revision": "5"
+  },
+  {
+    "id": "2001427",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "any",
+    "classtype": "policy-violation",
+    "content": "|59 47 00 0b 00 00 00 00 00 12 00 00 00 00|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT Yahoo IM Unavailable Status",
+    "revision": "6"
+  },
+  {
+    "id": "2002659",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "policy-violation",
+    "content": "EVENT=InstallBegin",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT Yahoo IM Client Install",
+    "revision": "5"
+  },
+  {
+    "id": "2001254",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "policy-violation",
+    "content": "|00|J",
+    "flow": "from_server,established",
+    "depth": "2",
+    "offset": "10",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT Yahoo IM voicechat",
+    "revision": "7"
+  },
+  {
+    "id": "2007866",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "trojan-activity",
+    "content": "\u0026lastmsg=",
+    "flow": "established,to_server",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT Gadu-Gadu Chat Client Checkin via HTTP",
+    "revision": "7"
+  },
+  {
+    "id": "2010784",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "policy-violation",
+    "content": "facebook.com",
+    "flow": "established,to_server",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT Facebook Chat (send message)",
+    "revision": "3"
+  },
+  {
+    "id": "2010785",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "policy-violation",
+    "content": "facebook.com",
+    "flow": "established,to_server",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT Facebook Chat (buddy list)",
+    "revision": "4"
+  },
+  {
+    "id": "2002334",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "5222",
+    "classtype": "policy-violation",
+    "content": "version=",
+    "flow": "to_server",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT Google IM traffic Jabber client sign-on",
+    "revision": "5"
+  },
+  {
+    "id": "2001595",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "policy-violation",
+    "content": "/getlatestversion?ver=",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT Skype VOIP Checking Version (Startup)",
+    "revision": "10"
+  },
+  {
+    "id": "2008295",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "policy-violation",
+    "content": "Host|3a| appmsg.gadu-gadu.",
+    "flow": "established,to_server",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT Gadu-Gadu IM Login Server Request",
+    "revision": "6"
+  },
+  {
+    "id": "2101990",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "1863",
+    "classtype": "policy-violation",
+    "content": "CAL",
+    "flow": "to_server,established",
+    "depth": "4",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT MSN user search",
+    "revision": "2"
+  },
+  {
+    "id": "2101991",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "1863",
+    "classtype": "policy-violation",
+    "content": "TWN",
+    "flow": "to_server,established",
+    "depth": "4",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT MSN login attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2101986",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "1863",
+    "classtype": "policy-violation",
+    "content": "INVITE",
+    "flow": "established",
+    "depth": "4",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT MSN outbound file transfer request",
+    "revision": "7"
+  },
+  {
+    "id": "2101988",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "1863",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "policy-violation",
+    "content": "MSNSLP/1.0 200 OK",
+    "flow": "established",
+    "depth": "4",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT MSN outbound file transfer accept",
+    "revision": "6"
+  },
+  {
+    "id": "2101989",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "1863",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "policy-violation",
+    "content": "MSNSLP/1.0 603 Decline",
+    "flow": "established",
+    "depth": "4",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT MSN outbound file transfer rejected",
+    "revision": "7"
+  },
+  {
+    "id": "2100541",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "any",
+    "classtype": "policy-violation",
+    "content": "User-Agent|3A|ICQ",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT ICQ access",
+    "revision": "12"
+  },
+  {
+    "id": "2002023",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "6666:7000",
+    "classtype": "misc-activity",
+    "content": "|0a|",
+    "flow": "to_server,established",
+    "depth": "5",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT IRC USER command",
+    "revision": "15"
+  },
+  {
+    "id": "2002024",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "6666:7000",
+    "classtype": "misc-activity",
+    "content": "|0a|",
+    "flow": "to_server,established",
+    "depth": "5",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT IRC NICK command",
+    "revision": "18"
+  },
+  {
+    "id": "2002025",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "6666:7000",
+    "classtype": "misc-activity",
+    "content": "|0a|",
+    "flow": "to_server,established",
+    "depth": "50",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT IRC JOIN command",
+    "revision": "18"
+  },
+  {
+    "id": "2002026",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "6666:7000",
+    "classtype": "misc-activity",
+    "content": "PRIVMSG|20|",
+    "flow": "established,to_server",
+    "depth": "8",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT IRC PRIVMSG command",
+    "revision": "20"
+  },
+  {
+    "id": "2002027",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "any",
+    "source_port": "6666:7000",
+    "destination_ip": "any",
+    "destination_port": "any",
+    "classtype": "misc-activity",
+    "content": "PING|20|",
+    "flow": "from_server,established",
+    "depth": "5",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT IRC PING command",
+    "revision": "15"
+  },
+  {
+    "id": "2101640",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "6666:7000",
+    "classtype": "policy-violation",
+    "content": "|3A|.DCC CHAT chat",
+    "flow": "to_server,established",
+    "depth": "8",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT IRC DCC chat request",
+    "revision": "10"
+  },
+  {
+    "id": "2101639",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "6666:7000",
+    "classtype": "policy-violation",
+    "content": "|3A|.DCC SEND",
+    "flow": "to_server,established",
+    "depth": "8",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT IRC DCC file transfer request",
+    "revision": "11"
+  },
+  {
+    "id": "2102458",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "5050",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "policy-violation",
+    "content": "|00 98|",
+    "flow": "from_server,established",
+    "depth": "2",
+    "offset": "10",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT Yahoo IM successful chat join",
+    "revision": "5"
+  },
+  {
+    "id": "2102460",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "5100",
+    "classtype": "policy-violation",
+    "content": "\u003cR",
+    "flow": "to_server,established",
+    "depth": "2",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT Yahoo IM conference request",
+    "revision": "5"
+  },
+  {
+    "id": "2102452",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "5050",
+    "classtype": "policy-violation",
+    "content": "|00 12|",
+    "flow": "to_server,established",
+    "depth": "2",
+    "offset": "10",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT Yahoo IM ping",
+    "revision": "5"
+  },
+  {
+    "id": "2102459",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "5050",
+    "classtype": "policy-violation",
+    "content": "|00|P",
+    "flow": "to_server,established",
+    "depth": "2",
+    "offset": "10",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT Yahoo IM conference offer invitation",
+    "revision": "5"
+  },
+  {
+    "id": "2102455",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "5050",
+    "classtype": "policy-violation",
+    "content": "|00 1D|",
+    "flow": "to_server,established",
+    "depth": "2",
+    "offset": "10",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT Yahoo IM conference message",
+    "revision": "4"
+  },
+  {
+    "id": "2102461",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "5100",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "policy-violation",
+    "content": "|0D 00 05 00|",
+    "flow": "from_server,established",
+    "depth": "4",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT Yahoo IM conference watch",
+    "revision": "5"
+  },
+  {
+    "id": "2102456",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "5050",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "policy-violation",
+    "content": "|00|M",
+    "flow": "established",
+    "depth": "2",
+    "offset": "10",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT Yahoo Messenger File Transfer Receive Request",
+    "revision": "5"
+  },
+  {
+    "id": "2102451",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "5050",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "policy-violation",
+    "content": "|00|J",
+    "flow": "from_server,established",
+    "depth": "2",
+    "offset": "10",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT Yahoo IM voicechat",
+    "revision": "4"
+  },
+  {
+    "id": "2102454",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "5050",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "policy-violation",
+    "content": "|00 19|",
+    "flow": "from_server,established",
+    "depth": "2",
+    "offset": "10",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT Yahoo IM conference logon success",
+    "revision": "4"
+  },
+  {
+    "id": "2102453",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "5050",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "policy-violation",
+    "content": "|00 18|",
+    "flow": "from_server,established",
+    "depth": "2",
+    "offset": "10",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT Yahoo IM conference invitation",
+    "revision": "4"
+  },
+  {
+    "id": "2025066",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "6666:7000",
+    "classtype": "misc-activity",
+    "content": "|0a|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2013_07_13"
+    },
+    "message": "ET CHAT IRC USER Likely bot with 0 0 colon checkin",
+    "revision": "1"
+  },
+  {
+    "id": "2025067",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "!6666:7000",
+    "classtype": "misc-activity",
+    "content": "|0a|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2013_07_13"
+    },
+    "message": "ET CHAT IRC USER Off-port Likely bot with 0 0 colon checkin",
+    "revision": "1"
+  },
+  {
+    "id": "2008299",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "8074",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "policy-violation",
+    "content": "|03 00 00 00|",
+    "flow": "established,from_server",
+    "depth": "4",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT GaduGadu Chat Server Login OK Packet",
+    "revision": "4"
+  },
+  {
+    "id": "2100233",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "5222",
+    "classtype": "policy-violation",
+    "content": "\u003cmessage",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT Jabber/Google Talk Outoing Message",
+    "revision": "3"
+  },
+  {
+    "id": "2100230",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "5222",
+    "classtype": "not-suspicious",
+    "content": "\u003cstream",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT Jabber/Google Talk Outgoing Traffic",
+    "revision": "3"
+  },
+  {
+    "id": "2100877",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "5222",
+    "classtype": "policy-violation",
+    "content": "jabber|3A|client",
+    "flow": "established,to_server",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT Google Talk Startup",
+    "revision": "3"
+  },
+  {
+    "id": "2100232",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "5222",
+    "classtype": "policy-violation",
+    "content": "\u003cstream|3a|stream to=\\\"gmail.com\\",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT Google Talk Logon",
+    "revision": "4"
+  },
+  {
+    "id": "2100876",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "policy-violation",
+    "content": "/googletalk/google-talk-versioncheck.txt?",
+    "flow": "established,to_server",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT Google Talk Version Check",
+    "revision": "4"
+  },
+  {
+    "id": "2100235",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "5222",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "policy-violation",
+    "content": "\u003csuccess",
+    "flow": "to_client,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT Jabber/Google Talk Logon Success",
+    "revision": "3"
+  },
+  {
+    "id": "2100236",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "5222",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "policy-violation",
+    "content": "\u003cmessage",
+    "flow": "to_client,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT Jabber/Google Talk Incoming Message",
+    "revision": "3"
+  },
+  {
+    "id": "2008297",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "8074",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "policy-violation",
+    "content": "|01 00 00 00|",
+    "flow": "established,from_server",
+    "depth": "4",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT GaduGadu Chat Server Welcome Packet",
+    "revision": "5"
+  },
+  {
+    "id": "2101729",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "6666:7000",
+    "classtype": "policy-violation",
+    "content": "JOIN|20 3a 20 23|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL CHAT IRC Channel join",
+    "revision": "11"
+  },
+  {
+    "id": "2002028",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "6666:7000",
+    "classtype": "misc-activity",
+    "content": "PONG|20|",
+    "flow": "established,to_server",
+    "depth": "5",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT IRC PONG response",
+    "revision": "19"
+  },
+  {
+    "id": "2002157",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "policy-violation",
+    "content": "Skype",
+    "flow": "established,to_server",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET CHAT Skype User-Agent detected",
+    "revision": "11"
+  }
+]

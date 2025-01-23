@@ -1,0 +1,3250 @@
+[
+  {
+    "id": "2102003",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "1434",
+    "classtype": "misc-attack",
+    "content": "send",
+    "depth": "1",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL Slammer Worm propagation attempt",
+    "revision": "9"
+  },
+  {
+    "id": "2101775",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "3306",
+    "classtype": "protocol-command-decode",
+    "content": "|0A 00 00 01 85 04 00 00 80|root|00|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL MYSQL root login attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2101776",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "3306",
+    "classtype": "protocol-command-decode",
+    "content": "|0F 00 00 00 03|show databases",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL MYSQL show databases attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2101674",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "protocol-command-decode",
+    "content": "connect_data|28|command=version|29|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL connect_data remote version detection attempt",
+    "revision": "7"
+  },
+  {
+    "id": "2103152",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$SQL_SERVERS",
+    "source_port": "1433",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "any",
+    "classtype": "unsuccessful-user",
+    "content": "Login failed for user 'sa'",
+    "flow": "from_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL sa brute force failed login attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102576",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.generate_replication_support",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.generate_replication_support buffer overflow attempt",
+    "revision": "7"
+  },
+  {
+    "id": "2102599",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.add_grouped_column",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.add_grouped_column buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2100677",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "139",
+    "classtype": "attempted-user",
+    "content": "s|00|p|00|_|00|p|00|a|00|s|00|s|00|w|00|o|00|r|00|d|00|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL sp_password password change",
+    "revision": "7"
+  },
+  {
+    "id": "2100678",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "139",
+    "classtype": "attempted-user",
+    "content": "s|00|p|00|_|00|d|00|e|00|l|00|e|00|t|00|e|00|_|00|a|00|l|00|e|00|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL sp_delete_alert log file deletion",
+    "revision": "7"
+  },
+  {
+    "id": "2100680",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$SQL_SERVERS",
+    "source_port": "139",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "any",
+    "classtype": "attempted-user",
+    "content": "Login failed for user 'sa'",
+    "flow": "from_server,established",
+    "offset": "83",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL sa login failed",
+    "revision": "10"
+  },
+  {
+    "id": "2100683",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "1433",
+    "classtype": "attempted-user",
+    "content": "s|00|p|00|_|00|p|00|a|00|s|00|s|00|w|00|o|00|r|00|d|00|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL sp_password - password change",
+    "revision": "6"
+  },
+  {
+    "id": "2100684",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "1433",
+    "classtype": "attempted-user",
+    "content": "s|00|p|00|_|00|d|00|e|00|l|00|e|00|t|00|e|00|_|00|a|00|l|00|e|00|r|00|t|00|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL sp_delete_alert log file deletion",
+    "revision": "6"
+  },
+  {
+    "id": "2100685",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "1433",
+    "classtype": "attempted-user",
+    "content": "s|00|p|00|_|00|a|00|d|00|d|00|u|00|s|00|e|00|r|00|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL sp_adduser - database user creation",
+    "revision": "6"
+  },
+  {
+    "id": "2100688",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$SQL_SERVERS",
+    "source_port": "1433",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "any",
+    "classtype": "unsuccessful-user",
+    "content": "Login failed for user 'sa'",
+    "flow": "from_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL sa login failed",
+    "revision": "11"
+  },
+  {
+    "id": "2100690",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "139",
+    "classtype": "attempted-user",
+    "content": "x|00|p|00|_|00|p|00|r|00|i|00|n|00|t|00|s|00|t|00|a|00|t|00|e|00|m|00|e|00|n|00|t|00|s|00|",
+    "flow": "to_server,established",
+    "offset": "32",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL xp_printstatements possible buffer overflow",
+    "revision": "10"
+  },
+  {
+    "id": "2100692",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "139",
+    "classtype": "shellcode-detect",
+    "content": "9 |D0 00 92 01 C2 00|R|00|U|00|9 |EC 00|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL shellcode attempt",
+    "revision": "7"
+  },
+  {
+    "id": "2100693",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "1433",
+    "classtype": "shellcode-detect",
+    "content": "H|00|%|00|x|00|w|00 90 00 90 00 90 00 90 00 90 00|3|00 C0 00|P|00|h|00|.|00|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL MSSQL shellcode attempt 2",
+    "revision": "7"
+  },
+  {
+    "id": "2100694",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "139",
+    "classtype": "attempted-user",
+    "content": "H|00|%|00|x|00|w|00 90 00 90 00 90 00 90 00 90 00|3|00 C0 00|P|00|h|00|.|00|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL shellcode attempt",
+    "revision": "7"
+  },
+  {
+    "id": "2103273",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$SQL_SERVERS",
+    "source_port": "1433",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "any",
+    "classtype": "unsuccessful-user",
+    "content": "L|00|o|00|g|00|i|00|n|00| |00|f|00|a|00|i|00|l|00|e|00|d|00| |00|f|00|o|00|r|00| |00|u|00|s|00|e|00|r|00| |00|'|00|s|00|a|00|'|00|",
+    "flow": "from_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL sa brute force failed login unicode attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102703",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HTTP_SERVERS",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "web-application-attack",
+    "content": "!\"|0A|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL Oracle iSQLPlus login.uix username overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102699",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "TO_CHAR",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL TO_CHAR buffer overflow attempt",
+    "revision": "2"
+  },
+  {
+    "id": "2102698",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "file",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL create file buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102678",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "ctx_output.start_log",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL ctx_output.start_log buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102708",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_offline_og.begin_flavor_change",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_offline_og.begin_flavor_change buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102697",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "alter",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL alter file buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102709",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_offline_og.begin_instantiation",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_offline_og.begin_instantiation buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102652",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_offline_og.begin_load",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_offline_og.begin_load buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102711",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_offline_og.end_flavor_change",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_offline_og.end_flavor_change buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102712",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_offline_og.end_instantiation",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_offline_og.end_instantiation buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102713",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_offline_og.end_load",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_offline_og.end_load buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102714",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_offline_og.resume_subset_of_masters",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_offline_og.resume_subset_of_masters buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102715",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_offline_snapshot.begin_load",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_offline_snapshot.begin_load buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102635",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_offline_snapshot.end_load",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_offline_snapshot.end_load buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102717",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_rectifier_diff.differences",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_rectifier_diff.differences buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102718",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_rectifier_diff.rectify",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_rectifier_diff.rectify buffer overflow attempt",
+    "revision": "2"
+  },
+  {
+    "id": "2102719",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.abort_flavor_definition",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.abort_flavor_definition buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102720",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.add_column_group_to_flavor",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.add_column_group_to_flavor buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102721",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.add_columns_to_flavor",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.add_columns_to_flavor buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102674",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.add_delete_resolution",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.add_delete_resolution buffer overflow attempt",
+    "revision": "2"
+  },
+  {
+    "id": "2102722",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.add_object_to_flavor",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.add_object_to_flavor buffer overflow attempt",
+    "revision": "2"
+  },
+  {
+    "id": "2102723",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.add_priority_char",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.add_priority_char buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102724",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.add_priority_date",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.add_priority_date buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102725",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.add_priority_nchar",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.add_priority_nchar buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102727",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.add_priority_nvarchar2",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.add_priority_nvarchar2 buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102728",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.add_priority_raw",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.add_priority_raw buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102729",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.add_priority_varchar2",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.add_priority_varchar2 buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102730",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.add_site_priority_site",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.add_site_priority_site buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102731",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.add_unique_resolution",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.add_unique_resolution buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102732",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.add_update_resolution",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.add_update_resolution buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102733",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.alter_master_propagation",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.alter_master_propagation buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102619",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.alter_master_repobject",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.alter_master_repobject buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102734",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.alter_mview_propagation",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.alter_mview_propagation buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102741",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.alter_priority",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.alter_priority buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102735",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.alter_priority_char",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.alter_priority_char buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102736",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.alter_priority_date",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.alter_priority_date buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102737",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.alter_priority_nchar",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.alter_priority_nchar buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102738",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.alter_priority_number",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.alter_priority_number buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102739",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.alter_priority_nvarchar2",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.alter_priority_nvarchar2 buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102740",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.alter_priority_raw",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.alter_priority_raw buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102742",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.alter_priority_varchar2",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.alter_priority_varchar2 buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102744",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.alter_site_priority",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.alter_site_priority buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102743",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.alter_site_priority_site",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.alter_site_priority_site buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102745",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.alter_snapshot_propagation",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.alter_snapshot_propagation buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102747",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.begin_flavor_definition",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.begin_flavor_definition buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102609",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.cancel_statistics",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.cancel_statistics buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102748",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.comment_on_column_group",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.comment_on_column_group buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102749",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.comment_on_delete_resolution",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.comment_on_delete_resolution buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102750",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.comment_on_mview_repsites",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.comment_on_mview_repsites buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102751",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.comment_on_priority_group",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.comment_on_priority_group buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102752",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.comment_on_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.comment_on_repgroup buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102606",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.comment_on_repobject",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.comment_on_repobject buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102753",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.comment_on_repsites",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.comment_on_repsites buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102754",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.comment_on_site_priority",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.comment_on_site_priority buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102755",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.comment_on_unique_resolution",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.comment_on_unique_resolution buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102756",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.comment_on_update_resolution",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.comment_on_update_resolution buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102605",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.compare_old_values",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.compare_old_values buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102757",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.create_master_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.create_master_repgroup buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102758",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.create_master_repobject",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.create_master_repobject buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102603",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.create_mview_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.create_mview_repgroup buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102850",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.create_mview_repobject",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.create_mview_repobject buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102759",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.create_snapshot_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.create_snapshot_repgroup buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102851",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.create_snapshot_repobject",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.create_snapshot_repobject buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102760",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.define_column_group",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.define_column_group buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102761",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.define_priority_group",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.define_priority_group buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102762",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.define_site_priority",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.define_site_priority buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102763",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.do_deferred_repcat_admin",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.do_deferred_repcat_admin buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102764",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_column_group_from_flavor",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_column_group_from_flavor buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102765",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_column_group",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_column_group buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102766",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_columns_from_flavor",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_columns_from_flavor buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102767",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_delete_resolution",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_delete_resolution buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102601",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_master_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_master_repgroup buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102637",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_master_repobject",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_master_repobject buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102639",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_mview_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_mview_repgroup buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102769",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_mview_repobject",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_mview_repobject buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102770",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_object_from_flavor",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_object_from_flavor buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102777",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_priority",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_priority buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102771",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_priority_char",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_priority_char buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102779",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_site_priority_site",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_site_priority_site buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102772",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_priority_date",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_priority_date buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102773",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_priority_nchar",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_priority_nchar buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102774",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_priority_number",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_priority_number buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102775",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_priority_nvarchar2",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_priority_nvarchar2 buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102776",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_priority_raw",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_priority_raw buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102778",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_priority_varchar2",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_priority_varchar2 buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102780",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_site_priority",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_site_priority buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102781",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_snapshot_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_snapshot_repgroup buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102782",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_snapshot_repobject",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_snapshot_repobject buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102783",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_unique_resolution",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_unique_resolution buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102784",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_update_resolution",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.drop_update_resolution buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102785",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.execute_ddl",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.execute_ddl buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102852",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.generate_mview_support",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.generate_mview_support buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102786",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.generate_replication_package",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.generate_replication_package buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102853",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.generate_replication_trigger",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.generate_replication_trigger buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102854",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.generate_snapshot_support",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.generate_snapshot_support buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102788",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.make_column_group",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.make_column_group buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102789",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.obsolete_flavor_definition",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.obsolete_flavor_definition buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102790",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.publish_flavor_definition",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.publish_flavor_definition buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102791",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.purge_flavor_definition",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.purge_flavor_definition buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102792",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.purge_master_log",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.purge_master_log buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102793",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.purge_statistics",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.purge_statistics buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102631",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.refresh_mview_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.refresh_mview_repgroup buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102795",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.refresh_snapshot_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.refresh_snapshot_repgroup buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102796",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.register_mview_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.register_mview_repgroup buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102797",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.register_snapshot_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.register_snapshot_repgroup buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102798",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.register_statistics",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.register_statistics buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102799",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.relocate_masterdef",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.relocate_masterdef buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102855",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.remove_master_databases",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.remove_master_databases buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102800",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.rename_shadow_column_group",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.rename_shadow_column_group buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102627",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.repcat_import_check",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.repcat_import_check buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102801",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.resume_master_activity",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.resume_master_activity buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102804",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.send_and_compare_old_values",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.send_and_compare_old_values buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102626",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.send_old_values",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.send_old_values buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102805",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.set_columns",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.set_columns buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102806",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.set_local_flavor",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.set_local_flavor buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102807",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.specify_new_masters",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.specify_new_masters buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102808",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.suspend_master_activity",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.suspend_master_activity buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102856",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.switch_mview_master",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.switch_mview_master buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102857",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.switch_snapshot_master",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.switch_snapshot_master buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102809",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.unregister_mview_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.unregister_mview_repgroup buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102810",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.unregister_snapshot_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.unregister_snapshot_repgroup buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102811",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.validate_flavor_definition",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.validate_flavor_definition buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102812",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.validate_for_local_flavor",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat.validate_for_local_flavor buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102629",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat_admin.register_user_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat_admin.register_user_repgroup buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102624",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat_admin.unregister_user_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat_admin.unregister_user_repgroup buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102746",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat_auth.revoke_surrogate_repcat",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat_auth.revoke_surrogate_repcat buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102641",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat_instantiate.drop_site_instantiation",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat_instantiate.drop_site_instantiation buffer overflow attempt",
+    "revision": "5"
+  },
+  {
+    "id": "2102645",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat_instantiate.instantiate_offline",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat_instantiate.instantiate_offline buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102647",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat_instantiate.instantiate_online",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat_instantiate.instantiate_online buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102802",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat_rgt.check_ddl_text",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat_rgt.check_ddl_text buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102676",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat_rgt.drop_site_instantiation",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat_rgt.drop_site_instantiation buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102675",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat_rgt.instantiate_offline",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat_rgt.instantiate_offline buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102677",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat_rgt.instantiate_online",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat_rgt.instantiate_online buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102623",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat_sna_utl.create_snapshot_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat_sna_utl.create_snapshot_repgroup buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102621",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat_sna_utl.register_flavor_change",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat_sna_utl.register_flavor_change buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102622",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat_utl.drop_an_object",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL dbms_repcat_utl.drop_an_object buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102683",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "mdsys.md2.sdo_code_size",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL mdsys.md2.sdo_code_size buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102682",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "mdsys.md2.validate_geom",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL mdsys.md2.validate_geom buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102681",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "mdsys.sdo_admin.sdo_code_size",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL mdsys.sdo_admin.sdo_code_size buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102700",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "numtoyminterval",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL numtoyminterval buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102649",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "!\"|22|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL service_name buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102859",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "sys.dbms_repcat_conf.add_priority_char",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL sys.dbms_repcat_conf.add_priority_char buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102877",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "sys.dbms_repcat_conf.alter_site_priority_site",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL sys.dbms_repcat_conf.alter_site_priority_site buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102893",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "sys.dbms_repcat_conf.drop_priority_raw",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL sys.dbms_repcat_conf.drop_priority_raw buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102895",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "sys.dbms_repcat_conf.drop_priority_varchar2",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL sys.dbms_repcat_conf.drop_priority_varchar2 buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102822",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "sys.dbms_repcat_fla_mas.publish_flavor_definition",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL sys.dbms_repcat_fla_mas.publish_flavor_definition buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102830",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "sys.dbms_repcat_mas.create_master_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL sys.dbms_repcat_mas.create_master_repgroup buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102614",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "TIME_ZONE",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL time_zone buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2100681",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "139",
+    "classtype": "attempted-user",
+    "content": "x|00|p|00|_|00|c|00|m|00|d|00|s|00|h|00|e|00|l|00|l|00|",
+    "flow": "to_server,established",
+    "offset": "32",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL xp_cmdshell program execution",
+    "revision": "7"
+  },
+  {
+    "id": "2100673",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "1433",
+    "classtype": "attempted-user",
+    "content": "s|00|p|00|_|00|s|00|t|00|a|00|r|00|t|00|_|00|j|00|o|00|b|00|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL sp_start_job - program execution",
+    "revision": "6"
+  },
+  {
+    "id": "2102600",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.add_grouped_column",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL add_grouped_column ordered sname/oname buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102602",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_master_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL drop_master_repgroup ordered gname buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102604",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.create_mview_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL create_mview_repgroup ordered fname buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102607",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.comment_on_repobject",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL comment_on_repobject ordered type buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102610",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.cancel_statistics",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL cancel_statistics ordered sname/oname buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102616",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat_auth.grant_surrogate_repcat",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL grant_surrogate_repcat ordered userid buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102618",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.alter_mview_propagation",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL alter_mview_propagation ordered gname buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102625",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat_admin.unregister_user_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL unregister_user_repgroup ordered privilege_type buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102628",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.repcat_import_check",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL repcat_import_check ordered gowner/gname buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102630",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat_admin.register_user_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL register_user_repgroup ordered privilege_type buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102632",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.refresh_mview_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL refresh_mview_repgroup ordered gowner buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102634",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_rectifier_diff",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL rectifier_diff ordered sname1 buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102636",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_offline_snapshot.end_load",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL snapshot.end_load ordered gname buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102638",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_master_repobject",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL drop_master_repobject ordered type buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102640",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_repcat.drop_mview_repgroup",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL drop_mview_repgroup ordered gowner/gname buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102642",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "drop_site_instantiation",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL drop_site_instantiate ordered refresh_template_name buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102644",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "FROM_TZ",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL from_tz buffer overflow attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2102646",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "instantiate_offline",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL instantiate_offline ordered refresh_template_name buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102648",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "instantiate_online",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL instantiate_online ordered refresh_template_name buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2102653",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "dbms_offline_og.begin_load",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL og.begin_load ordered gname buffer overflow attempt",
+    "revision": "3"
+  },
+  {
+    "id": "2014910",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "3306",
+    "classtype": "bad-unknown",
+    "content": "SELECT|20|user|2c|password|20|from|20|mysql|2e|user",
+    "flow": "established,to_server",
+    "metadata": {},
+    "message": "ET SQL MySQL mysql.user Dump (Used in Metasploit Auth-Bypass Module)",
+    "revision": "3"
+  },
+  {
+    "id": "2102650",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "$ORACLE_PORTS",
+    "classtype": "attempted-user",
+    "content": "!\"|29|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL SQL user name buffer overflow attempt",
+    "revision": "4"
+  }
+]

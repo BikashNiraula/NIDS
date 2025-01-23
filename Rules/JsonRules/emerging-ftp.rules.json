@@ -1,0 +1,1017 @@
+[
+  {
+    "id": "2009981",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-user",
+    "content": "FROM",
+    "flow": "established,to_server",
+    "depth": "4",
+    "metadata": {},
+    "message": "ET FTP Possible FTP Daemon Username SELECT FROM SQL Injection Attempt",
+    "revision": "2"
+  },
+  {
+    "id": "2009982",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-user",
+    "content": "FROM",
+    "flow": "established,to_server",
+    "depth": "4",
+    "metadata": {},
+    "message": "ET FTP Possible FTP Daemon Username DELETE FROM SQL Injection Attempt",
+    "revision": "2"
+  },
+  {
+    "id": "2009983",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-user",
+    "content": "INTO",
+    "flow": "established,to_server",
+    "depth": "4",
+    "metadata": {},
+    "message": "ET FTP Possible FTP Daemon Username INSERT INTO SQL Injection Attempt",
+    "revision": "2"
+  },
+  {
+    "id": "2009984",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-user",
+    "content": "SET",
+    "flow": "established,to_server",
+    "depth": "4",
+    "metadata": {},
+    "message": "ET FTP Possible FTP Daemon Username UPDATE SET SQL Injection Attempt",
+    "revision": "2"
+  },
+  {
+    "id": "2009985",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-user",
+    "content": "SELECT",
+    "flow": "established,to_server",
+    "depth": "4",
+    "metadata": {},
+    "message": "ET FTP Possible FTP Daemon Username UNION SELECT SQL Injection Attempt",
+    "revision": "2"
+  },
+  {
+    "id": "2010081",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-user",
+    "content": "OUTFILE",
+    "flow": "established,to_server",
+    "depth": "4",
+    "metadata": {},
+    "message": "ET FTP Possible FTP Daemon Username INTO OUTFILE SQL Injection Attempt",
+    "revision": "2"
+  },
+  {
+    "id": "2101972",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "PASS",
+    "flow": "to_server,established,no_stream",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP PASS overflow attempt",
+    "revision": "17"
+  },
+  {
+    "id": "2101973",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "MKD",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP MKD overflow attempt",
+    "revision": "10"
+  },
+  {
+    "id": "2101974",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "REST",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP REST overflow attempt",
+    "revision": "7"
+  },
+  {
+    "id": "2101975",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "DELE",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP DELE overflow attempt",
+    "revision": "9"
+  },
+  {
+    "id": "2101976",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "RMD",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP RMD overflow attempt",
+    "revision": "10"
+  },
+  {
+    "id": "2101942",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "RMDIR",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP RMDIR overflow attempt",
+    "revision": "7"
+  },
+  {
+    "id": "2101920",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "NEWER",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP SITE NEWER overflow attempt",
+    "revision": "7"
+  },
+  {
+    "id": "2101921",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "ZIPCHK",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP SITE ZIPCHK overflow attempt",
+    "revision": "6"
+  },
+  {
+    "id": "2101928",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "suspicious-filename-detect",
+    "content": "shadow",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP shadow retrieval attempt",
+    "revision": "6"
+  },
+  {
+    "id": "2100334",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "suspicious-filename-detect",
+    "content": ".forward",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP .forward",
+    "revision": "6"
+  },
+  {
+    "id": "2102449",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "ALLO",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP ALLO overflow attempt",
+    "revision": "2"
+  },
+  {
+    "id": "2101621",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "CMD",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP CMD overflow attempt",
+    "revision": "11"
+  },
+  {
+    "id": "2101919",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "CWD",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP CWD overflow attempt",
+    "revision": "23"
+  },
+  {
+    "id": "2101888",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "misc-attack",
+    "content": "CPWD",
+    "flow": "established,to_server",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP SITE CPWD overflow attempt",
+    "revision": "9"
+  },
+  {
+    "id": "2101864",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-dos",
+    "content": "NEWER",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP SITE NEWER attempt",
+    "revision": "8"
+  },
+  {
+    "id": "2101779",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "denial-of-service",
+    "content": "....",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP CWD .... attempt",
+    "revision": "4"
+  },
+  {
+    "id": "2101728",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "denial-of-service",
+    "content": "~|0D 0A|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP CWD ~\u003cCR\u003e\u003cNEWLINE\u003e attempt",
+    "revision": "8"
+  },
+  {
+    "id": "2102391",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "APPE",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP APPE overflow attempt",
+    "revision": "10"
+  },
+  {
+    "id": "2101672",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "denial-of-service",
+    "content": "CWD",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP CWD ~ attempt",
+    "revision": "12"
+  },
+  {
+    "id": "2101624",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "protocol-command-decode",
+    "content": "PWD",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP large PWD command",
+    "revision": "7"
+  },
+  {
+    "id": "2101623",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "protocol-command-decode",
+    "content": "MODE",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP invalid MODE",
+    "revision": "8"
+  },
+  {
+    "id": "2101622",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "misc-attack",
+    "content": "././",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP RNFR ././ attempt",
+    "revision": "6"
+  },
+  {
+    "id": "2101529",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "SITE",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP SITE overflow attempt",
+    "revision": "11"
+  },
+  {
+    "id": "2101562",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "CHOWN",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP SITE CHOWN overflow attempt",
+    "revision": "12"
+  },
+  {
+    "id": "2100349",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "MKD",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP MKD overflow",
+    "revision": "12"
+  },
+  {
+    "id": "2100354",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "suspicious-login",
+    "content": "pass -iss@iss",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP iss scan",
+    "revision": "7"
+  },
+  {
+    "id": "2100355",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "suspicious-login",
+    "content": "pass wh00t",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP pass wh00t",
+    "revision": "7"
+  },
+  {
+    "id": "2100357",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "suspicious-login",
+    "content": "pass -cklaus",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP piss scan",
+    "revision": "7"
+  },
+  {
+    "id": "2100358",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "suspicious-login",
+    "content": "pass -saint",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP saint scan",
+    "revision": "7"
+  },
+  {
+    "id": "2100359",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "suspicious-login",
+    "content": "pass -satan",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP satan scan",
+    "revision": "7"
+  },
+  {
+    "id": "2100361",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "bad-unknown",
+    "content": "EXEC",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP SITE EXEC attempt",
+    "revision": "16"
+  },
+  {
+    "id": "2100362",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "bad-unknown",
+    "content": "--use-compress-program",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP tar parameters",
+    "revision": "14"
+  },
+  {
+    "id": "2102125",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "protocol-command-decode",
+    "content": "C|3A 5C|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP CWD Root directory transversal attempt",
+    "revision": "10"
+  },
+  {
+    "id": "2102546",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "MDTM",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP MDTM overflow attempt",
+    "revision": "6"
+  },
+  {
+    "id": "2011487",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "bad-unknown",
+    "content": "%",
+    "flow": "established,to_server",
+    "depth": "5",
+    "metadata": {
+      "created_at": "2010_09_29"
+    },
+    "message": "ET FTP Suspicious Percentage Symbol Usage in FTP Username",
+    "revision": "2"
+  },
+  {
+    "id": "2101229",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "bad-unknown",
+    "content": "...",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP CWD ...",
+    "revision": "8"
+  },
+  {
+    "id": "2100336",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "bad-unknown",
+    "content": "~root",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP CWD ~root attempt",
+    "revision": "11"
+  },
+  {
+    "id": "2102374",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "NLST",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP NLST overflow attempt",
+    "revision": "7"
+  },
+  {
+    "id": "2103441",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "misc-attack",
+    "content": "PORT",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP PORT bounce attempt",
+    "revision": "2"
+  },
+  {
+    "id": "2102392",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "RETR",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP RETR overflow attempt",
+    "revision": "8"
+  },
+  {
+    "id": "2103077",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "RNFR",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP RNFR overflow attempt",
+    "revision": "2"
+  },
+  {
+    "id": "2102389",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "RNTO",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP RNTO overflow attempt",
+    "revision": "8"
+  },
+  {
+    "id": "2101379",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "STAT",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP STAT overflow attempt",
+    "revision": "13"
+  },
+  {
+    "id": "2102390",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "STOU",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP STOU overflow attempt",
+    "revision": "5"
+  },
+  {
+    "id": "2102373",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "XMKD",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP XMKD overflow attempt",
+    "revision": "5"
+  },
+  {
+    "id": "2102416",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "MDTM",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP invalid MDTM command attempt",
+    "revision": "7"
+  },
+  {
+    "id": "2100356",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "suspicious-filename-detect",
+    "content": "passwd",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP passwd retrieval attempt",
+    "revision": "6"
+  },
+  {
+    "id": "2016687",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "21",
+    "classtype": "misc-activity",
+    "content": "USER anonymous|0d 0a|PASS Java1.",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2013_03_29"
+    },
+    "message": "ET FTP Outbound Java Anonymous FTP Login",
+    "revision": "2"
+  },
+  {
+    "id": "2016688",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "21",
+    "classtype": "misc-activity",
+    "content": "RETR",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2013_03_29"
+    },
+    "message": "ET FTP Outbound Java Downloading jar over FTP",
+    "revision": "2"
+  },
+  {
+    "id": "2101927",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "suspicious-filename-detect",
+    "content": "authorized_keys",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP authorized_keys file transferred",
+    "revision": "5"
+  },
+  {
+    "id": "2101734",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "attempted-admin",
+    "content": "USER|20|",
+    "flow": "to_server,established,no_stream",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP USER overflow attempt",
+    "revision": "35"
+  },
+  {
+    "id": "2011488",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "bad-unknown",
+    "content": "|22|",
+    "flow": "established,to_server",
+    "depth": "5",
+    "metadata": {
+      "created_at": "2010_09_29"
+    },
+    "message": "ET FTP Suspicious Quotation Mark Usage in FTP Username",
+    "revision": "3"
+  },
+  {
+    "id": "2048464",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "$FTP_PORTS",
+    "destination_ip": "any",
+    "destination_port": "any",
+    "classtype": "network-scan",
+    "content": "WS_FTP|20|Server|20|",
+    "flow": "established,to_client",
+    "depth": "3",
+    "metadata": {},
+    "message": "ET FTP Vulnerable WS_FTP Version in FTP Banner Response (CVE-2023-40044)",
+    "revision": "2"
+  },
+  {
+    "id": "2101992",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "21",
+    "classtype": "protocol-command-decode",
+    "content": "..",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL FTP LIST directory traversal attempt",
+    "revision": "10"
+  }
+]

@@ -1,0 +1,974 @@
+[
+  {
+    "id": "2014385",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "3389",
+    "destination_ip": "any",
+    "destination_port": "any",
+    "classtype": "not-suspicious",
+    "flow": "from_server,not_established",
+    "metadata": {
+      "created_at": "2012_03_15"
+    },
+    "message": "ET DOS Microsoft Remote Desktop (RDP) Syn/Ack Outbound Flowbit Set",
+    "revision": "6"
+  },
+  {
+    "id": "2017722",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HTTP_SERVERS",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "attempted-dos",
+    "content": "$pass=",
+    "flow": "established,to_server",
+    "depth": "6",
+    "metadata": {
+      "created_at": "2013_11_15"
+    },
+    "message": "ET DOS Trojan.BlackRev V1.Botnet HTTP Login POST Flood Traffic Inbound",
+    "revision": "1"
+  },
+  {
+    "id": "2017918",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "123",
+    "classtype": "attempted-dos",
+    "content": "|00 02 2A|",
+    "depth": "3",
+    "offset": "1",
+    "metadata": {
+      "created_at": "2014_01_03"
+    },
+    "message": "ET DOS Possible NTP DDoS Inbound Frequent Un-Authed MON_LIST Requests IMPL 0x02",
+    "revision": "2"
+  },
+  {
+    "id": "2017920",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "123",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "any",
+    "classtype": "attempted-dos",
+    "content": "|00 02 2a|",
+    "depth": "3",
+    "offset": "1",
+    "metadata": {
+      "created_at": "2014_01_03"
+    },
+    "message": "ET DOS Possible NTP DDoS Multiple MON_LIST Seq 0 Response Spanning Multiple Packets IMPL 0x02",
+    "revision": "2"
+  },
+  {
+    "id": "2017921",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "123",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "any",
+    "classtype": "attempted-dos",
+    "content": "|00 03 2a|",
+    "depth": "3",
+    "offset": "1",
+    "metadata": {
+      "created_at": "2014_01_03"
+    },
+    "message": "ET DOS Possible NTP DDoS Multiple MON_LIST Seq 0 Response Spanning Multiple Packets IMPL 0x03",
+    "revision": "2"
+  },
+  {
+    "id": "2017965",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "123",
+    "destination_ip": "any",
+    "destination_port": "0:1023",
+    "classtype": "attempted-dos",
+    "content": "|00 02 2a|",
+    "depth": "3",
+    "offset": "1",
+    "metadata": {
+      "created_at": "2014_01_14"
+    },
+    "message": "ET DOS Likely NTP DDoS In Progress MON_LIST Response to Non-Ephemeral Port IMPL 0x02",
+    "revision": "3"
+  },
+  {
+    "id": "2018978",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HTTP_SERVERS",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "trojan-activity",
+    "content": "User-Agent|3a 20 20|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2014_08_21"
+    },
+    "message": "ET DOS HOIC with booster inbound",
+    "revision": "1"
+  },
+  {
+    "id": "2019010",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "123",
+    "destination_ip": "any",
+    "destination_port": "0:1023",
+    "classtype": "attempted-dos",
+    "content": "|00 02 00|",
+    "depth": "3",
+    "offset": "1",
+    "metadata": {
+      "created_at": "2014_08_26"
+    },
+    "message": "ET DOS Likely NTP DDoS In Progress PEER_LIST Response to Non-Ephemeral Port IMPL 0x02",
+    "revision": "3"
+  },
+  {
+    "id": "2019011",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "123",
+    "destination_ip": "any",
+    "destination_port": "0:1023",
+    "classtype": "attempted-dos",
+    "content": "|00 03 00|",
+    "depth": "3",
+    "offset": "1",
+    "metadata": {
+      "created_at": "2014_08_26"
+    },
+    "message": "ET DOS Likely NTP DDoS In Progress PEER_LIST Response to Non-Ephemeral Port IMPL 0x03",
+    "revision": "3"
+  },
+  {
+    "id": "2019012",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "123",
+    "destination_ip": "any",
+    "destination_port": "0:1023",
+    "classtype": "attempted-dos",
+    "content": "|00 02 01|",
+    "depth": "3",
+    "offset": "1",
+    "metadata": {
+      "created_at": "2014_08_26"
+    },
+    "message": "ET DOS Likely NTP DDoS In Progress PEER_LIST_SUM Response to Non-Ephemeral Port IMPL 0x02",
+    "revision": "3"
+  },
+  {
+    "id": "2019013",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "123",
+    "destination_ip": "any",
+    "destination_port": "0:1023",
+    "classtype": "attempted-dos",
+    "content": "|00 03 01|",
+    "depth": "3",
+    "offset": "1",
+    "metadata": {
+      "created_at": "2014_08_26"
+    },
+    "message": "ET DOS Likely NTP DDoS In Progress PEER_LIST_SUM Response to Non-Ephemeral Port IMPL 0x03",
+    "revision": "3"
+  },
+  {
+    "id": "2019102",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "1900",
+    "classtype": "attempted-dos",
+    "content": "ST|3a 20|ssdp|3a|all|0d 0a|",
+    "metadata": {
+      "created_at": "2014_09_03"
+    },
+    "message": "ET DOS Possible SSDP Amplification Scan in Progress",
+    "revision": "1"
+  },
+  {
+    "id": "2014141",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "attempted-dos",
+    "content": "\u0026msg=",
+    "flow": "established,to_server",
+    "depth": "5",
+    "metadata": {
+      "created_at": "2012_01_23"
+    },
+    "message": "ET DOS LOIC Javascript DDoS Outbound",
+    "revision": "4"
+  },
+  {
+    "id": "2016030",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HTTP_SERVERS",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "web-application-attack",
+    "content": "=MSG",
+    "flow": "established,to_server",
+    "depth": "2",
+    "metadata": {
+      "created_at": "2012_12_14"
+    },
+    "message": "ET DOS LOIC POST",
+    "revision": "3"
+  },
+  {
+    "id": "2016031",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HTTP_SERVERS",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "web-application-attack",
+    "content": "/?msg=MSG",
+    "flow": "established,to_server",
+    "metadata": {
+      "created_at": "2012_12_14"
+    },
+    "message": "ET DOS LOIC GET",
+    "revision": "2"
+  },
+  {
+    "id": "2011821",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "denial-of-service",
+    "content": "User-agent|3a| Mozilla/5.0 (Windows|3b| U|3b| Windows NT 5.1|3b| ru|3b| rv|3a|1.8.1.1) Gecko/20061204 Firefox/2.0.0.1",
+    "flow": "established,to_server",
+    "metadata": {
+      "created_at": "2010_10_18"
+    },
+    "message": "ET DOS User-Agent used in known DDoS Attacks Detected outbound",
+    "revision": "3"
+  },
+  {
+    "id": "2011822",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "denial-of-service",
+    "content": "User-agent|3a| Mozilla/5.0 (Windows|3b| U|3b| Windows NT 5.1|3b| ru|3b| rv|3a|1.8.1.1) Gecko/20061204 Firefox/2.0.0.1",
+    "flow": "established,to_server",
+    "metadata": {
+      "created_at": "2010_10_18"
+    },
+    "message": "ET DOS User-Agent used in known DDoS Attacks Detected inbound",
+    "revision": "3"
+  },
+  {
+    "id": "2011823",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "denial-of-service",
+    "content": "User-agent|3a| Opera/9.02 (Windows NT 5.1|3b| U|3b| ru)",
+    "flow": "established,to_server",
+    "metadata": {
+      "created_at": "2010_10_18"
+    },
+    "message": "ET DOS User-Agent used in known DDoS Attacks Detected outbound 2",
+    "revision": "3"
+  },
+  {
+    "id": "2011824",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "denial-of-service",
+    "content": "User-agent|3a| Opera/9.02 (Windows NT 5.1|3b| U|3b| ru)",
+    "flow": "established,to_server",
+    "metadata": {
+      "created_at": "2010_10_18"
+    },
+    "message": "ET DOS User-Agent used in known DDoS Attacks Detected inbound 2",
+    "revision": "3"
+  },
+  {
+    "id": "2016016",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "53",
+    "classtype": "bad-unknown",
+    "content": "|00 ff 00 01 00 00 29|",
+    "depth": "10",
+    "offset": "2",
+    "metadata": {
+      "created_at": "2012_12_12"
+    },
+    "message": "ET DOS DNS Amplification Attack Inbound",
+    "revision": "8"
+  },
+  {
+    "id": "2017966",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "123",
+    "destination_ip": "any",
+    "destination_port": "0:1023",
+    "classtype": "attempted-dos",
+    "content": "|00 03 2a|",
+    "depth": "3",
+    "offset": "1",
+    "metadata": {
+      "created_at": "2014_01_14"
+    },
+    "message": "ET DOS Likely NTP DDoS In Progress MON_LIST Response to Non-Ephemeral Port IMPL 0x03",
+    "revision": "3"
+  },
+  {
+    "id": "2019350",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "attempted-dos",
+    "content": "|20|HTTP/1.1Host|3a 20|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2014_10_03"
+    },
+    "message": "ET DOS Terse HTTP GET Likely GoodBye 5.2 DDoS tool",
+    "revision": "2"
+  },
+  {
+    "id": "2019346",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "attempted-dos",
+    "content": "GET / HTTP/1.1|0d 0a 0d 0a|",
+    "flow": "to_server,established",
+    "depth": "18",
+    "metadata": {
+      "created_at": "2014_10_03"
+    },
+    "message": "ET DOS Terse HTTP GET Likely LOIC",
+    "revision": "2"
+  },
+  {
+    "id": "2019347",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "attempted-dos",
+    "content": "!\"|0d 0a|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2014_10_03"
+    },
+    "message": "ET DOS HTTP GET AAAAAAAA Likely FireFlood",
+    "revision": "2"
+  },
+  {
+    "id": "2019348",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "attempted-dos",
+    "content": "GET / HTTP/1.0|0d 0a 0d 0a 0d 0a|",
+    "flow": "to_server,established",
+    "depth": "20",
+    "metadata": {
+      "created_at": "2014_10_03"
+    },
+    "message": "ET DOS Terse HTTP GET Likely AnonMafiaIC DDoS tool",
+    "revision": "2"
+  },
+  {
+    "id": "2019349",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "attempted-dos",
+    "content": "GET / HTTP/1.1|0d 0a 0d 0a 0d 0a|",
+    "flow": "to_server,established",
+    "depth": "20",
+    "metadata": {
+      "created_at": "2014_10_03"
+    },
+    "message": "ET DOS Terse HTTP GET Likely AnonGhost DDoS tool",
+    "revision": "2"
+  },
+  {
+    "id": "2019014",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "123",
+    "destination_ip": "any",
+    "destination_port": "0:1023",
+    "classtype": "attempted-dos",
+    "content": "|00 03 10|",
+    "depth": "3",
+    "offset": "1",
+    "metadata": {
+      "created_at": "2014_08_26"
+    },
+    "message": "ET DOS Likely NTP DDoS In Progress GET_RESTRICT Response to Non-Ephemeral Port IMPL 0x03",
+    "revision": "4"
+  },
+  {
+    "id": "2019015",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "123",
+    "destination_ip": "any",
+    "destination_port": "0:1023",
+    "classtype": "attempted-dos",
+    "content": "|00 02 10|",
+    "depth": "3",
+    "offset": "1",
+    "metadata": {
+      "created_at": "2014_08_26"
+    },
+    "message": "ET DOS Likely NTP DDoS In Progress GET_RESTRICT Response to Non-Ephemeral Port IMPL 0x02",
+    "revision": "4"
+  },
+  {
+    "id": "2019016",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "123",
+    "classtype": "attempted-dos",
+    "content": "|00 03 00|",
+    "depth": "3",
+    "offset": "1",
+    "metadata": {
+      "created_at": "2014_08_26"
+    },
+    "message": "ET DOS Possible NTP DDoS Inbound Frequent Un-Authed PEER_LIST Requests IMPL 0x03",
+    "revision": "3"
+  },
+  {
+    "id": "2019017",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "123",
+    "classtype": "attempted-dos",
+    "content": "|00 02 00|",
+    "depth": "3",
+    "offset": "1",
+    "metadata": {
+      "created_at": "2014_08_26"
+    },
+    "message": "ET DOS Possible NTP DDoS Inbound Frequent Un-Authed PEER_LIST Requests IMPL 0x02",
+    "revision": "3"
+  },
+  {
+    "id": "2019018",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "123",
+    "classtype": "attempted-dos",
+    "content": "|00 03 01|",
+    "depth": "3",
+    "offset": "1",
+    "metadata": {
+      "created_at": "2014_08_26"
+    },
+    "message": "ET DOS Possible NTP DDoS Inbound Frequent Un-Authed PEER_LIST_SUM Requests IMPL 0x03",
+    "revision": "3"
+  },
+  {
+    "id": "2019019",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "123",
+    "classtype": "attempted-dos",
+    "content": "|00 02 01|",
+    "depth": "3",
+    "offset": "1",
+    "metadata": {
+      "created_at": "2014_08_26"
+    },
+    "message": "ET DOS Possible NTP DDoS Inbound Frequent Un-Authed PEER_LIST_SUM Requests IMPL 0x02",
+    "revision": "3"
+  },
+  {
+    "id": "2019021",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "123",
+    "classtype": "attempted-dos",
+    "content": "|00 02 10|",
+    "depth": "3",
+    "offset": "1",
+    "metadata": {
+      "created_at": "2014_08_26"
+    },
+    "message": "ET DOS Possible NTP DDoS Inbound Frequent Un-Authed GET_RESTRICT Requests IMPL 0x02",
+    "revision": "3"
+  },
+  {
+    "id": "2019020",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "123",
+    "classtype": "attempted-dos",
+    "content": "|00 03 10|",
+    "depth": "3",
+    "offset": "1",
+    "metadata": {
+      "created_at": "2014_08_26"
+    },
+    "message": "ET DOS Possible NTP DDoS Inbound Frequent Un-Authed GET_RESTRICT Requests IMPL 0x03",
+    "revision": "3"
+  },
+  {
+    "id": "2019022",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "123",
+    "destination_ip": "any",
+    "destination_port": "any",
+    "classtype": "attempted-dos",
+    "content": "|df 00 00 04 00|",
+    "depth": "5",
+    "offset": "1",
+    "metadata": {
+      "created_at": "2014_08_26"
+    },
+    "message": "ET DOS Likely NTP DDoS In Progress Multiple UNSETTRAP Mode 6 Responses",
+    "revision": "4"
+  },
+  {
+    "id": "2018277",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HTTP_SERVERS",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "attempted-dos",
+    "content": "pingback.ping",
+    "flow": "established,to_server",
+    "metadata": {},
+    "message": "ET DOS Possible WordPress Pingback DDoS in Progress (Inbound)",
+    "revision": "2"
+  },
+  {
+    "id": "2020305",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "1434",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "any",
+    "classtype": "attempted-dos",
+    "content": "Version|3b|",
+    "depth": "1",
+    "metadata": {
+      "created_at": "2015_01_23"
+    },
+    "message": "ET DOS MC-SQLR Response Outbound Possible DDoS Participation",
+    "revision": "4"
+  },
+  {
+    "id": "2020306",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "1434",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "attempted-dos",
+    "content": "Version|3b|",
+    "depth": "1",
+    "metadata": {
+      "created_at": "2015_01_23"
+    },
+    "message": "ET DOS MC-SQLR Response Inbound Possible DDoS Target",
+    "revision": "3"
+  },
+  {
+    "id": "2020702",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HTTP_SERVERS",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "attempted-dos",
+    "content": "User-Agent|3a| Bittorrent",
+    "flow": "established,to_server",
+    "metadata": {
+      "created_at": "2015_03_18"
+    },
+    "message": "ET DOS Bittorrent User-Agent inbound - possible DDOS",
+    "revision": "1"
+  },
+  {
+    "id": "2021170",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "5093",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "any",
+    "classtype": "attempted-dos",
+    "content": "|7a 00 00 00 00 00 00 00 00 00 00 00|",
+    "depth": "12",
+    "metadata": {
+      "created_at": "2015_05_29"
+    },
+    "message": "ET DOS Possible Sentinal LM  Application attack in progress Outbound (Response)",
+    "revision": "1"
+  },
+  {
+    "id": "2021171",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "5093",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "attempted-dos",
+    "content": "|7a 00 00 00 00 00 00 00 00 00 00 00|",
+    "depth": "12",
+    "metadata": {
+      "created_at": "2015_05_29"
+    },
+    "message": "ET DOS Possible Sentinal LM Amplification attack (Response) Inbound",
+    "revision": "1"
+  },
+  {
+    "id": "2021172",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "5093",
+    "classtype": "attempted-dos",
+    "content": "|7a 00 00 00 00 00|",
+    "metadata": {
+      "created_at": "2015_05_29"
+    },
+    "message": "ET DOS Possible Sentinal LM Amplification attack (Request) Inbound",
+    "revision": "1"
+  },
+  {
+    "id": "2022760",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "attempted-dos",
+    "content": "User-Agent|3a| x00_-gawa.sa.pilipinas.2015",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2016_04_26"
+    },
+    "message": "ET DOS Linux/Tsunami DOS User-Agent (x00_-gawa.sa.pilipinas.2015) INBOUND",
+    "revision": "1"
+  },
+  {
+    "id": "2023054",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "53",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "1:1023",
+    "classtype": "bad-unknown",
+    "content": "|0c|root-servers|03|net|00|",
+    "depth": "6",
+    "offset": "2",
+    "metadata": {},
+    "message": "ET DOS DNS Amplification Attack Possible Outbound Windows Non-Recursive Root Hint Reserved Port",
+    "revision": "2"
+  },
+  {
+    "id": "2023053",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "53",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "1:1023",
+    "classtype": "bad-unknown",
+    "content": "|0c|root-servers|03|net|00|",
+    "depth": "6",
+    "offset": "2",
+    "metadata": {},
+    "message": "ET DOS DNS Amplification Attack Possible Inbound Windows Non-Recursive Root Hint Reserved Port",
+    "revision": "2"
+  },
+  {
+    "id": "2023832",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "any",
+    "source_port": "445",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "attempted-dos",
+    "content": "!\"|FE|SMB",
+    "flow": "from_server,established",
+    "depth": "4",
+    "offset": "4",
+    "metadata": {},
+    "message": "ET DOS SMB Tree_Connect Stack Overflow Attempt (CVE-2017-0016)",
+    "revision": "3"
+  },
+  {
+    "id": "2023497",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "445",
+    "classtype": "attempted-dos",
+    "content": "NTLMSSP",
+    "flow": "established,to_server",
+    "depth": "5",
+    "offset": "4",
+    "metadata": {},
+    "message": "ET DOS Microsoft Windows LSASS Remote Memory Corruption (CVE-2017-0004)",
+    "revision": "3"
+  },
+  {
+    "id": "2024511",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "[139,445]",
+    "classtype": "trojan-activity",
+    "content": "|00 01 ff ff|",
+    "flow": "established,to_server",
+    "depth": "4",
+    "metadata": {},
+    "message": "ET DOS SMBLoris NBSS Length Mem Exhaustion Attempt (PoC Based)",
+    "revision": "2"
+  },
+  {
+    "id": "2024584",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "389",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "389",
+    "classtype": "attempted-dos",
+    "content": "|30 84 00 00 00 2d 02 01 01 63 84 00 00 00 24 04 00 0a 01 00|",
+    "metadata": {},
+    "message": "ET DOS CLDAP Amplification Reflection (PoC based)",
+    "revision": "1"
+  },
+  {
+    "id": "2024585",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "389",
+    "classtype": "attempted-dos",
+    "content": "objectclass0",
+    "metadata": {},
+    "message": "ET DOS Potential CLDAP Amplification Reflection",
+    "revision": "1"
+  },
+  {
+    "id": "2025401",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "11211",
+    "classtype": "attempted-dos",
+    "content": "|0d 0a|",
+    "depth": "7",
+    "metadata": {},
+    "message": "ET DOS Possible Memcached DDoS Amplification Query (set)",
+    "revision": "2"
+  },
+  {
+    "id": "2025402",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "11211",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "any",
+    "classtype": "attempted-dos",
+    "content": "STATS|20|pid",
+    "depth": "9",
+    "metadata": {},
+    "message": "ET DOS Possible Memcached DDoS Amplification Response Outbound",
+    "revision": "1"
+  },
+  {
+    "id": "2025403",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "11211",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "attempted-dos",
+    "content": "STATS|20|pid",
+    "depth": "9",
+    "metadata": {},
+    "message": "ET DOS Possible Memcached DDoS Amplification Inbound",
+    "revision": "1"
+  },
+  {
+    "id": "2030339",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "attempted-dos",
+    "content": "\u003chttp",
+    "flow": "established,to_server",
+    "metadata": {},
+    "message": "ET DOS CallStranger - Attempted UPnP Reflected Amplified TCP with Multiple Callbacks (CVE-2020-12695)",
+    "revision": "2"
+  },
+  {
+    "id": "2014153",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "attempted-dos",
+    "content": "User-Agent|3a 20 20|",
+    "flow": "established,to_server",
+    "metadata": {
+      "created_at": "2012_01_28"
+    },
+    "message": "ET DOS High Orbit Ion Cannon (HOIC) Attack Inbound Generic Detection Double Spaced UA",
+    "revision": "5"
+  },
+  {
+    "id": "2023831",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "any",
+    "source_port": "445",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "attempted-dos",
+    "content": "|03 00|",
+    "flow": "established,to_client",
+    "depth": "2",
+    "offset": "16",
+    "metadata": {},
+    "message": "ET DOS Excessive Large Tree Connect Response",
+    "revision": "3"
+  },
+  {
+    "id": "2018977",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "trojan-activity",
+    "content": "User-Agent|3a 20 20|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2014_08_21"
+    },
+    "message": "ET DOS HOIC with booster outbound",
+    "revision": "3"
+  }
+]
