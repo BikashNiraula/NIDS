@@ -1,0 +1,155 @@
+[
+  {
+    "id": "2008020",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "trojan-activity",
+    "content": "proc=[System Process]|0a|",
+    "flow": "established,to_server",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET WORM Win32.Socks.s HTTP Post Checkin",
+    "revision": "6"
+  },
+  {
+    "id": "2012201",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "trojan-activity",
+    "content": "/setting.nql",
+    "flow": "established,to_server",
+    "metadata": {
+      "created_at": "2011_01_17"
+    },
+    "message": "ET WORM Possible Worm Sohanad.Z or Other Infection Request for setting.nql",
+    "revision": "1"
+  },
+  {
+    "id": "2102004",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "1434",
+    "classtype": "misc-attack",
+    "content": "send",
+    "depth": "1",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL WORM Slammer Worm propagation attempt OUTBOUND",
+    "revision": "8"
+  },
+  {
+    "id": "2012739",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "trojan-activity",
+    "content": "/taskx.txt",
+    "flow": "established,to_server",
+    "metadata": {
+      "created_at": "2011_04_29"
+    },
+    "message": "ET WORM Rimecud Worm checkin",
+    "revision": "1"
+  },
+  {
+    "id": "2014402",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "15000:30000",
+    "classtype": "trojan-activity",
+    "content": "GET /wg.txt",
+    "flow": "established,to_server",
+    "depth": "11",
+    "metadata": {
+      "created_at": "2012_03_20"
+    },
+    "message": "ET WORM W32/Rimecud wg.txt Checkin",
+    "revision": "1"
+  },
+  {
+    "id": "2017404",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "any",
+    "classtype": "trojan-activity",
+    "content": "njxq80",
+    "flow": "established,to_server",
+    "depth": "9",
+    "metadata": {},
+    "message": "ET WORM W32/Njw0rm CnC Beacon",
+    "revision": "3"
+  },
+  {
+    "id": "2018131",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "trojan-activity",
+    "content": "/HNAP1/",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2014_02_13"
+    },
+    "message": "ET WORM TheMoon.linksys.router 1",
+    "revision": "4"
+  },
+  {
+    "id": "2018132",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "trojan-activity",
+    "content": "/tmUnblock.cgi",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2014_02_13"
+    },
+    "message": "ET WORM TheMoon.linksys.router 2",
+    "revision": "4"
+  },
+  {
+    "id": "2018155",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "$HTTP_PORTS",
+    "classtype": "trojan-activity",
+    "content": "/hndUnblock.cgi",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2014_02_19"
+    },
+    "message": "ET WORM TheMoon.linksys.router 3",
+    "revision": "3"
+  }
+]

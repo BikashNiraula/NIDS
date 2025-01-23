@@ -1,0 +1,80 @@
+[
+  {
+    "id": "2404300",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "[144.202.34.169]",
+    "destination_port": "any",
+    "classtype": "trojan-activity",
+    "metadata": {},
+    "message": "ET CNC Feodo Tracker Reported CnC Server TCP group 1",
+    "revision": "7442"
+  },
+  {
+    "id": "2404301",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "[144.202.34.169]",
+    "destination_port": "any",
+    "classtype": "trojan-activity",
+    "metadata": {},
+    "message": "ET CNC Feodo Tracker Reported CnC Server UDP group 1",
+    "revision": "7442"
+  },
+  {
+    "id": "2404302",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "[185.77.174.191]",
+    "destination_port": "any",
+    "classtype": "trojan-activity",
+    "metadata": {},
+    "message": "ET CNC Feodo Tracker Reported CnC Server TCP group 2",
+    "revision": "7442"
+  },
+  {
+    "id": "2404303",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "[185.77.174.191]",
+    "destination_port": "any",
+    "classtype": "trojan-activity",
+    "metadata": {},
+    "message": "ET CNC Feodo Tracker Reported CnC Server UDP group 2",
+    "revision": "7442"
+  },
+  {
+    "id": "2404304",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "[45.76.181.158]",
+    "destination_port": "any",
+    "classtype": "trojan-activity",
+    "metadata": {},
+    "message": "ET CNC Feodo Tracker Reported CnC Server TCP group 3",
+    "revision": "7442"
+  },
+  {
+    "id": "2404305",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "[45.76.181.158]",
+    "destination_port": "any",
+    "classtype": "trojan-activity",
+    "metadata": {},
+    "message": "ET CNC Feodo Tracker Reported CnC Server UDP group 3",
+    "revision": "7442"
+  }
+]

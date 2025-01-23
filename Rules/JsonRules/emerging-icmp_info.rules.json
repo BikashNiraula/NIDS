@@ -1,0 +1,256 @@
+[
+  {
+    "id": "2100366",
+    "action": "alert",
+    "protocol": "icmp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "misc-activity",
+    "content": "|10 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F|",
+    "depth": "32",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL ICMP_INFO PING *NIX",
+    "revision": "8"
+  },
+  {
+    "id": "2100368",
+    "action": "alert",
+    "protocol": "icmp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "misc-activity",
+    "content": "|08 09 0A 0B 0C 0D 0E 0F 10 11 12 13 14 15 16 17|",
+    "depth": "32",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL ICMP_INFO PING BSDtype",
+    "revision": "7"
+  },
+  {
+    "id": "2100369",
+    "action": "alert",
+    "protocol": "icmp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "misc-activity",
+    "content": "|01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F|",
+    "depth": "32",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL ICMP_INFO PING BayRS Router",
+    "revision": "7"
+  },
+  {
+    "id": "2100370",
+    "action": "alert",
+    "protocol": "icmp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "misc-activity",
+    "content": "|00 00 00 00 00 00 00 00 00 00 00 00 08 09 0A 0B|",
+    "depth": "32",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL ICMP_INFO PING BeOS4.x",
+    "revision": "8"
+  },
+  {
+    "id": "2100371",
+    "action": "alert",
+    "protocol": "icmp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "misc-activity",
+    "content": "|AB CD AB CD AB CD AB CD AB CD AB CD AB CD AB CD|",
+    "depth": "32",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL ICMP_INFO PING Cisco Type.x",
+    "revision": "8"
+  },
+  {
+    "id": "2100373",
+    "action": "alert",
+    "protocol": "icmp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "misc-activity",
+    "content": "|01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 10|",
+    "depth": "32",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL ICMP_INFO PING Flowpoint2200 or Network Management Software",
+    "revision": "7"
+  },
+  {
+    "id": "2100374",
+    "action": "alert",
+    "protocol": "icmp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "misc-activity",
+    "content": "|A9| Sustainable So",
+    "depth": "32",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL ICMP_INFO PING IP NetMonitor Macintosh",
+    "revision": "8"
+  },
+  {
+    "id": "2100376",
+    "action": "alert",
+    "protocol": "icmp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "misc-activity",
+    "content": "0123456789abcdefghijklmnop",
+    "depth": "32",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL ICMP_INFO PING Microsoft Windows",
+    "revision": "8"
+  },
+  {
+    "id": "2100377",
+    "action": "alert",
+    "protocol": "icmp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "misc-activity",
+    "content": "================",
+    "depth": "32",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL ICMP_INFO PING Network Toolbox 3 Windows",
+    "revision": "8"
+  },
+  {
+    "id": "2100378",
+    "action": "alert",
+    "protocol": "icmp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "misc-activity",
+    "content": "OMeterObeseArmad",
+    "depth": "32",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL ICMP_INFO PING Ping-O-MeterWindows",
+    "revision": "8"
+  },
+  {
+    "id": "2100379",
+    "action": "alert",
+    "protocol": "icmp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "misc-activity",
+    "content": "Data|00 00 00 00 00 00 00 00 00 00 00 00|",
+    "depth": "32",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL ICMP_INFO PING Pinger Windows",
+    "revision": "8"
+  },
+  {
+    "id": "2100380",
+    "action": "alert",
+    "protocol": "icmp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "misc-activity",
+    "content": "|88 04|",
+    "depth": "32",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL ICMP_INFO PING Seer Windows",
+    "revision": "8"
+  },
+  {
+    "id": "2100482",
+    "action": "alert",
+    "protocol": "icmp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "misc-activity",
+    "content": "WhatsUp - A Netw",
+    "depth": "32",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL ICMP_INFO PING WhatsupGold Windows",
+    "revision": "6"
+  },
+  {
+    "id": "2100480",
+    "action": "alert",
+    "protocol": "icmp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "classtype": "misc-activity",
+    "content": "89|3A 3B|\u003c=\u003e?",
+    "depth": "100",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL ICMP_INFO PING speedera",
+    "revision": "6"
+  },
+  {
+    "id": "2039018",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "53",
+    "classtype": "misc-activity",
+    "content": "|0a|requestbin|03|net|00|",
+    "depth": "1",
+    "offset": "2",
+    "metadata": {},
+    "message": "ET ICMP_INFO DNSBin Demo (requestbin .net) - Data Exfil",
+    "revision": "3"
+  }
+]

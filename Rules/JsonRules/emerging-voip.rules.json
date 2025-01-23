@@ -1,0 +1,278 @@
+[
+  {
+    "id": "2003192",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "5060",
+    "classtype": "attempted-dos",
+    "content": "INVITE",
+    "flow": "established,to_server",
+    "depth": "6",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET VOIP INVITE Message Flood TCP",
+    "revision": "4"
+  },
+  {
+    "id": "2009698",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "5060",
+    "classtype": "attempted-dos",
+    "content": "INVITE",
+    "depth": "6",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET VOIP INVITE Message Flood UDP",
+    "revision": "1"
+  },
+  {
+    "id": "2003193",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "5060",
+    "classtype": "attempted-dos",
+    "content": "REGISTER",
+    "flow": "established,to_server",
+    "depth": "8",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET VOIP REGISTER Message Flood TCP",
+    "revision": "5"
+  },
+  {
+    "id": "2009699",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "5060",
+    "classtype": "attempted-dos",
+    "content": "REGISTER",
+    "depth": "8",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET VOIP REGISTER Message Flood UDP",
+    "revision": "1"
+  },
+  {
+    "id": "2003194",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "5060",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "any",
+    "classtype": "attempted-dos",
+    "content": "SIP/2.0 401 Unauthorized",
+    "flow": "established,from_server",
+    "depth": "24",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET VOIP Multiple Unauthorized SIP Responses TCP",
+    "revision": "6"
+  },
+  {
+    "id": "2009700",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "5060",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "any",
+    "classtype": "attempted-dos",
+    "content": "SIP/2.0 401 Unauthorized",
+    "depth": "24",
+    "metadata": {
+      "created_at": "2010_07_30"
+    },
+    "message": "ET VOIP Multiple Unauthorized SIP Responses UDP",
+    "revision": "2"
+  },
+  {
+    "id": "2012296",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "5060",
+    "classtype": "attempted-recon",
+    "content": "|0d 0a|User-Agent|3A| Asterisk PBX",
+    "metadata": {
+      "created_at": "2011_02_07"
+    },
+    "message": "ET VOIP Modified Sipvicious Asterisk PBX User-Agent",
+    "revision": "1"
+  },
+  {
+    "id": "2012297",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "5060",
+    "classtype": "attempted-recon",
+    "content": "|0d 0a|User-Agent|3A| Zoiper",
+    "metadata": {
+      "created_at": "2011_02_07"
+    },
+    "message": "ET VOIP Possible Inbound VOIP Scan/Misuse With User-Agent Zoiper",
+    "revision": "1"
+  },
+  {
+    "id": "2011422",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "5060",
+    "classtype": "attempted-recon",
+    "content": "ccxllrlflgig|22|\u003csip|3A|100",
+    "depth": "8",
+    "metadata": {
+      "created_at": "2010_09_28"
+    },
+    "message": "ET VOIP Possible Modified Sipvicious OPTIONS Scan",
+    "revision": "2"
+  },
+  {
+    "id": "2100158",
+    "action": "alert",
+    "protocol": "ip",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "5060",
+    "classtype": "attempted-dos",
+    "content": "INVITE",
+    "depth": "6",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL VOIP SIP INVITE message flooding",
+    "revision": "4"
+  },
+  {
+    "id": "2100163",
+    "action": "alert",
+    "protocol": "ip",
+    "source_ip": "any",
+    "source_port": "any",
+    "destination_ip": "any",
+    "destination_port": "5060",
+    "classtype": "attempted-dos",
+    "content": "SIP/2.0 407 Proxy Authentication Required",
+    "depth": "42",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL VOIP SIP 407 Proxy Authentication Required Flood",
+    "revision": "4"
+  },
+  {
+    "id": "2100223",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "5060",
+    "classtype": "misc-attack",
+    "content": "a|3D|",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL VOIP EXPLOIT SIP UDP Softphone overflow attempt",
+    "revision": "2"
+  },
+  {
+    "id": "2100162",
+    "action": "alert",
+    "protocol": "ip",
+    "source_ip": "any",
+    "source_port": "5060",
+    "destination_ip": "any",
+    "destination_port": "any",
+    "classtype": "attempted-dos",
+    "content": "SIP/2.0 401 Unauthorized",
+    "depth": "24",
+    "metadata": {
+      "created_at": "2010_09_23"
+    },
+    "message": "GPL VOIP SIP 401 Unauthorized Flood",
+    "revision": "5"
+  },
+  {
+    "id": "2021066",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "1720",
+    "classtype": "misc-attack",
+    "content": "|b8 00 00 27 05|ooh323|06|",
+    "flow": "to_server,established",
+    "depth": "8",
+    "offset": "14",
+    "metadata": {
+      "created_at": "2015_05_07"
+    },
+    "message": "ET VOIP Possible Misuse Call from Cisco ooh323",
+    "revision": "1"
+  },
+  {
+    "id": "2022022",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "1720",
+    "classtype": "misc-attack",
+    "content": "|22 c0 09 00 7a b7 07|MERA RTU|08|",
+    "flow": "to_server,established",
+    "metadata": {
+      "created_at": "2015_11_03"
+    },
+    "message": "ET VOIP Possible Misuse Call from MERA RTU",
+    "revision": "1"
+  },
+  {
+    "id": "2022024",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "1720",
+    "classtype": "misc-activity",
+    "content": "|7E|",
+    "flow": "to_server,established",
+    "depth": "1",
+    "offset": "4",
+    "metadata": {
+      "created_at": "2015_11_03"
+    },
+    "message": "ET VOIP H.323 in Q.931 Call Setup - Inbound",
+    "revision": "1"
+  }
+]
