@@ -1,178 +1,159 @@
 [
   {
-    "id": "2100492",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$TELNET_SERVERS",
     "source_port": "23",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
-    "classtype": "bad-unknown",
-    "content": "Login failed",
-    "flow": "from_server,established",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL TELNET TELNET login failed",
-    "revision": "11"
-  },
-  {
-    "id": "2100717",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$TELNET_SERVERS",
-    "source_port": "23",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "any",
-    "classtype": "bad-unknown",
-    "content": "not on system console",
-    "flow": "from_server,established",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL TELNET Telnet Root not on console",
-    "revision": "9"
-  },
-  {
-    "id": "2100719",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$TELNET_SERVERS",
-    "source_port": "23",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "any",
+    "sid": "2100719",
+    "msg": "GPL TELNET root login",
+    "rev": "9",
     "classtype": "suspicious-login",
     "content": "login|3A| root",
     "flow": "from_server,established",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL TELNET root login",
-    "revision": "9"
+      "created_at": "2010_09_23",
+      "signature_severity": "Unknown",
+      "updated_at": "2012_09_12"
+    }
   },
   {
-    "id": "2101251",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "23",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
-    "classtype": "bad-unknown",
-    "content": "Login incorrect",
-    "flow": "from_server,established",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL TELNET Bad Login",
-    "revision": "11"
-  },
-  {
-    "id": "2008860",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "23",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "any",
+    "sid": "2008860",
+    "msg": "ET TELNET External Telnet Attempt To Cisco Device With No Telnet Password Set (Automatically Dissalowed Until Password Set)",
+    "rev": "4",
     "classtype": "attempted-admin",
     "content": "Password required, but none set",
     "flow": "from_server",
     "depth": "31",
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET TELNET External Telnet Attempt To Cisco Device With No Telnet Password Set (Automatically Dissalowed Until Password Set)",
-    "revision": "4"
+      "created_at": "2010_07_30",
+      "signature_severity": "Minor",
+      "updated_at": "2015_04_15"
+    }
   },
   {
-    "id": "2023019",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "[23,2323,3323,4323]",
+    "sid": "2023019",
+    "msg": "ET TELNET busybox MIRAI hackers - Possible Brute Force Attack",
+    "rev": "2",
     "classtype": "attempted-admin",
     "content": "MIRAI",
     "flow": "to_server,established",
-    "metadata": {},
-    "message": "ET TELNET busybox MIRAI hackers - Possible Brute Force Attack",
-    "revision": "2"
+    "flowbits": [
+      "isset,ET.telnet.busybox"
+    ],
+    "reference": [
+      "url,lists.emergingthreats.net/pipermail/emerging-sigs/2016-August/027524.html"
+    ],
+    "metadata": {
+      "attack_target": "Server",
+      "confidence": "Medium",
+      "created_at": "2016_08_08",
+      "deployment": "Datacenter",
+      "performance_impact": "Low",
+      "signature_severity": "Major",
+      "updated_at": "2016_09_26"
+    }
   },
   {
-    "id": "2023304",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "[23,2323,3323,4323]",
+    "sid": "2023304",
+    "msg": "ET TELNET busybox ECCHI hackers - Possible Brute Force Attack",
+    "rev": "1",
     "classtype": "attempted-admin",
     "content": "ECCHI",
     "flow": "to_server,established",
-    "metadata": {},
-    "message": "ET TELNET busybox ECCHI hackers - Possible Brute Force Attack",
-    "revision": "1"
+    "flowbits": [
+      "isset,ET.telnet.busybox"
+    ],
+    "reference": [
+      "url,lists.emergingthreats.net/pipermail/emerging-sigs/2016-August/027524.html"
+    ],
+    "metadata": {
+      "attack_target": "Server",
+      "confidence": "Medium",
+      "created_at": "2016_09_27",
+      "deployment": "Datacenter",
+      "performance_impact": "Low",
+      "signature_severity": "Major",
+      "updated_at": "2016_09_27"
+    }
   },
   {
-    "id": "2023901",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "[23,2323,3323,4323]",
+    "sid": "2023901",
+    "msg": "ET TELNET busybox MEMES Hackers - Possible Brute Force Attack",
+    "rev": "1",
     "classtype": "attempted-admin",
     "content": "MEMES",
     "flow": "to_server,established",
-    "metadata": {},
-    "message": "ET TELNET busybox MEMES Hackers - Possible Brute Force Attack",
-    "revision": "1"
+    "flowbits": [
+      "isset,ET.telnet.busybox"
+    ],
+    "reference": [
+      "url,lists.emergingthreats.net/pipermail/emerging-sigs/2016-August/027524.html"
+    ],
+    "metadata": {
+      "affected_product": "Linux",
+      "attack_target": "Networking_Equipment",
+      "confidence": "Medium",
+      "created_at": "2017_02_14",
+      "deployment": "Perimeter",
+      "malware_family": "Mirai",
+      "performance_impact": "Moderate",
+      "signature_severity": "Major",
+      "updated_at": "2017_02_14"
+    }
   },
   {
-    "id": "2032879",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "trojan-activity",
-    "content": "\u003cTimeHackedSplit\u003e",
-    "flow": "established,to_server",
-    "metadata": {},
-    "message": "ET TELNET Lunar Builder CnC Activity",
-    "revision": "1"
-  },
-  {
-    "id": "2033017",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "any",
-    "classtype": "trojan-activity",
-    "content": "Hard|20|Disk|20|Used|20|Sizes|3a 3a|",
-    "flow": "established,to_server",
-    "metadata": {},
-    "message": "ET TELNET Teslarvng Ransomware CnC Activity M2",
-    "revision": "2"
-  },
-  {
-    "id": "2023016",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "[23,2323,3323,4323]",
+    "sid": "2023016",
+    "msg": "ET TELNET SUSPICIOUS Path to BusyBox",
+    "rev": "2",
     "classtype": "suspicious-filename-detect",
     "content": "/bin/busybox",
     "flow": "established,to_server",
-    "metadata": {},
-    "message": "ET TELNET SUSPICIOUS Path to BusyBox",
-    "revision": "2"
+    "flowbits": [
+      "set,ET.telnet.busybox"
+    ],
+    "reference": [
+      "url,lists.emergingthreats.net/pipermail/emerging-sigs/2016-August/027524.html"
+    ],
+    "metadata": {
+      "attack_target": "Server",
+      "confidence": "Medium",
+      "created_at": "2016_08_08",
+      "deployment": "Datacenter",
+      "performance_impact": "Low",
+      "signature_severity": "Major",
+      "updated_at": "2022_04_18"
+    }
   }
 ]

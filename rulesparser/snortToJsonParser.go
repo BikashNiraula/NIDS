@@ -1,147 +1,347 @@
 package rulesparser
 
 import (
-	"bufio"
-	"encoding/json"
-	"regexp"
+
 	"strings"
-	_ "encoding/json"
+	"encoding/json"
 	"fmt"
 	"log"
 	_ "net"
-	"os"
+	 "os"
 	"path/filepath"
-	_ "strings"
+	"bufio"
 
 	_ "github.com/google/gopacket"
 	_ "github.com/google/gopacket/layers"
 	_ "github.com/google/gopacket/pcap"
 	_ "github.com/olekukonko/tablewriter"
+	_ "github.com/spf13/cobra"
 )
 
-type Metadata struct {
-	CreatedAt         string `json:"created_at,omitempty"`
-	UpdatedAt         string `json:"updated_at,omitempty"`
-	SignatureSeverity string `json:"signature_severity,omitempty"`
-}
 
+// --------------------------
+// Data Structures
+// --------------------------
+
+// SnortRule now includes many fields that might be present in a rule.
+// Fields expected only once are stored as strings; fields that may appear multiple times (like flowbits, reference)
+// are stored as slices. Metadata is parsed into a map.
 type SnortRule struct {
-	ID              string   `json:"id"`
-	Action          string   `json:"action"`
-	Protocol        string   `json:"protocol"`
-	SourceIP        string   `json:"source_ip"`
-	SourcePort      string   `json:"source_port"`
-	DestinationIP   string   `json:"destination_ip"`
-	DestinationPort string   `json:"destination_port"`
-	Classtype       string   `json:"classtype,omitempty"`
-	Content         string   `json:"content,omitempty"`
-	Flow            string   `json:"flow,omitempty"`
-	Depth           string   `json:"depth,omitempty"`
-	Offset          string   `json:"offset,omitempty"`
-	Metadata        Metadata `json:"metadata,omitempty"`
-	Message         string   `json:"message"`
-	Revision        string   `json:"revision"`
+	// Required header fields:
+	Action          string `json:"action"`
+	Protocol        string `json:"protocol"`
+	SourceIP        string `json:"source_ip"`
+	SourcePort      string `json:"source_port"`
+	DestinationIP   string `json:"destination_ip"`
+	DestinationPort string `json:"destination_port"`
+
+	// Unique rule identifier (SID) is required.
+	SID string `json:"sid"`
+
+	// Options that are usually unique:
+	Message   string `json:"msg"`
+	Revision  string `json:"rev"`
+	GID       string `json:"gid,omitempty"`
+	Classtype string `json:"classtype,omitempty"`
+	Content   string `json:"content,omitempty"`
+	Flow      string `json:"flow,omitempty"`
+	Depth     string `json:"depth,omitempty"`
+	Offset    string `json:"offset,omitempty"`
+	Flags     string `json:"flags,omitempty"`
+	Priority  string `json:"priority,omitempty"`
+
+	// Options that can occur multiple times:
+	Flowbits  []string `json:"flowbits,omitempty"`
+	Reference []string `json:"reference,omitempty"`
+
+	// Metadata parsed into a key/value mapping.
+	Metadata map[string]string `json:"metadata,omitempty"`
 }
 
-func ParseSnortRule(rule string) (*SnortRule, error) {
-	ruleRegex := regexp.MustCompile(`(?P<action>\w+)\s+(?P<protocol>\w+)\s+(?P<source_ip>[\S]+)\s+(?P<source_port>[\S]+)\s+->\s+(?P<destination_ip>[\S]+)\s+(?P<destination_port>[\S]+)\s*\((?P<options>.*)\)`)
-	matches := ruleRegex.FindStringSubmatch(rule)
+// --------------------------
+// Parser Implementation
+// --------------------------
 
-	if matches == nil {
-		return nil, fmt.Errorf("invalid rule format")
+// parser holds the input string and the current position.
+type parser struct {
+	input string
+	pos   int
+}
+
+func newParser(input string) *parser {
+	return &parser{input: input, pos: 0}
+}
+
+func (p *parser) peek() byte {
+	if p.pos < len(p.input) {
+		return p.input[p.pos]
 	}
+	return 0
+}
 
-	// Extract fields using named groups
-	groups := make(map[string]string)
-	for i, name := range ruleRegex.SubexpNames() {
-		if i != 0 && name != "" {
-			groups[name] = matches[i]
+func (p *parser) skipWhitespace() {
+	for p.pos < len(p.input) && isWhitespace(p.input[p.pos]) {
+		p.pos++
+	}
+}
+
+// match returns true if the upcoming input begins with the literal.
+func (p *parser) match(lit string) bool {
+	return strings.HasPrefix(p.input[p.pos:], lit)
+}
+
+// expect consumes the given literal or returns an error.
+func (p *parser) expect(lit string) error {
+	p.skipWhitespace()
+	if !p.match(lit) {
+		return fmt.Errorf("expected %q at position %d", lit, p.pos)
+	}
+	p.pos += len(lit)
+	return nil
+}
+
+// parseToken reads a token from the header (delimited by whitespace).
+func (p *parser) parseToken() string {
+	p.skipWhitespace()
+	start := p.pos
+	for p.pos < len(p.input) && !isWhitespace(p.input[p.pos]) {
+		p.pos++
+	}
+	return p.input[start:p.pos]
+}
+
+// parseWord reads a word (for option keys): letters, digits, underscore.
+func (p *parser) parseWord() string {
+	start := p.pos
+	for p.pos < len(p.input) && (isLetterOrDigit(p.input[p.pos]) || p.input[p.pos] == '_') {
+		p.pos++
+	}
+	return p.input[start:p.pos]
+}
+
+// parseQuotedString parses a quoted string.
+func (p *parser) parseQuotedString() (string, error) {
+	if p.peek() != '"' && p.peek() != '\'' {
+		return "", fmt.Errorf("expected quote at position %d", p.pos)
+	}
+	quote := p.input[p.pos]
+	p.pos++ // consume opening quote
+	start := p.pos
+	for p.pos < len(p.input) && p.input[p.pos] != quote {
+		p.pos++
+	}
+	if p.pos >= len(p.input) {
+		return "", fmt.Errorf("unterminated quoted string starting at %d", start)
+	}
+	val := p.input[start:p.pos]
+	p.pos++ // consume closing quote
+	return val, nil
+}
+
+// option represents one key/value pair from the options.
+type option struct {
+	Key   string
+	Value string
+}
+
+// parseOption parses one option (e.g. key: value).
+func (p *parser) parseOption() (option, error) {
+	p.skipWhitespace()
+	key := p.parseWord()
+	if key == "" {
+		return option{}, fmt.Errorf("expected option key at position %d", p.pos)
+	}
+	p.skipWhitespace()
+	if err := p.expect(":"); err != nil {
+		return option{}, err
+	}
+	p.skipWhitespace()
+	var val string
+	if p.peek() == '"' || p.peek() == '\'' {
+		v, err := p.parseQuotedString()
+		if err != nil {
+			return option{}, err
+		}
+		val = v
+	} else {
+		// Unquoted value: read until next semicolon or closing parenthesis.
+		start := p.pos
+		for p.pos < len(p.input) && p.input[p.pos] != ';' && p.input[p.pos] != ')' {
+			p.pos++
+		}
+		val = strings.TrimSpace(p.input[start:p.pos])
+	}
+	return option{Key: key, Value: val}, nil
+}
+
+// parseOptionList parses a semicolon-separated list of options, returning a mapping of keys to slices of values.
+func (p *parser) parseOptionList() (map[string][]string, error) {
+	opts := make(map[string][]string)
+	for {
+		p.skipWhitespace()
+		if p.peek() == ')' {
+			break
+		}
+		opt, err := p.parseOption()
+		if err != nil {
+			return nil, err
+		}
+		opts[opt.Key] = append(opts[opt.Key], opt.Value)
+		p.skipWhitespace()
+		if p.peek() == ';' {
+			p.pos++ // consume semicolon
+		} else {
+			break
 		}
 	}
+	return opts, nil
+}
 
-	// Validate required fields
-	if groups["action"] == "" || groups["protocol"] == "" || groups["source_ip"] == "" || groups["source_port"] == "" || groups["destination_ip"] == "" || groups["destination_port"] == "" {
-		return nil, fmt.Errorf("missing required fields in rule")
+// parseRule parses the complete Snort rule.
+func (p *parser) parseRule() (*SnortRule, error) {
+	// Parse header tokens.
+	p.skipWhitespace()
+	action := p.parseToken()
+	if action == "" {
+		return nil, fmt.Errorf("missing action")
+	}
+	p.skipWhitespace()
+	protocol := p.parseToken()
+	if protocol == "" {
+		return nil, fmt.Errorf("missing protocol")
+	}
+	p.skipWhitespace()
+	sourceIP := p.parseToken()
+	if sourceIP == "" {
+		return nil, fmt.Errorf("missing source IP")
+	}
+	p.skipWhitespace()
+	sourcePort := p.parseToken()
+	if sourcePort == "" {
+		return nil, fmt.Errorf("missing source port")
+	}
+	p.skipWhitespace()
+	// Expect arrow "->"
+	if err := p.expect("->"); err != nil {
+		return nil, err
+	}
+	p.skipWhitespace()
+	destinationIP := p.parseToken()
+	if destinationIP == "" {
+		return nil, fmt.Errorf("missing destination IP")
+	}
+	p.skipWhitespace()
+	destinationPort := p.parseToken()
+	if destinationPort == "" {
+		return nil, fmt.Errorf("missing destination port")
+	}
+	p.skipWhitespace()
+	// Parse options: expect '(' then options then ')'
+	if err := p.expect("("); err != nil {
+		return nil, fmt.Errorf("expected '(' starting options: %v", err)
+	}
+	opts, err := p.parseOptionList()
+	if err != nil {
+		return nil, err
+	}
+	p.skipWhitespace()
+	if err := p.expect(")"); err != nil {
+		return nil, fmt.Errorf("expected ')' ending options: %v", err)
 	}
 
-	// Parse options into structured fields
-	var metadata Metadata
-	conditions := make(map[string]string)
-	options := strings.Split(groups["options"], ";")
-	var content, classtype, flow, depth, offset string
-
-	for _, option := range options {
-		option = strings.TrimSpace(option)
-		if option == "" {
-			continue
+	// Now, extract known keys.
+	// For keys that occur only once, use the first element.
+	extract := func(key string) string {
+		if vals, ok := opts[key]; ok && len(vals) > 0 {
+			return vals[0]
 		}
+		return ""
+	}
 
-		switch {
-		case strings.HasPrefix(option, "msg:"):
-			groups["message"] = strings.Trim(option[4:], "\" ")
-		case strings.HasPrefix(option, "rev:"):
-			groups["revision"] = strings.Trim(option[4:], " ")
-		case strings.HasPrefix(option, "classtype:"):
-			classtype = strings.Trim(option[10:], " ")
-		case strings.HasPrefix(option, "content:"):
-			content = strings.Trim(option[8:], "\" ")
-		case strings.HasPrefix(option, "flow:"):
-			flow = strings.Trim(option[5:], " ")
-		case strings.HasPrefix(option, "depth:"):
-			depth = strings.Trim(option[6:], " ")
-		case strings.HasPrefix(option, "offset:"):
-			offset = strings.Trim(option[7:], " ")
-		case strings.HasPrefix(option, "metadata:"):
-			metadataParts := strings.Split(option[9:], ",")
-			for _, part := range metadataParts {
-				kv := strings.SplitN(part, " ", 2)
-				if len(kv) == 2 {
-					key := strings.TrimSpace(kv[0])
-					value := strings.TrimSpace(kv[1])
-					switch key {
-					case "created_at":
-						metadata.CreatedAt = value
-					case "updated_at":
-						metadata.UpdatedAt = value
-					case "signature_severity":
-						metadata.SignatureSeverity = value
-					default:
-						// Ignore unknown metadata keys
-						continue
-					}
-				}
+	// For keys that can be multiple, take the whole slice.
+	flowbits := opts["flowbits"]
+	reference := opts["reference"]
+
+	// For metadata, parse its first occurrence if present.
+	metadata := make(map[string]string)
+	if metaStr := extract("metadata"); metaStr != "" {
+		// Split by commas then by whitespace.
+		parts := strings.Split(metaStr, ",")
+		for _, part := range parts {
+			part = strings.TrimSpace(part)
+			if part == "" {
+				continue
 			}
-		default:
-			keyValue := strings.SplitN(option, ":", 2)
-			if len(keyValue) == 2 {
-				conditions[strings.TrimSpace(keyValue[0])] = strings.TrimSpace(keyValue[1])
+			kv := strings.SplitN(part, " ", 2)
+			if len(kv) == 2 {
+				metadata[kv[0]] = strings.TrimSpace(kv[1])
 			}
 		}
 	}
 
-	// Ensure ID is present
-	if conditions["sid"] == "" {
+	// 'sid' is required.
+	sid := extract("sid")
+	if strings.TrimSpace(sid) == "" {
 		return nil, fmt.Errorf("missing required field: sid")
 	}
 
-	return &SnortRule{
-		ID:              conditions["sid"],
-		Action:          groups["action"],
-		Protocol:        groups["protocol"],
-		SourceIP:        groups["source_ip"],
-		SourcePort:      groups["source_port"],
-		DestinationIP:   groups["destination_ip"],
-		DestinationPort: groups["destination_port"],
-		Classtype:       classtype,
-		Content:         content,
-		Flow:            flow,
-		Depth:           depth,
-		Offset:          offset,
-		Metadata:        metadata,
-		Message:         groups["message"],
-		Revision:        groups["revision"],
-	}, nil
+	// Build the final SnortRule.
+	rule := &SnortRule{
+		Action:          action,
+		Protocol:        protocol,
+		SourceIP:        sourceIP,
+		SourcePort:      sourcePort,
+		DestinationIP:   destinationIP,
+		DestinationPort: destinationPort,
+
+		Message:   extract("msg"),
+		Revision:  extract("rev"),
+		GID:       extract("gid"),
+		Classtype: extract("classtype"),
+		Content:   extract("content"),
+		Flow:      extract("flow"),
+		Depth:     extract("depth"),
+		Offset:    extract("offset"),
+		Flags:     extract("flags"),
+		Priority:  extract("priority"),
+
+		Flowbits:  flowbits,
+		Reference: reference,
+		Metadata:  metadata,
+		SID:        sid,
+	}
+
+	return rule, nil
 }
+
+// --------------------------
+// Helper Functions
+// --------------------------
+
+// isWhitespace returns true if ch is a whitespace character.
+func isWhitespace(ch byte) bool {
+	return ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r'
+}
+
+// isLetterOrDigit returns true if ch is a letter or digit.
+func isLetterOrDigit(ch byte) bool {
+	return (ch >= 'a' && ch <= 'z') ||
+		(ch >= 'A' && ch <= 'Z') ||
+		(ch >= '0' && ch <= '9')
+}
+
+// ParseSnortRule is the exported function that uses our recursive descent parser.
+func ParseSnortRule(rule string) (*SnortRule, error) {
+	p := newParser(rule)
+	r, err := p.parseRule()
+	if err != nil {
+		return nil, fmt.Errorf("error parsing rule: %v", err)
+	}
+	return r, nil
+}
+
+
+
 
 func ParseSnortRulesFromFile(rulesFile string) ([]SnortRule, error) {
 	file, err := os.Open(rulesFile)

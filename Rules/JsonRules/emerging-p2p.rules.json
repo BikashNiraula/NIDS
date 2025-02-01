@@ -1,1480 +1,989 @@
 [
   {
-    "id": "2008591",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "1024:",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "1024:",
+    "sid": "2008591",
+    "msg": "ET P2P Ares Server Connection",
+    "rev": "3",
     "classtype": "policy-violation",
-    "content": "Ares|00 0a|",
+    "content": "r|be|bloop|00|dV",
     "flow": "established,to_server",
+    "reference": [
+      "url,aresgalaxy.sourceforge.net"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Ares Server Connection",
-    "revision": "3"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_07_30"
+    }
   },
   {
-    "id": "2000369",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "6969",
+    "sid": "2000369",
+    "msg": "ET P2P BitTorrent Announce",
+    "rev": "6",
     "classtype": "policy-violation",
     "content": "/announce",
     "flow": "to_server,established",
+    "reference": [
+      "url,bitconjurer.org/BitTorrent/protocol.html"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P BitTorrent Announce",
-    "revision": "6"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_07_30"
+    }
   },
   {
-    "id": "2003311",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "1024:65535",
     "destination_ip": "$HOME_NET",
     "destination_port": "1024:65535",
+    "sid": "2003311",
+    "msg": "ET P2P Edonkey Publicize File ACK",
+    "rev": "3",
     "classtype": "policy-violation",
     "content": "|e3 0d|",
     "depth": "2",
+    "reference": [
+      "url,www.giac.org/certified_professionals/practicals/gcih/0446.php"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Edonkey Publicize File ACK",
-    "revision": "3"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_07_30"
+    }
   },
   {
-    "id": "2003312",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "1024:65535",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "1024:65535",
+    "sid": "2003312",
+    "msg": "ET P2P Edonkey Connect Request",
+    "rev": "3",
     "classtype": "policy-violation",
     "content": "|e3 0a|",
     "depth": "2",
+    "reference": [
+      "url,www.giac.org/certified_professionals/practicals/gcih/0446.php"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Edonkey Connect Request",
-    "revision": "3"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_07_30"
+    }
   },
   {
-    "id": "2002760",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2002760",
+    "msg": "ET P2P GnucDNA UDP Ultrapeer Traffic",
+    "rev": "3",
     "classtype": "policy-violation",
     "content": "SCP@|83|DNA@",
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P GnucDNA UDP Ultrapeer Traffic",
-    "revision": "3"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_07_30"
+    }
   },
   {
-    "id": "2001796",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "1024:65535",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "1024:65535",
-    "classtype": "policy-violation",
-    "content": "KaZaA",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Kazaa over UDP",
-    "revision": "5"
-  },
-  {
-    "id": "2009097",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "41170",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2009097",
+    "msg": "ET P2P Manolito Connection (1)",
+    "rev": "2",
     "classtype": "policy-violation",
     "content": "|3d 4a d9|",
     "depth": "3",
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Manolito Connection (1)",
-    "revision": "2"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_07_30"
+    }
   },
   {
-    "id": "2009098",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "1024:65535",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "41170",
+    "sid": "2009098",
+    "msg": "ET P2P Manolito Ping",
+    "rev": "3",
     "classtype": "policy-violation",
-    "content": "|ed bb|",
+    "content": "|3d|",
     "depth": "1",
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Manolito Ping",
-    "revision": "3"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_07_30"
+    }
   },
   {
-    "id": "2000015",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "any",
     "source_port": "any",
     "destination_ip": "any",
     "destination_port": "any",
+    "sid": "2000015",
+    "msg": "ET P2P Phatbot Control Connection",
+    "rev": "6",
     "classtype": "trojan-activity",
-    "content": "|00|#waste|00|",
+    "content": "Wonk-",
     "flow": "established",
+    "reference": [
+      "url,www.lurhq.com/phatbot.html"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Phatbot Control Connection",
-    "revision": "6"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_07_30"
+    }
   },
   {
-    "id": "2001188",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "$HTTP_PORTS",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2001188",
+    "msg": "ET P2P Soulseek",
+    "rev": "7",
     "classtype": "policy-violation",
     "content": "slsknet",
     "flow": "established",
+    "reference": [
+      "url,www.slsknet.org"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Soulseek",
-    "revision": "7"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_07_30"
+    }
   },
   {
-    "id": "2001187",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "2234",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2001187",
+    "msg": "ET P2P Soulseek Filesearch Results",
+    "rev": "6",
     "classtype": "policy-violation",
     "content": "|09 00 00 00 78|",
     "flow": "from_server,established",
+    "reference": [
+      "url,www.slsknet.org"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Soulseek Filesearch Results",
-    "revision": "6"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_07_30"
+    }
   },
   {
-    "id": "2002950",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "1024:",
+    "sid": "2002950",
+    "msg": "ET P2P TOR 1.0 Server Key Retrieval",
+    "rev": "6",
     "classtype": "policy-violation",
     "content": "GET /tor/server/",
     "flow": "established,to_server",
     "depth": "16",
+    "reference": [
+      "url,tor.eff.org"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P TOR 1.0 Server Key Retrieval",
-    "revision": "6"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_07_30"
+    }
   },
   {
-    "id": "2002951",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "1024:",
+    "sid": "2002951",
+    "msg": "ET P2P TOR 1.0 Status Update",
+    "rev": "5",
     "classtype": "policy-violation",
     "content": "GET /tor/status/",
     "flow": "established,to_server",
     "depth": "16",
+    "reference": [
+      "url,tor.eff.org"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P TOR 1.0 Status Update",
-    "revision": "5"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_07_30"
+    }
   },
   {
-    "id": "2002952",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "1024:",
-    "classtype": "policy-violation",
-    "content": "\u003cidentity\u003e",
-    "flow": "established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P TOR 1.0 Inbound Circuit Traffic",
-    "revision": "5"
-  },
-  {
-    "id": "2002953",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "1024:",
-    "classtype": "policy-violation",
-    "content": "\u003cidentity\u003e",
-    "flow": "established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P TOR 1.0 Outbound Circuit Traffic",
-    "revision": "5"
-  },
-  {
-    "id": "2001059",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "any",
-    "classtype": "policy-violation",
-    "content": "User-Agent|3a| Ares",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Ares traffic",
-    "revision": "9"
-  },
-  {
-    "id": "2007799",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "User-Agent|3a| Azureus",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Azureus P2P Client User-Agent",
-    "revision": "4"
-  },
-  {
-    "id": "2011713",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "User-Agent|3a| BTSP/",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Bittorrent P2P Client User-Agent (BTSP)",
-    "revision": "4"
-  },
-  {
-    "id": "2006371",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "trojan-activity",
-    "content": "User-Agent|3a| BearShare",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P BearShare P2P Gnutella Client User-Agent (BearShare 6.x.x.x)",
-    "revision": "6"
-  },
-  {
-    "id": "2006379",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "trojan-activity",
-    "content": "\u0026version=",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P BearShare P2P Gnutella Client HTTP Request",
-    "revision": "6"
-  },
-  {
-    "id": "2011710",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "User-Agent|3a| BitComet/",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Bittorrent P2P Client User-Agent (BitComet)",
-    "revision": "4"
-  },
-  {
-    "id": "2011702",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "User-Agent|3a| BitTornado/",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Bittorrent P2P Client User-Agent (BitTornado)",
-    "revision": "4"
-  },
-  {
-    "id": "2006372",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "trojan-activity",
-    "content": "User-Agent|3a| Bittorrent",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Bittorrent P2P Client User-Agent (Bittorrent/5.x.x)",
-    "revision": "8"
-  },
-  {
-    "id": "2006375",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "trojan-activity",
-    "content": "\u0026peer_id=",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Bittorrent P2P Client HTTP Request",
-    "revision": "5"
-  },
-  {
-    "id": "2008581",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "any",
-    "classtype": "policy-violation",
-    "content": "d1|3a|ad2|3a|id20|3a|",
-    "depth": "12",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P BitTorrent DHT ping request",
-    "revision": "3"
-  },
-  {
-    "id": "2008585",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "any",
-    "classtype": "policy-violation",
-    "content": "e1|3a|q13|3a|announce_peer1|3a|",
-    "depth": "14",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P BitTorrent DHT announce_peers request",
-    "revision": "4"
-  },
-  {
-    "id": "2011700",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "User-Agent|3a| KTorrent/3",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Bittorrent P2P Client User-Agent (KTorrent/3.x.x)",
-    "revision": "4"
-  },
-  {
-    "id": "2007800",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "any",
-    "classtype": "policy-violation",
-    "content": "Server|3a| LimeWire",
-    "flow": "established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P LimeWire P2P Traffic",
-    "revision": "4"
-  },
-  {
-    "id": "2001035",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "/morpheus/morpheus.exe",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Morpheus Install",
-    "revision": "8"
-  },
-  {
-    "id": "2001036",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "/morpheus/morpheus_sm.ini",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Morpheus Install ini Download",
-    "revision": "8"
-  },
-  {
-    "id": "2001037",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "/gwebcache/gcache.asg?hostfile=",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Morpheus Update Request",
-    "revision": "8"
-  },
-  {
-    "id": "2010008",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "8247",
+    "sid": "2010008",
+    "msg": "ET P2P Octoshape P2P streaming media",
+    "rev": "4",
     "classtype": "policy-violation",
-    "content": "Oshtcp-streamtype|3a|",
+    "content": "POST / HTTP/1.",
     "depth": "64",
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Octoshape P2P streaming media",
-    "revision": "4"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_08_26"
+    }
   },
   {
-    "id": "2011707",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "User-Agent|3a| Shareaza 2.",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Client User-Agent (Shareaza 2.x)",
-    "revision": "4"
-  },
-  {
-    "id": "2011699",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "User-Agent|3a| Transmission/",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Bittorrent P2P Client User-Agent (Transmission/1.x)",
-    "revision": "5"
-  },
-  {
-    "id": "2011705",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "User-Agent|3a| rtorrent/",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Bittorrent P2P Client User-Agent (rTorrent)",
-    "revision": "4"
-  },
-  {
-    "id": "2008115",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "/tor/status/",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Tor Get Status Request",
-    "revision": "3"
-  },
-  {
-    "id": "2008113",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "/tor/server/",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Tor Get Server Request",
-    "revision": "5"
-  },
-  {
-    "id": "2008583",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "any",
-    "classtype": "policy-violation",
-    "content": "5|3a|nodes",
-    "depth": "12",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P BitTorrent DHT nodes reply",
-    "revision": "4"
-  },
-  {
-    "id": "2002814",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2002814",
+    "msg": "ET P2P Direct Connect Traffic (client-server)",
+    "rev": "5",
     "classtype": "policy-violation",
     "content": "$MyINFO",
     "flow": "from_client,established",
     "depth": "7",
+    "reference": [
+      "url,en.wikipedia.org/wiki/Direct_connect_file-sharing_application"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Direct Connect Traffic (client-server)",
-    "revision": "5"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_12_22"
+    }
   },
   {
-    "id": "2001298",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "4660:4799",
+    "sid": "2001298",
+    "msg": "ET P2P eDonkey Server Status Request",
+    "rev": "9",
     "classtype": "policy-violation",
     "content": "|e3 96|",
     "depth": "2",
+    "reference": [
+      "url,www.edonkey.com"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P eDonkey Server Status Request",
-    "revision": "9"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_12_22"
+    }
   },
   {
-    "id": "2007801",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "any",
     "source_port": "1024:",
     "destination_ip": "any",
     "destination_port": "1024:",
+    "sid": "2007801",
+    "msg": "ET P2P Gnutella TCP Traffic",
+    "rev": "4",
     "classtype": "policy-violation",
-    "content": "200 OK|0d 0a|",
+    "content": "GNUTELLA",
     "flow": "established,to_server",
     "depth": "8",
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Gnutella TCP Traffic",
-    "revision": "4"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_12_22"
+    }
   },
   {
-    "id": "2009966",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "1024:65535",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "1024:65535",
+    "sid": "2009966",
+    "msg": "ET P2P KuGoo P2P Connection",
+    "rev": "3",
     "classtype": "policy-violation",
-    "content": "|50 37|",
+    "content": "|64|",
     "depth": "1",
+    "reference": [
+      "url,koogoo.com"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P KuGoo P2P Connection",
-    "revision": "3"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_12_22"
+    }
   },
   {
-    "id": "2008611",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "2240",
     "destination_ip": "$HOME_NET",
     "destination_port": "1024:",
+    "sid": "2008611",
+    "msg": "ET P2P SoulSeek P2P Login Response",
+    "rev": "5",
     "classtype": "policy-violation",
     "content": "|5c 01 00 00 01 00 00 00|",
     "flow": "from_server,established",
     "depth": "8",
+    "reference": [
+      "url,www.slsknet.org"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P SoulSeek P2P Login Response",
-    "revision": "5"
+      "confidence": "Medium",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_12_22"
+    }
   },
   {
-    "id": "2010139",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "1024:65535",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "1024:65535",
+    "sid": "2010139",
+    "msg": "ET P2P Vuze BT Connection",
+    "rev": "5",
     "classtype": "policy-violation",
-    "content": "appid",
+    "content": "|00 00|",
     "flow": "established",
     "depth": "2",
+    "reference": [
+      "url,vuze.com"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Vuze BT Connection",
-    "revision": "5"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_12_22"
+    }
   },
   {
-    "id": "2010141",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "1024:65535",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2010141",
+    "msg": "ET P2P Vuze BT UDP Connection (2)",
+    "rev": "3",
     "classtype": "policy-violation",
-    "content": "|00 00|",
+    "content": "|00 00 04|",
     "depth": "3",
+    "reference": [
+      "url,vuze.com"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Vuze BT UDP Connection (2)",
-    "revision": "3"
+      "confidence": "Medium",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_12_22"
+    }
   },
   {
-    "id": "2010142",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "1024:65535",
+    "sid": "2010142",
+    "msg": "ET P2P Vuze BT UDP Connection (3)",
+    "rev": "4",
     "classtype": "policy-violation",
-    "content": "|02 05 21 04|",
+    "content": "|00 00 04|",
     "depth": "3",
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Vuze BT UDP Connection (3)",
-    "revision": "4"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_12_22"
+    }
   },
   {
-    "id": "2010143",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "1024:65535",
+    "sid": "2010143",
+    "msg": "ET P2P Vuze BT UDP Connection (4)",
+    "rev": "3",
     "classtype": "policy-violation",
-    "content": "|ff ff ff ff|",
+    "content": "|00 00 04|",
     "depth": "3",
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Vuze BT UDP Connection (4)",
-    "revision": "3"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_12_22"
+    }
   },
   {
-    "id": "2009968",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "1024:65535",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "1024:65535",
+    "sid": "2009968",
+    "msg": "ET P2P eMule KAD Network Connection Request(2)",
+    "rev": "4",
     "classtype": "policy-violation",
     "content": "|e4 20|",
     "depth": "2",
+    "reference": [
+      "url,emule-project.net"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P eMule KAD Network Connection Request(2)",
-    "revision": "4"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_12_22"
+    }
   },
   {
-    "id": "2009969",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "1024:65535",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "1024:65535",
+    "sid": "2009969",
+    "msg": "ET P2P eMule KAD Network Firewalled Request",
+    "rev": "4",
     "classtype": "policy-violation",
     "content": "|e4 50|",
     "depth": "2",
+    "reference": [
+      "url,emule-project.net"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P eMule KAD Network Firewalled Request",
-    "revision": "4"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_12_22"
+    }
   },
   {
-    "id": "2009972",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "1024:65535",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "1024:65535",
+    "sid": "2009972",
+    "msg": "ET P2P eMule KAD Network Server Status Request",
+    "rev": "4",
     "classtype": "policy-violation",
     "content": "|8c 97|",
     "depth": "2",
+    "reference": [
+      "url,emule-project.net"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P eMule KAD Network Server Status Request",
-    "revision": "4"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_12_22"
+    }
   },
   {
-    "id": "2001664",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "any",
-    "classtype": "policy-violation",
-    "content": "GNUTELLA CONNECT/",
-    "flow": "established,to_server",
-    "depth": "17",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Gnutella Connect",
-    "revision": "7"
-  },
-  {
-    "id": "2002761",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "any",
-    "classtype": "policy-violation",
-    "content": "X-Ultrapeer|3a| True",
-    "flow": "established,to_server",
-    "depth": "8",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Gnutella TCP Ultrapeer Traffic",
-    "revision": "6"
-  },
-  {
-    "id": "2001809",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "1024:65535",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "1024:65535",
+    "sid": "2001809",
+    "msg": "ET P2P Limewire P2P UDP Traffic",
+    "rev": "8",
     "classtype": "policy-violation",
     "content": "|49 50 40 83 53 43 50 41 00 00|",
     "depth": "10",
     "offset": "25",
+    "reference": [
+      "url,www.limewire.com"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Limewire P2P UDP Traffic",
-    "revision": "8"
+      "confidence": "Medium",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_12_22"
+    }
   },
   {
-    "id": "2008584",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "any",
-    "classtype": "policy-violation",
-    "content": "e1|3a|q9|3a|get_peers1|3a|",
-    "offset": "12",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P BitTorrent DHT get_peers request",
-    "revision": "5"
-  },
-  {
-    "id": "2000332",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "any",
     "source_port": "any",
     "destination_ip": "any",
     "destination_port": "4660:4799",
+    "sid": "2000332",
+    "msg": "ET P2P ed2k request part",
+    "rev": "11",
     "classtype": "policy-violation",
-    "content": "|00 00 00 47|",
+    "content": "|e3|",
     "flow": "to_server,established",
     "offset": "1",
+    "reference": [
+      "url,www.giac.org/practical/GCIH/Ian_Gosling_GCIH.pdf"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P ed2k request part",
-    "revision": "11"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_12_22"
+    }
   },
   {
-    "id": "2000333",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "any",
     "source_port": "any",
     "destination_ip": "any",
     "destination_port": "4660:4799",
+    "sid": "2000333",
+    "msg": "ET P2P ed2k file request answer",
+    "rev": "11",
     "classtype": "policy-violation",
-    "content": "|00 00 00 59|",
+    "content": "|e3|",
     "flow": "to_server,established",
     "offset": "1",
+    "reference": [
+      "url,www.giac.org/practical/GCIH/Ian_Gosling_GCIH.pdf"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P ed2k file request answer",
-    "revision": "11"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_12_22"
+    }
   },
   {
-    "id": "2008582",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "any",
-    "classtype": "policy-violation",
-    "content": "e1|3a|q9|3a|find_node1|3a|",
-    "depth": "24",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P BitTorrent DHT find_node request",
-    "revision": "6"
-  },
-  {
-    "id": "2012247",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "User-Agent|3a| BTWebClient",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2011_01_27"
-    },
-    "message": "ET P2P BTWebClient UA uTorrent in use",
-    "revision": "2"
-  },
-  {
-    "id": "2012467",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "1024:",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2012467",
+    "msg": "ET P2P Ocelot BitTorrent Server in Use",
+    "rev": "4",
     "classtype": "policy-violation",
-    "content": "HTTP/1.1 200 |0d 0a|Server|3a| Ocelot",
+    "content": "HTTP/1.1 200 |0d 0a|Server|3a| Ocelot ",
     "flow": "established,from_server",
     "depth": "30",
     "metadata": {
-      "created_at": "2011_03_10"
-    },
-    "message": "ET P2P Ocelot BitTorrent Server in Use",
-    "revision": "4"
+      "confidence": "High",
+      "created_at": "2011_03_10",
+      "signature_severity": "Informational",
+      "updated_at": "2011_03_11"
+    }
   },
   {
-    "id": "2011704",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "User-Agent|3a| Deluge",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Bittorrent P2P Client User-Agent (Deluge 1.x.x)",
-    "revision": "5"
-  },
-  {
-    "id": "2011232",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "trojan-activity",
-    "content": "User-Agent|3a| eChanblard|0d 0a|",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P p2p Related User-Agent (eChanblard)",
-    "revision": "7"
-  },
-  {
-    "id": "2102181",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "6881:6889",
+    "sid": "2102181",
+    "msg": "GPL P2P BitTorrent transfer",
+    "rev": "3",
     "classtype": "policy-violation",
     "content": "|13|BitTorrent protocol",
     "flow": "to_server,established",
     "depth": "20",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL P2P BitTorrent transfer",
-    "revision": "3"
+      "created_at": "2010_09_23",
+      "signature_severity": "Unknown",
+      "updated_at": "2012_01_16"
+    }
   },
   {
-    "id": "2102180",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2102180",
+    "msg": "GPL P2P BitTorrent announce request",
+    "rev": "4",
     "classtype": "policy-violation",
-    "content": "event=started",
+    "content": "GET /announce",
     "flow": "to_server,established",
     "depth": "13",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL P2P BitTorrent announce request",
-    "revision": "4"
+      "created_at": "2010_09_23",
+      "signature_severity": "Unknown",
+      "updated_at": "2012_01_16"
+    }
   },
   {
-    "id": "2011703",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "User-Agent|3a| Enhanced-CTorrent",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Bittorrent P2P Client User-Agent (Enhanced CTorrent 3.x)",
-    "revision": "6"
-  },
-  {
-    "id": "2011701",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "User-Agent|3a| Opera BitTorrent, Opera/",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Bittorrent P2P Client User-Agent (Opera/10.x)",
-    "revision": "5"
-  },
-  {
-    "id": "2102587",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "any",
     "source_port": "4711",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2102587",
+    "msg": "GPL P2P eDonkey server response",
+    "rev": "4",
     "classtype": "policy-violation",
     "content": "Server|3A| eMule",
     "flow": "established,from_server",
+    "reference": [
+      "url,www.emule-project.net"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL P2P eDonkey server response",
-    "revision": "4"
+      "created_at": "2010_09_23",
+      "signature_severity": "Unknown",
+      "updated_at": "2012_01_31"
+    }
   },
   {
-    "id": "2014459",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2014459",
+    "msg": "ET P2P QVOD P2P Sharing Traffic detected (tcp)",
+    "rev": "1",
     "classtype": "policy-violation",
-    "content": "|13|QVOD protocol|00 00 00 00 00 00 00 00 00 00 00 00 00 00|",
+    "content": "POST /service HTTP/1",
     "flow": "established,from_client",
     "depth": "20",
     "metadata": {
-      "created_at": "2012_04_03"
-    },
-    "message": "ET P2P QVOD P2P Sharing Traffic detected (tcp)",
-    "revision": "1"
+      "confidence": "High",
+      "created_at": "2012_04_03",
+      "signature_severity": "Informational",
+      "updated_at": "2012_04_03"
+    }
   },
   {
-    "id": "2100557",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2100557",
+    "msg": "GPL P2P GNUTella client request",
+    "rev": "7",
     "classtype": "policy-violation",
     "content": "GNUTELLA OK",
     "flow": "to_server,established",
     "depth": "40",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL P2P GNUTella client request",
-    "revision": "7"
+      "created_at": "2010_09_23",
+      "signature_severity": "Unknown",
+      "updated_at": "2012_07_30"
+    }
   },
   {
-    "id": "2101432",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2101432",
+    "msg": "GPL P2P GNUTella client request",
+    "rev": "7",
     "classtype": "policy-violation",
     "content": "GNUTELLA",
     "flow": "to_server,established",
     "depth": "8",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL P2P GNUTella client request",
-    "revision": "7"
+      "created_at": "2010_09_23",
+      "signature_severity": "Unknown",
+      "updated_at": "2012_07_30"
+    }
   },
   {
-    "id": "2009967",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "1024:65535",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "1024:65535",
+    "sid": "2009967",
+    "msg": "ET P2P eMule KAD Network Connection Request",
+    "rev": "5",
     "classtype": "policy-violation",
     "content": "|e4 21|",
     "depth": "2",
+    "reference": [
+      "url,emule-project.net"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P eMule KAD Network Connection Request",
-    "revision": "5"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2013_08_30"
+    }
   },
   {
-    "id": "2011712",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "User-Agent|3a| FDM 3.",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Bittorrent P2P Client User-Agent (FDM 3.x)",
-    "revision": "5"
-  },
-  {
-    "id": "2018012",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2018012",
+    "msg": "ET P2P Vagaa peer-to-peer (Transfer)",
+    "rev": "1",
     "classtype": "policy-violation",
     "content": "|0d 0a|VAGAA-OPERATION|3a| Transfer|0d 0a|",
     "flow": "from_client,established",
+    "reference": [
+      "url,en.wikipedia.org/wiki/Vagaa"
+    ],
     "metadata": {
-      "created_at": "2014_01_27"
-    },
-    "message": "ET P2P Vagaa peer-to-peer (Transfer)",
-    "revision": "1"
+      "confidence": "High",
+      "created_at": "2014_01_27",
+      "signature_severity": "Informational",
+      "updated_at": "2014_01_27"
+    }
   },
   {
-    "id": "2018532",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "trojan-activity",
-    "content": "!\"Referer|3a|",
-    "flow": "established, to_server",
-    "metadata": {
-      "created_at": "2014_06_05"
-    },
-    "message": "ET P2P zzima_loader",
-    "revision": "1"
-  },
-  {
-    "id": "2011706",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "User-Agent|3a| uTorrent",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Bittorrent P2P Client User-Agent (uTorrent)",
-    "revision": "5"
-  },
-  {
-    "id": "2000357",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2000357",
+    "msg": "ET P2P BitTorrent Traffic",
+    "rev": "9",
     "classtype": "policy-violation",
     "content": "|0000400907000000|",
     "flow": "established",
     "depth": "8",
+    "reference": [
+      "url,bitconjurer.org/BitTorrent/protocol.html"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P BitTorrent Traffic",
-    "revision": "9"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2014_09_18"
+    }
   },
   {
-    "id": "2010144",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "1024:65535",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2010144",
+    "msg": "ET P2P Vuze BT UDP Connection (5)",
+    "rev": "6",
     "classtype": "policy-violation",
     "content": "|00 00 04 17 27 10 19 80 00 00 00 00|",
     "depth": "12",
+    "reference": [
+      "url,vuze.com"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Vuze BT UDP Connection (5)",
-    "revision": "6"
+      "confidence": "Medium",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2014_09_18"
+    }
   },
   {
-    "id": "2000334",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "!7680",
+    "sid": "2000334",
+    "msg": "ET P2P BitTorrent peer sync",
+    "rev": "13",
     "classtype": "policy-violation",
     "content": "|00 00 00 0d 06 00|",
     "flow": "established",
     "depth": "6",
+    "reference": [
+      "url,bitconjurer.org/BitTorrent/protocol.html"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P BitTorrent peer sync",
-    "revision": "13"
+      "confidence": "Medium",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2016_01_15"
+    }
   },
   {
-    "id": "2022371",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "7680",
+    "sid": "2022371",
+    "msg": "ET P2P MS WUDO Peer Sync",
+    "rev": "1",
     "classtype": "policy-violation",
     "content": "|00 00 00 0d 06 00|",
     "flow": "established",
     "depth": "6",
+    "reference": [
+      "url,bitconjurer.org/BitTorrent/protocol.html",
+      "url,windows.microsoft.com/en-us/windows-10/windows-update-delivery-optimization-faq"
+    ],
     "metadata": {
-      "created_at": "2016_01_15"
-    },
-    "message": "ET P2P MS WUDO Peer Sync",
-    "revision": "1"
+      "confidence": "Medium",
+      "created_at": "2016_01_15",
+      "signature_severity": "Informational",
+      "updated_at": "2016_01_15"
+    }
   },
   {
-    "id": "2014734",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "$HTTP_PORTS",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "any",
-    "classtype": "policy-violation",
-    "content": "!\"mapfactor.com",
-    "flow": "established,to_client",
-    "metadata": {
-      "created_at": "2012_05_11"
-    },
-    "message": "ET P2P BitTorrent - Torrent File Downloaded",
-    "revision": "3"
-  },
-  {
-    "id": "2010140",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "1024:65535",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "1024:",
+    "sid": "2010140",
+    "msg": "ET P2P Vuze BT UDP Connection",
+    "rev": "7",
     "classtype": "policy-violation",
-    "content": "|00 00 00 00 00|",
+    "content": "!\"|00 22 02 00|\"",
     "depth": "4",
+    "reference": [
+      "url,vuze.com"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Vuze BT UDP Connection",
-    "revision": "7"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2016_11_01"
+    }
   },
   {
-    "id": "2003319",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "[!3389,1024:65535]",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "[!3389,1024:65535]",
+    "sid": "2003319",
+    "msg": "ET P2P Edonkey Search Request (search by name)",
+    "rev": "4",
     "classtype": "policy-violation",
-    "content": "|01|",
+    "content": "|e3 98|",
     "depth": "2",
+    "reference": [
+      "url,www.giac.org/certified_professionals/practicals/gcih/0446.php"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Edonkey Search Request (search by name)",
-    "revision": "4"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2019_01_18"
+    }
   },
   {
-    "id": "2009099",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "1024:65535",
     "destination_ip": "[$EXTERNAL_NET,!224.0.0.0/4]",
     "destination_port": "1024:65535",
+    "sid": "2009099",
+    "msg": "ET P2P ThunderNetwork UDP Traffic",
+    "rev": "4",
     "classtype": "policy-violation",
-    "content": "|00 00 00 00|",
+    "content": "|32 00 00 00|",
     "depth": "4",
+    "reference": [
+      "url,xunlei.com",
+      "url,en.wikipedia.org/wiki/Xunlei"
+    ],
     "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P ThunderNetwork UDP Traffic",
-    "revision": "4"
-  },
-  {
-    "id": "2008625",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "User-Agent|3a 20|Pando/",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Pando Client User-Agent Detected",
-    "revision": "8"
-  },
-  {
-    "id": "2012390",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "libtorrent",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2011_02_27"
-    },
-    "message": "ET P2P Libtorrent User-Agent",
-    "revision": "3"
-  },
-  {
-    "id": "2028942",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "User-Agent|3a 20|FFTorrent/",
-    "flow": "to_server,established",
-    "metadata": {},
-    "message": "ET P2P FFTorrent P2P Client User-Agent (FFTorrent/x.x.x)",
-    "revision": "2"
-  },
-  {
-    "id": "2007727",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "policy-violation",
-    "content": "!\"verismic.blob.core.windows.net|0d 0a|",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET P2P Possible Torrent Download via HTTP Request",
-    "revision": "9"
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2019_01_28"
+    }
   }
 ]

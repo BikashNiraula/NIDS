@@ -1,360 +1,350 @@
 [
   {
-    "id": "2102008",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "2401",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2102008",
+    "msg": "GPL MISC CVS invalid user authentication response",
+    "rev": "5",
     "classtype": "misc-attack",
-    "content": "|3A| no such user",
+    "content": "E Fatal error, aborting.",
     "flow": "from_server,established",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL MISC CVS invalid user authentication response",
-    "revision": "5"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_21"
+    }
   },
   {
-    "id": "2102009",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "2401",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2102009",
+    "msg": "GPL MISC CVS invalid repository response",
+    "rev": "3",
     "classtype": "misc-attack",
-    "content": "I HATE YOU",
+    "content": "error ",
     "flow": "from_server,established",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL MISC CVS invalid repository response",
-    "revision": "3"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_21"
+    }
   },
   {
-    "id": "2102010",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "2401",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2102010",
+    "msg": "GPL MISC CVS double free exploit attempt response",
+    "rev": "5",
     "classtype": "misc-attack",
     "content": "free|28 29 3A| warning|3A| chunk is already free",
     "flow": "from_server,established",
+    "reference": [
+      "bugtraq,6650",
+      "cve,2003-0015"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL MISC CVS double free exploit attempt response",
-    "revision": "5"
+      "created_at": "2010_09_23",
+      "cve": "CVE_2003_0015",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_21"
+    }
   },
   {
-    "id": "2102011",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "2401",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2102011",
+    "msg": "GPL MISC CVS invalid directory response",
+    "rev": "5",
     "classtype": "misc-attack",
     "content": "E protocol error|3A| invalid directory syntax in",
     "flow": "from_server,established",
+    "reference": [
+      "bugtraq,6650",
+      "cve,2003-0015"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL MISC CVS invalid directory response",
-    "revision": "5"
+      "created_at": "2010_09_23",
+      "cve": "CVE_2003_0015",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_21"
+    }
   },
   {
-    "id": "2102012",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "2401",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2102012",
+    "msg": "GPL MISC CVS missing cvsroot response",
+    "rev": "3",
     "classtype": "misc-attack",
     "content": "E protocol error|3A| Root request missing",
     "flow": "from_server,established",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL MISC CVS missing cvsroot response",
-    "revision": "3"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_21"
+    }
   },
   {
-    "id": "2102013",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "2401",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2102013",
+    "msg": "GPL MISC CVS invalid module response",
+    "rev": "3",
     "classtype": "misc-attack",
-    "content": "error",
+    "content": "cvs server|3A| cannot find module",
     "flow": "from_server,established",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL MISC CVS invalid module response",
-    "revision": "3"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_21"
+    }
   },
   {
-    "id": "2100511",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "5631",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2100511",
+    "msg": "GPL MISC Invalid PCAnywhere Login",
+    "rev": "6",
     "classtype": "unsuccessful-user",
     "content": "Invalid login",
     "flow": "from_server,established",
     "depth": "13",
     "offset": "5",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL MISC Invalid PCAnywhere Login",
-    "revision": "6"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2011_09_29"
+    }
   },
   {
-    "id": "2102317",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "2401",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2102317",
+    "msg": "GPL MISC CVS non-relative path error response",
+    "rev": "5",
     "classtype": "misc-attack",
     "content": "E cvs server|3A| warning|3A| cannot make directory CVS in /",
     "flow": "from_server,established",
+    "reference": [
+      "bugtraq,9178",
+      "cve,2003-0977"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL MISC CVS non-relative path error response",
-    "revision": "5"
+      "created_at": "2010_09_23",
+      "cve": "CVE_2003_0977",
+      "signature_severity": "Informational",
+      "updated_at": "2012_01_16"
+    }
   },
   {
-    "id": "2102547",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "8000",
-    "classtype": "web-application-activity",
-    "content": "Multipart",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL MISC HP Web JetAdmin remote file upload attempt",
-    "revision": "3"
-  },
-  {
-    "id": "2102548",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "8000",
-    "classtype": "web-application-activity",
-    "content": "/plugins/hpjdwm/script/test/setinfo.hts",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL MISC HP Web JetAdmin setinfo access",
-    "revision": "2"
-  },
-  {
-    "id": "2102549",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "8000",
-    "classtype": "web-application-activity",
-    "content": "WriteToFile",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL MISC HP Web JetAdmin file write attempt",
-    "revision": "2"
-  },
-  {
-    "id": "2101388",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "1900",
-    "classtype": "misc-attack",
-    "content": "Location|3A|",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL MISC UPnP Location overflow",
-    "revision": "14"
-  },
-  {
-    "id": "2101384",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "1900",
-    "classtype": "misc-attack",
-    "content": "NOTIFY *",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL MISC UPnP malformed advertisement",
-    "revision": "9"
-  },
-  {
-    "id": "2101323",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "4321",
+    "sid": "2101323",
+    "msg": "GPL MISC rwhoisd format string attempt",
+    "rev": "7",
     "classtype": "misc-attack",
     "content": "-soa %p",
     "flow": "to_server,established",
+    "reference": [
+      "bugtraq,3474",
+      "cve,2001-0838"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL MISC rwhoisd format string attempt",
-    "revision": "7"
+      "created_at": "2010_09_23",
+      "cve": "CVE_2001_0838",
+      "signature_severity": "Informational",
+      "updated_at": "2012_07_30"
+    }
   },
   {
-    "id": "2100608",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "514",
+    "sid": "2100608",
+    "msg": "GPL MISC rsh echo + +",
+    "rev": "6",
     "classtype": "attempted-user",
     "content": "echo |22|+ +|22|",
     "flow": "to_server,established",
+    "reference": [
+      "arachnids,388"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL MISC rsh echo + +",
-    "revision": "6"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_07_30"
+    }
   },
   {
-    "id": "2100616",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "113",
+    "sid": "2100616",
+    "msg": "GPL MISC ident version request",
+    "rev": "5",
     "classtype": "attempted-recon",
     "content": "VERSION|0A|",
     "flow": "to_server,established",
     "depth": "16",
+    "reference": [
+      "arachnids,303"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL MISC ident version request",
-    "revision": "5"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_07_30"
+    }
   },
   {
-    "id": "2100602",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "513",
+    "sid": "2100602",
+    "msg": "GPL MISC rlogin bin",
+    "rev": "6",
     "classtype": "attempted-user",
     "content": "bin|00|bin|00|",
     "flow": "to_server,established",
+    "reference": [
+      "arachnids,384"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL MISC rlogin bin",
-    "revision": "6"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_07_30"
+    }
   },
   {
-    "id": "2100603",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "513",
+    "sid": "2100603",
+    "msg": "GPL MISC rlogin echo++",
+    "rev": "6",
     "classtype": "bad-unknown",
     "content": "echo |22| + + |22|",
     "flow": "to_server,established",
+    "reference": [
+      "arachnids,385"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL MISC rlogin echo++",
-    "revision": "6"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_07_30"
+    }
   },
   {
-    "id": "2100606",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "513",
+    "sid": "2100606",
+    "msg": "GPL MISC rlogin root",
+    "rev": "6",
     "classtype": "attempted-admin",
     "content": "root|00|root|00|",
     "flow": "to_server,established",
+    "reference": [
+      "arachnids,389"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL MISC rlogin root",
-    "revision": "6"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_07_30"
+    }
   },
   {
-    "id": "2100609",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "514",
+    "sid": "2100609",
+    "msg": "GPL MISC rsh froot",
+    "rev": "6",
     "classtype": "attempted-admin",
     "content": "-froot|00|",
     "flow": "to_server,established",
+    "reference": [
+      "arachnids,387"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL MISC rsh froot",
-    "revision": "6"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_07_30"
+    }
   },
   {
-    "id": "2100610",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "514",
+    "sid": "2100610",
+    "msg": "GPL MISC rsh root",
+    "rev": "6",
     "classtype": "attempted-admin",
     "content": "root|00|root|00|",
     "flow": "to_server,established",
+    "reference": [
+      "arachnids,391"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL MISC rsh root",
-    "revision": "6"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_07_30"
+    }
   }
 ]

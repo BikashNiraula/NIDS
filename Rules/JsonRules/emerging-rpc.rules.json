@@ -1,1513 +1,1955 @@
 [
   {
-    "id": "2102005",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2102005",
+    "msg": "GPL RPC portmap kcms_server request UDP",
+    "rev": "11",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "bugtraq,6665",
+      "cve,2003-0027",
+      "url,www.kb.cert.org/vuls/id/850785"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap kcms_server request UDP",
-    "revision": "11"
+      "created_at": "2010_09_23",
+      "cve": "CVE_2003_0027",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_21"
+    }
   },
   {
-    "id": "2102006",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2102006",
+    "msg": "GPL RPC portmap kcms_server request TCP",
+    "rev": "11",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "bugtraq,6665",
+      "cve,2003-0027",
+      "url,www.kb.cert.org/vuls/id/850785"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap kcms_server request TCP",
-    "revision": "11"
+      "created_at": "2010_09_23",
+      "cve": "CVE_2003_0027",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_21"
+    }
   },
   {
-    "id": "2102014",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2102014",
+    "msg": "GPL RPC portmap UNSET attempt TCP 111",
+    "rev": "6",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "bugtraq,1892"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap UNSET attempt TCP 111",
-    "revision": "6"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_21"
+    }
   },
   {
-    "id": "2102015",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2102015",
+    "msg": "GPL RPC portmap UNSET attempt UDP 111",
+    "rev": "6",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "bugtraq,1892"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap UNSET attempt UDP 111",
-    "revision": "6"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_21"
+    }
   },
   {
-    "id": "2102016",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2102016",
+    "msg": "GPL RPC portmap status request TCP",
+    "rev": "7",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "arachnids,15"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap status request TCP",
-    "revision": "7"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_21"
+    }
   },
   {
-    "id": "2102017",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2102017",
+    "msg": "GPL RPC portmap espd request UDP",
+    "rev": "13",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "bugtraq,2714",
+      "cve,2001-0331"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap espd request UDP",
-    "revision": "13"
+      "created_at": "2010_09_23",
+      "cve": "CVE_2001_0331",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_21"
+    }
   },
   {
-    "id": "2102025",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2102025",
+    "msg": "GPL RPC yppasswd username overflow attempt UDP",
+    "rev": "10",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A9|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "bugtraq,2763",
+      "cve,2001-0779"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC yppasswd username overflow attempt UDP",
-    "revision": "10"
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "cve": "CVE_2001_0779",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_21"
+    }
   },
   {
-    "id": "2101950",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101950",
+    "msg": "GPL RPC portmap SET attempt UDP 111",
+    "rev": "6",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap SET attempt UDP 111",
-    "revision": "6"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_22"
+    }
   },
   {
-    "id": "2101959",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101959",
+    "msg": "GPL RPC portmap NFS request UDP",
+    "rev": "8",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap NFS request UDP",
-    "revision": "8"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_22"
+    }
   },
   {
-    "id": "2101960",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101960",
+    "msg": "GPL RPC portmap NFS request TCP",
+    "rev": "8",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap NFS request TCP",
-    "revision": "8"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_22"
+    }
   },
   {
-    "id": "2101961",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101961",
+    "msg": "GPL RPC portmap RQUOTA request UDP",
+    "rev": "8",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap RQUOTA request UDP",
-    "revision": "8"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_22"
+    }
   },
   {
-    "id": "2101962",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101962",
+    "msg": "GPL RPC portmap RQUOTA request TCP",
+    "rev": "8",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap RQUOTA request TCP",
-    "revision": "8"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_22"
+    }
   },
   {
-    "id": "2101963",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2101963",
+    "msg": "GPL RPC RQUOTA getquota overflow attempt UDP",
+    "rev": "10",
     "classtype": "misc-attack",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 AB|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "bugtraq,864",
+      "cve,1999-0974"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC RQUOTA getquota overflow attempt UDP",
-    "revision": "10"
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0974",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_22"
+    }
   },
   {
-    "id": "2101964",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2101964",
+    "msg": "GPL RPC tooltalk UDP overflow attempt",
+    "rev": "9",
     "classtype": "misc-attack",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 F3|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "bugtraq,122",
+      "cve,1999-0003"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC tooltalk UDP overflow attempt",
-    "revision": "9"
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0003",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_22"
+    }
   },
   {
-    "id": "2101965",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2101965",
+    "msg": "GPL RPC tooltalk TCP overflow attempt",
+    "rev": "9",
     "classtype": "misc-attack",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 F3|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "bugtraq,122",
+      "cve,1999-0003"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC tooltalk TCP overflow attempt",
-    "revision": "9"
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0003",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_22"
+    }
   },
   {
-    "id": "2101949",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101949",
+    "msg": "GPL RPC portmap SET attempt TCP 111",
+    "rev": "6",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap SET attempt TCP 111",
-    "revision": "6"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_22"
+    }
   },
   {
-    "id": "2101922",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101922",
+    "msg": "GPL RPC portmap proxy attempt TCP",
+    "rev": "7",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap proxy attempt TCP",
-    "revision": "7"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_22"
+    }
   },
   {
-    "id": "2101923",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101923",
+    "msg": "GPL RPC portmap proxy attempt UDP",
+    "rev": "7",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap proxy attempt UDP",
-    "revision": "7"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_22"
+    }
   },
   {
-    "id": "2101907",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2101907",
+    "msg": "GPL RPC CMSD UDP CMSD_CREATE buffer overflow attempt",
+    "rev": "11",
     "classtype": "attempted-admin",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 E4|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "bugtraq,524",
+      "cve,1999-0696"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC CMSD UDP CMSD_CREATE buffer overflow attempt",
-    "revision": "11"
+      "confidence": "High",
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0696",
+      "signature_severity": "Major",
+      "updated_at": "2011_04_26"
+    }
   },
   {
-    "id": "2101908",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2101908",
+    "msg": "GPL RPC CMSD TCP CMSD_CREATE buffer overflow attempt",
+    "rev": "10",
     "classtype": "attempted-admin",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 E4|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "bugtraq,524",
+      "cve,1999-0696"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC CMSD TCP CMSD_CREATE buffer overflow attempt",
-    "revision": "10"
+      "confidence": "High",
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0696",
+      "signature_severity": "Major",
+      "updated_at": "2011_04_26"
+    }
   },
   {
-    "id": "2101909",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2101909",
+    "msg": "GPL RPC CMSD TCP CMSD_INSERT buffer overflow attempt",
+    "rev": "13",
     "classtype": "misc-attack",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 E4|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "bugtraq,524",
+      "cve,1999-0696",
+      "url,www.cert.org/advisories/CA-99-08-cmsd.html"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC CMSD TCP CMSD_INSERT buffer overflow attempt",
-    "revision": "13"
+      "confidence": "High",
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0696",
+      "signature_severity": "Major",
+      "updated_at": "2011_04_26"
+    }
   },
   {
-    "id": "2101912",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2101912",
+    "msg": "GPL RPC sadmind TCP NETMGT_PROC_SERVICE CLIENT_DOMAIN overflow attempt",
+    "rev": "10",
     "classtype": "attempted-admin",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 87 88|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "bugtraq,0866",
+      "bugtraq,866",
+      "cve,1999-0977"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC sadmind TCP NETMGT_PROC_SERVICE CLIENT_DOMAIN overflow attempt",
-    "revision": "10"
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0977",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_26"
+    }
   },
   {
-    "id": "2101913",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2101913",
+    "msg": "GPL RPC STATD UDP stat mon_name format string exploit attempt",
+    "rev": "11",
     "classtype": "attempted-admin",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 B8|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "bugtraq,1480",
+      "cve,2000-0666"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC STATD UDP stat mon_name format string exploit attempt",
-    "revision": "11"
+      "created_at": "2010_09_23",
+      "cve": "CVE_2000_0666",
+      "signature_severity": "Major",
+      "updated_at": "2011_04_26"
+    }
   },
   {
-    "id": "2101914",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2101914",
+    "msg": "GPL RPC STATD TCP stat mon_name format string exploit attempt",
+    "rev": "11",
     "classtype": "attempted-admin",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 B8|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "bugtraq,1480",
+      "cve,2000-0666"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC STATD TCP stat mon_name format string exploit attempt",
-    "revision": "11"
+      "created_at": "2010_09_23",
+      "cve": "CVE_2000_0666",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_26"
+    }
   },
   {
-    "id": "2101915",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2101915",
+    "msg": "GPL RPC STATD UDP monitor mon_name format string exploit attempt",
+    "rev": "10",
     "classtype": "attempted-admin",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 B8|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "bugtraq,1480",
+      "cve,2000-0666"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC STATD UDP monitor mon_name format string exploit attempt",
-    "revision": "10"
+      "created_at": "2010_09_23",
+      "cve": "CVE_2000_0666",
+      "signature_severity": "Major",
+      "updated_at": "2011_04_26"
+    }
   },
   {
-    "id": "2101916",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2101916",
+    "msg": "GPL RPC STATD TCP monitor mon_name format string exploit attempt",
+    "rev": "10",
     "classtype": "attempted-admin",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 B8|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "bugtraq,1480",
+      "cve,2000-0666"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC STATD TCP monitor mon_name format string exploit attempt",
-    "revision": "10"
+      "created_at": "2010_09_23",
+      "cve": "CVE_2000_0666",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_26"
+    }
   },
   {
-    "id": "2101867",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "177",
+    "sid": "2101867",
+    "msg": "GPL RPC xdmcp info query",
+    "rev": "2",
     "classtype": "attempted-recon",
     "content": "|00 01 00 02 00 01 00|",
+    "reference": [
+      "nessus,10891"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC xdmcp info query",
-    "revision": "2"
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2011_05_02"
+    }
   },
   {
-    "id": "2101746",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101746",
+    "msg": "GPL RPC portmap cachefsd request UDP",
+    "rev": "12",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "bugtraq,4674",
+      "cve,2002-0033",
+      "cve,2002-0084"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap cachefsd request UDP",
-    "revision": "12"
+      "created_at": "2010_09_23",
+      "cve": "CVE_2002_0033",
+      "signature_severity": "Informational",
+      "updated_at": "2011_05_25"
+    }
   },
   {
-    "id": "2101747",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101747",
+    "msg": "GPL RPC portmap cachefsd request TCP",
+    "rev": "12",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "bugtraq,4674",
+      "cve,2002-0033",
+      "cve,2002-0084"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap cachefsd request TCP",
-    "revision": "12"
+      "created_at": "2010_09_23",
+      "cve": "CVE_2002_0033",
+      "signature_severity": "Informational",
+      "updated_at": "2011_05_25"
+    }
   },
   {
-    "id": "2101732",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101732",
+    "msg": "GPL RPC portmap rwalld request UDP",
+    "rev": "10",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
-    "depth": "4",
-    "offset": "4",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap rwalld request UDP",
-    "revision": "10"
-  },
-  {
-    "id": "2101733",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "111",
-    "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
-    "flow": "to_server,established",
-    "depth": "4",
-    "offset": "8",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap rwalld request TCP",
-    "revision": "10"
-  },
-  {
-    "id": "2101277",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "111",
-    "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
-    "depth": "4",
-    "offset": "4",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap ypupdated request UDP",
-    "revision": "10"
-  },
-  {
-    "id": "2102256",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "any",
-    "classtype": "misc-attack",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
     "offset": "12",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC sadmind query with root credentials attempt UDP",
-    "revision": "5"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2011_05_25"
+    }
   },
   {
-    "id": "2102255",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
-    "destination_port": "any",
-    "classtype": "misc-attack",
-    "content": "|00 00 00 00|",
+    "destination_port": "111",
+    "sid": "2101733",
+    "msg": "GPL RPC portmap rwalld request TCP",
+    "rev": "10",
+    "classtype": "rpc-portmap-decode",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
     "offset": "16",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC sadmind query with root credentials attempt TCP",
-    "revision": "5"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2011_05_25"
+    }
   },
   {
-    "id": "2102185",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "111",
+    "sid": "2101277",
+    "msg": "GPL RPC portmap ypupdated request UDP",
+    "rev": "10",
+    "classtype": "rpc-portmap-decode",
+    "content": "|00 01 86 A0|",
+    "depth": "4",
+    "offset": "12",
+    "metadata": {
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2011_06_22"
+    }
+  },
+  {
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2102185",
+    "msg": "GPL RPC mountd UDP mount path overflow attempt",
+    "rev": "8",
     "classtype": "misc-attack",
-    "content": "|00 00 00 00|",
-    "depth": "4",
-    "offset": "4",
+    "content": "|00 01 86 A5 00|",
+    "depth": "5",
+    "offset": "12",
+    "reference": [
+      "bugtraq,8179",
+      "cve,2003-0252",
+      "nessus,11800"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC mountd UDP mount path overflow attempt",
-    "revision": "8"
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "cve": "CVE_2003_0252",
+      "signature_severity": "Informational",
+      "updated_at": "2012_01_16"
+    }
   },
   {
-    "id": "2102184",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2102184",
+    "msg": "GPL RPC mountd TCP mount path overflow attempt",
+    "rev": "8",
     "classtype": "misc-attack",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A5 00|",
     "flow": "to_server,established",
-    "depth": "4",
-    "offset": "8",
+    "depth": "5",
+    "offset": "16",
+    "reference": [
+      "bugtraq,8179",
+      "cve,2003-0252",
+      "nessus,11800"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC mountd TCP mount path overflow attempt",
-    "revision": "8"
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "cve": "CVE_2003_0252",
+      "signature_severity": "Informational",
+      "updated_at": "2012_01_16"
+    }
   },
   {
-    "id": "2102104",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "512",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2102104",
+    "msg": "GPL RPC rexec username too long response",
+    "rev": "6",
     "classtype": "unsuccessful-user",
     "content": "username too long",
     "flow": "from_server,established",
     "depth": "17",
+    "reference": [
+      "bugtraq,7459"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC rexec username too long response",
-    "revision": "6"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_01_16"
+    }
   },
   {
-    "id": "2102093",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2102093",
+    "msg": "GPL RPC portmap proxy integer overflow attempt TCP",
+    "rev": "6",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0 00|",
     "flow": "to_server,established",
-    "depth": "4",
-    "offset": "8",
+    "depth": "5",
+    "offset": "16",
+    "reference": [
+      "bugtraq,7123",
+      "cve,2003-0028"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap proxy integer overflow attempt TCP",
-    "revision": "6"
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "cve": "CVE_2003_0028",
+      "signature_severity": "Informational",
+      "updated_at": "2012_01_16"
+    }
   },
   {
-    "id": "2102082",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2102082",
+    "msg": "GPL RPC portmap rpc.xfsmd request TCP",
+    "rev": "10",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "bugtraq,5072",
+      "bugtraq,5075",
+      "cve,2002-0359"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap rpc.xfsmd request TCP",
-    "revision": "10"
+      "created_at": "2010_09_23",
+      "cve": "CVE_2002_0359",
+      "signature_severity": "Informational",
+      "updated_at": "2012_01_16"
+    }
   },
   {
-    "id": "2102036",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2102036",
+    "msg": "GPL RPC portmap network-status-monitor request TCP",
+    "rev": "7",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap network-status-monitor request TCP",
-    "revision": "7"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_01_16"
+    }
   },
   {
-    "id": "2102035",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2102035",
+    "msg": "GPL RPC portmap network-status-monitor request UDP",
+    "rev": "7",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap network-status-monitor request UDP",
-    "revision": "7"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_01_16"
+    }
   },
   {
-    "id": "2101274",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101274",
+    "msg": "GPL RPC portmap ttdbserv request TCP",
+    "rev": "19",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "arachnids,24",
+      "bugtraq,122",
+      "bugtraq,3382",
+      "cve,1999-0003",
+      "cve,1999-0687",
+      "cve,1999-1075",
+      "cve,2001-0717",
+      "url,www.cert.org/advisories/CA-2001-05.html"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap ttdbserv request TCP",
-    "revision": "19"
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0003",
+      "signature_severity": "Informational",
+      "updated_at": "2012_07_13"
+    }
   },
   {
-    "id": "2100569",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2100569",
+    "msg": "GPL RPC snmpXdmi overflow attempt TCP",
+    "rev": "15",
     "classtype": "attempted-admin",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 87 99|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "bugtraq,2417",
+      "cve,2001-0236",
+      "url,www.cert.org/advisories/CA-2001-05.html"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC snmpXdmi overflow attempt TCP",
-    "revision": "15"
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "cve": "CVE_2001_0236",
+      "signature_severity": "Informational",
+      "updated_at": "2012_08_21"
+    }
   },
   {
-    "id": "2100585",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2100585",
+    "msg": "GPL RPC portmap sadmind request UDP",
+    "rev": "8",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "arachnids,20"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap sadmind request UDP",
-    "revision": "8"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_08_21"
+    }
   },
   {
-    "id": "2100589",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2100589",
+    "msg": "GPL RPC portmap yppasswd request UDP",
+    "rev": "9",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "arachnids,14"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap yppasswd request UDP",
-    "revision": "9"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_08_21"
+    }
   },
   {
-    "id": "2100590",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2100590",
+    "msg": "GPL RPC portmap ypserv request UDP",
+    "rev": "13",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "arachnids,12",
+      "bugtraq,5914",
+      "bugtraq,6016",
+      "cve,2000-1042",
+      "cve,2000-1043",
+      "cve,2002-1232"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap ypserv request UDP",
-    "revision": "13"
+      "created_at": "2010_09_23",
+      "cve": "CVE_2000_1042",
+      "signature_severity": "Informational",
+      "updated_at": "2012_08_21"
+    }
   },
   {
-    "id": "2100591",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2100591",
+    "msg": "GPL RPC portmap ypupdated request TCP",
+    "rev": "11",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "arachnids,125"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap ypupdated request TCP",
-    "revision": "11"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_08_21"
+    }
   },
   {
-    "id": "2100593",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2100593",
+    "msg": "GPL RPC portmap snmpXdmi request TCP",
+    "rev": "19",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "bugtraq,2417",
+      "cve,2001-0236",
+      "url,www.cert.org/advisories/CA-2001-05.html"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap snmpXdmi request TCP",
-    "revision": "19"
+      "created_at": "2010_09_23",
+      "cve": "CVE_2001_0236",
+      "signature_severity": "Informational",
+      "updated_at": "2012_08_21"
+    }
   },
   {
-    "id": "2100595",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2100595",
+    "msg": "GPL RPC portmap espd request TCP",
+    "rev": "17",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "bugtraq,2714",
+      "cve,2001-0331"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap espd request TCP",
-    "revision": "17"
+      "created_at": "2010_09_23",
+      "cve": "CVE_2001_0331",
+      "signature_severity": "Informational",
+      "updated_at": "2012_08_21"
+    }
   },
   {
-    "id": "2100598",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2100598",
+    "msg": "GPL RPC portmap listing TCP 111",
+    "rev": "13",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "arachnids,428"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap listing TCP 111",
-    "revision": "13"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_08_21"
+    }
   },
   {
-    "id": "2100601",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "513",
+    "sid": "2100601",
+    "msg": "GPL RPC rlogin LinuxNIS",
+    "rev": "7",
     "classtype": "bad-unknown",
     "content": "|3A 3A 3A 3A 3A 3A 3A 3A 00 3A 3A 3A 3A 3A 3A 3A 3A|",
     "flow": "to_server,established",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC rlogin LinuxNIS",
-    "revision": "7"
+      "confidence": "High",
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_08_21"
+    }
   },
   {
-    "id": "2100605",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "513",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2100605",
+    "msg": "GPL RPC rlogin login failure",
+    "rev": "7",
     "classtype": "unsuccessful-user",
     "content": "login incorrect",
     "flow": "from_server,established",
+    "reference": [
+      "arachnids,393"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC rlogin login failure",
-    "revision": "7"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_08_21"
+    }
   },
   {
-    "id": "2100611",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "513",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2100611",
+    "msg": "GPL RPC rlogin login failure",
+    "rev": "8",
     "classtype": "unsuccessful-user",
     "content": "|01|rlogind|3A| Permission denied.",
     "flow": "from_server,established",
+    "reference": [
+      "arachnids,392"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC rlogin login failure",
-    "revision": "8"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_08_21"
+    }
   },
   {
-    "id": "2100575",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2100575",
+    "msg": "GPL RPC portmap admind request UDP",
+    "rev": "9",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "arachnids,18"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap admind request UDP",
-    "revision": "9"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_09_14"
+    }
   },
   {
-    "id": "2100576",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2100576",
+    "msg": "GPL RPC portmap amountd request UDP",
+    "rev": "9",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "arachnids,19"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap amountd request UDP",
-    "revision": "9"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_09_14"
+    }
   },
   {
-    "id": "2100577",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2100577",
+    "msg": "GPL RPC portmap bootparam request UDP",
+    "rev": "14",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "arachnids,16",
+      "cve,1999-0647"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap bootparam request UDP",
-    "revision": "14"
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0647",
+      "signature_severity": "Informational",
+      "updated_at": "2012_09_14"
+    }
   },
   {
-    "id": "2100578",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2100578",
+    "msg": "GPL RPC portmap cmsd request UDP",
+    "rev": "9",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "arachnids,17"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap cmsd request UDP",
-    "revision": "9"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_09_14"
+    }
   },
   {
-    "id": "2101280",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101280",
+    "msg": "GPL RPC portmap listing UDP 111",
+    "rev": "10",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "arachnids,428"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap listing UDP 111",
-    "revision": "10"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_09_14"
+    }
   },
   {
-    "id": "2100579",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2100579",
+    "msg": "GPL RPC portmap mountd request UDP",
+    "rev": "9",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "arachnids,13"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap mountd request UDP",
-    "revision": "9"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_09_14"
+    }
   },
   {
-    "id": "2100580",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2100580",
+    "msg": "GPL RPC portmap nisd request UDP",
+    "rev": "10",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "arachnids,21"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap nisd request UDP",
-    "revision": "10"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_09_14"
+    }
   },
   {
-    "id": "2100581",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2100581",
+    "msg": "GPL RPC portmap pcnfsd request UDP",
+    "rev": "10",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "arachnids,22"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap pcnfsd request UDP",
-    "revision": "10"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_09_14"
+    }
   },
   {
-    "id": "2100582",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2100582",
+    "msg": "GPL RPC portmap rexd request UDP",
+    "rev": "9",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "arachnids,23"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap rexd request UDP",
-    "revision": "9"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_09_14"
+    }
   },
   {
-    "id": "2100583",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2100583",
+    "msg": "GPL RPC portmap rstatd request UDP",
+    "rev": "10",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "arachnids,10"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap rstatd request UDP",
-    "revision": "10"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_09_14"
+    }
   },
   {
-    "id": "2100584",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2100584",
+    "msg": "GPL RPC portmap rusers request UDP",
+    "rev": "12",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "arachnids,133",
+      "cve,1999-0626"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap rusers request UDP",
-    "revision": "12"
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0626",
+      "signature_severity": "Informational",
+      "updated_at": "2012_09_14"
+    }
   },
   {
-    "id": "2100586",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2100586",
+    "msg": "GPL RPC portmap selection_svc request UDP",
+    "rev": "9",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "arachnids,25"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap selection_svc request UDP",
-    "revision": "9"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_09_14"
+    }
   },
   {
-    "id": "2101279",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101279",
+    "msg": "GPL RPC portmap snmpXdmi request UDP",
+    "rev": "15",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "bugtraq,2417",
+      "cve,2001-0236",
+      "url,www.cert.org/advisories/CA-2001-05.html"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap snmpXdmi request UDP",
-    "revision": "15"
+      "created_at": "2010_09_23",
+      "cve": "CVE_2001_0236",
+      "signature_severity": "Informational",
+      "updated_at": "2012_09_14"
+    }
   },
   {
-    "id": "2100587",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2100587",
+    "msg": "GPL RPC portmap status request UDP",
+    "rev": "9",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "arachnids,15"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap status request UDP",
-    "revision": "9"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_09_14"
+    }
   },
   {
-    "id": "2100588",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2100588",
+    "msg": "GPL RPC portmap ttdbserv request UDP",
+    "rev": "18",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "depth": "4",
-    "offset": "4",
+    "offset": "12",
+    "reference": [
+      "arachnids,24",
+      "bugtraq,122",
+      "bugtraq,3382",
+      "cve,1999-0003",
+      "cve,1999-0687",
+      "cve,1999-1075",
+      "cve,2001-0717",
+      "url,www.cert.org/advisories/CA-2001-05.html"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap ttdbserv request UDP",
-    "revision": "18"
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0003",
+      "signature_severity": "Informational",
+      "updated_at": "2012_09_14"
+    }
   },
   {
-    "id": "2101271",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101271",
+    "msg": "GPL RPC portmap rusers request TCP",
+    "rev": "15",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "arachnids,133",
+      "cve,1999-0626"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap rusers request TCP",
-    "revision": "15"
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0626",
+      "signature_severity": "Informational",
+      "updated_at": "2013_03_18"
+    }
   },
   {
-    "id": "2101265",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101265",
+    "msg": "GPL RPC portmap cmsd request TCP",
+    "rev": "10",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "arachnids,17"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap cmsd request TCP",
-    "revision": "10"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2013_03_18"
+    }
   },
   {
-    "id": "2101269",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101269",
+    "msg": "GPL RPC portmap rexd request TCP",
+    "rev": "11",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "arachnids,23"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap rexd request TCP",
-    "revision": "11"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2013_03_18"
+    }
   },
   {
-    "id": "2101275",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101275",
+    "msg": "GPL RPC portmap yppasswd request TCP",
+    "rev": "11",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "arachnids,14"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap yppasswd request TCP",
-    "revision": "11"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2013_03_18"
+    }
   },
   {
-    "id": "2101262",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101262",
+    "msg": "GPL RPC portmap admind request TCP",
+    "rev": "10",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "arachnids,18"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap admind request TCP",
-    "revision": "10"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2013_03_18"
+    }
   },
   {
-    "id": "2101270",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101270",
+    "msg": "GPL RPC portmap rstatd request TCP",
+    "rev": "12",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "arachnids,10"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap rstatd request TCP",
-    "revision": "12"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2013_03_18"
+    }
   },
   {
-    "id": "2101273",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101273",
+    "msg": "GPL RPC portmap selection_svc request TCP",
+    "rev": "11",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "arachnids,25"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap selection_svc request TCP",
-    "revision": "11"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2013_03_18"
+    }
   },
   {
-    "id": "2101268",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101268",
+    "msg": "GPL RPC portmap pcnfsd request TCP",
+    "rev": "13",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "arachnids,22"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap pcnfsd request TCP",
-    "revision": "13"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2013_03_18"
+    }
   },
   {
-    "id": "2101263",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101263",
+    "msg": "GPL RPC portmap amountd request TCP",
+    "rev": "12",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "arachnids,19"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap amountd request TCP",
-    "revision": "12"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2013_03_18"
+    }
   },
   {
-    "id": "2101267",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101267",
+    "msg": "GPL RPC portmap nisd request TCP",
+    "rev": "12",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "arachnids,21"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap nisd request TCP",
-    "revision": "12"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2013_03_18"
+    }
   },
   {
-    "id": "2101272",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101272",
+    "msg": "GPL RPC portmap sadmind request TCP",
+    "rev": "11",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "arachnids,20"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap sadmind request TCP",
-    "revision": "11"
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2013_03_18"
+    }
   },
   {
-    "id": "2101276",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101276",
+    "msg": "GPL RPC portmap ypserv request TCP",
+    "rev": "15",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "arachnids,12",
+      "bugtraq,5914",
+      "bugtraq,6016",
+      "cve,2000-1042",
+      "cve,2000-1043",
+      "cve,2002-1232"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap ypserv request TCP",
-    "revision": "15"
+      "created_at": "2010_09_23",
+      "cve": "CVE_2000_1042",
+      "signature_severity": "Informational",
+      "updated_at": "2013_03_18"
+    }
   },
   {
-    "id": "2101264",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "111",
+    "sid": "2101264",
+    "msg": "GPL RPC portmap bootparam request TCP",
+    "rev": "14",
     "classtype": "rpc-portmap-decode",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 86 A0|",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "arachnids,16",
+      "cve,1999-0647"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC portmap bootparam request TCP",
-    "revision": "14"
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0647",
+      "signature_severity": "Informational",
+      "updated_at": "2013_03_18"
+    }
   },
   {
-    "id": "2102007",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "32771:34000",
+    "sid": "2102007",
+    "msg": "GPL RPC kcms_server directory traversal attempt",
+    "rev": "12",
     "classtype": "misc-attack",
-    "content": "|00 00 00 00|",
+    "content": "|00 01 87|}",
     "flow": "to_server,established",
     "depth": "4",
-    "offset": "8",
+    "offset": "16",
+    "reference": [
+      "bugtraq,6665",
+      "cve,2003-0027",
+      "url,www.kb.cert.org/vuls/id/850785"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL RPC kcms_server directory traversal attempt",
-    "revision": "12"
+      "confidence": "High",
+      "created_at": "2010_09_23",
+      "cve": "CVE_2003_0027",
+      "deployment": "Internal",
+      "mitre_tactic_id": "TA0007",
+      "mitre_tactic_name": "Discovery",
+      "mitre_technique_id": "T1083",
+      "mitre_technique_name": "File_And_Directory_Discovery",
+      "signature_severity": "Major",
+      "updated_at": "2024_11_26"
+    }
   }
 ]
