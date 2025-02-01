@@ -96,3 +96,85 @@ func main() {
 		log.Fatal(err)
 	}
 }
+//-------------------------------------------------------------------------------------------
+// package main
+
+// import (
+// 	"fmt"
+// 	"log"
+// 	"time"
+
+// 	"github.com/google/gopacket"
+// 	"github.com/google/gopacket/pcap"
+// 	"NIDS/packetpreprocesser" //Update this with your actual module path
+// )
+
+// func main() {
+// 	// Find a network device
+// 	devices, err := pcap.FindAllDevs()
+// 	if err != nil {
+// 		log.Fatal("Error finding devices:", err)
+// 	}
+// 	if len(devices) == 0 {
+// 		log.Fatal("No network devices found!")
+// 	}
+// 	device := "\\Device\\NPF_{56610559-1305-4E78-8413-2864DE5D5E76}" // Use the first available device
+
+// 	// Open the device for packet capture
+// 	handle, err := pcap.OpenLive(device, 1600, true, pcap.BlockForever)
+// 	if err != nil {
+// 		log.Fatal("Error opening device:", err)
+// 	}
+// 	defer handle.Close()
+
+// 	// Apply a simple filter to capture only TCP packets
+// 	if err := handle.SetBPFFilter("tcp"); err != nil {
+// 		log.Fatal("Error applying BPF filter:", err)
+// 	}
+
+// 	fmt.Println("Listening on:", device)
+
+// 	packetSource := gopacket.NewPacketSource(handle, handle.LinkType())
+
+// 	// Capture and process packets
+// 	for packet := range packetSource.Packets() {
+// 		meta := packetpreprocesser.DecodePacket(packet.Data())
+// 		if meta != nil {
+// 			fmt.Printf("\n[Packet Captured] %s\n", time.Now().Format(time.RFC3339))
+// 			fmt.Printf("Src: %s:%d -> Dst: %s:%d\n", meta.SrcIP, meta.SrcPort, meta.DstIP, meta.DstPort)
+// 			fmt.Printf("Protocol: %s | TCP Flags: %s\n", meta.Protocol, meta.TCPFlags)
+// 			if meta.Payload != "" {
+// 				fmt.Println("Payload:", meta.Payload)
+// 			}
+// 			packetpreprocesser.ExtractHTTP(meta)
+// 			packetpreprocesser.ExtractDNS(meta)
+// 		}
+// 	}
+// }
+//--------------------------------------
+// package main
+
+// import (
+// 	"fmt"
+// 	"log"
+
+// 	"github.com/google/gopacket"
+// 	"github.com/google/gopacket/pcap"
+// )
+
+// func main() {
+// 	// Open device for packet capture
+// 	handle, err := pcap.OpenLive("\\Device\\NPF_{56610559-1305-4E78-8413-2864DE5D5E76}", 1600, true, pcap.BlockForever) // Change "eth0" to your network device
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+// 	defer handle.Close()
+
+// 	// Capture packets
+// 	packetSource := gopacket.NewPacketSource(handle, handle.LinkType())
+
+// 	// Loop over packets
+// 	for packet := range packetSource.Packets() {
+// 		fmt.Println(packet)
+// 	}
+// }
