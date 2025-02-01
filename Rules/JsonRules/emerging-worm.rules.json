@@ -1,155 +1,87 @@
 [
   {
-    "id": "2008020",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "trojan-activity",
-    "content": "proc=[System Process]|0a|",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2010_07_30"
-    },
-    "message": "ET WORM Win32.Socks.s HTTP Post Checkin",
-    "revision": "6"
-  },
-  {
-    "id": "2012201",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "trojan-activity",
-    "content": "/setting.nql",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2011_01_17"
-    },
-    "message": "ET WORM Possible Worm Sohanad.Z or Other Infection Request for setting.nql",
-    "revision": "1"
-  },
-  {
-    "id": "2102004",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "1434",
+    "sid": "2102004",
+    "msg": "GPL WORM Slammer Worm propagation attempt OUTBOUND",
+    "rev": "8",
     "classtype": "misc-attack",
-    "content": "send",
+    "content": "|04|",
     "depth": "1",
+    "reference": [
+      "bugtraq,5310",
+      "bugtraq,5311",
+      "cve,2002-0649",
+      "nessus,11214",
+      "url,vil.nai.com/vil/content/v_99992.htm"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL WORM Slammer Worm propagation attempt OUTBOUND",
-    "revision": "8"
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "cve": "CVE_2002_0649",
+      "signature_severity": "Informational",
+      "updated_at": "2011_04_21"
+    }
   },
   {
-    "id": "2012739",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "trojan-activity",
-    "content": "/taskx.txt",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2011_04_29"
-    },
-    "message": "ET WORM Rimecud Worm checkin",
-    "revision": "1"
-  },
-  {
-    "id": "2014402",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "15000:30000",
+    "sid": "2014402",
+    "msg": "ET WORM W32/Rimecud wg.txt Checkin",
+    "rev": "1",
     "classtype": "trojan-activity",
     "content": "GET /wg.txt",
     "flow": "established,to_server",
     "depth": "11",
+    "reference": [
+      "md5,a89f7289d5cce821a194542e90026082",
+      "md5,fd56ce176889d4fbe588760a1da6462b",
+      "url,www.microsoft.com/security/portal/Threat/Encyclopedia/Entry.aspx?Name=Worm%3AWin32%2FRimecud"
+    ],
     "metadata": {
-      "created_at": "2012_03_20"
-    },
-    "message": "ET WORM W32/Rimecud wg.txt Checkin",
-    "revision": "1"
+      "created_at": "2012_03_20",
+      "signature_severity": "Major",
+      "updated_at": "2012_03_20"
+    }
   },
   {
-    "id": "2017404",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "$EXTERNAL_NET",
     "destination_port": "any",
+    "sid": "2017404",
+    "msg": "ET WORM W32/Njw0rm CnC Beacon",
+    "rev": "3",
     "classtype": "trojan-activity",
-    "content": "njxq80",
+    "content": "lv0njxq80",
     "flow": "established,to_server",
     "depth": "9",
-    "metadata": {},
-    "message": "ET WORM W32/Njw0rm CnC Beacon",
-    "revision": "3"
-  },
-  {
-    "id": "2018131",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "any",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "trojan-activity",
-    "content": "/HNAP1/",
-    "flow": "to_server,established",
+    "reference": [
+      "url,www.fireeye.com/blog/technical/malware-research/2013/08/njw0rm-brother-from-the-same-mother.html",
+      "md5,4c60493b14c666c56db163203e819272",
+      "md5,b0e1d20accd9a2ed29cdacb803e4a89d"
+    ],
     "metadata": {
-      "created_at": "2014_02_13"
-    },
-    "message": "ET WORM TheMoon.linksys.router 1",
-    "revision": "4"
-  },
-  {
-    "id": "2018132",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "any",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "trojan-activity",
-    "content": "/tmUnblock.cgi",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2014_02_13"
-    },
-    "message": "ET WORM TheMoon.linksys.router 2",
-    "revision": "4"
-  },
-  {
-    "id": "2018155",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "any",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "$HTTP_PORTS",
-    "classtype": "trojan-activity",
-    "content": "/hndUnblock.cgi",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2014_02_19"
-    },
-    "message": "ET WORM TheMoon.linksys.router 3",
-    "revision": "3"
+      "attack_target": "Client_Endpoint",
+      "created_at": "2013_08_31",
+      "deployment": "Perimeter",
+      "mitre_tactic_id": "TA0010",
+      "mitre_tactic_name": "Exfiltration",
+      "mitre_technique_id": "T1041",
+      "mitre_technique_name": "Exfiltration_Over_C2_Channel",
+      "signature_severity": "Major",
+      "tag": "c2",
+      "updated_at": "2013_08_31"
+    }
   }
 ]

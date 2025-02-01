@@ -1,945 +1,304 @@
 [
   {
-    "id": "2101948",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "53",
+    "sid": "2101948",
+    "msg": "GPL DNS zone transfer UDP",
+    "rev": "8",
     "classtype": "attempted-recon",
     "content": "|00 00 FC|",
     "offset": "14",
+    "reference": [
+      "cve,1999-0532",
+      "nessus,10595"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL DNS zone transfer UDP",
-    "revision": "8"
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0532",
+      "signature_severity": "Informational",
+      "updated_at": "2011_06_22"
+    }
   },
   {
-    "id": "2101616",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "53",
-    "classtype": "attempted-recon",
-    "content": "|04|bind|00|",
-    "offset": "12",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL DNS named version attempt",
-    "revision": "9"
-  },
-  {
-    "id": "2100252",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "53",
+    "sid": "2100252",
+    "msg": "GPL DNS named iquery attempt",
+    "rev": "9",
     "classtype": "attempted-recon",
     "content": "|09 80 00 00 00 01 00 00 00 00|",
     "depth": "16",
     "offset": "2",
+    "reference": [
+      "bugtraq,134",
+      "cve,1999-0009",
+      "url,www.rfc-editor.org/rfc/rfc1035.txt"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL DNS named iquery attempt",
-    "revision": "9"
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0009",
+      "signature_severity": "Informational",
+      "updated_at": "2011_06_22"
+    }
   },
   {
-    "id": "2100256",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "53",
-    "classtype": "attempted-recon",
-    "content": "|04|bind|00|",
-    "offset": "12",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL DNS named authors attempt",
-    "revision": "8"
-  },
-  {
-    "id": "2100257",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "53",
-    "classtype": "attempted-recon",
-    "content": "|04|bind|00|",
-    "flow": "to_server,established",
-    "offset": "12",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL DNS named version attempt",
-    "revision": "10"
-  },
-  {
-    "id": "2101435",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "53",
-    "classtype": "attempted-recon",
-    "content": "|04|bind|00|",
-    "flow": "to_server,established",
-    "offset": "12",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL DNS named authors attempt",
-    "revision": "8"
-  },
-  {
-    "id": "2016569",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|0a|micorsofts|03|net|00|",
-    "metadata": {
-      "created_at": "2013_03_14"
-    },
-    "message": "ET DNS APT_NGO_wuaclt C2 Domain micorsofts.net",
-    "revision": "3"
-  },
-  {
-    "id": "2016571",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|07|hotmal1|03|com|00|",
-    "metadata": {
-      "created_at": "2013_03_14"
-    },
-    "message": "ET DNS APT_NGO_wuaclt C2 Domain hotmal1.com",
-    "revision": "1"
-  },
-  {
-    "id": "2016570",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|0a|micorsofts|03|com|00|",
-    "metadata": {
-      "created_at": "2013_03_14"
-    },
-    "message": "ET DNS APT_NGO_wuaclt C2 Domain micorsofts.com",
-    "revision": "2"
-  },
-  {
-    "id": "2016591",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "any",
     "source_port": "53",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2016591",
+    "msg": "ET DNS Reply Sinkhole - 106.187.96.49 blacklistthisdomain.com",
+    "rev": "6",
     "classtype": "trojan-activity",
-    "content": "|00 04 6a bb 60 31|",
+    "content": "|00 01 00 01|",
     "metadata": {
-      "created_at": "2013_03_19"
-    },
-    "message": "ET DNS Reply Sinkhole - 106.187.96.49 blacklistthisdomain.com",
-    "revision": "6"
+      "confidence": "High",
+      "created_at": "2013_03_19",
+      "reviewed_at": "2024_03_25",
+      "signature_severity": "Major",
+      "updated_at": "2014_08_26"
+    }
   },
   {
-    "id": "2013894",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "any",
     "source_port": "53",
     "destination_ip": "$DNS_SERVERS",
     "destination_port": "any",
+    "sid": "2013894",
+    "msg": "ET DNS Excessive DNS Responses with 1 or more RR's (100+ in 10 seconds) to google.com.br possible Cache Poisoning Attempt",
+    "rev": "5",
     "classtype": "bad-unknown",
     "content": "|06|google|03|com|02|br|00|",
+    "reference": [
+      "url,www.securelist.com/en/blog/208193214/Massive_DNS_poisoning_attacks_in_Brazil",
+      "url,www.zdnet.com/blog/security/massive-dns-poisoning-attack-in-brazil-serving-exploits-and-malware/9780"
+    ],
     "metadata": {
-      "created_at": "2011_11_10"
-    },
-    "message": "ET DNS Excessive DNS Responses with 1 or more RR's (100+ in 10 seconds) to google.com.br possible Cache Poisoning Attempt",
-    "revision": "5"
+      "created_at": "2011_11_10",
+      "signature_severity": "Informational",
+      "updated_at": "2014_09_15"
+    }
   },
   {
-    "id": "2025146",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|gr|03|com|00|",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2017_12_12"
-    },
-    "message": "ET DNS Query for Suspicious .gr.com Domain (gr .com in DNS Lookup)",
-    "revision": "1"
-  },
-  {
-    "id": "2027757",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|to|00|",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {},
-    "message": "ET DNS Query for .to TLD",
-    "revision": "2"
-  },
-  {
-    "id": "2027758",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|cc|00|",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {},
-    "message": "ET DNS Query for .cc TLD",
-    "revision": "2"
-  },
-  {
-    "id": "2011802",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "![$SMTP_SERVERS,$DNS_SERVERS]",
-    "source_port": "any",
-    "destination_ip": "$DNS_SERVERS",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|09|localhost",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2010_10_13"
-    },
-    "message": "ET DNS DNS Lookup for localhost.DOMAIN.TLD",
-    "revision": "4"
-  },
-  {
-    "id": "2011911",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|0C|explorer_exe",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2010_11_09"
-    },
-    "message": "ET DNS Hiloti DNS CnC Channel Successful Install Message",
-    "revision": "3"
-  },
-  {
-    "id": "2014285",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|ch|02|vu",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2012_02_28"
-    },
-    "message": "ET DNS DNS Query for Suspicious .ch.vu Domain",
-    "revision": "5"
-  },
-  {
-    "id": "2015550",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|04|upas|02|su|00|",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2012_07_31"
-    },
-    "message": "ET DNS Query for a Suspicious *.upas.su domain",
-    "revision": "2"
-  },
-  {
-    "id": "2023883",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|03|top|00|",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {},
-    "message": "ET DNS Query to a *.top domain - Likely Hostile",
-    "revision": "2"
-  },
-  {
-    "id": "2016413",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "any",
     "source_port": "53",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2016413",
+    "msg": "ET DNS Reply Sinkhole - sinkhole.cert.pl 148.81.111.111",
+    "rev": "5",
     "classtype": "trojan-activity",
-    "content": "|00 04 94 51 6f 6f|",
+    "content": "|00 01 00 01|",
     "metadata": {
-      "created_at": "2013_02_15"
-    },
-    "message": "ET DNS Reply Sinkhole - sinkhole.cert.pl 148.81.111.111",
-    "revision": "5"
+      "confidence": "High",
+      "created_at": "2013_02_15",
+      "signature_severity": "Major",
+      "updated_at": "2022_07_13"
+    }
   },
   {
-    "id": "2016418",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "any",
     "source_port": "53",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2016418",
+    "msg": "ET DNS Reply Sinkhole - Dr. Web",
+    "rev": "6",
     "classtype": "trojan-activity",
-    "content": "|00 04 5b e9 f4 6a|",
+    "content": "|00 01 00 01|",
+    "reference": [
+      "url,virustracker.info"
+    ],
     "metadata": {
-      "created_at": "2013_02_16"
-    },
-    "message": "ET DNS Reply Sinkhole - Dr. Web",
-    "revision": "6"
+      "confidence": "High",
+      "created_at": "2013_02_16",
+      "signature_severity": "Major",
+      "updated_at": "2022_07_13"
+    }
   },
   {
-    "id": "2016419",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "any",
     "source_port": "53",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2016419",
+    "msg": "ET DNS Reply Sinkhole - Zinkhole.org",
+    "rev": "6",
     "classtype": "trojan-activity",
-    "content": "|00 04 b0 1f 3e 4c|",
+    "content": "|00 01 00 01|",
     "metadata": {
-      "created_at": "2013_02_16"
-    },
-    "message": "ET DNS Reply Sinkhole - Zinkhole.org",
-    "revision": "6"
+      "confidence": "High",
+      "created_at": "2013_02_16",
+      "signature_severity": "Major",
+      "updated_at": "2022_07_13"
+    }
   },
   {
-    "id": "2016422",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "any",
     "source_port": "53",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2016422",
+    "msg": "ET DNS Reply Sinkhole - Georgia Tech (1)",
+    "rev": "6",
     "classtype": "trojan-activity",
-    "content": "|00 04 c6 3d e3 06|",
+    "content": "|00 01 00 01|",
+    "reference": [
+      "url,virustracker.info"
+    ],
     "metadata": {
-      "created_at": "2013_02_16"
-    },
-    "message": "ET DNS Reply Sinkhole - Georgia Tech (1)",
-    "revision": "6"
+      "confidence": "High",
+      "created_at": "2013_02_16",
+      "signature_severity": "Major",
+      "updated_at": "2022_07_13"
+    }
   },
   {
-    "id": "2016423",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "any",
     "source_port": "53",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2016423",
+    "msg": "ET DNS Reply Sinkhole - Georgia Tech (2)",
+    "rev": "7",
     "classtype": "trojan-activity",
-    "content": "|00 04 32 3e 0c 67|",
+    "content": "|00 01 00 01|",
+    "reference": [
+      "url,virustracker.info"
+    ],
     "metadata": {
-      "created_at": "2013_02_16"
-    },
-    "message": "ET DNS Reply Sinkhole - Georgia Tech (2)",
-    "revision": "7"
+      "confidence": "High",
+      "created_at": "2013_02_16",
+      "signature_severity": "Major",
+      "updated_at": "2022_07_13"
+    }
   },
   {
-    "id": "2012901",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "any",
     "destination_port": "53",
+    "sid": "2012901",
+    "msg": "ET DNS Query for a Suspicious *.noc.su domain",
+    "rev": "4",
     "classtype": "bad-unknown",
-    "content": "|03|noc|02|su",
+    "content": "|01|",
     "depth": "1",
     "offset": "2",
     "metadata": {
-      "created_at": "2011_05_31"
-    },
-    "message": "ET DNS Query for a Suspicious *.noc.su domain",
-    "revision": "4"
+      "confidence": "High",
+      "created_at": "2011_05_31",
+      "signature_severity": "Informational",
+      "updated_at": "2024_01_29"
+    }
   },
   {
-    "id": "2013016",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "any",
     "destination_port": "53",
+    "sid": "2013016",
+    "msg": "ET DNS DNS Query for Illegal Drug Sales Site (SilkRoad)",
+    "rev": "3",
     "classtype": "policy-violation",
-    "content": "|10|ianxz6zefk72ulzz|05|onion",
+    "content": "|01|",
     "depth": "1",
     "offset": "2",
     "metadata": {
-      "created_at": "2011_06_13"
-    },
-    "message": "ET DNS DNS Query for Illegal Drug Sales Site (SilkRoad)",
-    "revision": "3"
+      "confidence": "Medium",
+      "created_at": "2011_06_13",
+      "signature_severity": "Unknown",
+      "updated_at": "2024_01_29"
+    }
   },
   {
-    "id": "2014169",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "any",
     "destination_port": "53",
+    "sid": "2012956",
+    "msg": "ET DNS DNS Query for a Suspicious *.co.tv domain",
+    "rev": "4",
     "classtype": "bad-unknown",
-    "content": "|02|su|00|",
+    "content": "|01|",
     "depth": "1",
     "offset": "2",
     "metadata": {
-      "created_at": "2012_01_31"
-    },
-    "message": "ET DNS Query for .su TLD (Soviet Union) Often Malware Related",
-    "revision": "3"
+      "confidence": "Medium",
+      "created_at": "2011_06_08",
+      "signature_severity": "Informational",
+      "updated_at": "2024_01_29"
+    }
   },
   {
-    "id": "2011410",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "any",
     "destination_port": "53",
+    "sid": "2012900",
+    "msg": "ET DNS DNS Query for a Suspicious *.ae.am domain",
+    "rev": "3",
     "classtype": "bad-unknown",
-    "content": "|02|cz|02|cc|00|",
+    "content": "|01|",
     "depth": "1",
     "offset": "2",
     "metadata": {
-      "created_at": "2010_09_28"
-    },
-    "message": "ET DNS DNS Query for Suspicious .cz.cc Domain",
-    "revision": "5"
+      "confidence": "Medium",
+      "created_at": "2011_05_31",
+      "signature_severity": "Informational",
+      "updated_at": "2024_01_30"
+    }
   },
   {
-    "id": "2013172",
     "action": "alert",
     "protocol": "udp",
     "source_ip": "$HOME_NET",
     "source_port": "any",
     "destination_ip": "any",
     "destination_port": "53",
+    "sid": "2012903",
+    "msg": "ET DNS DNS Query for a Suspicious *.qc.cx domain",
+    "rev": "3",
     "classtype": "bad-unknown",
-    "content": "|02|cu|02|cc",
+    "content": "|01|",
     "depth": "1",
     "offset": "2",
     "metadata": {
-      "created_at": "2011_07_02"
-    },
-    "message": "ET DNS DNS Query for a Suspicious *.cu.cc domain",
-    "revision": "4"
-  },
-  {
-    "id": "2012956",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|co|02|tv",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_06_08"
-    },
-    "message": "ET DNS DNS Query for a Suspicious *.co.tv domain",
-    "revision": "4"
-  },
-  {
-    "id": "2012826",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|vv|02|cc|00|",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_05_19"
-    },
-    "message": "ET DNS DNS Query to a Suspicious *.vv.cc domain",
-    "revision": "3"
-  },
-  {
-    "id": "2013124",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|co|02|be",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_06_29"
-    },
-    "message": "ET DNS DNS Query for Suspicious .co.be Domain",
-    "revision": "5"
-  },
-  {
-    "id": "2013847",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|03|net|02|tf",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_11_07"
-    },
-    "message": "ET DNS Query for Suspicious .net.tf Domain",
-    "revision": "3"
-  },
-  {
-    "id": "2013848",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|eu|02|tf",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_11_07"
-    },
-    "message": "ET DNS Query for Suspicious .eu.tf Domain",
-    "revision": "3"
-  },
-  {
-    "id": "2013849",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|03|int|02|tf",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_11_07"
-    },
-    "message": "ET DNS Query for Suspicious .int.tf Domain",
-    "revision": "3"
-  },
-  {
-    "id": "2013850",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|03|edu|02|tf",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_11_07"
-    },
-    "message": "ET DNS Query for Suspicious .edu.tf Domain",
-    "revision": "3"
-  },
-  {
-    "id": "2013851",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|us|02|tf",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_11_07"
-    },
-    "message": "ET DNS Query for Suspicious .us.tf Domain",
-    "revision": "3"
-  },
-  {
-    "id": "2013852",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|ca|02|tf",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_11_07"
-    },
-    "message": "ET DNS Query for Suspicious .ca.tf Domain",
-    "revision": "3"
-  },
-  {
-    "id": "2013853",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|bg|02|tf",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_11_07"
-    },
-    "message": "ET DNS Query for Suspicious .bg.tf Domain",
-    "revision": "3"
-  },
-  {
-    "id": "2013854",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|ru|02|tf",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_11_07"
-    },
-    "message": "ET DNS Query for Suspicious .ru.tf Domain",
-    "revision": "3"
-  },
-  {
-    "id": "2013855",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|pl|02|tf",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_11_07"
-    },
-    "message": "ET DNS Query for Suspicious .pl.tf Domain",
-    "revision": "3"
-  },
-  {
-    "id": "2013856",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|cz|02|tf",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_11_07"
-    },
-    "message": "ET DNS Query for Suspicious .cz.tf Domain",
-    "revision": "3"
-  },
-  {
-    "id": "2013857",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|de|02|tf",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_11_07"
-    },
-    "message": "ET DNS Query for Suspicious .de.tf Domain",
-    "revision": "3"
-  },
-  {
-    "id": "2013858",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|at|02|tf",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_11_07"
-    },
-    "message": "ET DNS Query for Suspicious .at.tf Domain",
-    "revision": "3"
-  },
-  {
-    "id": "2013859",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|ch|02|tf",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_11_07"
-    },
-    "message": "ET DNS Query for Suspicious .ch.tf Domain",
-    "revision": "3"
-  },
-  {
-    "id": "2013860",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|sg|02|tf",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_11_07"
-    },
-    "message": "ET DNS Query for Suspicious .sg.tf Domain",
-    "revision": "3"
-  },
-  {
-    "id": "2013970",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|03|noip|02|cn|00|",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_11_28"
-    },
-    "message": "ET DNS Query for Suspicious .noip.cn Domain",
-    "revision": "3"
-  },
-  {
-    "id": "2012902",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|be|02|ma",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_05_31"
-    },
-    "message": "ET DNS DNS Query for a Suspicious *.be.ma domain",
-    "revision": "5"
-  },
-  {
-    "id": "2011409",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|co|02|cc|00|",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2010_09_28"
-    },
-    "message": "ET DNS DNS Query for Suspicious .co.cc Domain",
-    "revision": "5"
-  },
-  {
-    "id": "2018438",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|03|tun|10|vpnoverdns|03|com|00|",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2014_05_02"
-    },
-    "message": "ET DNS DNS Query for vpnoverdns - indicates DNS tunnelling",
-    "revision": "4"
-  },
-  {
-    "id": "2012900",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|ae|02|am",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_05_31"
-    },
-    "message": "ET DNS DNS Query for a Suspicious *.ae.am domain",
-    "revision": "3"
-  },
-  {
-    "id": "2012903",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "|02|qc|02|cx",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_05_31"
-    },
-    "message": "ET DNS DNS Query for a Suspicious *.qc.cx domain",
-    "revision": "3"
-  },
-  {
-    "id": "2012811",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "!\"|03|www|06|google|02|tk",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2011_05_15"
-    },
-    "message": "ET DNS Query to a .tk domain - Likely Hostile",
-    "revision": "5"
-  },
-  {
-    "id": "2016778",
-    "action": "alert",
-    "protocol": "udp",
-    "source_ip": "$HOME_NET",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "53",
-    "classtype": "bad-unknown",
-    "content": "!\"|01|u|02|pw|00|",
-    "depth": "1",
-    "offset": "2",
-    "metadata": {
-      "created_at": "2013_04_20"
-    },
-    "message": "ET DNS Query to a *.pw domain - Likely Hostile",
-    "revision": "6"
+      "confidence": "Medium",
+      "created_at": "2011_05_31",
+      "signature_severity": "Informational",
+      "updated_at": "2024_01_30"
+    }
   }
 ]

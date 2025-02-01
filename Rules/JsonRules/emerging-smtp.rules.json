@@ -1,386 +1,242 @@
 [
   {
-    "id": "2012986",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "25",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2012986",
+    "msg": "ET SMTP Robtex.com Block Message",
+    "rev": "2",
     "classtype": "not-suspicious",
     "content": "robtex.com",
     "flow": "established,from_server",
     "metadata": {
-      "created_at": "2011_06_10"
-    },
-    "message": "ET SMTP Robtex.com Block Message",
-    "revision": "2"
+      "created_at": "2011_06_10",
+      "signature_severity": "Informational",
+      "updated_at": "2011_06_10"
+    }
   },
   {
-    "id": "2012982",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "25",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2012982",
+    "msg": "ET SMTP Abuseat.org Block Message",
+    "rev": "3",
     "classtype": "not-suspicious",
     "content": "abuseat.org",
     "flow": "established,from_server",
     "metadata": {
-      "created_at": "2011_06_10"
-    },
-    "message": "ET SMTP Abuseat.org Block Message",
-    "revision": "3"
+      "created_at": "2011_06_10",
+      "signature_severity": "Informational",
+      "updated_at": "2011_10_12"
+    }
   },
   {
-    "id": "2102275",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$SMTP_SERVERS",
-    "source_port": "25",
-    "destination_ip": "$EXTERNAL_NET",
-    "destination_port": "any",
-    "classtype": "suspicious-login",
-    "content": "Authentication unsuccessful",
-    "flow": "from_server,established",
-    "offset": "54",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL SMTP AUTH LOGON brute force attempt",
-    "revision": "3"
-  },
-  {
-    "id": "2100654",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$SMTP_SERVERS",
-    "destination_port": "25",
-    "classtype": "attempted-admin",
-    "content": "rcpt to|3A|",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL SMTP RCPT TO overflow",
-    "revision": "15"
-  },
-  {
-    "id": "2100659",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$SMTP_SERVERS",
-    "destination_port": "25",
-    "classtype": "attempted-recon",
-    "content": "decode",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL SMTP expn decode",
-    "revision": "10"
-  },
-  {
-    "id": "2100660",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$SMTP_SERVERS",
-    "destination_port": "25",
-    "classtype": "attempted-recon",
-    "content": "root",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL SMTP expn root",
-    "revision": "13"
-  },
-  {
-    "id": "2100672",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$SMTP_SERVERS",
-    "destination_port": "25",
-    "classtype": "attempted-recon",
-    "content": "decode",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL SMTP vrfy decode",
-    "revision": "10"
-  },
-  {
-    "id": "2101446",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$SMTP_SERVERS",
-    "destination_port": "25",
-    "classtype": "attempted-recon",
-    "content": "root",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL SMTP vrfy root",
-    "revision": "7"
-  },
-  {
-    "id": "2102259",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$SMTP_SERVERS",
-    "destination_port": "25",
-    "classtype": "attempted-admin",
-    "content": "!\"|0a|",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL SMTP EXPN overflow attempt",
-    "revision": "9"
-  },
-  {
-    "id": "2018144",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2018144",
+    "msg": "ET SMTP EXE - ZIP file with .pif filename inside",
+    "rev": "1",
     "classtype": "bad-unknown",
     "content": "|0D 0A 0D 0A|UmFyI",
     "flow": "established",
     "metadata": {
-      "created_at": "2014_02_15"
-    },
-    "message": "ET SMTP EXE - ZIP file with .pif filename inside",
-    "revision": "1"
+      "created_at": "2014_02_15",
+      "signature_severity": "Informational",
+      "updated_at": "2014_02_15"
+    }
   },
   {
-    "id": "2019340",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "any",
-    "source_port": "any",
-    "destination_ip": "any",
-    "destination_port": "[25,587]",
-    "classtype": "trojan-activity",
-    "content": "Subject|3a 20|CCOP|20|",
-    "flow": "to_server,established",
-    "metadata": {
-      "created_at": "2014_10_02"
-    },
-    "message": "ET SMTP Possible ComputerCop Log Transmitted via SMTP",
-    "revision": "1"
-  },
-  {
-    "id": "2019407",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$SMTP_SERVERS",
     "destination_port": "[25,587]",
+    "sid": "2019407",
+    "msg": "ET SMTP SUSPICIOUS SMTP Attachment Inbound PPT attachment with Embedded OLE Object M2",
+    "rev": "1",
     "classtype": "misc-activity",
     "content": "|0D 0A 0D 0A|UEsDB",
     "flow": "established,to_server",
     "metadata": {
-      "created_at": "2014_10_15"
-    },
-    "message": "ET SMTP SUSPICIOUS SMTP Attachment Inbound PPT attachment with Embedded OLE Object M2",
-    "revision": "1"
+      "confidence": "Medium",
+      "created_at": "2014_10_15",
+      "signature_severity": "Minor",
+      "updated_at": "2014_10_15"
+    }
   },
   {
-    "id": "2019408",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$SMTP_SERVERS",
     "destination_port": "[25,587]",
+    "sid": "2019408",
+    "msg": "ET SMTP SUSPICIOUS SMTP Attachment Inbound PPT attachment with Embedded OLE Object M3",
+    "rev": "1",
     "classtype": "misc-activity",
     "content": "|0D 0A 0D 0A|UEsDB",
     "flow": "established,to_server",
     "metadata": {
-      "created_at": "2014_10_15"
-    },
-    "message": "ET SMTP SUSPICIOUS SMTP Attachment Inbound PPT attachment with Embedded OLE Object M3",
-    "revision": "1"
+      "confidence": "Medium",
+      "created_at": "2014_10_15",
+      "signature_severity": "Minor",
+      "updated_at": "2014_10_15"
+    }
   },
   {
-    "id": "2019409",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$SMTP_SERVERS",
     "destination_port": "[25,587]",
+    "sid": "2019409",
+    "msg": "ET SMTP SUSPICIOUS SMTP Attachment Inbound PPT attachment with Embedded OLE Object M4",
+    "rev": "1",
     "classtype": "misc-activity",
     "content": "cHB0L2VtYmVkZGluZ3Mvb2xlT2JqZWN0",
     "flow": "established,to_server",
     "metadata": {
-      "created_at": "2014_10_15"
-    },
-    "message": "ET SMTP SUSPICIOUS SMTP Attachment Inbound PPT attachment with Embedded OLE Object M4",
-    "revision": "1"
+      "confidence": "Medium",
+      "created_at": "2014_10_15",
+      "signature_severity": "Minor",
+      "updated_at": "2014_10_15"
+    }
   },
   {
-    "id": "2019410",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$SMTP_SERVERS",
     "destination_port": "[25,587]",
+    "sid": "2019410",
+    "msg": "ET SMTP SUSPICIOUS SMTP Attachment Inbound PPT attachment with Embedded OLE Object M5",
+    "rev": "1",
     "classtype": "misc-activity",
     "content": "cHQvZW1iZWRkaW5ncy9vbGVPYmplY3",
     "flow": "established,to_server",
     "metadata": {
-      "created_at": "2014_10_15"
-    },
-    "message": "ET SMTP SUSPICIOUS SMTP Attachment Inbound PPT attachment with Embedded OLE Object M5",
-    "revision": "1"
+      "confidence": "Medium",
+      "created_at": "2014_10_15",
+      "signature_severity": "Minor",
+      "updated_at": "2014_10_15"
+    }
   },
   {
-    "id": "2019411",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$SMTP_SERVERS",
     "destination_port": "[25,587]",
+    "sid": "2019411",
+    "msg": "ET SMTP SUSPICIOUS SMTP Attachment Inbound PPT attachment with Embedded OLE Object M6",
+    "rev": "1",
     "classtype": "misc-activity",
     "content": "BwdC9lbWJlZGRpbmdzL29sZU9iamVjd",
     "flow": "established,to_server",
     "metadata": {
-      "created_at": "2014_10_15"
-    },
-    "message": "ET SMTP SUSPICIOUS SMTP Attachment Inbound PPT attachment with Embedded OLE Object M6",
-    "revision": "1"
+      "confidence": "Medium",
+      "created_at": "2014_10_15",
+      "signature_severity": "Minor",
+      "updated_at": "2014_10_15"
+    }
   },
   {
-    "id": "2019406",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$SMTP_SERVERS",
     "destination_port": "[25,587]",
+    "sid": "2019406",
+    "msg": "ET SMTP SUSPICIOUS SMTP Attachment Inbound PPT attachment with Embedded OLE Object M1",
+    "rev": "2",
     "classtype": "misc-activity",
     "content": "|0D 0A 0D 0A|UEsDB",
     "flow": "established,to_server",
     "metadata": {
-      "created_at": "2014_10_15"
-    },
-    "message": "ET SMTP SUSPICIOUS SMTP Attachment Inbound PPT attachment with Embedded OLE Object M1",
-    "revision": "2"
+      "confidence": "Medium",
+      "created_at": "2014_10_15",
+      "signature_severity": "Minor",
+      "updated_at": "2014_10_31"
+    }
   },
   {
-    "id": "2012985",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "25",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2012985",
+    "msg": "ET SMTP Sorbs.net Block Message",
+    "rev": "2",
     "classtype": "not-suspicious",
     "content": "sorbs.net",
     "flow": "established,from_server",
     "metadata": {
-      "created_at": "2011_06_10"
-    },
-    "message": "ET SMTP Sorbs.net Block Message",
-    "revision": "2"
+      "created_at": "2011_06_10",
+      "signature_severity": "Informational",
+      "updated_at": "2014_12_05"
+    }
   },
   {
-    "id": "2012983",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "25",
     "destination_ip": "$HOME_NET",
     "destination_port": "any",
+    "sid": "2012983",
+    "msg": "ET SMTP Spamcop.net Block Message",
+    "rev": "2",
     "classtype": "not-suspicious",
     "content": "spamcop.net",
     "flow": "established,from_server",
     "metadata": {
-      "created_at": "2011_06_10"
-    },
-    "message": "ET SMTP Spamcop.net Block Message",
-    "revision": "2"
+      "created_at": "2011_06_10",
+      "signature_severity": "Informational",
+      "updated_at": "2014_12_05"
+    }
   },
   {
-    "id": "2023255",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "any",
     "source_port": "any",
     "destination_ip": "$SMTP_SERVERS",
     "destination_port": "[25,587]",
+    "sid": "2023255",
+    "msg": "ET SMTP Incoming SMTP Message with Possibly Malicious MIME Epilogue 2016-05-13 (BadEpilogue)",
+    "rev": "1",
     "classtype": "bad-unknown",
-    "content": "|0d 0a 2d 2d|",
+    "content": "|0d 0a|Content-Type|3a 20|multipart|2f|mixed|3b|",
     "flow": "to_server,established",
-    "metadata": {},
-    "message": "ET SMTP Incoming SMTP Message with Possibly Malicious MIME Epilogue 2016-05-13 (BadEpilogue)",
-    "revision": "1"
-  },
-  {
-    "id": "2050426",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "any",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "[25,587]",
-    "classtype": "trojan-activity",
-    "content": "\u0026subquery|3d 5c 5c|",
-    "flow": "established,to_server",
-    "metadata": {},
-    "message": "ET SMTP Message Containing search-ms URI With subquery Parameter In Message Body - Possible NTLM Hash Leak Attempt",
-    "revision": "1"
-  },
-  {
-    "id": "2050427",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "any",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "[25,587]",
-    "classtype": "trojan-activity",
-    "content": "\u0026crumb|3d|location|3a 5c 5c|",
-    "flow": "established,to_server",
-    "metadata": {},
-    "message": "ET SMTP Message Containing search-ms URI With crumb location Parameter In Message Body - Possible NTLM Hash Leak Attempt",
-    "revision": "1"
-  },
-  {
-    "id": "2050428",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "any",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "[25,587]",
-    "classtype": "trojan-activity",
-    "content": "wpa|3a 2f 2f 2f 2f|",
-    "flow": "established,to_server",
-    "metadata": {},
-    "message": "ET SMTP Message Containing Windows Performance Analyzer URI In Message Body - Possible NTLM Hash Leak Attempt",
-    "revision": "1"
+    "reference": [
+      "url,www.certego.local/en/news/badepilogue-the-perfect-evasion/"
+    ],
+    "metadata": {
+      "attack_target": "SMTP_Server",
+      "created_at": "2016_09_22",
+      "deployment": "Datacenter",
+      "performance_impact": "Low",
+      "signature_severity": "Major",
+      "updated_at": "2016_09_22"
+    }
   }
 ]

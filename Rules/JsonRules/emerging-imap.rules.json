@@ -1,291 +1,77 @@
 [
   {
-    "id": "2101903",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "143",
-    "classtype": "misc-attack",
-    "content": "RENAME",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL IMAP rename overflow attempt",
-    "revision": "9"
-  },
-  {
-    "id": "2101904",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "143",
-    "classtype": "misc-attack",
-    "content": "FIND",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL IMAP find overflow attempt",
-    "revision": "8"
-  },
-  {
-    "id": "2103070",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "143",
-    "classtype": "misc-attack",
-    "content": "FETCH",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL IMAP fetch overflow attempt",
-    "revision": "3"
-  },
-  {
-    "id": "2101842",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "143",
+    "sid": "2101842",
+    "msg": "GPL IMAP login buffer overflow attempt",
+    "rev": "16",
     "classtype": "attempted-user",
     "content": "LOGIN",
     "flow": "established,to_server",
+    "reference": [
+      "bugtraq,13727",
+      "bugtraq,502",
+      "cve,1999-0005",
+      "cve,1999-1557",
+      "cve,2005-1255",
+      "nessus,10123",
+      "cve,2007-2795",
+      "nessus,10125"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL IMAP login buffer overflow attempt",
-    "revision": "16"
+      "confidence": "High",
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0005",
+      "signature_severity": "Major",
+      "updated_at": "2011_05_17"
+    }
   },
   {
-    "id": "2101844",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "143",
+    "sid": "2101780",
+    "msg": "GPL IMAP EXPLOIT partial body overflow attempt",
+    "rev": "10",
     "classtype": "misc-attack",
-    "content": "AUTHENTICATE",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL IMAP authenticate overflow attempt",
-    "revision": "12"
-  },
-  {
-    "id": "2101780",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "143",
-    "classtype": "misc-attack",
-    "content": "x PARTIAL 1 BODY[",
+    "content": " x PARTIAL 1 BODY[",
     "flow": "to_server,established",
+    "reference": [
+      "bugtraq,4713",
+      "cve,2002-0379"
+    ],
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL IMAP EXPLOIT partial body overflow attempt",
-    "revision": "10"
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "cve": "CVE_2002_0379",
+      "signature_severity": "Minor",
+      "updated_at": "2011_05_17"
+    }
   },
   {
-    "id": "2102330",
     "action": "alert",
     "protocol": "tcp",
     "source_ip": "$EXTERNAL_NET",
     "source_port": "any",
     "destination_ip": "$HOME_NET",
     "destination_port": "143",
-    "classtype": "misc-attack",
-    "content": "AUTH",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL IMAP auth overflow attempt",
-    "revision": "3"
-  },
-  {
-    "id": "2103076",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "143",
-    "classtype": "misc-attack",
-    "content": "UNSUBSCRIBE",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL IMAP unsubscribe overflow attempt",
-    "revision": "2"
-  },
-  {
-    "id": "2103075",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "143",
-    "classtype": "misc-attack",
-    "content": "UNSUBSCRIBE",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL IMAP unsubscribe literal overflow attempt",
-    "revision": "3"
-  },
-  {
-    "id": "2103074",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "143",
-    "classtype": "misc-attack",
-    "content": "SUBSCRIBE",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL IMAP subscribe overflow attempt",
-    "revision": "2"
-  },
-  {
-    "id": "2103073",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "143",
-    "classtype": "misc-attack",
-    "content": "SUBSCRIBE",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL IMAP subscribe literal overflow attempt",
-    "revision": "3"
-  },
-  {
-    "id": "2103072",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "143",
-    "classtype": "misc-attack",
-    "content": "STATUS",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL IMAP status overflow attempt",
-    "revision": "3"
-  },
-  {
-    "id": "2103068",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "143",
-    "classtype": "misc-attack",
-    "content": "EXAMINE",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL IMAP examine overflow attempt",
-    "revision": "2"
-  },
-  {
-    "id": "2103066",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "143",
-    "classtype": "misc-attack",
-    "content": "APPEND",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL IMAP append overflow attempt",
-    "revision": "3"
-  },
-  {
-    "id": "2103058",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "143",
-    "classtype": "misc-attack",
-    "content": "COPY",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL IMAP copy literal overflow attempt",
-    "revision": "3"
-  },
-  {
-    "id": "2103007",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "143",
-    "classtype": "misc-attack",
-    "content": "DELETE",
-    "flow": "established,to_server",
-    "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL IMAP delete overflow attempt",
-    "revision": "2"
-  },
-  {
-    "id": "2100293",
-    "action": "alert",
-    "protocol": "tcp",
-    "source_ip": "$EXTERNAL_NET",
-    "source_port": "any",
-    "destination_ip": "$HOME_NET",
-    "destination_port": "143",
+    "sid": "2100293",
+    "msg": "GPL IMAP Overflow Attempt",
+    "rev": "8",
     "classtype": "attempted-admin",
     "content": "|E8 C0 FF FF FF|/bin/sh",
     "flow": "to_server,established",
     "metadata": {
-      "created_at": "2010_09_23"
-    },
-    "message": "GPL IMAP Overflow Attempt",
-    "revision": "8"
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_09_13"
+    }
   }
 ]
