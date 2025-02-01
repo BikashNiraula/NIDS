@@ -1,13 +1,15 @@
 package main
+
 import (
 	_ "NIDS/rulesparser"
 	_ "encoding/json"
 	"fmt"
+	// Removed underscore so we can use strings package
+	"strings"
 	_ "log"
 	_ "net"
 	_ "os"
 	_ "path/filepath"
-	_ "strings"
 
 	"github.com/google/gopacket"
 	"github.com/google/gopacket/layers"
@@ -15,6 +17,34 @@ import (
 	_ "github.com/olekukonko/tablewriter"
 	_ "github.com/spf13/cobra"
 )
+
+// inferAppProtocolByPayload performs simple pattern matching on the payload.
+// This is a basic form of deep packet inspection to help overcome the limitations
+// of using port numbers alone for protocol detection (​:contentReference[oaicite:1]{index=1}).
+func inferAppProtocolByPayload(payload []byte) string {
+	payloadStr := string(payload)
+	// Check for HTTP patterns
+	if strings.HasPrefix(payloadStr, "GET ") ||
+		strings.HasPrefix(payloadStr, "POST ") ||
+		strings.Contains(payloadStr, "HTTP/1.1") ||
+		strings.Contains(payloadStr, "HTTP/1.0") {
+		return "HTTP"
+	}
+	// Check for SMTP response (commonly starts with "220")
+	if strings.HasPrefix(payloadStr, "220 ") && strings.Contains(payloadStr, "SMTP") {
+		return "SMTP"
+	}
+	// Check for SMTP commands (e.g., EHLO/HELO)
+	if strings.HasPrefix(payloadStr, "EHLO ") || strings.HasPrefix(payloadStr, "HELO ") {
+		return "SMTP"
+	}
+	// Check for FTP response (e.g., "220-" may indicate FTP service)
+	if strings.HasPrefix(payloadStr, "220-") && strings.Contains(payloadStr, "FTP") {
+		return "FTP"
+	}
+	// Add additional payload-based heuristics here as needed.
+	return "Unknown"
+}
 
 func CaptureAndLogAllFields(iface string) error {
 	handle, err := pcap.OpenLive(iface, 1600, true, pcap.BlockForever)
@@ -65,11 +95,11 @@ func CaptureAndLogAllFields(iface string) error {
 			}
 		}
 
-		// Extract application layer (FTP, SMTP, HTTP, etc.)
+		// Extract application layer payload and try to infer the application protocol.
 		if applicationLayer := packet.ApplicationLayer(); applicationLayer != nil {
 			payload = applicationLayer.Payload()
 
-			// Infer application protocol based on port numbers
+			// First, use port-based heuristics.
 			switch {
 			case protocol == "TCP" && (sourcePort == "21" || destinationPort == "21"):
 				appProtocol = "FTP"
@@ -92,10 +122,23 @@ func CaptureAndLogAllFields(iface string) error {
 			default:
 				appProtocol = "Unknown"
 			}
+
+			// If the port-based method did not yield a known protocol, try inspecting the payload.
+			if appProtocol == "Unknown" && len(payload) > 0 {
+				inferred := inferAppProtocolByPayload(payload)
+				if inferred != "Unknown" {
+					// Append a note indicating that payload inspection provided the hint.
+					appProtocol = inferred + " (via payload)"
+				}
+			}
+		} else {
+			// No application layer was detected; set payload to empty and appProtocol accordingly.
+			payload = []byte{}
+			appProtocol = "No Application Data"
 		}
 
 		fmt.Printf(
-			"Packet:\n  Timestamp: %s\n  Network Protocol: %s\n  Application Protocol: %s\n  Source IP: %s\n  Source Port: %s\n  Destination IP: %s\n  Destination Port: %s\n  TTL: %d\n  Flags: %s\n  Length: %d\n  Payload: %x\n\n",
+			"Packet:\n  Timestamp: %s\n  Network Protocol: %s\n  Application Protocol: %s\n  Source IP: %s\n  Source Port: %s\n  Destination IP: %s\n  Destination Port: %s\n  TTL: %d\n  Flags: %s\n  Length: %d\n  Payload (hex): %x\n\n",
 			timestamp, protocol, appProtocol, sourceIP, sourcePort, destinationIP, destinationPort, ttl, tcpFlags, packetLength, payload,
 		)
 	}
