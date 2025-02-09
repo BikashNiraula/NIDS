@@ -39,10 +39,9 @@ func main() {
 			}
 
 			// Call CaptureAndLogAllFields with the provided interface
-			err := CaptureAndLogAllFields(iface)
-			if err != nil {
-				log.Fatalf("Error capturing packets: %v", err)
-			}
+			 CaptureAndLogAllFields(iface)
+
+			 
 		},
 	}
 
@@ -96,6 +95,10 @@ func main() {
 		log.Fatal(err)
 	}
 }
+
+
+
+
 //-------------------------------------------------------------------------------------------
 // package main
 
@@ -178,3 +181,6 @@ func main() {
 // 		fmt.Println(packet)
 // 	}
 // }
+
+
+
