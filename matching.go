@@ -1,56 +1,74 @@
-// matcher.go
 package main
 
 import (
 	"bytes"
 	"encoding/hex"
 	"encoding/json"
-	_"flag"
 	"log"
 	"net"
-	"os"
 	"strconv"
 	"strings"
+	"os"
 )
 
-// Rule represents a signature rule from the JSON file.
-type Rule struct {
+// SnortRule represents a complete JSON rule.
+type SnortRule struct {
+	// Required header fields:
 	Action          string `json:"action"`
 	Protocol        string `json:"protocol"`
 	SourceIP        string `json:"source_ip"`
 	SourcePort      string `json:"source_port"`
 	DestinationIP   string `json:"destination_ip"`
 	DestinationPort string `json:"destination_port"`
-	Sid             string `json:"sid"`
-	Msg             string `json:"msg"`
-	Content         string `json:"content,omitempty"`
-	Depth           string `json:"depth,omitempty"`
-	Offset          string `json:"offset,omitempty"`
-	// (Other fields like flow, flags, metadata, etc. can be added as needed.)
+
+	// Unique rule identifier (SID) is required.
+	SID string `json:"sid"`
+
+	// Options that are usually unique:
+	Message   string `json:"msg"`
+	Revision  string `json:"rev"`
+	GID       string `json:"gid,omitempty"`
+	Classtype string `json:"classtype,omitempty"`
+	Content   string `json:"content,omitempty"`
+	Flow      string `json:"flow,omitempty"`
+	Depth     string `json:"depth,omitempty"`
+	Offset    string `json:"offset,omitempty"`
+	Flags     string `json:"flags,omitempty"`
+	Priority  string `json:"priority,omitempty"`
+
+	// Options that can occur multiple times:
+	Flowbits  []string          `json:"flowbits,omitempty"`
+	Reference []string          `json:"reference,omitempty"`
+
+	// Metadata parsed into a key/value mapping.
+	Metadata map[string]string `json:"metadata,omitempty"`
 }
 
-// LoadRules loads and unmarshals the JSON signature file.
-func LoadRules(filename string) ([]Rule, error) {
-	data, err := os.ReadFile(filename)
-	if err != nil {
-		return nil, err
-	}
-	var rules []Rule
-	if err := json.Unmarshal(data, &rules); err != nil {
-		return nil, err
-	}
-	return rules, nil
+// Packet represents a network packet. In addition to the fields already
+// used for matching, we add some extra properties (Flow, Flags, Flowbits)
+// that could be used to match the extra rule fields.
+type Packet struct {
+	Protocol        string
+	SourceIP        string
+	SourcePort      int
+	DestinationIP   string
+	DestinationPort int
+	Payload         []byte
+	// Additional packet properties for matching rule options:
+	Flow     string   // e.g. "established,to_server"
+	Flags    string   // e.g. "S, A" (comma-separated if multiple)
+	Flowbits []string // e.g. list of flowbits that are set
 }
 
-// matchIP compares a rule IP field with the packet IP. It handles "any", "$HOME_NET", "$EXTERNAL_NET", and CIDR notation.
+// matchIP compares a rule IP field with the packet IP. It handles "any",
+// "$HOME_NET", "$EXTERNAL_NET", and CIDR notation.
 func matchIP(ruleIP, packetIP string) bool {
 	ruleIP = strings.TrimSpace(ruleIP)
 	if strings.ToLower(ruleIP) == "any" {
 		return true
 	}
-
-	// For demonstration, we define $HOME_NET here.
-	homeNet := "192.168.1.0/24"
+	// For demonstration, define $HOME_NET here.
+	homeNet := "192.168.57.7/32"
 	if ruleIP == "$HOME_NET" {
 		_, cidr, err := net.ParseCIDR(homeNet)
 		if err != nil {
@@ -67,10 +85,9 @@ func matchIP(ruleIP, packetIP string) bool {
 			return false
 		}
 		ip := net.ParseIP(packetIP)
-		// Assume external means not in homeNet.
+		// External if not in $HOME_NET
 		return ip != nil && !cidr.Contains(ip)
 	}
-	// If ruleIP is in CIDR notation:
 	if strings.Contains(ruleIP, "/") {
 		_, cidr, err := net.ParseCIDR(ruleIP)
 		if err != nil {
@@ -80,22 +97,19 @@ func matchIP(ruleIP, packetIP string) bool {
 		ip := net.ParseIP(packetIP)
 		return ip != nil && cidr.Contains(ip)
 	}
-	// Otherwise, direct comparison.
 	return ruleIP == packetIP
 }
 
-// matchPort compares the packet port with the rule's port field.
-// It handles "any", single ports, ranges (e.g., "0:1023"), lists (e.g., "[139,445]")
+// matchPort compares the packet port with the rule port field.
+// It handles "any", a single port, ranges (e.g. "0:1023"), lists (e.g. "[139,445]")
 // and variables like "$HTTP_PORTS".
 func matchPort(rulePort string, packetPort int) bool {
 	rulePort = strings.TrimSpace(rulePort)
 	if strings.ToLower(rulePort) == "any" {
 		return true
 	}
-	// Example variable: "$HTTP_PORTS"
 	if strings.HasPrefix(rulePort, "$") {
 		if rulePort == "$HTTP_PORTS" {
-			// Define your HTTP ports mapping
 			httpPorts := []int{80, 8080}
 			for _, p := range httpPorts {
 				if p == packetPort {
@@ -105,7 +119,6 @@ func matchPort(rulePort string, packetPort int) bool {
 		}
 		return false
 	}
-	// Check for port range (e.g., "0:1023")
 	if strings.Contains(rulePort, ":") {
 		parts := strings.Split(rulePort, ":")
 		if len(parts) != 2 {
@@ -118,7 +131,6 @@ func matchPort(rulePort string, packetPort int) bool {
 		}
 		return packetPort >= low && packetPort <= high
 	}
-	// Check for a list (e.g., "[139,445]")
 	if strings.HasPrefix(rulePort, "[") && strings.HasSuffix(rulePort, "]") {
 		list := rulePort[1 : len(rulePort)-1]
 		ports := strings.Split(list, ",")
@@ -131,7 +143,6 @@ func matchPort(rulePort string, packetPort int) bool {
 		}
 		return false
 	}
-	// Otherwise, assume a single port.
 	val, err := strconv.Atoi(rulePort)
 	if err != nil {
 		return false
@@ -152,7 +163,7 @@ func parseContentPattern(content string) ([]byte, error) {
 }
 
 // matchContent searches for the rule's content pattern in the packet payload,
-// taking into account any offset and depth constraints.
+// taking into account offset and depth constraints.
 func matchContent(ruleContent string, payload []byte, offsetStr, depthStr string) bool {
 	if ruleContent == "" {
 		return true
@@ -188,64 +199,95 @@ func matchContent(ruleContent string, payload []byte, offsetStr, depthStr string
 	return bytes.Contains(searchRegion, pattern)
 }
 
-// Packet represents a network packet.
-type Packet struct {
-	Protocol        string
-	SourceIP        string
-	SourcePort      int
-	DestinationIP   string
-	DestinationPort int
-	Payload         []byte
+// contains is a helper that checks if a slice of strings contains a given string.
+func contains(slice []string, s string) bool {
+	for _, v := range slice {
+		if v == s {
+			return true
+		}
+	}
+	return false
 }
 
-// MatchPacket checks if a given packet matches the provided rule.
-func MatchPacket(pkt Packet, rule Rule) bool {
-	// Check protocol (case-insensitive).
+// MatchPacket checks if a given packet matches the provided SnortRule.
+// It compares header fields (protocol, IPs, ports) and, if specified,
+// payload content (using content, offset, depth) as well as additional
+// matching fields such as Flow, Flags, and Flowbits.
+func MatchPacket(pkt Packet, rule SnortRule) bool {
+	// Check protocol (case-insensitive)
 	if strings.ToLower(rule.Protocol) != strings.ToLower(pkt.Protocol) {
 		return false
 	}
-	// Check source and destination IP addresses.
+	// Check source and destination IP addresses
 	if !matchIP(rule.SourceIP, pkt.SourceIP) || !matchIP(rule.DestinationIP, pkt.DestinationIP) {
 		return false
 	}
-	// Check source and destination ports.
+	// Check source and destination ports
 	if !matchPort(rule.SourcePort, pkt.SourcePort) || !matchPort(rule.DestinationPort, pkt.DestinationPort) {
 		return false
 	}
-	// Check payload content if specified.
+	// Check payload content if specified
 	if rule.Content != "" {
 		if !matchContent(rule.Content, pkt.Payload, rule.Offset, rule.Depth) {
 			return false
 		}
 	}
-	// (Additional checks for flow, flags, flowbits, etc. can be added here.)
+	// Check Flow field if specified (for example, expecting certain flow tokens)
+	if rule.Flow != "" {
+		flowTokens := strings.Split(rule.Flow, ",")
+		for _, token := range flowTokens {
+			token = strings.TrimSpace(token)
+			if token != "" && !strings.Contains(pkt.Flow, token) {
+				return false
+			}
+		}
+	}
+	// Check Flags field if specified (for TCP flags)
+	if rule.Flags != "" {
+		ruleFlags := strings.Split(rule.Flags, ",")
+		packetFlags := strings.Split(pkt.Flags, ",")
+		for _, flag := range ruleFlags {
+			flag = strings.TrimSpace(flag)
+			if flag != "" && !contains(packetFlags, flag) {
+				return false
+			}
+		}
+	}
+	// Check Flowbits if specified
+	if len(rule.Flowbits) > 0 {
+		for _, bit := range rule.Flowbits {
+			if !contains(pkt.Flowbits, bit) {
+				return false
+			}
+		}
+	}
+	// Note: Revision, GID, Classtype, Priority, Reference, and Metadata are typically not used
+	// for matching packet characteristics.
 	return true
 }
 
-func matching(ruleFile *string,protocol *string,sip *string,sport *int, dip *string,dport *int, payloadStr *string) {
-	// Define command-line flags.
-	// ruleFile := flag.String("rules", "rules.json", "Path to JSON file containing signature rules")
-	// protocol := flag.String("protocol", "", "Packet protocol (tcp/udp)")
-	// sip := flag.String("sip", "", "Source IP address")
-	// sport := flag.Int("sport", 0, "Source port")
-	// dip := flag.String("dip", "", "Destination IP address")
-	// dport := flag.Int("dport", 0, "Destination port")
-	// payloadStr := flag.String("payload", "", "Packet payload as a string")
+// LoadRules loads and unmarshals a JSON file containing an array of SnortRule objects.
+func LoadRules(filename string) ([]SnortRule, error) {
+	data, err := os.ReadFile(filename)
+	if err != nil {
+		return nil, err
+	}
+	var rules []SnortRule
+	if err := json.Unmarshal(data, &rules); err != nil {
+		return nil, err
+	}
+	return rules, nil
+}
 
-	// flag.Parse()
-
-	// Check for required flags.
-	// if *protocol == "" || *sip == "" || *dip == "" {
-	// 	log.Fatal("protocol, sip, and dip flags are required")
-	// }
-
-	// Load signature rules from the specified file.
+// matching simulates the matching process based on input parameters.
+// It loads the rules from a file, builds a Packet, and checks each rule.
+func matching(ruleFile *string, protocol *string, sip *string, sport *int, dip *string, dport *int, payloadStr *string, flow *string, flags *string, pktFlowbits *[]string) {
+	// Load rules
 	rules, err := LoadRules(*ruleFile)
 	if err != nil {
-		log.Fatal("Error loading rules: ", err)
+		log.Fatal("Error loading rules:", err)
 	}
-
-	// Create a Packet from the provided flags.
+	// Build the packet from command-line parameters
 	pkt := Packet{
 		Protocol:        *protocol,
 		SourceIP:        *sip,
@@ -253,17 +295,19 @@ func matching(ruleFile *string,protocol *string,sip *string,sport *int, dip *str
 		DestinationIP:   *dip,
 		DestinationPort: *dport,
 		Payload:         []byte(*payloadStr),
+		Flow:            *flow,
+		Flags:           *flags,
+		Flowbits:        *pktFlowbits,
 	}
-
-	// Check the packet against all rules.
 	matched := false
 	for _, rule := range rules {
 		if MatchPacket(pkt, rule) {
 			matched = true
-			log.Printf("ALERT: Packet matched rule SID %s - %s\n", rule.Sid, rule.Msg)
+			log.Printf("ALERT: Packet matched rule SID %s - %s\n", rule.SID, rule.Message)
 		}
 	}
 	if !matched {
 		log.Println("No matching rules found for the given packet")
 	}
 }
+
