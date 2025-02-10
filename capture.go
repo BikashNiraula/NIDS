@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	_"log"
+	_ "log"
+	_ "os"
 	"strconv"
 	"strings"
 
@@ -13,17 +14,17 @@ import (
 
 // CapturedPacket holds the fields extracted from a captured packet.
 type CapturedPacket struct {
-	Timestamp         string // Formatted timestamp when the packet was captured.
-	NetworkProtocol   string // Network-layer protocol (IPv4, IPv6, etc.)
-	AppProtocol       string // Application-layer protocol (HTTP, FTP, etc.)
-	SourceIP          string // Source IP address.
-	SourcePort        string // Source port.
-	DestinationIP     string // Destination IP address.
-	DestinationPort   string // Destination port.
-	TTL               uint8  // Time To Live (only applicable for IPv4).
-	Flags             string // TCP flags (if applicable).
-	Length            int    // Packet length (from network-layer header).
-	Payload           []byte // Application-layer payload (raw bytes).
+	Timestamp       string // Formatted timestamp when the packet was captured.
+	NetworkProtocol string // Network-layer protocol (IPv4, IPv6, etc.)
+	AppProtocol     string // Application-layer protocol (HTTP, FTP, etc.)
+	SourceIP        string // Source IP address.
+	SourcePort      string // Source port.
+	DestinationIP   string // Destination IP address.
+	DestinationPort string // Destination port.
+	TTL             uint8  // Time To Live (only applicable for IPv4).
+	Flags           string // TCP flags (if applicable).
+	Length          int    // Packet length (from network-layer header).
+	Payload         []byte // Application-layer payload (raw bytes).
 }
 
 // inferAppProtocolByPayload performs simple pattern matching on the payload.
@@ -63,8 +64,8 @@ func CaptureAndLogAllFields(iface string) error {
 	defer handle.Close()
 
 	packetSource := gopacket.NewPacketSource(handle, handle.LinkType())
-
 	fmt.Println("Listening for packets and extracting fields...")
+
 	for packet := range packetSource.Packets() {
 		timestamp := packet.Metadata().Timestamp.Format("2006-01-02 15:04:05.000")
 		var protocol, sourceIP, destinationIP, sourcePort, destinationPort, appProtocol string
@@ -72,6 +73,8 @@ func CaptureAndLogAllFields(iface string) error {
 		var packetLength int
 		var ttl uint8
 		var tcpFlags string
+		var flagsBuilder strings.Builder
+		
 
 		// Extract network layer (IPv4, IPv6).
 		if networkLayer := packet.NetworkLayer(); networkLayer != nil {
@@ -95,8 +98,27 @@ func CaptureAndLogAllFields(iface string) error {
 				src, dst := transLayer.TransportFlow().Endpoints()
 				sourcePort = src.String()
 				destinationPort = dst.String()
-				tcpFlags = fmt.Sprintf("SYN:%t ACK:%t FIN:%t RST:%t PSH:%t URG:%t",
+				fmt.Printf("SYN:%t ACK:%t FIN:%t RST:%t PSH:%t URG:%t",
 					transLayer.SYN, transLayer.ACK, transLayer.FIN, transLayer.RST, transLayer.PSH, transLayer.URG)
+				if transLayer.FIN {
+					flagsBuilder.WriteString("F")
+				}
+				if transLayer.SYN {
+					flagsBuilder.WriteString("S")
+				}
+				if transLayer.RST {
+					flagsBuilder.WriteString("R")
+				}
+				if transLayer.PSH {
+					flagsBuilder.WriteString("P")
+				}
+				if transLayer.ACK {
+					flagsBuilder.WriteString("A")
+				}
+				if transLayer.URG {
+					flagsBuilder.WriteString("U")
+				}
+				tcpFlags = flagsBuilder.String()
 			case *layers.UDP:
 				src, dst := transLayer.TransportFlow().Endpoints()
 				sourcePort = src.String()
@@ -140,16 +162,16 @@ func CaptureAndLogAllFields(iface string) error {
 				}
 			}
 		} else {
-			// No application layer was detected.
 			payload = []byte{}
 			appProtocol = "No Application Data"
 		}
 
 		// --- Prepare parameters for matching() ---
-		// ruleFile is assumed to be "rules.json". Change if needed.
-		ruleFile := "D:\\Minor_Projects\\NIDS\\Rules\\JsonRules\\emerging-dos.rules.json"
+		// Define the rule file path.
+		//ruleFile := ".\\Rules\\JsonRules\\emerging-dos.rules.json"
+		ruleFile := ".\\test-rules-000.json"
 
-		// Convert sourcePort and destinationPort to int.
+		// Convert sourcePort and destinationPort to integers.
 		sportInt, err := strconv.Atoi(sourcePort)
 		if err != nil {
 			sportInt = 0
@@ -158,11 +180,18 @@ func CaptureAndLogAllFields(iface string) error {
 		if err != nil {
 			dportInt = 0
 		}
-		// Convert payload (a []byte) to a string.
+		// Convert payload (a []byte) to string.
 		payloadStr := string(payload)
 
-		// Call matching() with proper pointer parameters.
-		matching(&ruleFile, &protocol, &sourceIP, &sportInt, &destinationIP, &dportInt, &payloadStr)
+		// Set default values for the additional matching parameters.
+		flowParam := "" // Default flow (adjust as needed, e.g., "established,to_server")
+		//process the flag param properly
+
+		// Reuse the extracted TCP flags
+		pktFlowbits := []string{} // Empty slice; populate if needed
+
+		// Call matching() with 10 pointer parameters.
+		matching(&ruleFile, &protocol, &sourceIP, &sportInt, &destinationIP, &dportInt, &payloadStr, &flowParam, &tcpFlags, &pktFlowbits)
 
 		// Log the captured packet fields.
 		fmt.Printf(
@@ -172,4 +201,3 @@ func CaptureAndLogAllFields(iface string) error {
 	}
 	return nil
 }
-

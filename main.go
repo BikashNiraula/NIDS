@@ -39,7 +39,11 @@ func main() {
 			}
 
 			// Call CaptureAndLogAllFields with the provided interface
-			 CaptureAndLogAllFields(iface)
+			 err:= CaptureAndLogAllFields(iface);
+			 if err!=nil{
+				log.Fatalf("Error capturing packets: %v", err)
+			 }
+			 
 
 			 
 		},
