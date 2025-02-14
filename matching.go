@@ -3,13 +3,14 @@ package main
 import (
 	"bytes"
 	"encoding/hex"
-	"encoding/json"
+	_ "encoding/json"
 	"log"
 	"net"
 	"strconv"
 	"strings"
-	"os"
+	_ "os"
 )
+
 
 // SnortRule represents a complete JSON rule.
 type SnortRule struct {
@@ -68,9 +69,10 @@ func matchIP(ruleIP, packetIP string) bool {
 		return true
 	}
 	// For demonstration, define $HOME_NET here.
-	homeNet := "192.168.57.7/32"
+	
 	if ruleIP == "$HOME_NET" {
 		_, cidr, err := net.ParseCIDR(homeNet)
+		log.Println("This is homenet", homeNet)
 		if err != nil {
 			log.Println("Error parsing homeNet:", err)
 			return false
@@ -266,27 +268,12 @@ func MatchPacket(pkt Packet, rule SnortRule) bool {
 	return true
 }
 
-// LoadRules loads and unmarshals a JSON file containing an array of SnortRule objects.
-func LoadRules(filename string) ([]SnortRule, error) {
-	data, err := os.ReadFile(filename)
-	if err != nil {
-		return nil, err
-	}
-	var rules []SnortRule
-	if err := json.Unmarshal(data, &rules); err != nil {
-		return nil, err
-	}
-	return rules, nil
-}
+
 
 // matching simulates the matching process based on input parameters.
 // It loads the rules from a file, builds a Packet, and checks each rule.
-func matching(ruleFile *string, protocol *string, sip *string, sport *int, dip *string, dport *int, payloadStr *string, flow *string, flags *string, pktFlowbits *[]string) {
-	// Load rules
-	rules, err := LoadRules(*ruleFile)
-	if err != nil {
-		log.Fatal("Error loading rules:", err)
-	}
+func matching(rules []SnortRule, protocol *string, sip *string, sport *int, dip *string, dport *int, payloadStr *string, flow *string, flags *string, pktFlowbits *[]string) {
+	
 	// Build the packet from command-line parameters
 	pkt := Packet{
 		Protocol:        *protocol,

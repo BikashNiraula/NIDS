@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	_ "log"
+	"log"
 	_ "os"
 	"strconv"
 	"strings"
@@ -62,10 +62,17 @@ func CaptureAndLogAllFields(iface string) error {
 		return fmt.Errorf("failed to open interface: %v", err)
 	}
 	defer handle.Close()
+	// Define the rule file path.
+		//ruleFile := ".\\Rules\\JsonRules\\emerging-dos.rules.json"
+	ruleFile := ".\\test-rules-001.json"
+	rules, err := LoadRules(ruleFile)
+	if err != nil {
+		log.Fatal("Error loading rules:", err)
+	}
 
 	packetSource := gopacket.NewPacketSource(handle, handle.LinkType())
 	fmt.Println("Listening for packets and extracting fields...")
-
+	//set homeNet here
 	for packet := range packetSource.Packets() {
 		timestamp := packet.Metadata().Timestamp.Format("2006-01-02 15:04:05.000")
 		var protocol, sourceIP, destinationIP, sourcePort, destinationPort, appProtocol string
@@ -167,10 +174,7 @@ func CaptureAndLogAllFields(iface string) error {
 		}
 
 		// --- Prepare parameters for matching() ---
-		// Define the rule file path.
-		//ruleFile := ".\\Rules\\JsonRules\\emerging-dos.rules.json"
-		ruleFile := ".\\test-rules-000.json"
-
+		
 		// Convert sourcePort and destinationPort to integers.
 		sportInt, err := strconv.Atoi(sourcePort)
 		if err != nil {
@@ -190,8 +194,9 @@ func CaptureAndLogAllFields(iface string) error {
 		// Reuse the extracted TCP flags
 		pktFlowbits := []string{} // Empty slice; populate if needed
 
+		
 		// Call matching() with 10 pointer parameters.
-		matching(&ruleFile, &protocol, &sourceIP, &sportInt, &destinationIP, &dportInt, &payloadStr, &flowParam, &tcpFlags, &pktFlowbits)
+		matching(rules, &protocol, &sourceIP, &sportInt, &destinationIP, &dportInt, &payloadStr, &flowParam, &tcpFlags, &pktFlowbits)
 
 		// Log the captured packet fields.
 		fmt.Printf(
