@@ -16,7 +16,7 @@ import (
 	_ "github.com/olekukonko/tablewriter"
 	"github.com/spf13/cobra"
 )
-
+var homeNet string
 func main() {
 	// Create the root command
 	var rootCmd = &cobra.Command{
@@ -37,6 +37,13 @@ func main() {
 				fmt.Println("Error: No interface specified")
 				return
 			}
+
+			//set HomeNet
+			err1 := SetHomeNet(iface);
+			if err1!=nil{
+				log.Fatalf("HomeNet IP not successfully set!!!: %v", err1)
+			 }
+			 
 
 			// Call CaptureAndLogAllFields with the provided interface
 			 err:= CaptureAndLogAllFields(iface);
