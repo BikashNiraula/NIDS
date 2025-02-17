@@ -64,7 +64,7 @@ func CaptureAndLogAllFields(iface string) error {
 	defer handle.Close()
 	// Define the rule file path.
 		//ruleFile := ".\\Rules\\JsonRules\\emerging-dos.rules.json"
-	ruleFile := ".\\test-rules-001.json"
+	ruleFile := ".\\test-rules-002.json"
 	rules, err := LoadRules(ruleFile)
 	if err != nil {
 		log.Fatal("Error loading rules:", err)
@@ -185,7 +185,7 @@ func CaptureAndLogAllFields(iface string) error {
 			dportInt = 0
 		}
 		// Convert payload (a []byte) to string.
-		payloadStr := string(payload)
+		//payloadStr := string(payload)
 
 		// Set default values for the additional matching parameters.
 		flowParam := "" // Default flow (adjust as needed, e.g., "established,to_server")
@@ -196,7 +196,7 @@ func CaptureAndLogAllFields(iface string) error {
 
 		
 		// Call matching() with 10 pointer parameters.
-		matching(rules, &protocol, &sourceIP, &sportInt, &destinationIP, &dportInt, &payloadStr, &flowParam, &tcpFlags, &pktFlowbits)
+		matching(rules, &protocol, &sourceIP, &sportInt, &destinationIP, &dportInt, &payload, &flowParam, &tcpFlags, &pktFlowbits)
 
 		// Log the captured packet fields.
 		fmt.Printf(

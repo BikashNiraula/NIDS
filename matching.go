@@ -2,7 +2,7 @@ package main
 
 import (
 	"bytes"
-	"encoding/hex"
+	_ "encoding/hex"
 	_ "encoding/json"
 	"log"
 	"net"
@@ -152,22 +152,29 @@ func matchPort(rulePort string, packetPort int) bool {
 	return packetPort == val
 }
 
-// parseContentPattern converts a rule content string into a byte slice.
-// If the content is enclosed in "|" characters, it is assumed to be a hex pattern.
-func parseContentPattern(content string) ([]byte, error) {
-	content = strings.TrimSpace(content)
-	if strings.HasPrefix(content, "|") && strings.HasSuffix(content, "|") {
-		hexStr := strings.Trim(content, "|")
-		hexStr = strings.ReplaceAll(hexStr, " ", "")
-		return hex.DecodeString(hexStr)
-	}
-	return []byte(content), nil
+// tcpFlagsMatch checks if the packet's TCP flags match the rule's specified flags.
+func tcpFlagsMatch(packetFlags, ruleFlags string) bool {
+    // Create a map to represent the presence of each flag in the packet.
+    packetFlagSet := make(map[rune]bool)
+    for _, flag := range packetFlags {
+        packetFlagSet[flag] = true
+    }
+
+    // Check if all flags specified in the rule are present in the packet.
+    for _, flag := range ruleFlags {
+        if !packetFlagSet[flag] {
+            return false
+        }
+    }
+    return true
 }
 
-// matchContent searches for the rule's content pattern in the packet payload,
-// taking into account offset and depth constraints.
-func matchContent(ruleContent string, payload []byte, offsetStr, depthStr string) bool {
-	if ruleContent == "" {
+
+// matchContent searches for the given raw pattern (already decoded as []byte)
+// in the packet payload, taking into account offset and depth constraints.
+// It assumes that offset and depth are provided in bytes.
+func matchContent(pattern []byte, payload []byte, offsetStr, depthStr string) bool {
+	if len(pattern) == 0 {
 		return true
 	}
 	offset := 0
@@ -193,11 +200,6 @@ func matchContent(ruleContent string, payload []byte, offsetStr, depthStr string
 		end = len(payload)
 	}
 	searchRegion := payload[offset:end]
-	pattern, err := parseContentPattern(ruleContent)
-	if err != nil {
-		log.Println("Error parsing content pattern:", err)
-		return false
-	}
 	return bytes.Contains(searchRegion, pattern)
 }
 
@@ -215,7 +217,7 @@ func contains(slice []string, s string) bool {
 // It compares header fields (protocol, IPs, ports) and, if specified,
 // payload content (using content, offset, depth) as well as additional
 // matching fields such as Flow, Flags, and Flowbits.
-func MatchPacket(pkt Packet, rule SnortRule) bool {
+func MatchPacket(pkt Packet, rule LoadedJsonRules) bool {
 	// Check protocol (case-insensitive)
 	if strings.ToLower(rule.Protocol) != strings.ToLower(pkt.Protocol) {
 		return false
@@ -230,11 +232,11 @@ func MatchPacket(pkt Packet, rule SnortRule) bool {
 	}
 	// Check payload content if specified
 	if rule.Content != "" {
-		if !matchContent(rule.Content, pkt.Payload, rule.Offset, rule.Depth) {
+		if !matchContent(rule.Pattern, pkt.Payload, rule.Offset, rule.Depth) {
 			return false
 		}
 	}
-	// Check Flow field if specified (for example, expecting certain flow tokens)
+	// Check Flow field if specified
 	if rule.Flow != "" {
 		flowTokens := strings.Split(rule.Flow, ",")
 		for _, token := range flowTokens {
@@ -244,15 +246,10 @@ func MatchPacket(pkt Packet, rule SnortRule) bool {
 			}
 		}
 	}
-	// Check Flags field if specified (for TCP flags)
+	// Check Flags field if specified
 	if rule.Flags != "" {
-		ruleFlags := strings.Split(rule.Flags, ",")
-		packetFlags := strings.Split(pkt.Flags, ",")
-		for _, flag := range ruleFlags {
-			flag = strings.TrimSpace(flag)
-			if flag != "" && !contains(packetFlags, flag) {
-				return false
-			}
+		if !tcpFlagsMatch(rule.Flags, pkt.Flags) {
+			return false
 		}
 	}
 	// Check Flowbits if specified
@@ -269,10 +266,9 @@ func MatchPacket(pkt Packet, rule SnortRule) bool {
 }
 
 
-
 // matching simulates the matching process based on input parameters.
 // It loads the rules from a file, builds a Packet, and checks each rule.
-func matching(rules []SnortRule, protocol *string, sip *string, sport *int, dip *string, dport *int, payloadStr *string, flow *string, flags *string, pktFlowbits *[]string) {
+func matching(rules []LoadedJsonRules, protocol *string, sip *string, sport *int, dip *string, dport *int, payload *[]byte, flow *string, flags *string, pktFlowbits *[]string) {
 	
 	// Build the packet from command-line parameters
 	pkt := Packet{
@@ -281,7 +277,7 @@ func matching(rules []SnortRule, protocol *string, sip *string, sport *int, dip 
 		SourcePort:      *sport,
 		DestinationIP:   *dip,
 		DestinationPort: *dport,
-		Payload:         []byte(*payloadStr),
+		Payload:         []byte(*payload),
 		Flow:            *flow,
 		Flags:           *flags,
 		Flowbits:        *pktFlowbits,
@@ -297,4 +293,3 @@ func matching(rules []SnortRule, protocol *string, sip *string, sport *int, dip 
 		log.Println("No matching rules found for the given packet")
 	}
 }
-

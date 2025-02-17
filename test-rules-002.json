@@ -1,0 +1,15 @@
+[
+    {
+      "_comment": "",
+      "action": "alert",
+      "protocol": "tcp",
+      "source_ip": "$HOME_NET",
+      "source_port": "any",
+      "destination_ip": "$EXTERNAL_NET",
+      "destination_port": "any",
+      "sid": "2000001",
+      "msg": "Matched UDP packet from 192.168.101.6:54209 to 142.250.82.223:3478",
+      "rev": "1",
+      "flags":"PA"
+    }
+]
