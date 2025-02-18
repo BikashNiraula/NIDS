@@ -56,18 +56,20 @@ func inferAppProtocolByPayload(payload []byte) string {
 
 // CaptureAndLogAllFields listens for packets on the specified interface,
 // extracts various fields, and then calls matching() with the proper parameters.
-func CaptureAndLogAllFields(iface string) error {
+func CaptureAndLogAllFields(iface string, doMatch bool, rulePath string) error {
 	handle, err := pcap.OpenLive(iface, 1600, true, pcap.BlockForever)
 	if err != nil {
 		return fmt.Errorf("failed to open interface: %v", err)
 	}
 	defer handle.Close()
 	// Define the rule file path.
-		//ruleFile := ".\\Rules\\JsonRules\\emerging-dos.rules.json"
-	ruleFile := ".\\test-rules-002.json"
-	rules, err := LoadRules(ruleFile)
-	if err != nil {
-		log.Fatal("Error loading rules:", err)
+	//ruleFile := ".\\Rules\\JsonRules\\emerging-dos.rules.json"
+	var rules []LoadedJsonRules
+	if doMatch {
+		rules, err = LoadRules(rulePath)
+		if err != nil {
+			log.Fatal("Error loading rules:", err)
+		}
 	}
 
 	packetSource := gopacket.NewPacketSource(handle, handle.LinkType())
@@ -81,7 +83,6 @@ func CaptureAndLogAllFields(iface string) error {
 		var ttl uint8
 		var tcpFlags string
 		var flagsBuilder strings.Builder
-		
 
 		// Extract network layer (IPv4, IPv6).
 		if networkLayer := packet.NetworkLayer(); networkLayer != nil {
@@ -174,7 +175,7 @@ func CaptureAndLogAllFields(iface string) error {
 		}
 
 		// --- Prepare parameters for matching() ---
-		
+
 		// Convert sourcePort and destinationPort to integers.
 		sportInt, err := strconv.Atoi(sourcePort)
 		if err != nil {
@@ -193,10 +194,11 @@ func CaptureAndLogAllFields(iface string) error {
 
 		// Reuse the extracted TCP flags
 		pktFlowbits := []string{} // Empty slice; populate if needed
-
-		
-		// Call matching() with 10 pointer parameters.
-		matching(rules, &protocol, &sourceIP, &sportInt, &destinationIP, &dportInt, &payload, &flowParam, &tcpFlags, &pktFlowbits)
+		// If matching is enabled, call matching() for the packet.
+		if doMatch {
+			// Call matching() with 10 pointer parameters.
+			matching(rules, &protocol, &sourceIP, &sportInt, &destinationIP, &dportInt, &payload, &flowParam, &tcpFlags, &pktFlowbits)
+		}
 
 		// Log the captured packet fields.
 		fmt.Printf(
