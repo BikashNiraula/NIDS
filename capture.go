@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"log"
-	_ "os"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/google/gopacket"
 	"github.com/google/gopacket/layers"
@@ -28,7 +28,6 @@ type CapturedPacket struct {
 }
 
 // inferAppProtocolByPayload performs simple pattern matching on the payload.
-// This is a basic form of deep packet inspection.
 func inferAppProtocolByPayload(payload []byte) string {
 	payloadStr := string(payload)
 	// Check for HTTP patterns.
@@ -46,24 +45,23 @@ func inferAppProtocolByPayload(payload []byte) string {
 	if strings.HasPrefix(payloadStr, "EHLO ") || strings.HasPrefix(payloadStr, "HELO ") {
 		return "SMTP"
 	}
-	// Check for FTP response (e.g., "220-" may indicate FTP service).
+	// Check for FTP response.
 	if strings.HasPrefix(payloadStr, "220-") && strings.Contains(payloadStr, "FTP") {
 		return "FTP"
 	}
-	// Add additional heuristics as needed.
 	return "Unknown"
 }
 
 // CaptureAndLogAllFields listens for packets on the specified interface,
-// extracts various fields, and then calls matching() with the proper parameters.
+// extracts various fields, performs flow tracking, and calls matching() if needed.
 func CaptureAndLogAllFields(iface string, doMatch bool, rulePath string) error {
 	handle, err := pcap.OpenLive(iface, 1600, true, pcap.BlockForever)
 	if err != nil {
 		return fmt.Errorf("failed to open interface: %v", err)
 	}
 	defer handle.Close()
-	// Define the rule file path.
-	//ruleFile := ".\\Rules\\JsonRules\\emerging-dos.rules.json"
+
+	// Load rules if matching is enabled.
 	var rules []LoadedJsonRules
 	if doMatch {
 		rules, err = LoadRules(rulePath)
@@ -74,7 +72,18 @@ func CaptureAndLogAllFields(iface string, doMatch bool, rulePath string) error {
 
 	packetSource := gopacket.NewPacketSource(handle, handle.LinkType())
 	fmt.Println("Listening for packets and extracting fields...")
-	//set homeNet here
+
+	// Start a goroutine to clean up old flows every 30 seconds.
+	go func() {
+		ticker := time.NewTicker(30 * time.Second)
+		for range ticker.C {
+			// Remove flows idle for more than 60 seconds.
+			CleanupFlows(60 * time.Second)
+			// Uncomment the following line to print flows periodically for debugging.
+			//PrintFlows()
+		}
+	}()
+
 	for packet := range packetSource.Packets() {
 		timestamp := packet.Metadata().Timestamp.Format("2006-01-02 15:04:05.000")
 		var protocol, sourceIP, destinationIP, sourcePort, destinationPort, appProtocol string
@@ -106,8 +115,6 @@ func CaptureAndLogAllFields(iface string, doMatch bool, rulePath string) error {
 				src, dst := transLayer.TransportFlow().Endpoints()
 				sourcePort = src.String()
 				destinationPort = dst.String()
-				fmt.Printf("SYN:%t ACK:%t FIN:%t RST:%t PSH:%t URG:%t",
-					transLayer.SYN, transLayer.ACK, transLayer.FIN, transLayer.RST, transLayer.PSH, transLayer.URG)
 				if transLayer.FIN {
 					flagsBuilder.WriteString("F")
 				}
@@ -137,8 +144,6 @@ func CaptureAndLogAllFields(iface string, doMatch bool, rulePath string) error {
 		// Extract application layer payload and try to infer the application protocol.
 		if applicationLayer := packet.ApplicationLayer(); applicationLayer != nil {
 			payload = applicationLayer.Payload()
-
-			// Use port-based heuristics.
 			switch {
 			case protocol == "TCP" && (sourcePort == "21" || destinationPort == "21"):
 				appProtocol = "FTP"
@@ -161,8 +166,6 @@ func CaptureAndLogAllFields(iface string, doMatch bool, rulePath string) error {
 			default:
 				appProtocol = "Unknown"
 			}
-
-			// If still unknown, inspect the payload.
 			if appProtocol == "Unknown" && len(payload) > 0 {
 				inferred := inferAppProtocolByPayload(payload)
 				if inferred != "Unknown" {
@@ -174,9 +177,34 @@ func CaptureAndLogAllFields(iface string, doMatch bool, rulePath string) error {
 			appProtocol = "No Application Data"
 		}
 
-		// --- Prepare parameters for matching() ---
+		// In capture.go (inside your packet processing loop)
 
-		// Convert sourcePort and destinationPort to integers.
+		// Create a CapturedPacket instance.
+		capturedPkt := CapturedPacket{
+			Timestamp:       timestamp,
+			NetworkProtocol: protocol,
+			AppProtocol:     appProtocol,
+			SourceIP:        sourceIP,
+			SourcePort:      sourcePort,
+			DestinationIP:   destinationIP,
+			DestinationPort: destinationPort,
+			TTL:             ttl,
+			Flags:           tcpFlags,
+			Length:          packetLength,
+			Payload:         payload,
+		}
+
+		// Update flow tracking.
+		UpdateFlow(capturedPkt)
+
+		// Retrieve the current flow state and flowbits.
+		flowState, flowbits := GetFlowInfo(capturedPkt)
+
+		// When calling matching(), pass the flow state and flowbits.
+		flowParam := flowState // e.g., "established" or "new"
+		pktFlowbits := flowbits
+
+		// Convert ports as needed.
 		sportInt, err := strconv.Atoi(sourcePort)
 		if err != nil {
 			sportInt = 0
@@ -185,26 +213,20 @@ func CaptureAndLogAllFields(iface string, doMatch bool, rulePath string) error {
 		if err != nil {
 			dportInt = 0
 		}
-		// Convert payload (a []byte) to string.
-		//payloadStr := string(payload)
 
-		// Set default values for the additional matching parameters.
-		flowParam := "" // Default flow (adjust as needed, e.g., "established,to_server")
-		//process the flag param properly
-
-		// Reuse the extracted TCP flags
-		pktFlowbits := []string{} // Empty slice; populate if needed
-		// If matching is enabled, call matching() for the packet.
 		if doMatch {
-			// Call matching() with 10 pointer parameters.
 			matching(rules, &protocol, &sourceIP, &sportInt, &destinationIP, &dportInt, &payload, &flowParam, &tcpFlags, &pktFlowbits)
-		}
+			PrintFlows()
 
-		// Log the captured packet fields.
-		fmt.Printf(
-			"Packet:\n  Timestamp: %s\n  Network Protocol: %s\n  Application Protocol: %s\n  Source IP: %s\n  Source Port: %s\n  Destination IP: %s\n  Destination Port: %s\n  TTL: %d\n  Flags: %s\n  Length: %d\n  Payload (hex): %x\n\n",
-			timestamp, protocol, appProtocol, sourceIP, sourcePort, destinationIP, destinationPort, ttl, tcpFlags, packetLength, payload,
-		)
+		}else{
+
+			// Log the captured packet fields.
+
+			fmt.Printf(
+				"Packet:\n  Timestamp: %s\n  Network Protocol: %s\n  Application Protocol: %s\n  Source IP: %s\n  Source Port: %s\n  Destination IP: %s\n  Destination Port: %s\n  TTL: %d\n  Flags: %s\n  Length: %d\n  Payload (hex): %x\n\n",
+				timestamp, protocol, appProtocol, sourceIP, sourcePort, destinationIP, destinationPort, ttl, tcpFlags, packetLength, payload,
+			)
+		}
 	}
 	return nil
 }
