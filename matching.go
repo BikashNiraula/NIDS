@@ -9,45 +9,50 @@ import (
 	"strconv"
 	"strings"
 	_ "os"
+	_"time"
+	_"sync"
+	_"fmt"
 )
 
+// --- Snort Rule and Packet Definitions ---
 
 // SnortRule represents a complete JSON rule.
 type SnortRule struct {
 	// Required header fields:
-	Action          string `json:"action"`
-	Protocol        string `json:"protocol"`
-	SourceIP        string `json:"source_ip"`
-	SourcePort      string `json:"source_port"`
-	DestinationIP   string `json:"destination_ip"`
-	DestinationPort string `json:"destination_port"`
+	Action          string            `json:"action"`
+	Protocol        string            `json:"protocol"`
+	SourceIP        string            `json:"source_ip"`
+	SourcePort      string            `json:"source_port"`
+	DestinationIP   string            `json:"destination_ip"`
+	DestinationPort string            `json:"destination_port"`
 
 	// Unique rule identifier (SID) is required.
 	SID string `json:"sid"`
 
 	// Options that are usually unique:
-	Message   string `json:"msg"`
-	Revision  string `json:"rev"`
-	GID       string `json:"gid,omitempty"`
-	Classtype string `json:"classtype,omitempty"`
-	Content   string `json:"content,omitempty"`
-	Flow      string `json:"flow,omitempty"`
-	Depth     string `json:"depth,omitempty"`
-	Offset    string `json:"offset,omitempty"`
-	Flags     string `json:"flags,omitempty"`
-	Priority  string `json:"priority,omitempty"`
+	Message   string            `json:"msg"`
+	Revision  string            `json:"rev"`
+	GID       string            `json:"gid,omitempty"`
+	Classtype string            `json:"classtype,omitempty"`
+	Content   string            `json:"content,omitempty"`
+	Flow      string            `json:"flow,omitempty"`
+	Depth     string            `json:"depth,omitempty"`
+	Offset    string            `json:"offset,omitempty"`
+	Flags     string            `json:"flags,omitempty"`
+	Priority  string            `json:"priority,omitempty"`
 
 	// Options that can occur multiple times:
 	Flowbits  []string          `json:"flowbits,omitempty"`
 	Reference []string          `json:"reference,omitempty"`
 
 	// Metadata parsed into a key/value mapping.
-	Metadata map[string]string `json:"metadata,omitempty"`
+	Metadata  map[string]string `json:"metadata,omitempty"`
+
+	// For content matching – assuming rule.Pattern holds the raw pattern bytes.
+	Pattern   []byte            `json:"pattern,omitempty"`
 }
 
-// Packet represents a network packet. In addition to the fields already
-// used for matching, we add some extra properties (Flow, Flags, Flowbits)
-// that could be used to match the extra rule fields.
+// Packet represents a network packet.
 type Packet struct {
 	Protocol        string
 	SourceIP        string
@@ -58,18 +63,17 @@ type Packet struct {
 	// Additional packet properties for matching rule options:
 	Flow     string   // e.g. "established,to_server"
 	Flags    string   // e.g. "S, A" (comma-separated if multiple)
-	Flowbits []string // e.g. list of flowbits that are set
+	Flowbits []string // e.g. list of flowbits that are set (from flow tracking)
 }
 
-// matchIP compares a rule IP field with the packet IP. It handles "any",
-// "$HOME_NET", "$EXTERNAL_NET", and CIDR notation.
+// --- Matching Helpers (IP, Port, Flags, Content, contains) ---
+
 func matchIP(ruleIP, packetIP string) bool {
 	ruleIP = strings.TrimSpace(ruleIP)
 	if strings.ToLower(ruleIP) == "any" {
 		return true
 	}
 	// For demonstration, define $HOME_NET here.
-	
 	if ruleIP == "$HOME_NET" {
 		_, cidr, err := net.ParseCIDR(homeNet)
 		log.Println("This is homenet", homeNet)
@@ -87,7 +91,6 @@ func matchIP(ruleIP, packetIP string) bool {
 			return false
 		}
 		ip := net.ParseIP(packetIP)
-		// External if not in $HOME_NET
 		return ip != nil && !cidr.Contains(ip)
 	}
 	if strings.Contains(ruleIP, "/") {
@@ -102,9 +105,6 @@ func matchIP(ruleIP, packetIP string) bool {
 	return ruleIP == packetIP
 }
 
-// matchPort compares the packet port with the rule port field.
-// It handles "any", a single port, ranges (e.g. "0:1023"), lists (e.g. "[139,445]")
-// and variables like "$HTTP_PORTS".
 func matchPort(rulePort string, packetPort int) bool {
 	rulePort = strings.TrimSpace(rulePort)
 	if strings.ToLower(rulePort) == "any" {
@@ -152,27 +152,19 @@ func matchPort(rulePort string, packetPort int) bool {
 	return packetPort == val
 }
 
-// tcpFlagsMatch checks if the packet's TCP flags match the rule's specified flags.
 func tcpFlagsMatch(packetFlags, ruleFlags string) bool {
-    // Create a map to represent the presence of each flag in the packet.
-    packetFlagSet := make(map[rune]bool)
-    for _, flag := range packetFlags {
-        packetFlagSet[flag] = true
-    }
-
-    // Check if all flags specified in the rule are present in the packet.
-    for _, flag := range ruleFlags {
-        if !packetFlagSet[flag] {
-            return false
-        }
-    }
-    return true
+	packetFlagSet := make(map[rune]bool)
+	for _, flag := range packetFlags {
+		packetFlagSet[flag] = true
+	}
+	for _, flag := range ruleFlags {
+		if !packetFlagSet[flag] {
+			return false
+		}
+	}
+	return true
 }
 
-
-// matchContent searches for the given raw pattern (already decoded as []byte)
-// in the packet payload, taking into account offset and depth constraints.
-// It assumes that offset and depth are provided in bytes.
 func matchContent(pattern []byte, payload []byte, offsetStr, depthStr string) bool {
 	if len(pattern) == 0 {
 		return true
@@ -203,7 +195,6 @@ func matchContent(pattern []byte, payload []byte, offsetStr, depthStr string) bo
 	return bytes.Contains(searchRegion, pattern)
 }
 
-// contains is a helper that checks if a slice of strings contains a given string.
 func contains(slice []string, s string) bool {
 	for _, v := range slice {
 		if v == s {
@@ -213,20 +204,18 @@ func contains(slice []string, s string) bool {
 	return false
 }
 
-// MatchPacket checks if a given packet matches the provided SnortRule.
-// It compares header fields (protocol, IPs, ports) and, if specified,
-// payload content (using content, offset, depth) as well as additional
-// matching fields such as Flow, Flags, and Flowbits.
+// --- Packet Matching ---
+
 func MatchPacket(pkt Packet, rule LoadedJsonRules) bool {
 	// Check protocol (case-insensitive)
 	if strings.ToLower(rule.Protocol) != strings.ToLower(pkt.Protocol) {
 		return false
 	}
-	// Check source and destination IP addresses
+	// Check IP addresses
 	if !matchIP(rule.SourceIP, pkt.SourceIP) || !matchIP(rule.DestinationIP, pkt.DestinationIP) {
 		return false
 	}
-	// Check source and destination ports
+	// Check ports
 	if !matchPort(rule.SourcePort, pkt.SourcePort) || !matchPort(rule.DestinationPort, pkt.DestinationPort) {
 		return false
 	}
@@ -252,25 +241,87 @@ func MatchPacket(pkt Packet, rule LoadedJsonRules) bool {
 			return false
 		}
 	}
-	// Check Flowbits if specified
-	if len(rule.Flowbits) > 0 {
-		for _, bit := range rule.Flowbits {
-			if !contains(pkt.Flowbits, bit) {
-				return false
-			}
-		}
-	}
-	// Note: Revision, GID, Classtype, Priority, Reference, and Metadata are typically not used
-	// for matching packet characteristics.
+	// Note: We now handle flowbits tests separately in matching()
 	return true
 }
 
+// --- Flowbits Matching Helpers ---
+
+// flowbitsTest checks test conditions in the rule's Flowbits array.
+// For entries like "isnotset,bitname" or "isset,bitname", it verifies whether
+// the packet's current Flowbits satisfy the condition.
+func flowbitsTest(pkt Packet, ruleBits []string) bool {
+	for _, entry := range ruleBits {
+		entry = strings.TrimSpace(entry)
+		// Skip non-test modifiers like "noalert"
+		if strings.ToLower(entry) == "noalert" {
+			continue
+		}
+		parts := strings.SplitN(entry, ",", 2)
+		if len(parts) < 2 {
+			// If not in "operator,bit" format, assume a plain test for existence.
+			if !contains(pkt.Flowbits, entry) {
+				return false
+			}
+			continue
+		}
+		operator := strings.ToLower(strings.TrimSpace(parts[0]))
+		bit := strings.TrimSpace(parts[1])
+		switch operator {
+		case "isnotset":
+			if contains(pkt.Flowbits, bit) {
+				return false
+			}
+		case "isset":
+			if !contains(pkt.Flowbits, bit) {
+				return false
+			}
+		// "set" and "unset" are action operators, not tests.
+		}
+	}
+	return true
+}
+
+// flowbitsActions processes action operators in the rule's Flowbits array.
+// It performs actions such as "set" or "unset" on the flow record.
+func flowbitsActions(pkt Packet, ruleBits []string) {
+	for _, entry := range ruleBits {
+		entry = strings.TrimSpace(entry)
+		parts := strings.SplitN(entry, ",", 2)
+		if len(parts) < 2 {
+			continue
+		}
+		operator := strings.ToLower(strings.TrimSpace(parts[0]))
+		bit := strings.TrimSpace(parts[1])
+		switch operator {
+		case "set":
+			SetFlowbit(pkt, bit)
+		case "unset":
+			UnsetFlowbit(pkt, bit)
+		}
+	}
+}
+
+// flowbitsNoAlert checks if the rule includes the "noalert" modifier.
+func flowbitsNoAlert(ruleBits []string) bool {
+	for _, entry := range ruleBits {
+		if strings.ToLower(strings.TrimSpace(entry)) == "noalert" {
+			return true
+		}
+	}
+	return false
+}
+
+// --- Matching Process ---
 
 // matching simulates the matching process based on input parameters.
-// It loads the rules from a file, builds a Packet, and checks each rule.
+// It builds a Packet and checks each rule, integrating proper flowbits matching:
+// first, it tests any flowbit conditions (via flowbitsTest); if these pass, it then
+// calls MatchPacket; on a match, it executes any flowbit actions (via flowbitsActions)
+// and logs an alert unless the rule includes a "noalert" modifier.
 func matching(rules []LoadedJsonRules, protocol *string, sip *string, sport *int, dip *string, dport *int, payload *[]byte, flow *string, flags *string, pktFlowbits *[]string) {
-	
-	// Build the packet from command-line parameters
+
+	// Build the packet from command-line parameters.
 	pkt := Packet{
 		Protocol:        *protocol,
 		SourceIP:        *sip,
@@ -284,9 +335,23 @@ func matching(rules []LoadedJsonRules, protocol *string, sip *string, sport *int
 	}
 	matched := false
 	for _, rule := range rules {
+		// If the rule has flowbits test conditions, check them first.
+		if len(rule.Flowbits) > 0 {
+			if !flowbitsTest(pkt, rule.Flowbits) {
+				continue // Skip rule if flowbit test fails.
+			}
+		}
+		// Then check the remainder of the rule.
 		if MatchPacket(pkt, rule) {
 			matched = true
-			log.Printf("ALERT: Packet matched rule SID %s - %s\n", rule.SID, rule.Message)
+			// Perform any flowbit actions (e.g. set or unset) after a match.
+			if len(rule.Flowbits) > 0 {
+				flowbitsActions(pkt, rule.Flowbits)
+			}
+			// Log an alert unless the rule includes a "noalert" modifier.
+			if !flowbitsNoAlert(rule.Flowbits) {
+				log.Printf("ALERT: Packet matched rule SID %s - %s\n", rule.SID, rule.Message)
+			}
 		}
 	}
 	if !matched {

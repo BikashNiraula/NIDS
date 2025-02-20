@@ -72,3 +72,8 @@ func SetHomeNet(iface string) error {
 
 	return fmt.Errorf("interface %s not found", iface)
 }
+
+
+
+
+// kaam garna baaki xa hai, ipv4 ra ipv6 dui tai aauna paryo homenet ma
