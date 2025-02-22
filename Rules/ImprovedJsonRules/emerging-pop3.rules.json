@@ -1,0 +1,304 @@
+[
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "110",
+    "sid": "2101936",
+    "msg": "GPL POP3 AUTH overflow attempt",
+    "rev": "9",
+    "classtype": "attempted-admin",
+    "flow": "to_server,established",
+    "pcre": "/^AUTH\\s[^\\n]{50}/smi",
+    "content": [
+      "AUTH"
+    ],
+    "reference": [
+      "bugtraq,830",
+      "cve,1999-0822",
+      "nessus,10184"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0822",
+      "signature_severity": "Major",
+      "updated_at": "2011_04_22"
+    },
+    "other_options": {
+      "isdataat": [
+        "50,relative"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "110",
+    "sid": "2101937",
+    "msg": "GPL POP3 LIST overflow attempt",
+    "rev": "8",
+    "classtype": "attempted-admin",
+    "flow": "to_server,established",
+    "pcre": "/^LIST\\s[^\\n]{10}/smi",
+    "content": [
+      "LIST"
+    ],
+    "reference": [
+      "bugtraq,948",
+      "cve,2000-0096",
+      "nessus,10197"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "cve": "CVE_2000_0096",
+      "signature_severity": "Major",
+      "updated_at": "2011_04_22"
+    },
+    "other_options": {
+      "isdataat": [
+        "10,relative"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "110",
+    "sid": "2101938",
+    "msg": "GPL POP3 XTND overflow attempt",
+    "rev": "5",
+    "classtype": "attempted-admin",
+    "flow": "to_server,established",
+    "pcre": "/^XTND\\s[^\\n]{50}/smi",
+    "content": [
+      "XTND"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "signature_severity": "Major",
+      "updated_at": "2011_04_22"
+    },
+    "other_options": {
+      "isdataat": [
+        "50,relative"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "110",
+    "sid": "2101635",
+    "msg": "GPL POP3 APOP overflow attempt",
+    "rev": "14",
+    "classtype": "attempted-admin",
+    "flow": "to_server,established",
+    "pcre": "/^APOP\\s[^\\n]{256}/smi",
+    "content": [
+      "APOP"
+    ],
+    "reference": [
+      "bugtraq,1652",
+      "cve,2000-0840",
+      "cve,2000-0841",
+      "nessus,10559"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "cve": "CVE_2000_0840",
+      "signature_severity": "Major",
+      "updated_at": "2011_06_08"
+    },
+    "other_options": {
+      "isdataat": [
+        "256,relative"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "110",
+    "sid": "2101634",
+    "msg": "GPL POP3 POP3 PASS overflow attempt",
+    "rev": "15",
+    "classtype": "attempted-admin",
+    "flow": "to_server,established",
+    "pcre": "/^PASS\\s[^\\n]{50}/smi",
+    "content": [
+      "PASS"
+    ],
+    "reference": [
+      "bugtraq,791",
+      "cve,1999-1511",
+      "nessus,10325"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_1511",
+      "signature_severity": "Major",
+      "updated_at": "2011_06_08"
+    },
+    "other_options": {
+      "isdataat": [
+        "50,relative"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "110",
+    "sid": "2102110",
+    "msg": "GPL POP3 STAT overflow attempt",
+    "rev": "4",
+    "classtype": "attempted-admin",
+    "flow": "to_server,established",
+    "pcre": "/^STAT\\s[^\\n]{10}/smi",
+    "content": [
+      "STAT"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "signature_severity": "Major",
+      "updated_at": "2012_01_16"
+    },
+    "other_options": {
+      "isdataat": [
+        "10,relative"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "110",
+    "sid": "2100288",
+    "msg": "GPL POP3 x86 Linux overflow",
+    "rev": "8",
+    "classtype": "attempted-admin",
+    "flow": "to_server,established",
+    "content": [
+      "|D8|@|CD 80 E8 D9 FF FF FF|/bin/sh"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "signature_severity": "Major",
+      "updated_at": "2012_08_21"
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "110",
+    "sid": "2100289",
+    "msg": "GPL POP3 x86 SCO overflow",
+    "rev": "11",
+    "classtype": "attempted-admin",
+    "flow": "to_server,established",
+    "content": [
+      "V|0E|1|C0 B0 3B 8D|~|12 89 F9 89 F9|"
+    ],
+    "reference": [
+      "bugtraq,156",
+      "cve,1999-0006"
+    ],
+    "metadata": {
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0006",
+      "signature_severity": "Major",
+      "updated_at": "2012_08_21"
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "110",
+    "sid": "2102409",
+    "msg": "GPL POP3 APOP USER overflow attempt",
+    "rev": "2",
+    "classtype": "attempted-admin",
+    "flow": "to_server,established",
+    "pcre": "/^APOP\\s+USER\\s[^\\n]{256}/smi",
+    "content": [
+      "APOP"
+    ],
+    "reference": [
+      "bugtraq,9794"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "signature_severity": "Major",
+      "updated_at": "2013_03_18"
+    },
+    "other_options": {
+      "isdataat": [
+        "256,relative"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  }
+]

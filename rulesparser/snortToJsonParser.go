@@ -1,61 +1,71 @@
 package rulesparser
 
 import (
-
-	"strings"
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"log"
-	_ "net"
-	 "os"
+	"os"
 	"path/filepath"
-	"bufio"
-
-	_ "github.com/google/gopacket"
-	_ "github.com/google/gopacket/layers"
-	_ "github.com/google/gopacket/pcap"
-	_ "github.com/olekukonko/tablewriter"
-	_ "github.com/spf13/cobra"
+	"strings"
 )
-
 
 // --------------------------
 // Data Structures
 // --------------------------
 
-// SnortRule now includes many fields that might be present in a rule.
-// Fields expected only once are stored as strings; fields that may appear multiple times (like flowbits, reference)
-// are stored as slices. Metadata is parsed into a map.
+// ThresholdOption represents the parsed components of a threshold option.
+type ThresholdOption struct {
+	Type    string `json:"type,omitempty"`
+	Count   string `json:"count,omitempty"`
+	Seconds string `json:"seconds,omitempty"`
+	Track   string `json:"track,omitempty"`
+}
+
+// SnortRule represents a complete Snort rule, including its header,
+// explicitly parsed options, and any additional options.
 type SnortRule struct {
-	// Required header fields:
+	// Header fields
 	Action          string `json:"action"`
 	Protocol        string `json:"protocol"`
 	SourceIP        string `json:"source_ip"`
 	SourcePort      string `json:"source_port"`
+	// Direction: either "->" or "<>"
+	Direction       string `json:"direction"`
 	DestinationIP   string `json:"destination_ip"`
 	DestinationPort string `json:"destination_port"`
 
-	// Unique rule identifier (SID) is required.
+	// Unique identifier
 	SID string `json:"sid"`
 
-	// Options that are usually unique:
-	Message   string `json:"msg"`
-	Revision  string `json:"rev"`
+	// Common options (single occurrence)
+	Message   string `json:"msg,omitempty"`
+	Revision  string `json:"rev,omitempty"`
 	GID       string `json:"gid,omitempty"`
 	Classtype string `json:"classtype,omitempty"`
-	Content   string `json:"content,omitempty"`
+	Priority  string `json:"priority,omitempty"`
 	Flow      string `json:"flow,omitempty"`
 	Depth     string `json:"depth,omitempty"`
 	Offset    string `json:"offset,omitempty"`
 	Flags     string `json:"flags,omitempty"`
-	Priority  string `json:"priority,omitempty"`
 
-	// Options that can occur multiple times:
+	// Additional detection options
+	PCRE            string           `json:"pcre,omitempty"`
+	Distance        string           `json:"distance,omitempty"`
+	Within          string           `json:"within,omitempty"`
+	Threshold       *ThresholdOption `json:"threshold,omitempty"`
+	DetectionFilter string           `json:"detection_filter,omitempty"`
+
+	// Options that can occur multiple times
+	Content   []string `json:"content,omitempty"` // can be defined multiple times
 	Flowbits  []string `json:"flowbits,omitempty"`
 	Reference []string `json:"reference,omitempty"`
 
 	// Metadata parsed into a key/value mapping.
 	Metadata map[string]string `json:"metadata,omitempty"`
+
+	// Any additional options that are not explicitly handled.
+	OtherOptions map[string][]string `json:"other_options,omitempty"`
 }
 
 // --------------------------
@@ -104,16 +114,17 @@ func (p *parser) expect(lit string) error {
 func (p *parser) parseToken() string {
 	p.skipWhitespace()
 	start := p.pos
-	for p.pos < len(p.input) && !isWhitespace(p.input[p.pos]) {
+	// Stop at whitespace or '(' (beginning of options)
+	for p.pos < len(p.input) && !isWhitespace(p.input[p.pos]) && p.input[p.pos] != '(' {
 		p.pos++
 	}
 	return p.input[start:p.pos]
 }
 
-// parseWord reads a word (for option keys): letters, digits, underscore.
+// parseWord reads a word (for option keys): letters, digits, underscore (and hyphen).
 func (p *parser) parseWord() string {
 	start := p.pos
-	for p.pos < len(p.input) && (isLetterOrDigit(p.input[p.pos]) || p.input[p.pos] == '_') {
+	for p.pos < len(p.input) && (isLetterOrDigit(p.input[p.pos]) || p.input[p.pos] == '_' || p.input[p.pos] == '-') {
 		p.pos++
 	}
 	return p.input[start:p.pos]
@@ -144,7 +155,7 @@ type option struct {
 	Value string
 }
 
-// parseOption parses one option (e.g. key: value).
+// parseOption parses one option which can be either a key:value pair or a flag (key with no colon).
 func (p *parser) parseOption() (option, error) {
 	p.skipWhitespace()
 	key := p.parseWord()
@@ -152,29 +163,33 @@ func (p *parser) parseOption() (option, error) {
 		return option{}, fmt.Errorf("expected option key at position %d", p.pos)
 	}
 	p.skipWhitespace()
-	if err := p.expect(":"); err != nil {
-		return option{}, err
-	}
-	p.skipWhitespace()
 	var val string
-	if p.peek() == '"' || p.peek() == '\'' {
-		v, err := p.parseQuotedString()
-		if err != nil {
-			return option{}, err
+	// If a colon follows, parse the value.
+	if p.peek() == ':' {
+		p.pos++ // consume colon
+		p.skipWhitespace()
+		if p.peek() == '"' || p.peek() == '\'' {
+			v, err := p.parseQuotedString()
+			if err != nil {
+				return option{}, err
+			}
+			val = v
+		} else {
+			// Unquoted value: read until next semicolon or closing parenthesis.
+			start := p.pos
+			for p.pos < len(p.input) && p.input[p.pos] != ';' && p.input[p.pos] != ')' {
+				p.pos++
+			}
+			val = strings.TrimSpace(p.input[start:p.pos])
 		}
-		val = v
 	} else {
-		// Unquoted value: read until next semicolon or closing parenthesis.
-		start := p.pos
-		for p.pos < len(p.input) && p.input[p.pos] != ';' && p.input[p.pos] != ')' {
-			p.pos++
-		}
-		val = strings.TrimSpace(p.input[start:p.pos])
+		// No colon implies a flag option (e.g. "nocase")
+		val = "true"
 	}
 	return option{Key: key, Value: val}, nil
 }
 
-// parseOptionList parses a semicolon-separated list of options, returning a mapping of keys to slices of values.
+// parseOptionList parses a semicolon-separated list of options into a mapping of keys to slices of values.
 func (p *parser) parseOptionList() (map[string][]string, error) {
 	opts := make(map[string][]string)
 	for {
@@ -195,6 +210,36 @@ func (p *parser) parseOptionList() (map[string][]string, error) {
 		}
 	}
 	return opts, nil
+}
+
+// parseThreshold converts a threshold string like
+// "type both, count 5, seconds 60, track by_src"
+// into a ThresholdOption struct.
+func parseThreshold(thresholdStr string) (*ThresholdOption, error) {
+	parts := strings.Split(thresholdStr, ",")
+	thresh := &ThresholdOption{}
+	for _, part := range parts {
+		part = strings.TrimSpace(part)
+		tokens := strings.Fields(part)
+		if len(tokens) < 2 {
+			return nil, fmt.Errorf("invalid threshold option: %s", part)
+		}
+		key := tokens[0]
+		value := strings.Join(tokens[1:], " ")
+		switch key {
+		case "type":
+			thresh.Type = value
+		case "count":
+			thresh.Count = value
+		case "seconds":
+			thresh.Seconds = value
+		case "track":
+			thresh.Track = value
+		default:
+			// Optionally log or handle unknown keys.
+		}
+	}
+	return thresh, nil
 }
 
 // parseRule parses the complete Snort rule.
@@ -221,9 +266,16 @@ func (p *parser) parseRule() (*SnortRule, error) {
 		return nil, fmt.Errorf("missing source port")
 	}
 	p.skipWhitespace()
-	// Expect arrow "->"
-	if err := p.expect("->"); err != nil {
-		return nil, err
+	// Parse direction operator: either "->" or "<>"
+	var direction string
+	if p.match("->") {
+		direction = "->"
+		p.pos += 2
+	} else if p.match("<>") {
+		direction = "<>"
+		p.pos += 2
+	} else {
+		return nil, fmt.Errorf("missing or invalid direction operator at position %d", p.pos)
 	}
 	p.skipWhitespace()
 	destinationIP := p.parseToken()
@@ -249,8 +301,7 @@ func (p *parser) parseRule() (*SnortRule, error) {
 		return nil, fmt.Errorf("expected ')' ending options: %v", err)
 	}
 
-	// Now, extract known keys.
-	// For keys that occur only once, use the first element.
+	// Helper function: extract first occurrence of an option.
 	extract := func(key string) string {
 		if vals, ok := opts[key]; ok && len(vals) > 0 {
 			return vals[0]
@@ -258,14 +309,14 @@ func (p *parser) parseRule() (*SnortRule, error) {
 		return ""
 	}
 
-	// For keys that can be multiple, take the whole slice.
+	// For options that can occur multiple times.
+	content := opts["content"]
 	flowbits := opts["flowbits"]
 	reference := opts["reference"]
 
-	// For metadata, parse its first occurrence if present.
+	// Parse metadata into a key/value map if present.
 	metadata := make(map[string]string)
 	if metaStr := extract("metadata"); metaStr != "" {
-		// Split by commas then by whitespace.
 		parts := strings.Split(metaStr, ",")
 		for _, part := range parts {
 			part = strings.TrimSpace(part)
@@ -285,30 +336,69 @@ func (p *parser) parseRule() (*SnortRule, error) {
 		return nil, fmt.Errorf("missing required field: sid")
 	}
 
-	// Build the final SnortRule.
+	// Parse the threshold option into a structured format.
+	var thresholdOption *ThresholdOption
+	if rawThreshold := extract("threshold"); rawThreshold != "" {
+		thresholdOption, err = parseThreshold(rawThreshold)
+		if err != nil {
+			return nil, fmt.Errorf("failed to parse threshold: %v", err)
+		}
+	}
+
+	// Build the SnortRule object.
 	rule := &SnortRule{
 		Action:          action,
 		Protocol:        protocol,
 		SourceIP:        sourceIP,
 		SourcePort:      sourcePort,
+		Direction:       direction,
 		DestinationIP:   destinationIP,
 		DestinationPort: destinationPort,
+		SID:             sid,
 
-		Message:   extract("msg"),
-		Revision:  extract("rev"),
-		GID:       extract("gid"),
-		Classtype: extract("classtype"),
-		Content:   extract("content"),
-		Flow:      extract("flow"),
-		Depth:     extract("depth"),
-		Offset:    extract("offset"),
-		Flags:     extract("flags"),
-		Priority:  extract("priority"),
+		Message:         extract("msg"),
+		Revision:        extract("rev"),
+		GID:             extract("gid"),
+		Classtype:       extract("classtype"),
+		Priority:        extract("priority"),
+		Flow:            extract("flow"),
+		Depth:           extract("depth"),
+		Offset:          extract("offset"),
+		Flags:           extract("flags"),
 
-		Flowbits:  flowbits,
-		Reference: reference,
-		Metadata:  metadata,
-		SID:        sid,
+		PCRE:            extract("pcre"),
+		Distance:        extract("distance"),
+		Within:          extract("within"),
+		Threshold:       thresholdOption,
+		DetectionFilter: extract("detection_filter"),
+
+		Content:         content,
+		Flowbits:        flowbits,
+		Reference:       reference,
+		Metadata:        metadata,
+	}
+
+	// Remove known keys from opts and store any remaining options.
+	knownKeys := []string{
+		"msg", "rev", "gid", "classtype", "priority", "flow", "depth", "offset", "flags",
+		"pcre", "distance", "within", "threshold", "detection_filter", "content", "flowbits",
+		"reference", "metadata", "sid",
+	}
+	otherOpts := make(map[string][]string)
+	for k, v := range opts {
+		skip := false
+		for _, known := range knownKeys {
+			if k == known {
+				skip = true
+				break
+			}
+		}
+		if !skip {
+			otherOpts[k] = v
+		}
+	}
+	if len(otherOpts) > 0 {
+		rule.OtherOptions = otherOpts
 	}
 
 	return rule, nil
@@ -318,19 +408,17 @@ func (p *parser) parseRule() (*SnortRule, error) {
 // Helper Functions
 // --------------------------
 
-// isWhitespace returns true if ch is a whitespace character.
 func isWhitespace(ch byte) bool {
 	return ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r'
 }
 
-// isLetterOrDigit returns true if ch is a letter or digit.
 func isLetterOrDigit(ch byte) bool {
 	return (ch >= 'a' && ch <= 'z') ||
 		(ch >= 'A' && ch <= 'Z') ||
 		(ch >= '0' && ch <= '9')
 }
 
-// ParseSnortRule is the exported function that uses our recursive descent parser.
+// ParseSnortRule is the exported function to parse a single Snort rule string.
 func ParseSnortRule(rule string) (*SnortRule, error) {
 	p := newParser(rule)
 	r, err := p.parseRule()
@@ -340,9 +428,7 @@ func ParseSnortRule(rule string) (*SnortRule, error) {
 	return r, nil
 }
 
-
-
-
+// ParseSnortRulesFromFile reads a file containing Snort rules and parses them.
 func ParseSnortRulesFromFile(rulesFile string) ([]SnortRule, error) {
 	file, err := os.Open(rulesFile)
 	if err != nil {
@@ -355,7 +441,7 @@ func ParseSnortRulesFromFile(rulesFile string) ([]SnortRule, error) {
 	for scanner.Scan() {
 		rule := strings.TrimSpace(scanner.Text())
 		if rule == "" || strings.HasPrefix(rule, "#") {
-			continue // Skip empty lines and comments
+			continue // Skip empty lines and comments.
 		}
 		parsedRule, err := ParseSnortRule(rule)
 		if err != nil {
@@ -372,6 +458,7 @@ func ParseSnortRulesFromFile(rulesFile string) ([]SnortRule, error) {
 	return parsedRules, nil
 }
 
+// SaveRulesAsJSON marshals the rules into JSON and writes to the specified file.
 func SaveRulesAsJSON(rules []SnortRule, outputFile string) error {
 	jsonOutput, err := json.MarshalIndent(rules, "", "  ")
 	if err != nil {
@@ -386,6 +473,7 @@ func SaveRulesAsJSON(rules []SnortRule, outputFile string) error {
 	return nil
 }
 
+// ConvertSingleSnortRulesFileToJSON converts one .rules file to JSON.
 func ConvertSingleSnortRulesFileToJSON(rulesFile, outputFile string) error {
 	rules, err := ParseSnortRulesFromFile(rulesFile)
 	if err != nil {
@@ -400,27 +488,21 @@ func ConvertSingleSnortRulesFileToJSON(rulesFile, outputFile string) error {
 	return nil
 }
 
-// Handles the coversion of .rules file to 
+// ConvertSnortRulesToJSON handles the conversion of a .rules file or a directory of .rules files to JSON.
 func ConvertSnortRulesToJSON(rulesFile, outputFile string) error {
-	// Ensure the rulesFile is provided
 	if rulesFile == "" {
 		return fmt.Errorf("please provide a rules file or directory using the --rulesFile flag")
 	}
 
-	// Check if rulesFile is a directory
 	fileInfo, err := os.Stat(rulesFile)
 	if err != nil {
 		return fmt.Errorf("failed to access rulesFile: %v", err)
 	}
 
-	// If it's a directory, process all .rules files in the directory
 	if fileInfo.IsDir() {
-		// Ensure the outputFile is a valid directory
 		if outputFile == "" {
 			return fmt.Errorf("please provide an output directory using the --outputFile flag")
 		}
-
-		// Check if outputFile is a valid directory
 		outputDirInfo, err := os.Stat(outputFile)
 		if err != nil {
 			return fmt.Errorf("error accessing output directory: %v", err)
@@ -429,21 +511,15 @@ func ConvertSnortRulesToJSON(rulesFile, outputFile string) error {
 			return fmt.Errorf("provided output path is not a directory")
 		}
 
-		// Process all .rules files in the directory
 		files, err := os.ReadDir(rulesFile)
 		if err != nil {
 			return fmt.Errorf("failed to read rules directory: %v", err)
 		}
 
-		// Loop through the files and process .rules files
 		for _, file := range files {
 			if filepath.Ext(file.Name()) == ".rules" {
-				// Construct the full path of the rules file
 				rulesFilePath := filepath.Join(rulesFile, file.Name())
-				// Construct the corresponding output JSON file path
 				outputJSONPath := filepath.Join(outputFile, file.Name()+".json")
-
-				// Convert each .rules file to JSON
 				if err := ConvertSingleSnortRulesFileToJSON(rulesFilePath, outputJSONPath); err != nil {
 					log.Printf("Error converting %s: %v", file.Name(), err)
 				} else {
@@ -454,25 +530,19 @@ func ConvertSnortRulesToJSON(rulesFile, outputFile string) error {
 		return nil
 	}
 
-	// If it's a single file, process it as usual
 	if outputFile == "" {
-		// Ensure the default output directory exists
 		defaultOutputDir := "./Rules/JsonRules"
 		err := os.MkdirAll(defaultOutputDir, os.ModePerm)
 		if err != nil {
 			return fmt.Errorf("error creating output directory: %v", err)
 		}
-		// Use the rules file name with .json extension in the default directory
 		outputFile = filepath.Join(defaultOutputDir, filepath.Base(rulesFile)+".json")
 	}
 
-	// If outputFile is a directory, append .json extension with the same filename
 	if info, err := os.Stat(outputFile); err == nil && info.IsDir() {
-		// If it's a directory, use the base name of the rulesFile and append .json
 		outputFile = filepath.Join(outputFile, filepath.Base(rulesFile)+".json")
 	}
 
-	// Convert the single Snort rules file to JSON
 	if err := ConvertSingleSnortRulesFileToJSON(rulesFile, outputFile); err != nil {
 		return fmt.Errorf("error converting rules file to JSON: %v", err)
 	}

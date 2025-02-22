@@ -139,6 +139,7 @@ func CaptureAndLogAllFields(iface string, doMatch bool, rulePath string) error {
 				sourcePort = src.String()
 				destinationPort = dst.String()
 			}
+			
 		}
 
 		// Extract application layer payload and try to infer the application protocol.
@@ -216,7 +217,7 @@ func CaptureAndLogAllFields(iface string, doMatch bool, rulePath string) error {
 
 		if doMatch {
 			matching(rules, &protocol, &sourceIP, &sportInt, &destinationIP, &dportInt, &payload, &flowParam, &tcpFlags, &pktFlowbits)
-			PrintFlows()
+			//PrintFlows()
 
 		}else{
 

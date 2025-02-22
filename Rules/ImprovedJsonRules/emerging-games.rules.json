@@ -1,0 +1,881 @@
+[
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "6112",
+    "sid": "2002154",
+    "msg": "ET GAMES Guild Wars connection",
+    "rev": "5",
+    "classtype": "policy-violation",
+    "flow": "established,to_server",
+    "content": [
+      "|01 00 00 00 00 F1 00 10 00 01 00 00 00 00 00 00 00 00 00 00 00|"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_07_30"
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "27020:27050",
+    "sid": "2003089",
+    "msg": "ET GAMES STEAM Connection (v2)",
+    "rev": "4",
+    "classtype": "policy-violation",
+    "flow": "established,to_server",
+    "content": [
+      "|00 00 00 03|"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_07_30"
+    },
+    "other_options": {
+      "dsize": [
+        "4"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "20000",
+    "sid": "2007746",
+    "msg": "ET GAMES Gold VIP Club Casino Client in Use",
+    "rev": "5",
+    "classtype": "policy-violation",
+    "flow": "established,to_server",
+    "content": [
+      "Gold VIP Club Casino"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_07_30"
+    },
+    "other_options": {
+      "dsize": [
+        "25"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "any",
+    "sid": "2012170",
+    "msg": "ET GAMES Blizzard Web Downloader Install Detected",
+    "rev": "2",
+    "classtype": "policy-violation",
+    "flow": "established,to_server",
+    "content": [
+      "User-Agent|3a| Blizzard Web Client"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2011_01_10",
+      "signature_severity": "Informational",
+      "updated_at": "2011_01_10"
+    },
+    "other_options": {
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "sid": "2013910",
+    "msg": "ET GAMES Second Life setup download",
+    "rev": "2",
+    "classtype": "policy-violation",
+    "flow": "established,to_server",
+    "content": [
+      "/Second_Life_Setup.exe"
+    ],
+    "reference": [
+      "url,en.wikifur.com/wiki/Second_Life",
+      "url,wiki.secondlife.com/wiki/Furry"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2011_11_11",
+      "signature_severity": "Informational",
+      "updated_at": "2011_11_11"
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "sid": "2011708",
+    "msg": "ET GAMES Blizzard Downloader Client User-Agent (Blizzard Downloader 2.x)",
+    "rev": "6",
+    "classtype": "policy-violation",
+    "flow": "to_server,established",
+    "content": [
+      "User-Agent|3a| Blizzard"
+    ],
+    "reference": [
+      "url,www.worldofwarcraft.com/info/faq/blizzarddownloader.html"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2012_01_24"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "11,9"
+      ],
+      "http_header": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "sid": "2014718",
+    "msg": "ET GAMES Nintendo Wii User-Agent",
+    "rev": "2",
+    "classtype": "policy-violation",
+    "flow": "established,to_server",
+    "content": [
+      "(Nintendo Wii"
+    ],
+    "reference": [
+      "url,www.useragentstring.com/pages/Opera/"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2012_05_08",
+      "signature_severity": "Informational",
+      "updated_at": "2012_05_23"
+    },
+    "other_options": {
+      "http_header": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "25565",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2021701",
+    "msg": "ET GAMES MINECRAFT Server response inbound",
+    "rev": "1",
+    "classtype": "policy-violation",
+    "flow": "established,from_server",
+    "depth": "10",
+    "content": [
+      "|7B 22|"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2015_08_21",
+      "signature_severity": "Informational",
+      "updated_at": "2015_08_21"
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2027417",
+    "msg": "ET GAMES Wolfteam HileYapak Server Response",
+    "rev": "2",
+    "classtype": "policy-violation",
+    "flow": "established,from_server",
+    "content": [
+      "200",
+      "Temizleme Yapildi HileYapak",
+      "Content-Type|3a 20|text/plain"
+    ],
+    "reference": [
+      "md5,85cf4df17fcf04286fcbbdf9fbe11077"
+    ],
+    "metadata": {
+      "affected_product": "Windows_XP_Vista_7_8_10_Server_32_64_Bit",
+      "attack_target": "Client_Endpoint",
+      "confidence": "High",
+      "created_at": "2019_05_31",
+      "deployment": "Perimeter",
+      "performance_impact": "Low",
+      "signature_severity": "Informational",
+      "updated_at": "2019_05_31"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "true"
+      ],
+      "http_header": [
+        "true"
+      ],
+      "http_stat_code": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2029784",
+    "msg": "ET GAMES Growtopia Hack - WrongGrow CnC Activity",
+    "rev": "2",
+    "classtype": "bad-unknown",
+    "flow": "established,to_client",
+    "content": [
+      "200",
+      "|20|HeySurfer#1234"
+    ],
+    "reference": [
+      "md5,b76a144f412b680e6a04ee4f4fbcf000"
+    ],
+    "metadata": {
+      "affected_product": "Windows_XP_Vista_7_8_10_Server_32_64_Bit",
+      "attack_target": "Client_Endpoint",
+      "confidence": "High",
+      "created_at": "2020_04_01",
+      "deployment": "Perimeter",
+      "signature_severity": "Informational",
+      "updated_at": "2020_04_01"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "true"
+      ],
+      "file_data": [
+        "true"
+      ],
+      "http_stat_code": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "sid": "2030484",
+    "msg": "ET GAMES Dragon Raja Activity",
+    "rev": "2",
+    "classtype": "misc-activity",
+    "flow": "established,to_server",
+    "depth": "14",
+    "content": [
+      "/setup/dir.txt",
+      "User-Agent|3a 20|DragonRajaOrigin|0d 0a|"
+    ],
+    "reference": [
+      "md5,33200121c71932220c67b9f3ccc57d60"
+    ],
+    "metadata": {
+      "affected_product": "Windows_XP_Vista_7_8_10_Server_32_64_Bit",
+      "attack_target": "Client_Endpoint",
+      "confidence": "High",
+      "created_at": "2020_07_08",
+      "deployment": "Perimeter",
+      "performance_impact": "Low",
+      "signature_severity": "Major",
+      "updated_at": "2020_07_08"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "10,20"
+      ],
+      "http_uri": [
+        "true"
+      ],
+      "isdataat": [
+        "!1,relative"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "sid": "2031619",
+    "msg": "ET GAMES Playit Activity (playit .gg)",
+    "rev": "2",
+    "classtype": "policy-violation",
+    "flow": "established,to_server",
+    "content": [
+      "GET",
+      "Host|3a 20|playit.gg|0d 0a|",
+      "Referer|3a 20|https://playit.gg/claim/v2/"
+    ],
+    "reference": [
+      "md5,adef7b6d9fcd8c2a0fabd94d73bc9789"
+    ],
+    "metadata": {
+      "attack_target": "Client_Endpoint",
+      "confidence": "High",
+      "created_at": "2021_02_12",
+      "deployment": "SSLDecrypt",
+      "performance_impact": "Low",
+      "signature_severity": "Informational",
+      "updated_at": "2021_02_12"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "true"
+      ],
+      "http_header": [
+        "true",
+        "true"
+      ],
+      "http_method": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "sid": "2031878",
+    "msg": "ET GAMES GameHouse License Check",
+    "rev": "2",
+    "classtype": "policy-violation",
+    "flow": "established,to_server",
+    "depth": "11",
+    "content": [
+      "parameters=",
+      "POST /lm/dynamicLicense HTTP/1.1|0d 0a|",
+      "Referer|3a 20|"
+    ],
+    "reference": [
+      "md5,0e29380dcc1f9a57f545fc26b4045c94"
+    ],
+    "metadata": {
+      "affected_product": "Windows_XP_Vista_7_8_10_Server_32_64_Bit",
+      "attack_target": "Client_Endpoint",
+      "confidence": "High",
+      "created_at": "2021_03_08",
+      "deployment": "Perimeter",
+      "performance_impact": "Low",
+      "signature_severity": "Informational",
+      "updated_at": "2021_03_08"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "true"
+      ],
+      "http_client_body": [
+        "true"
+      ],
+      "http_header": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "any",
+    "destination_port": "53",
+    "sid": "2034841",
+    "msg": "ET GAMES Moonlight Hack Domain in DNS Lookup",
+    "rev": "1",
+    "classtype": "policy-violation",
+    "depth": "1",
+    "offset": "2",
+    "distance": "1",
+    "within": "7",
+    "content": [
+      "|01|",
+      "|00 01 00 00 00 00 00|",
+      "|08|moonsoft|03|eu3|03|biz"
+    ],
+    "reference": [
+      "md5,ebfdbc2a60373344e6ab32c866027ea8"
+    ],
+    "metadata": {
+      "attack_target": "Client_Endpoint",
+      "confidence": "High",
+      "created_at": "2021_12_23",
+      "deployment": "Perimeter",
+      "signature_severity": "Minor",
+      "updated_at": "2021_12_23"
+    },
+    "other_options": {
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "any",
+    "destination_port": "53",
+    "sid": "2034842",
+    "msg": "ET GAMES Moonlight Hack Domain in DNS Lookup",
+    "rev": "1",
+    "classtype": "policy-violation",
+    "depth": "1",
+    "offset": "2",
+    "distance": "1",
+    "within": "7",
+    "content": [
+      "|01|",
+      "|00 01 00 00 00 00 00|",
+      "|09|moonlight|03|uno"
+    ],
+    "reference": [
+      "md5,ebfdbc2a60373344e6ab32c866027ea8"
+    ],
+    "metadata": {
+      "attack_target": "Client_Endpoint",
+      "confidence": "High",
+      "created_at": "2021_12_23",
+      "deployment": "Perimeter",
+      "signature_severity": "Minor",
+      "updated_at": "2021_12_23"
+    },
+    "other_options": {
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "sid": "2034843",
+    "msg": "ET GAMES Moonlight Hack Actvity (GET)",
+    "rev": "1",
+    "classtype": "policy-violation",
+    "flow": "established,to_server",
+    "content": [
+      "GET",
+      "Host|3a 20|moonlight.uno|0d 0a|"
+    ],
+    "reference": [
+      "md5,ebfdbc2a60373344e6ab32c866027ea8"
+    ],
+    "metadata": {
+      "attack_target": "Client_Endpoint",
+      "confidence": "High",
+      "created_at": "2021_12_23",
+      "deployment": "SSLDecrypt",
+      "signature_severity": "Minor",
+      "updated_at": "2021_12_23"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "true"
+      ],
+      "http_header": [
+        "true"
+      ],
+      "http_method": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "any",
+    "destination_port": "53",
+    "sid": "2034901",
+    "msg": "ET GAMES UnknownApps Game Cheat Service Checkin (auth .hwidspoof .me)",
+    "rev": "1",
+    "classtype": "misc-activity",
+    "depth": "1",
+    "offset": "2",
+    "distance": "1",
+    "within": "7",
+    "content": [
+      "|01|",
+      "|00 01 00 00 00 00 00|",
+      "|04|auth|09|hwidspoof|02|me"
+    ],
+    "reference": [
+      "md5,26c643629102e506561890596fb2dd5c",
+      "md5,dc4b2c44289288d64fa757311515304f"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2022_01_12",
+      "signature_severity": "Informational",
+      "updated_at": "2022_01_12"
+    },
+    "other_options": {
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "any",
+    "destination_port": "53",
+    "sid": "2034902",
+    "msg": "ET GAMES UnknownApps Game Cheat Service Checkin (auth .unknownp .one)",
+    "rev": "2",
+    "classtype": "misc-activity",
+    "depth": "1",
+    "offset": "2",
+    "distance": "1",
+    "within": "7",
+    "content": [
+      "|01|",
+      "|00 01 00 00 00 00 00|",
+      "|04|auth|08|unknownp|03|one|00|"
+    ],
+    "reference": [
+      "md5,26c643629102e506561890596fb2dd5c",
+      "md5,dc4b2c44289288d64fa757311515304f"
+    ],
+    "metadata": {
+      "attack_target": "Client_Endpoint",
+      "confidence": "Medium",
+      "created_at": "2022_01_12",
+      "deployment": "Perimeter",
+      "performance_impact": "Low",
+      "signature_severity": "Informational",
+      "updated_at": "2022_01_12"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "true"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "sid": "2037905",
+    "msg": "ET GAMES Solaris2 Checkin",
+    "rev": "1",
+    "classtype": "misc-activity",
+    "flow": "established,to_server",
+    "depth": "6",
+    "distance": "0",
+    "within": "13",
+    "content": [
+      "cpuid=",
+      "cpuid=",
+      "\u0026hddserial=",
+      "\u0026macaddr=",
+      "\u0026machineguid=",
+      "\u0026name=",
+      "\u0026serial=",
+      "!\"\u0026\"",
+      "POST",
+      "/patch/serial.php"
+    ],
+    "reference": [
+      "md5,9953874a71e5df4a8b73a83db9576ae4",
+      "url,solaris2.hu"
+    ],
+    "metadata": {
+      "attack_target": "Client_Endpoint",
+      "confidence": "High",
+      "created_at": "2022_08_03",
+      "deployment": "Perimeter",
+      "performance_impact": "Low",
+      "signature_severity": "Informational",
+      "updated_at": "2022_08_03"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "true"
+      ],
+      "http_client_body": [
+        "true",
+        "true",
+        "true",
+        "true",
+        "true",
+        "true",
+        "true"
+      ],
+      "http_header": [
+        "true"
+      ],
+      "http_method": [
+        "true"
+      ],
+      "http_uri": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "sid": "2043101",
+    "msg": "ET GAMES Multiple Game Cheat Application Related Activity",
+    "rev": "1",
+    "classtype": "unknown",
+    "flow": "established,to_server",
+    "depth": "94",
+    "content": [
+      "GET",
+      "|2f 3f|tqos|3d 7b 22|Head|22 3a 7b 22|Cmd|22 3a|5|7d 2c 22|Body|22 3a 7b 22|QOSRep|22 3a 7b 22|BusinessID|22 3a|1|2c 22|QosNum|22 3a|1|2c 22|QosList|22 3a 5b 7b 22|QosID|22 3a|12418",
+      "!\"Referer|3a 20|\"",
+      "!\"User-Agent|3a 20|\""
+    ],
+    "reference": [
+      "md5,dc058da156fc9a901abc787d1baa32d9"
+    ],
+    "metadata": {
+      "attack_target": "Client_Endpoint",
+      "confidence": "High",
+      "created_at": "2022_12_29",
+      "deployment": "Perimeter",
+      "signature_severity": "Informational",
+      "updated_at": "2022_12_29"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "true"
+      ],
+      "http_header": [
+        "true",
+        "true"
+      ],
+      "http_method": [
+        "true"
+      ],
+      "http_uri": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "sid": "2044162",
+    "msg": "ET GAMES Multiple Game Cheat Application Activity",
+    "rev": "1",
+    "classtype": "bad-unknown",
+    "flow": "established,to_server",
+    "content": [
+      "GET",
+      ".php?hwid=",
+      "User-Agent|3a 20|Mozilla/5.0|0d 0a|"
+    ],
+    "reference": [
+      "url,www.virustotal.com/gui/file/1276331d3b61566b027ab4a76c0ac0d2e0b7650a7a2891f50bd0ce8cf72c6218/behavior"
+    ],
+    "metadata": {
+      "attack_target": "Client_Endpoint",
+      "confidence": "Medium",
+      "created_at": "2023_02_09",
+      "deployment": "Perimeter",
+      "signature_severity": "Informational",
+      "updated_at": "2023_02_09"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "true"
+      ],
+      "http_header": [
+        "true"
+      ],
+      "http_method": [
+        "true"
+      ],
+      "http_uri": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "sid": "2044163",
+    "msg": "ET GAMES Multiple Game Cheat Application Activity",
+    "rev": "1",
+    "classtype": "bad-unknown",
+    "flow": "established,to_server",
+    "content": [
+      "GET",
+      ".php?hwid=",
+      "User-Agent|3a 20|EnAgent|0d 0a|"
+    ],
+    "reference": [
+      "url,www.virustotal.com/gui/file/1276331d3b61566b027ab4a76c0ac0d2e0b7650a7a2891f50bd0ce8cf72c6218/behavior"
+    ],
+    "metadata": {
+      "attack_target": "Client_Endpoint",
+      "confidence": "Medium",
+      "created_at": "2023_02_09",
+      "deployment": "Perimeter",
+      "signature_severity": "Informational",
+      "updated_at": "2023_02_09"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "true"
+      ],
+      "http_header": [
+        "true"
+      ],
+      "http_method": [
+        "true"
+      ],
+      "http_uri": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$HOME_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$EXTERNAL_NET",
+    "destination_port": "$HTTP_PORTS",
+    "sid": "2013710",
+    "msg": "ET GAMES FreeRide Games",
+    "rev": "7",
+    "classtype": "misc-activity",
+    "flow": "established,to_server",
+    "content": [
+      "/do/SDM",
+      "action=",
+      "User-Agent|3a| AHTTPConnection"
+    ],
+    "reference": [
+      "url,freeridegames.comurl,web.archive.org/web/20140318090458/http://forums.comodo.com:80/av-false-positivenegative-detection-reporting/trojwarewin32trojanagentgen-t55152.0.html"
+    ],
+    "metadata": {
+      "attack_target": "Client_Endpoint",
+      "confidence": "High",
+      "created_at": "2011_09_28",
+      "deployment": "Perimeter",
+      "performance_impact": "Low",
+      "reviewed_at": "2024_03_11",
+      "signature_severity": "Informational",
+      "updated_at": "2023_07_06"
+    },
+    "other_options": {
+      "http_header": [
+        "true"
+      ],
+      "http_uri": [
+        "true",
+        "true"
+      ],
+      "nocase": [
+        "true",
+        "true",
+        "true"
+      ]
+    }
+  }
+]
