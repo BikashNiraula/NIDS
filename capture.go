@@ -217,9 +217,9 @@ func CaptureAndLogAllFields(iface string, doMatch bool, rulePath string) error {
 
 		if doMatch {
 			matching(rules, &protocol, &sourceIP, &sportInt, &destinationIP, &dportInt, &payload, &flowParam, &tcpFlags, &pktFlowbits)
-			//PrintFlows()
+			PrintFlows()
 
-		}else{
+		}
 
 			// Log the captured packet fields.
 
@@ -227,7 +227,7 @@ func CaptureAndLogAllFields(iface string, doMatch bool, rulePath string) error {
 				"Packet:\n  Timestamp: %s\n  Network Protocol: %s\n  Application Protocol: %s\n  Source IP: %s\n  Source Port: %s\n  Destination IP: %s\n  Destination Port: %s\n  TTL: %d\n  Flags: %s\n  Length: %d\n  Payload (hex): %x\n\n",
 				timestamp, protocol, appProtocol, sourceIP, sourcePort, destinationIP, destinationPort, ttl, tcpFlags, packetLength, payload,
 			)
-		}
+		
 	}
 	return nil
 }

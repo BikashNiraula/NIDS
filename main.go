@@ -16,7 +16,7 @@ import (
 	_ "github.com/olekukonko/tablewriter"
 	"github.com/spf13/cobra"
 )
-var homeNet string
+var homeNet []string
 func main() {
 	// Create the root command
 	var rootCmd = &cobra.Command{

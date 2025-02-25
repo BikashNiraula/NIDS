@@ -70,38 +70,54 @@ type Packet struct {
 
 func matchIP(ruleIP, packetIP string) bool {
 	ruleIP = strings.TrimSpace(ruleIP)
+
 	if strings.ToLower(ruleIP) == "any" {
 		return true
 	}
-	// For demonstration, define $HOME_NET here.
+
+	ip := net.ParseIP(packetIP)
+	if ip == nil {
+		log.Println("Invalid packet IP:", packetIP)
+		return false
+	}
+
 	if ruleIP == "$HOME_NET" {
-		_, cidr, err := net.ParseCIDR(homeNet)
-		log.Println("This is homenet", homeNet)
-		if err != nil {
-			log.Println("Error parsing homeNet:", err)
-			return false
+		for _, cidrStr := range homeNet {
+			_, cidr, err := net.ParseCIDR(cidrStr)
+			if err != nil {
+				log.Println("Error parsing homeNet CIDR:", cidrStr, err)
+				continue
+			}
+			if cidr.Contains(ip) {
+				return true
+			}
 		}
-		ip := net.ParseIP(packetIP)
-		return ip != nil && cidr.Contains(ip)
+		return false
 	}
+
 	if ruleIP == "$EXTERNAL_NET" {
-		_, cidr, err := net.ParseCIDR(homeNet)
-		if err != nil {
-			log.Println("Error parsing homeNet:", err)
-			return false
+		for _, cidrStr := range homeNet {
+			_, cidr, err := net.ParseCIDR(cidrStr)
+			if err != nil {
+				log.Println("Error parsing homeNet CIDR:", cidrStr, err)
+				continue
+			}
+			if cidr.Contains(ip) {
+				return false
+			}
 		}
-		ip := net.ParseIP(packetIP)
-		return ip != nil && !cidr.Contains(ip)
+		return true
 	}
+
 	if strings.Contains(ruleIP, "/") {
 		_, cidr, err := net.ParseCIDR(ruleIP)
 		if err != nil {
 			log.Println("Error parsing CIDR", ruleIP, err)
 			return false
 		}
-		ip := net.ParseIP(packetIP)
-		return ip != nil && cidr.Contains(ip)
+		return cidr.Contains(ip)
 	}
+
 	return ruleIP == packetIP
 }
 

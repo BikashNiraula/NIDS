@@ -225,6 +225,3 @@ func PrintFlows() {
 			flow.FlowState, flow.PacketCount, flow.ByteCount, bits)
 	}
 }
-
-
-
