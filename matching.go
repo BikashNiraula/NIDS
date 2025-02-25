@@ -66,6 +66,9 @@ type Packet struct {
 	Flowbits []string // e.g. list of flowbits that are set (from flow tracking)
 }
 
+var thresholdTracker = NewThresholdTracker()
+
+
 // --- Matching Helpers (IP, Port, Flags, Content, contains) ---
 
 func matchIP(ruleIP, packetIP string) bool {
@@ -338,41 +341,62 @@ func flowbitsNoAlert(ruleBits []string) bool {
 // calls MatchPacket; on a match, it executes any flowbit actions (via flowbitsActions)
 // and logs an alert unless the rule includes a "noalert" modifier.
 func matching(rules []LoadedJsonRules, protocol *string, sip *string, sport *int, dip *string, dport *int, payload *[]byte, flow *string, flags *string, pktFlowbits *[]string) {
-
-	// Build the packet from command-line parameters.
-	pkt := Packet{
-		Protocol:        *protocol,
-		SourceIP:        *sip,
-		SourcePort:      *sport,
-		DestinationIP:   *dip,
-		DestinationPort: *dport,
-		Payload:         []byte(*payload),
-		Flow:            *flow,
-		Flags:           *flags,
-		Flowbits:        *pktFlowbits,
-	}
-	matched := false
-	for _, rule := range rules {
-		// If the rule has flowbits test conditions, check them first.
-		if len(rule.Flowbits) > 0 {
-			if !flowbitsTest(pkt, rule.Flowbits) {
-				continue // Skip rule if flowbit test fails.
-			}
-		}
-		// Then check the remainder of the rule.
-		if MatchPacket(pkt, rule) {
-			matched = true
-			// Perform any flowbit actions (e.g. set or unset) after a match.
-			if len(rule.Flowbits) > 0 {
-				flowbitsActions(pkt, rule.Flowbits)
-			}
-			// Log an alert unless the rule includes a "noalert" modifier.
-			if !flowbitsNoAlert(rule.Flowbits) {
-				log.Printf("ALERT: Packet matched rule SID %s - %s\n", rule.SID, rule.Message)
-			}
-		}
-	}
-	if !matched {
-		log.Println("No matching rules found for the given packet")
-	}
+    // Build the packet from command-line parameters.
+    pkt := Packet{
+        Protocol:        *protocol,
+        SourceIP:        *sip,
+        SourcePort:      *sport,
+        DestinationIP:   *dip,
+        DestinationPort: *dport,
+        Payload:         []byte(*payload),
+        Flow:            *flow,
+        Flags:           *flags,
+        Flowbits:        *pktFlowbits,
+    }
+    matched := false
+    for _, rule := range rules {
+        // If the rule has flowbits test conditions, check them first.
+        if len(rule.Flowbits) > 0 {
+            if !flowbitsTest(pkt, rule.Flowbits) {
+                continue // Skip rule if flowbit test fails.
+            }
+        }
+        // Check the remaining criteria.
+        if MatchPacket(pkt, rule) {
+            // Default: trigger alert if no threshold is specified.
+            triggerAlert := true
+            // If a threshold option is present, use it.
+            if rule.Metadata != nil && rule.Metadata["threshold"] != "" {
+                // (Alternative approach: if Threshold is a proper struct field, use that.)
+            }
+            // For this example, assume every rule has a non-nil Threshold.
+            if rule.Threshold != nil {
+                // Parse count and seconds from the threshold.
+                countThreshold, err := strconv.Atoi(rule.Threshold.Count)
+                if err != nil {
+                    countThreshold = 5 // fallback default
+                }
+               	secondsThreshold, err := strconv.Atoi(rule.Threshold.Seconds)
+                if err != nil {
+                    secondsThreshold = 60 // fallback default
+                }
+                // Only trigger alert if the threshold is met.
+                triggerAlert = thresholdTracker.RecordEvent(rule.SID, pkt.SourceIP, countThreshold, secondsThreshold)
+            }
+            if triggerAlert {
+                matched = true
+                // Perform any flowbit actions (if defined).
+                if len(rule.Flowbits) > 0 {
+                    flowbitsActions(pkt, rule.Flowbits)
+                }
+                // Log an alert unless "noalert" is specified.
+                if !flowbitsNoAlert(rule.Flowbits) {
+                    log.Printf("ALERT: Packet matched rule SID %s - %s\n", rule.SID, rule.Message)
+                }
+            }
+        }
+    }
+    if !matched {
+        log.Println("No matching rules found for the given packet")
+    }
 }

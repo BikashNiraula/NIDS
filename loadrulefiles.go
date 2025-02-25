@@ -8,7 +8,15 @@ import (
 	"strings"
 )
 
-// SnortRule represents a complete JSON rule.
+// Threshold represents the threshold configuration for a rule.
+type ThresholdOptions struct {
+	Type    string `json:"type"`
+	Count   string `json:"count"`
+	Seconds string `json:"seconds"`
+	Track   string `json:"track"`
+}
+
+// LoadedJsonRules represents a complete JSON rule including threshold.
 type LoadedJsonRules struct {
 	// Required header fields:
 	Action          string            `json:"action"`
@@ -31,6 +39,9 @@ type LoadedJsonRules struct {
 	Flowbits        []string          `json:"flowbits,omitempty"`
 	Reference       []string          `json:"reference,omitempty"`
 	Metadata        map[string]string `json:"metadata,omitempty"`
+
+	// New: Threshold configuration
+	Threshold *ThresholdOptions `json:"threshold,omitempty"`
 
 	// Pattern holds the processed content as raw bytes.
 	Pattern []byte `json:"-"`
@@ -69,11 +80,10 @@ func processContent(content string) ([]byte, error) {
 	return result, nil
 }
 
-// LoadRules loads and unmarshals a JSON file containing an array of SnortRule objects.
+// LoadRules loads and unmarshals a JSON file containing an array of rules.
 // It processes the Content field by converting it into a Pattern ([]byte).
 // Plain text content is simply converted to []byte,
-// while content enclosed in "|" characters is parsed as hexadecimal,
-// removing any spaces and decoding it such that every two hex characters become one byte.
+// while content enclosed in "|" characters is parsed as hexadecimal.
 // Mixed content is supported as well.
 func LoadRules(filename string) ([]LoadedJsonRules, error) {
 	data, err := os.ReadFile(filename)

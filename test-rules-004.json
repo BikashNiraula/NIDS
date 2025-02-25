@@ -1,0 +1,38 @@
+[
+    {
+        "_comment": "",
+        "action": "alert",
+        "protocol": "udp",
+        "source_ip": "$HOME_NET",
+        "source_port": "any",
+        "destination_ip": "$EXTERNAL_NET",
+        "destination_port": "any",
+        "sid": "2000001",
+        "msg": "RULE NO 1 MILYO!!!!!! AYYYO BIKASH NIRAULA BAAJE",
+        "rev": "1",
+        "threshold": {
+            "type": "both",
+            "count": "5",
+            "seconds": "10",
+            "track": "by_src"
+        }
+    },
+    {
+        "_comment": "",
+        "action": "alert",
+        "protocol": "udp",
+        "source_ip": "$EXTERNAL_NET",
+        "source_port": "any",
+        "destination_ip": "$HOME_NET",
+        "destination_port": "any",
+        "sid": "2000002",
+        "msg": "RULE NO 2 MILYO!!!!! AYYYO BIKASH SEKUWA BAJE",
+        "rev": "1",
+        "threshold": {
+            "type": "both",
+            "count": "5",
+            "seconds": "60",
+            "track": "by_src"
+        }
+    }
+]

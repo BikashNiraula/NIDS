@@ -83,6 +83,16 @@ func CaptureAndLogAllFields(iface string, doMatch bool, rulePath string) error {
 			//PrintFlows()
 		}
 	}()
+	// Determine a cleanup window.
+	// For simplicity, we assume a default threshold window of 60 seconds.
+	const cleanupWindow = 60
+
+	go func() {
+		ticker := time.NewTicker(30 * time.Second)
+		for range ticker.C {
+			thresholdTracker.Cleanup(cleanupWindow)
+		}
+	}()
 
 	for packet := range packetSource.Packets() {
 		timestamp := packet.Metadata().Timestamp.Format("2006-01-02 15:04:05.000")
@@ -139,7 +149,7 @@ func CaptureAndLogAllFields(iface string, doMatch bool, rulePath string) error {
 				sourcePort = src.String()
 				destinationPort = dst.String()
 			}
-			
+
 		}
 
 		// Extract application layer payload and try to infer the application protocol.
@@ -217,17 +227,19 @@ func CaptureAndLogAllFields(iface string, doMatch bool, rulePath string) error {
 
 		if doMatch {
 			matching(rules, &protocol, &sourceIP, &sportInt, &destinationIP, &dportInt, &payload, &flowParam, &tcpFlags, &pktFlowbits)
-			PrintFlows()
+			//PrintFlows()
 
-		}
-
+		} else {
 			// Log the captured packet fields.
 
 			fmt.Printf(
 				"Packet:\n  Timestamp: %s\n  Network Protocol: %s\n  Application Protocol: %s\n  Source IP: %s\n  Source Port: %s\n  Destination IP: %s\n  Destination Port: %s\n  TTL: %d\n  Flags: %s\n  Length: %d\n  Payload (hex): %x\n\n",
 				timestamp, protocol, appProtocol, sourceIP, sourcePort, destinationIP, destinationPort, ttl, tcpFlags, packetLength, payload,
 			)
-		
+
+		}
+
+
 	}
 	return nil
 }

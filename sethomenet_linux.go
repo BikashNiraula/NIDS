@@ -1,4 +1,4 @@
-// +build linux 
+// +build linux linux
 
 package main
 
@@ -6,106 +6,72 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
-	"net"
 	"os/exec"
 	"regexp"
-	"runtime"
 	"strings"
+
+	"github.com/google/gopacket/pcap"
 )
 
-
+// SetHomeNet collects both IPv4 and IPv6 addresses for the given interface on Linux/macOS.
+// Each address is appended with a netmask (/32 for IPv4, /128 for IPv6) and stored in a list.
 func SetHomeNet(iface string) error {
-	var cmd *exec.Cmd
-
-	// Use different commands based on the operating system.
-	if runtime.GOOS == "linux" {
-		// "ip -6 addr show dev <iface>" shows IPv6 addresses for the interface.
-		cmd = exec.Command("ip", "-6", "addr", "show", "dev", iface)
-	} else if runtime.GOOS == "darwin" {
-		// "ifconfig <iface>" shows network configuration on macOS.
-		cmd = exec.Command("ifconfig", iface)
-	} else {
-		return fmt.Errorf("unsupported OS: %s", runtime.GOOS)
-	}
-
+	// Execute the ifconfig command for the specified interface.
+	cmd := exec.Command("ifconfig", iface)
 	output, err := cmd.Output()
 	if err != nil {
-		return fmt.Errorf("error executing command: %v", err)
+		return fmt.Errorf("error executing ifconfig command: %v", err)
 	}
 
 	scanner := bufio.NewScanner(bytes.NewReader(output))
-	var candidateIPv6s []string
-
-	// Prepare a regex to capture IPv6 addresses.
-	// For Linux, we expect lines like:
-	//   inet6 2001:db8::2/64 scope global
-	// For macOS, we expect lines like:
-	//   inet6 2001:db8::1 prefixlen 64 ...
-	var ipv6Regex *regexp.Regexp
-	if runtime.GOOS == "linux" {
-		ipv6Regex = regexp.MustCompile(`inet6 ([0-9a-fA-F:]+)/\d+\s+scope\s+global`)
-	} else { // darwin
-		ipv6Regex = regexp.MustCompile(`inet6\s+([0-9a-fA-F:]+)`)
-	}
+	// For Linux and macOS, ifconfig output typically contains "inet " for IPv4 and "inet6 " for IPv6.
+	ipv4Regex := regexp.MustCompile(`inet (\d+\.\d+\.\d+\.\d+)`)
+	ipv6Regex := regexp.MustCompile(`inet6 ([0-9a-fA-F:]+)`)
 
 	for scanner.Scan() {
 		line := strings.TrimSpace(scanner.Text())
 
-		// Exclude addresses marked as temporary or deprecated.
-		if strings.Contains(line, "temporary") || strings.Contains(line, "deprecated") {
-			continue
-		}
-		// On Linux, also skip lines mentioning "dynamic" (often used for temporary addresses).
-		if runtime.GOOS == "linux" && strings.Contains(line, "dynamic") {
-			continue
-		}
-
-		matches := ipv6Regex.FindStringSubmatch(line)
-		if len(matches) == 2 {
+		// Extract IPv4 addresses.
+		if matches := ipv4Regex.FindStringSubmatch(line); len(matches) == 2 {
 			ip := matches[1]
-			// Exclude link-local addresses.
-			if strings.HasPrefix(strings.ToLower(ip), "fe80") {
-				continue
+			homeNet = append(homeNet, fmt.Sprintf("%s/32", ip))
+		}
+
+		// Extract IPv6 addresses.
+		if matches := ipv6Regex.FindStringSubmatch(line); len(matches) == 2 {
+			ip := matches[1]
+			// Exclude link-local addresses (which usually start with "fe80")
+			if !strings.HasPrefix(strings.ToLower(ip), "fe80") {
+				homeNet = append(homeNet, fmt.Sprintf("%s/128", ip))
 			}
-			candidateIPv6s = append(candidateIPv6s, ip)
 		}
 	}
 
-	// If a stable IPv6 address is found, use it.
-	if len(candidateIPv6s) > 0 {
-		homeNet = fmt.Sprintf("%s/128", candidateIPv6s[0])
-		fmt.Printf("The homenet is: %s\n", homeNet)
-		return nil
-	}
-
-	// No IPv6 found, fallback to IPv4.
-	// Use the standard net package to get interface addresses without regex.
-	ifi, err := net.InterfaceByName(iface)
-	if err != nil {
-		return fmt.Errorf("error finding interface %s: %v", iface, err)
-	}
-	addrs, err := ifi.Addrs()
-	if err != nil {
-		return fmt.Errorf("error getting addresses for interface %s: %v", iface, err)
-	}
-	for _, addr := range addrs {
-		// addr may be a pointer to net.IPNet or net.IPAddr.
-		var ip net.IP
-		switch v := addr.(type) {
-		case *net.IPNet:
-			ip = v.IP
-		case *net.IPAddr:
-			ip = v.IP
+	if len(homeNet) == 0 {
+		// Fallback: extract IP addresses using pcap.
+		devices, err := pcap.FindAllDevs()
+		if err != nil {
+			return fmt.Errorf("error finding devices: %v", err)
 		}
-		if ip == nil {
-			continue
-		}
-		if ip4 := ip.To4(); ip4 != nil {
-			homeNet = fmt.Sprintf("%s/32", ip4.String())
-			fmt.Printf("The homenet is: %s\n", homeNet)
-			return nil
+		for _, device := range devices {
+			if device.Name == iface {
+				for _, addr := range device.Addresses {
+					ip := addr.IP.String()
+					if addr.IP.To4() != nil {
+						homeNet = append(homeNet, fmt.Sprintf("%s/32", ip))
+					} else {
+						homeNet = append(homeNet, fmt.Sprintf("%s/128", ip))
+					}
+				}
+				break
+			}
 		}
 	}
 
-	return fmt.Errorf("no suitable IPv6 or IPv4 address found on interface %s", iface)
+	if len(homeNet) == 0 {
+		return fmt.Errorf("no valid IP addresses found on interface %s", iface)
+	}
+
+	fmt.Printf("The homeNet is: %v\n", homeNet)
+	return nil
 }

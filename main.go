@@ -18,6 +18,9 @@ import (
 )
 var homeNet []string
 func main() {
+	// Setup for logging
+	log.SetFlags(log.Ldate | log.Ltime | log.Lmicroseconds)
+
 	// Create the root command
 	var rootCmd = &cobra.Command{
 		Use:   "nids",
