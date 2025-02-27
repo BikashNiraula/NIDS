@@ -42,6 +42,8 @@ func (tt *ThresholdTracker) key(ruleID, srcIP string) string {
 
 // RecordEvent records an event for a given rule and tracking component using the rule's threshold parameters.
 // Returns true if a new alert is generated.
+// RecordEvent records an event for a given rule and tracking component using the rule's threshold parameters.
+// Returns true if a new alert is generated.
 func (tt *ThresholdTracker) RecordEvent(ruleID, srcIP string, countThreshold, secondsThreshold int) bool {
 	tt.mu.Lock()
 	defer tt.mu.Unlock()
@@ -49,7 +51,7 @@ func (tt *ThresholdTracker) RecordEvent(ruleID, srcIP string, countThreshold, se
 	key := tt.key(ruleID, srcIP)
 	now := time.Now()
 
-	// Get or create event entry
+	// Get or create event entry.
 	entry, exists := tt.events[key]
 	if !exists {
 		entry = &eventEntry{
@@ -58,14 +60,22 @@ func (tt *ThresholdTracker) RecordEvent(ruleID, srcIP string, countThreshold, se
 		}
 		tt.events[key] = entry
 	} else {
-		// Update thresholds if changed (should typically be consistent for same rule)
+		// Update thresholds if changed (should typically be consistent for the same rule).
 		if entry.secondsThreshold != secondsThreshold || entry.countThreshold != countThreshold {
 			entry.secondsThreshold = secondsThreshold
 			entry.countThreshold = countThreshold
 		}
 	}
 
-	// Purge old events
+	// If an alert exists and its threshold period has passed, reset the alert and the event counter.
+	if alert, ok := tt.alerts[key]; ok {
+		if now.Sub(alert.Timestamp) >= time.Duration(secondsThreshold)*time.Second {
+			delete(tt.alerts, key)
+			entry.timestamps = []time.Time{}
+		}
+	}
+
+	// Purge old events from the current window.
 	cutoff := now.Add(-time.Duration(entry.secondsThreshold) * time.Second)
 	var recent []time.Time
 	for _, t := range entry.timestamps {
@@ -73,35 +83,33 @@ func (tt *ThresholdTracker) RecordEvent(ruleID, srcIP string, countThreshold, se
 			recent = append(recent, t)
 		}
 	}
-
-	// Add current event
-	recent = append(recent, now)
 	entry.timestamps = recent
 
+	// Add the current event.
+	entry.timestamps = append(entry.timestamps, now)
+
 	log.Printf("DEBUG: Rule %s for %s has %d/%d events in %ds", 
-		ruleID, srcIP, len(recent), entry.countThreshold, entry.secondsThreshold)
+		ruleID, srcIP, len(entry.timestamps), entry.countThreshold, entry.secondsThreshold)
 
-	// Check threshold
-	if len(recent) >= entry.countThreshold {
-		// Check existing alert
-		if alert, exists := tt.alerts[key]; exists {
-			if now.Sub(alert.Timestamp) < time.Duration(alert.SecondsThreshold)*time.Second {
-				return false
-			}
-		}
-
-		// Record new alert
+	// Check if the threshold is reached.
+	if len(entry.timestamps) >= entry.countThreshold {
+		// Record new alert.
 		tt.alerts[key] = ThresholdAlert{
 			RuleID:           ruleID,
 			SrcIP:            srcIP,
 			Timestamp:        now,
 			SecondsThreshold: entry.secondsThreshold,
 		}
+
+		// Restart the count after an alert is generated.
+		entry.timestamps = []time.Time{}
+
 		log.Printf("ALERT: Threshold reached for %s - %s", ruleID, srcIP)
 		return true
 	}
 	return false
 }
+
 
 // Cleanup purges stale events and alerts based on their individual thresholds.
 func (tt *ThresholdTracker) Cleanup() {

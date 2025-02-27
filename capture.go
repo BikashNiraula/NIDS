@@ -87,12 +87,12 @@ func CaptureAndLogAllFields(iface string, doMatch bool, rulePath string) error {
 	// For simplicity, we assume a default threshold window of 60 seconds.
 	//const cleanupWindow = 60
 
-	go func() {
-		ticker := time.NewTicker(30 * time.Second)
-		for range ticker.C {
-			thresholdTracker.Cleanup()
-		}
-	}()
+	// go func() {
+	// 	ticker := time.NewTicker(30 * time.Second)
+	// 	for range ticker.C {
+	// 		thresholdTracker.Cleanup()
+	// 	}
+	// }()
 
 	for packet := range packetSource.Packets() {
 		timestamp := packet.Metadata().Timestamp.Format("2006-01-02 15:04:05.000")
