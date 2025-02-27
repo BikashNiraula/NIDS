@@ -375,11 +375,14 @@ func matching(rules []LoadedJsonRules, protocol *string, sip *string, sport *int
                 countThreshold, err := strconv.Atoi(rule.Threshold.Count)
                 if err != nil {
                     countThreshold = 5 // fallback default
+					log.Println("Count threshold fallback to 5")
                 }
                	secondsThreshold, err := strconv.Atoi(rule.Threshold.Seconds)
                 if err != nil {
                     secondsThreshold = 60 // fallback default
+					log.Println("Second threshold ballfack to 60")
                 }
+
                 // Only trigger alert if the threshold is met.
                 triggerAlert = thresholdTracker.RecordEvent(rule.SID, pkt.SourceIP, countThreshold, secondsThreshold)
             }
@@ -388,11 +391,14 @@ func matching(rules []LoadedJsonRules, protocol *string, sip *string, sport *int
                 // Perform any flowbit actions (if defined).
                 if len(rule.Flowbits) > 0 {
                     flowbitsActions(pkt, rule.Flowbits)
-                }
-                // Log an alert unless "noalert" is specified.
-                if !flowbitsNoAlert(rule.Flowbits) {
-                    log.Printf("ALERT: Packet matched rule SID %s - %s\n", rule.SID, rule.Message)
-                }
+					// Log an alert unless "noalert" is specified.
+					if !flowbitsNoAlert(rule.Flowbits) {
+						log.Printf("ALERT: Packet matched rule SID %s - %s\n", rule.SID, rule.Message)
+					}
+                }else{
+					log.Printf("ALERT: Packet matched rule SID %s - %s\n", rule.SID, rule.Message)
+				}
+                
             }
         }
     }

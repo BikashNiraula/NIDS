@@ -85,12 +85,12 @@ func CaptureAndLogAllFields(iface string, doMatch bool, rulePath string) error {
 	}()
 	// Determine a cleanup window.
 	// For simplicity, we assume a default threshold window of 60 seconds.
-	const cleanupWindow = 60
+	//const cleanupWindow = 60
 
 	go func() {
 		ticker := time.NewTicker(30 * time.Second)
 		for range ticker.C {
-			thresholdTracker.Cleanup(cleanupWindow)
+			thresholdTracker.Cleanup()
 		}
 	}()
 
@@ -228,7 +228,6 @@ func CaptureAndLogAllFields(iface string, doMatch bool, rulePath string) error {
 		if doMatch {
 			matching(rules, &protocol, &sourceIP, &sportInt, &destinationIP, &dportInt, &payload, &flowParam, &tcpFlags, &pktFlowbits)
 			//PrintFlows()
-
 		} else {
 			// Log the captured packet fields.
 

@@ -12,8 +12,8 @@
         "rev": "1",
         "threshold": {
             "type": "both",
-            "count": "5",
-            "seconds": "10",
+            "count": "1",
+            "seconds": "5",
             "track": "by_src"
         }
     },
@@ -30,8 +30,8 @@
         "rev": "1",
         "threshold": {
             "type": "both",
-            "count": "5",
-            "seconds": "60",
+            "count": "1",
+            "seconds": "5",
             "track": "by_src"
         }
     }
