@@ -1,6 +1,7 @@
 package main
+
 import (
-	_ "NIDS/rulesparser"
+	// _ "NIDS/rulesparser"
 	_ "encoding/json"
 	"fmt"
 	_ "log"

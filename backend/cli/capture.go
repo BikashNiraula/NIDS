@@ -205,6 +205,7 @@ func CaptureAndLogAllFields(iface string, doMatch bool, rulePath string) error {
 			Payload:         payload,
 		}
 
+
 		// Update flow tracking.
 		UpdateFlow(capturedPkt)
 

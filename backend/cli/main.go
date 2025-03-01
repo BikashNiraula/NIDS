@@ -1,11 +1,15 @@
 package main
 
 import (
-	"NIDS/rulesparser"
+	// "NIDS/rulesparser"
+
+	"backend/cli/rulesparser"
+
 	_ "encoding/json"
 	"fmt"
 	"log"
 	_ "net"
+
 	_ "os"
 	_ "path/filepath"
 	_ "strings"
@@ -143,5 +147,7 @@ func main() {
 		fmt.Println(err)
 		log.Fatal(err)
 	}
+
+	
 }
 

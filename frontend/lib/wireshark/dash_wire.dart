@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nidswebapp/wireshark/capture.dart';
 import 'package:nidswebapp/wireshark/packet.dart';
 
 // Wireshark-like Tab Bar
@@ -34,31 +35,6 @@ class WiresharkTabBar extends StatelessWidget {
   }
 }
 
-// // Wireshark-like Toolbar
-// class WiresharkToolbar extends StatelessWidget {
-//   const WiresharkToolbar({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return AppBar(
-//       backgroundColor: Colors.black, // AppBar background color
-//       actions: [
-//         IconButton(
-//           icon: const Icon(Icons.folder_open, color: Colors.white),
-//           onPressed: () {},
-//         ),
-//         IconButton(
-//           icon: const Icon(Icons.save, color: Colors.white),
-//           onPressed: () {},
-//         ),
-//         IconButton(
-//           icon: const Icon(Icons.stop, color: Colors.white),
-//           onPressed: () {},
-//         ),
-//       ],
-//     );
-//   }
-// }
 
 // Capture Filter Input
 class CaptureFilterInput extends StatelessWidget {
@@ -202,6 +178,7 @@ class NetworkInterfacesList extends StatelessWidget {
           onTap: () {
             Navigator.push(context, MaterialPageRoute(
               builder: (context) {
+                // return PacketCaptureScreen();
                 return PacketCaptureScreen();
               },
             ));

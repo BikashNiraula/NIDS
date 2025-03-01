@@ -2,6 +2,7 @@ package main
 
 import (
 	_"bytes"
+
 	_ "encoding/hex"
 	_ "encoding/json"
 	_"log"
@@ -111,7 +112,7 @@ func UpdateFlow(packet CapturedPacket) {
 }
 
 // GetFlowInfo retrieves the flow state and flowbits for a given packet.
-func GetFlowInfo(packet CapturedPacket) (string, []string) {
+func GetFlowInfo(packet  CapturedPacket) (string, []string) {
 	key := FlowKey{
 		SourceIP:        packet.SourceIP,
 		DestinationIP:   packet.DestinationIP,
