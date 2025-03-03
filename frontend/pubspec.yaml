@@ -47,6 +47,9 @@ dependencies:
   web_socket_channel: ^3.0.2
   sqflite: ^2.4.1
   synchronized: ^3.3.0+3
+  permission_handler: ^11.4.0
+  path_provider: ^2.1.5
+  file_selector: ^1.0.3
 
 dev_dependencies:
   flutter_test:

@@ -1,0 +1,610 @@
+[
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "143",
+    "sid": "2101903",
+    "msg": "GPL IMAP rename overflow attempt",
+    "rev": "9",
+    "classtype": "misc-attack",
+    "flow": "established,to_server",
+    "pcre": "/\\sRENAME\\s[^\\n]{100}/smi",
+    "content": [
+      "RENAME"
+    ],
+    "reference": [
+      "bugtraq,1110",
+      "cve,2000-0284",
+      "nessus,10374"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "cve": "CVE_2000_0284",
+      "signature_severity": "Major",
+      "updated_at": "2011_04_26"
+    },
+    "other_options": {
+      "isdataat": [
+        "100,relative"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "143",
+    "sid": "2101904",
+    "msg": "GPL IMAP find overflow attempt",
+    "rev": "8",
+    "classtype": "misc-attack",
+    "flow": "established,to_server",
+    "pcre": "/\\sFIND\\s[^\\n]{100}/smi",
+    "content": [
+      "FIND"
+    ],
+    "reference": [
+      "bugtraq,1110",
+      "cve,2000-0284",
+      "nessus,10374"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "cve": "CVE_2000_0284",
+      "signature_severity": "Major",
+      "updated_at": "2011_04_26"
+    },
+    "other_options": {
+      "isdataat": [
+        "100,relative"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "143",
+    "sid": "2103070",
+    "msg": "GPL IMAP fetch overflow attempt",
+    "rev": "3",
+    "classtype": "misc-attack",
+    "flow": "established,to_server",
+    "pcre": "/\\sFETCH\\s[^\\n]{500}/smi",
+    "content": [
+      "FETCH"
+    ],
+    "reference": [
+      "bugtraq,11775"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "signature_severity": "Major",
+      "updated_at": "2011_05_05"
+    },
+    "other_options": {
+      "isdataat": [
+        "500,relative"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "143",
+    "sid": "2101842",
+    "msg": "GPL IMAP login buffer overflow attempt",
+    "rev": "16",
+    "classtype": "attempted-user",
+    "flow": "established,to_server",
+    "pcre": "/\\sLOGIN\\s[^\\n]{100}/smi",
+    "content": [
+      "LOGIN"
+    ],
+    "reference": [
+      "bugtraq,13727",
+      "bugtraq,502",
+      "cve,1999-0005",
+      "cve,1999-1557",
+      "cve,2005-1255",
+      "nessus,10123",
+      "cve,2007-2795",
+      "nessus,10125"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0005",
+      "signature_severity": "Major",
+      "updated_at": "2011_05_17"
+    },
+    "other_options": {
+      "isdataat": [
+        "100,relative"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "143",
+    "sid": "2101844",
+    "msg": "GPL IMAP authenticate overflow attempt",
+    "rev": "12",
+    "classtype": "misc-attack",
+    "flow": "established,to_server",
+    "pcre": "/\\sAUTHENTICATE\\s[^\\n]{100}/smi",
+    "content": [
+      "AUTHENTICATE"
+    ],
+    "reference": [
+      "bugtraq,12995",
+      "bugtraq,130",
+      "cve,1999-0005",
+      "cve,1999-0042",
+      "nessus,10292"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0005",
+      "signature_severity": "Major",
+      "updated_at": "2011_05_17"
+    },
+    "other_options": {
+      "isdataat": [
+        "100,relative"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "143",
+    "sid": "2101780",
+    "msg": "GPL IMAP EXPLOIT partial body overflow attempt",
+    "rev": "10",
+    "classtype": "misc-attack",
+    "flow": "to_server,established",
+    "content": [
+      " x PARTIAL 1 BODY["
+    ],
+    "reference": [
+      "bugtraq,4713",
+      "cve,2002-0379"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "cve": "CVE_2002_0379",
+      "signature_severity": "Minor",
+      "updated_at": "2011_05_17"
+    },
+    "other_options": {
+      "dsize": [
+        "\u003e1092"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "143",
+    "sid": "2102330",
+    "msg": "GPL IMAP auth overflow attempt",
+    "rev": "3",
+    "classtype": "misc-attack",
+    "flow": "established,to_server",
+    "pcre": "/AUTH\\s[^\\n]{100}/smi",
+    "content": [
+      "AUTH"
+    ],
+    "reference": [
+      "bugtraq,8861"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_01_16"
+    },
+    "other_options": {
+      "isdataat": [
+        "100,relative"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "143",
+    "sid": "2103076",
+    "msg": "GPL IMAP unsubscribe overflow attempt",
+    "rev": "2",
+    "classtype": "misc-attack",
+    "flow": "established,to_server",
+    "pcre": "/\\sUNSUBSCRIBE\\s[^\\n]{100}/smi",
+    "content": [
+      "UNSUBSCRIBE"
+    ],
+    "reference": [
+      "bugtraq,11775"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_09_12"
+    },
+    "other_options": {
+      "isdataat": [
+        "100,relative"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "143",
+    "sid": "2103075",
+    "msg": "GPL IMAP unsubscribe literal overflow attempt",
+    "rev": "3",
+    "classtype": "misc-attack",
+    "flow": "established,to_server",
+    "pcre": "/\\sUNSUBSCRIBE\\s[^\\n]*?\\s\\{/smi",
+    "content": [
+      "UNSUBSCRIBE"
+    ],
+    "reference": [
+      "bugtraq,11775"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_09_12"
+    },
+    "other_options": {
+      "byte_test": [
+        "5,\u003e,256,0,string,dec,relative"
+      ],
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "143",
+    "sid": "2103074",
+    "msg": "GPL IMAP subscribe overflow attempt",
+    "rev": "2",
+    "classtype": "misc-attack",
+    "flow": "established,to_server",
+    "pcre": "/\\sSUBSCRIBE\\s[^\\n]{100}/smi",
+    "content": [
+      "SUBSCRIBE"
+    ],
+    "reference": [
+      "bugtraq,11775"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_09_12"
+    },
+    "other_options": {
+      "isdataat": [
+        "100,relative"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "143",
+    "sid": "2103073",
+    "msg": "GPL IMAP subscribe literal overflow attempt",
+    "rev": "3",
+    "classtype": "misc-attack",
+    "flow": "established,to_server",
+    "pcre": "/\\sSUBSCRIBE\\s[^\\n]*?\\s\\{/smi",
+    "content": [
+      "SUBSCRIBE"
+    ],
+    "reference": [
+      "bugtraq,11775"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_09_12"
+    },
+    "other_options": {
+      "byte_test": [
+        "5,\u003e,256,0,string,dec,relative"
+      ],
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "143",
+    "sid": "2103072",
+    "msg": "GPL IMAP status overflow attempt",
+    "rev": "3",
+    "classtype": "misc-attack",
+    "flow": "established,to_server",
+    "pcre": "/\\sSTATUS\\s[^\\n]{100}/smi",
+    "content": [
+      "STATUS"
+    ],
+    "reference": [
+      "bugtraq,11775",
+      "bugtraq,13727",
+      "cve,2005-1256"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "cve": "CVE_2005_1256",
+      "signature_severity": "Minor",
+      "updated_at": "2012_09_12"
+    },
+    "other_options": {
+      "isdataat": [
+        "100,relative"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "143",
+    "sid": "2103068",
+    "msg": "GPL IMAP examine overflow attempt",
+    "rev": "2",
+    "classtype": "misc-attack",
+    "flow": "established,to_server",
+    "pcre": "/\\sEXAMINE\\s[^\\n]{100}/smi",
+    "content": [
+      "EXAMINE"
+    ],
+    "reference": [
+      "bugtraq,11775"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_09_12"
+    },
+    "other_options": {
+      "isdataat": [
+        "100,relative"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "143",
+    "sid": "2103066",
+    "msg": "GPL IMAP append overflow attempt",
+    "rev": "3",
+    "classtype": "misc-attack",
+    "flow": "established,to_server",
+    "pcre": "/\\sAPPEND\\s[^\\n]{256}/smi",
+    "content": [
+      "APPEND"
+    ],
+    "reference": [
+      "bugtraq,11775"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_09_12"
+    },
+    "other_options": {
+      "isdataat": [
+        "100,relative"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "143",
+    "sid": "2103058",
+    "msg": "GPL IMAP copy literal overflow attempt",
+    "rev": "3",
+    "classtype": "misc-attack",
+    "flow": "established,to_server",
+    "pcre": "/\\sCOPY\\s[^\\n]*?\\{/smi",
+    "content": [
+      "COPY"
+    ],
+    "reference": [
+      "bugtraq,1110"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_09_12"
+    },
+    "other_options": {
+      "byte_test": [
+        "5,\u003e,1024,0,string,dec,relative"
+      ],
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "143",
+    "sid": "2103007",
+    "msg": "GPL IMAP delete overflow attempt",
+    "rev": "2",
+    "classtype": "misc-attack",
+    "flow": "established,to_server",
+    "pcre": "/\\sDELETE\\s[^\\n]{100}/smi",
+    "content": [
+      "DELETE"
+    ],
+    "reference": [
+      "bugtraq,11675"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_09_12"
+    },
+    "other_options": {
+      "isdataat": [
+        "100,relative"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "143",
+    "sid": "2100293",
+    "msg": "GPL IMAP Overflow Attempt",
+    "rev": "8",
+    "classtype": "attempted-admin",
+    "flow": "to_server,established",
+    "content": [
+      "|E8 C0 FF FF FF|/bin/sh"
+    ],
+    "metadata": {
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_09_13"
+    }
+  }
+]

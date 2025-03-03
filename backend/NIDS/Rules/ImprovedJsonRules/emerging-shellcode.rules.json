@@ -1,0 +1,1968 @@
+[
+  {
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "any",
+    "destination_port": "any",
+    "sid": "2009285",
+    "msg": "ET SHELLCODE Bindshell2 Decoder Shellcode (UDP)",
+    "rev": "2",
+    "classtype": "shellcode-detect",
+    "distance": "0",
+    "content": [
+      "|53 53 53 53 53 43 53 43 53 FF D0 66 68|",
+      "|66 53 89 E1 95 68 A4 1A|"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Major",
+      "updated_at": "2010_07_30"
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "any",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "any",
+    "destination_port": "any",
+    "sid": "2009247",
+    "msg": "ET SHELLCODE Rothenburg Shellcode",
+    "rev": "3",
+    "classtype": "shellcode-detect",
+    "flow": "established",
+    "distance": "0",
+    "content": [
+      "|D9 74 24 F4 5B 81 73 13|",
+      "|83 EB FC E2 F4|"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2010_07_30",
+      "signature_severity": "Major",
+      "updated_at": "2010_07_30"
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012112",
+    "msg": "ET SHELLCODE Possible Encoded %90 NOP SLED",
+    "rev": "2",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "%90%90%90"
+    ],
+    "reference": [
+      "url,cansecwest.com/slides07/csw07-nazario.pdf",
+      "url,www.sophos.com/security/technical-papers/malware_with_your_mocha.html",
+      "url,www.windowsecurity.com/articles/Obfuscated-Shellcode-Part1.html"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_12_28",
+      "signature_severity": "Major",
+      "tag": "possible_exploitation",
+      "updated_at": "2011_01_27"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012110",
+    "msg": "ET SHELLCODE Possible UTF-8 %u90 NOP SLED",
+    "rev": "2",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "%u90%u90"
+    ],
+    "reference": [
+      "url,cansecwest.com/slides07/csw07-nazario.pdf",
+      "url,www.sophos.com/security/technical-papers/malware_with_your_mocha.html",
+      "url,www.windowsecurity.com/articles/Obfuscated-Shellcode-Part1.html"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_12_28",
+      "signature_severity": "Major",
+      "tag": "possible_exploitation",
+      "updated_at": "2011_01_27"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012254",
+    "msg": "ET SHELLCODE Common %u0a0a%u0a0a UTF-16 Heap Spray String",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "%u0a0a%u0a0a"
+    ],
+    "reference": [
+      "url,www.darkreading.com/security/vulnerabilities/221901428/index.html"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2011_02_03",
+      "signature_severity": "Major",
+      "updated_at": "2011_02_03"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012255",
+    "msg": "ET SHELLCODE Common %u0a%u0a%u0a%u0a UTF-8 Heap Spray String",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "%u0a%u0a%u0a%u0a"
+    ],
+    "reference": [
+      "url,www.darkreading.com/security/vulnerabilities/221901428/index.html"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2011_02_03",
+      "signature_severity": "Major",
+      "updated_at": "2011_02_03"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012257",
+    "msg": "ET SHELLCODE Common %0c%0c%0c%0c Heap Spray String",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "%0c%0c%0c%0c"
+    ],
+    "reference": [
+      "url,www.darkreading.com/security/vulnerabilities/221901428/index.html"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2011_02_03",
+      "signature_severity": "Major",
+      "updated_at": "2011_02_03"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012258",
+    "msg": "ET SHELLCODE Common %u0c0c%u0c0c UTF-16 Heap Spray String",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "%u0c0c%u0c0c"
+    ],
+    "reference": [
+      "url,www.darkreading.com/security/vulnerabilities/221901428/index.html"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2011_02_03",
+      "signature_severity": "Major",
+      "updated_at": "2011_02_03"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012259",
+    "msg": "ET SHELLCODE Common %u0c%u0c%u0c%u0c UTF-8 Heap Spray String",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "%u0c%u0c%u0c%u0c"
+    ],
+    "reference": [
+      "url,www.darkreading.com/security/vulnerabilities/221901428/index.html"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2011_02_03",
+      "signature_severity": "Major",
+      "updated_at": "2011_02_03"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "ip",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$SHELLCODE_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2100640",
+    "msg": "GPL SHELLCODE AIX NOOP",
+    "rev": "8",
+    "classtype": "shellcode-detect",
+    "content": [
+      "O|FF FB 82|O|FF FB 82|O|FF FB 82|O|FF FB 82|"
+    ],
+    "metadata": {
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2011_06_02"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012925",
+    "msg": "ET SHELLCODE Javascript Split String Unicode Heap Spray Attempt",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "pcre": "/\\x220\\x22\\x20\\x2B\\x20\\x22[a-d]\\x22\\x20\\x2B\\x20\\x22/smi",
+    "distance": "1",
+    "within": "5",
+    "content": [
+      "|22|u|22 20|+|20 22|0|22 20|+|20 22|",
+      "|22 20|+|20 22|"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2011_06_02",
+      "signature_severity": "Major",
+      "updated_at": "2011_06_02"
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012962",
+    "msg": "ET SHELLCODE Possible 0x0a0a0a0a Heap Spray Attempt",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "0x0a0a0a0a"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2011_06_09",
+      "signature_severity": "Major",
+      "updated_at": "2011_06_09"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012963",
+    "msg": "ET SHELLCODE Possible 0x0b0b0b0b Heap Spray Attempt",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "0x0b0b0b0b"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2011_06_09",
+      "signature_severity": "Major",
+      "updated_at": "2011_06_09"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012964",
+    "msg": "ET SHELLCODE Possible 0x0c0c0c0c Heap Spray Attempt",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "0x0c0c0c0c"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2011_06_09",
+      "signature_severity": "Major",
+      "updated_at": "2011_06_09"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012965",
+    "msg": "ET SHELLCODE Possible 0x0d0d0d0d Heap Spray Attempt",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "0x0d0d0d0d"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2011_06_09",
+      "signature_severity": "Major",
+      "updated_at": "2011_06_09"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012967",
+    "msg": "ET SHELLCODE Possible %u0d%u0d%u0d%u0d UTF-8 Heap Spray Attempt",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "%u0d%u0d%u0d%u0d"
+    ],
+    "reference": [
+      "url,www.darkreading.com/security/vulnerabilities/221901428/index.html"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2011_06_09",
+      "signature_severity": "Major",
+      "updated_at": "2011_06_09"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012968",
+    "msg": "ET SHELLCODE Possible %u0d0d%u0d0d UTF-16 Heap Spray Attempt",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "%u0d0d%u0d0d"
+    ],
+    "reference": [
+      "url,www.darkreading.com/security/vulnerabilities/221901428/index.html"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2011_06_09",
+      "signature_severity": "Major",
+      "updated_at": "2011_06_09"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2013145",
+    "msg": "ET SHELLCODE Possible %41%41%41%41 Heap Spray Attempt",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "%41%41%41%41"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2011_06_30",
+      "signature_severity": "Major",
+      "updated_at": "2011_06_30"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2013146",
+    "msg": "ET SHELLCODE Possible %u41%u41%u41%u41 UTF-8 Heap Spray Attempt",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "%u41%u41%u41%u41"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2011_06_30",
+      "signature_severity": "Major",
+      "updated_at": "2011_06_30"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2013147",
+    "msg": "ET SHELLCODE Possible %u4141%u4141 UTF-16 Heap Spray Attempt",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "%u4141%u4141"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2011_06_30",
+      "signature_severity": "Major",
+      "updated_at": "2011_06_30"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2013268",
+    "msg": "ET SHELLCODE Hex Obfuscated JavaScript Heap Spray 0b0b0b0b",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "|5C|x0b|5C|x0b|5C|x0b|5C|x0b"
+    ],
+    "reference": [
+      "url,www.darkreading.com/security/vulnerabilities/221901428/index.html"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2011_07_14",
+      "mitre_tactic_id": "TA0005",
+      "mitre_tactic_name": "Defense_Evasion",
+      "mitre_technique_id": "T1027",
+      "mitre_technique_name": "Obfuscated_Files_or_Information",
+      "signature_severity": "Major",
+      "updated_at": "2011_07_14"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2013269",
+    "msg": "ET SHELLCODE Hex Obfuscated JavaScript Heap Spray 0c0c0c0c",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "|5C|x0c|5C|x0c|5C|x0c|5C|x0c"
+    ],
+    "reference": [
+      "url,www.darkreading.com/security/vulnerabilities/221901428/index.html"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2011_07_14",
+      "mitre_tactic_id": "TA0005",
+      "mitre_tactic_name": "Defense_Evasion",
+      "mitre_technique_id": "T1027",
+      "mitre_technique_name": "Obfuscated_Files_or_Information",
+      "signature_severity": "Major",
+      "updated_at": "2011_07_14"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2013270",
+    "msg": "ET SHELLCODE Hex Obfuscated JavaScript Heap Spray 0d0d0d0d",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "|5C|x0d|5C|x0d|5C|x0d|5C|x0d"
+    ],
+    "reference": [
+      "url,www.darkreading.com/security/vulnerabilities/221901428/index.html"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2011_07_14",
+      "mitre_tactic_id": "TA0005",
+      "mitre_tactic_name": "Defense_Evasion",
+      "mitre_technique_id": "T1027",
+      "mitre_technique_name": "Obfuscated_Files_or_Information",
+      "signature_severity": "Major",
+      "updated_at": "2011_07_14"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2013271",
+    "msg": "ET SHELLCODE Hex Obfuscated JavaScript NOP SLED",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "|5C|x90|5C|x90|5C|x90|5C|x90"
+    ],
+    "reference": [
+      "url,www.darkreading.com/security/vulnerabilities/221901428/index.html"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2011_07_14",
+      "mitre_tactic_id": "TA0005",
+      "mitre_tactic_name": "Defense_Evasion",
+      "mitre_technique_id": "T1027",
+      "mitre_technique_name": "Obfuscated_Files_or_Information",
+      "signature_severity": "Major",
+      "tag": "possible_exploitation",
+      "updated_at": "2011_07_14"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2013274",
+    "msg": "ET SHELLCODE Double BackSlash Hex Obfuscated JavaScript Heap Spray 0a0a0a0a",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "|5C 5C|x0a|5C 5C|x0a|5C 5C|x0a|5C 5C|x0a"
+    ],
+    "reference": [
+      "url,www.darkreading.com/security/vulnerabilities/221901428/index.html"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2011_07_14",
+      "mitre_tactic_id": "TA0005",
+      "mitre_tactic_name": "Defense_Evasion",
+      "mitre_technique_id": "T1027",
+      "mitre_technique_name": "Obfuscated_Files_or_Information",
+      "signature_severity": "Major",
+      "updated_at": "2011_07_14"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2013275",
+    "msg": "ET SHELLCODE Double BackSlash Hex Obfuscated JavaScript Heap Spray 0b0b0b0b",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "|5C 5C|x0b|5C 5C|x0b|5C 5C|x0b|5C 5C|x0b"
+    ],
+    "reference": [
+      "url,www.darkreading.com/security/vulnerabilities/221901428/index.html"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2011_07_14",
+      "mitre_tactic_id": "TA0005",
+      "mitre_tactic_name": "Defense_Evasion",
+      "mitre_technique_id": "T1027",
+      "mitre_technique_name": "Obfuscated_Files_or_Information",
+      "signature_severity": "Major",
+      "updated_at": "2011_07_14"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2013276",
+    "msg": "ET SHELLCODE Double BackSlash Hex Obfuscated JavaScript Heap Spray 0c0c0c0c",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "|5C 5C|x0c|5C 5C|x0c|5C 5C|x0c|5C 5C|x0c"
+    ],
+    "reference": [
+      "url,www.darkreading.com/security/vulnerabilities/221901428/index.html"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2011_07_14",
+      "mitre_tactic_id": "TA0005",
+      "mitre_tactic_name": "Defense_Evasion",
+      "mitre_technique_id": "T1027",
+      "mitre_technique_name": "Obfuscated_Files_or_Information",
+      "signature_severity": "Major",
+      "updated_at": "2011_07_14"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2013277",
+    "msg": "ET SHELLCODE Double BackSlash Hex Obfuscated JavaScript Heap Spray 0d0d0d0d",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "|5C 5C|x0d|5C 5C|x0d|5C 5C|x0d|5C 5C|x0d"
+    ],
+    "reference": [
+      "url,www.darkreading.com/security/vulnerabilities/221901428/index.html"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2011_07_14",
+      "mitre_tactic_id": "TA0005",
+      "mitre_tactic_name": "Defense_Evasion",
+      "mitre_technique_id": "T1027",
+      "mitre_technique_name": "Obfuscated_Files_or_Information",
+      "signature_severity": "Major",
+      "updated_at": "2011_07_14"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2013278",
+    "msg": "ET SHELLCODE Double BackSlash Hex Obfuscated JavaScript NOP SLED",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "|5C 5C|x90|5C 5C|x90|5C 5C|x90|5C 5C|x90"
+    ],
+    "reference": [
+      "url,www.darkreading.com/security/vulnerabilities/221901428/index.html"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2011_07_14",
+      "mitre_tactic_id": "TA0005",
+      "mitre_tactic_name": "Defense_Evasion",
+      "mitre_technique_id": "T1027",
+      "mitre_technique_name": "Obfuscated_Files_or_Information",
+      "signature_severity": "Major",
+      "tag": "possible_exploitation",
+      "updated_at": "2011_07_14"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2013279",
+    "msg": "ET SHELLCODE Double BackSlash Hex Obfuscated JavaScript Heap Spray 41414141",
+    "rev": "2",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "|5C 5C|x41|5C 5C|x41|5C 5C|x41|5C 5C|x41"
+    ],
+    "reference": [
+      "url,www.darkreading.com/security/vulnerabilities/221901428/index.html"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2011_07_14",
+      "mitre_tactic_id": "TA0005",
+      "mitre_tactic_name": "Defense_Evasion",
+      "mitre_technique_id": "T1027",
+      "mitre_technique_name": "Obfuscated_Files_or_Information",
+      "signature_severity": "Major",
+      "updated_at": "2011_07_14"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "ip",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$SHELLCODE_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2102313",
+    "msg": "GPL SHELLCODE x86 0x71FB7BAB NOOP unicode",
+    "rev": "4",
+    "classtype": "shellcode-detect",
+    "content": [
+      "q|00 FB 00|{|00 AB 00|q|00 FB 00|{|00 AB 00|q|00 FB 00|{|00 AB 00|q|00 FB 00|{|00 AB 00|"
+    ],
+    "metadata": {
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_01_16"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "ip",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$SHELLCODE_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2102312",
+    "msg": "GPL SHELLCODE x86 0x71FB7BAB NOOP",
+    "rev": "4",
+    "classtype": "shellcode-detect",
+    "content": [
+      "q|FB|{|AB|q|FB|{|AB|q|FB|{|AB|q|FB|{|AB|"
+    ],
+    "metadata": {
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_01_16"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "ip",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$SHELLCODE_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2100639",
+    "msg": "GPL SHELLCODE SGI NOOP",
+    "rev": "7",
+    "classtype": "shellcode-detect",
+    "content": [
+      "|24 0F 12|4|24 0F 12|4|24 0F 12|4|24 0F 12|4"
+    ],
+    "reference": [
+      "arachnids,357"
+    ],
+    "metadata": {
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_08_21"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "ip",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$SHELLCODE_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2100641",
+    "msg": "GPL SHELLCODE Digital UNIX NOOP",
+    "rev": "8",
+    "classtype": "shellcode-detect",
+    "content": [
+      "G|FF 04 1F|G|FF 04 1F|G|FF 04 1F|G|FF 04 1F|"
+    ],
+    "reference": [
+      "arachnids,352"
+    ],
+    "metadata": {
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_08_21"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "ip",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$SHELLCODE_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2100642",
+    "msg": "GPL SHELLCODE HP-UX NOOP",
+    "rev": "8",
+    "classtype": "shellcode-detect",
+    "content": [
+      "|08|!|02 80 08|!|02 80 08|!|02 80 08|!|02 80|"
+    ],
+    "reference": [
+      "arachnids,358"
+    ],
+    "metadata": {
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_08_21"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "ip",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$SHELLCODE_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2100643",
+    "msg": "GPL SHELLCODE HP-UX NOOP",
+    "rev": "9",
+    "classtype": "shellcode-detect",
+    "content": [
+      "|0B|9|02 80 0B|9|02 80 0B|9|02 80 0B|9|02 80|"
+    ],
+    "reference": [
+      "arachnids,359"
+    ],
+    "metadata": {
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_08_21"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "ip",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$SHELLCODE_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2100644",
+    "msg": "GPL SHELLCODE sparc NOOP",
+    "rev": "7",
+    "classtype": "shellcode-detect",
+    "content": [
+      "|13 C0 1C A6 13 C0 1C A6 13 C0 1C A6 13 C0 1C A6|"
+    ],
+    "reference": [
+      "arachnids,345"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_08_21"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "ip",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$SHELLCODE_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2100645",
+    "msg": "GPL SHELLCODE sparc NOOP",
+    "rev": "7",
+    "classtype": "shellcode-detect",
+    "content": [
+      "|80 1C|@|11 80 1C|@|11 80 1C|@|11 80 1C|@|11|"
+    ],
+    "reference": [
+      "arachnids,353"
+    ],
+    "metadata": {
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_08_21"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "ip",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$SHELLCODE_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2100646",
+    "msg": "GPL SHELLCODE sparc NOOP",
+    "rev": "7",
+    "classtype": "shellcode-detect",
+    "content": [
+      "|A6 1C C0 13 A6 1C C0 13 A6 1C C0 13 A6 1C C0 13|"
+    ],
+    "reference": [
+      "arachnids,355"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_08_21"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "ip",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$SHELLCODE_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2100647",
+    "msg": "GPL SHELLCODE sparc setuid 0",
+    "rev": "8",
+    "classtype": "system-call-detect",
+    "content": [
+      "|82 10| |17 91 D0| |08|"
+    ],
+    "reference": [
+      "arachnids,282"
+    ],
+    "metadata": {
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_08_21"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "ip",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$SHELLCODE_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2100652",
+    "msg": "GPL SHELLCODE Linux shellcode",
+    "rev": "11",
+    "classtype": "shellcode-detect",
+    "content": [
+      "|90 90 90 E8 C0 FF FF FF|/bin/sh"
+    ],
+    "reference": [
+      "arachnids,343"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_08_21"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$SQL_SERVERS",
+    "destination_port": "1433",
+    "sid": "2100691",
+    "msg": "GPL SHELLCODE MSSQL shellcode attempt",
+    "rev": "8",
+    "classtype": "shellcode-detect",
+    "flow": "to_server,established",
+    "content": [
+      "9 |D0 00 92 01 C2 00|R|00|U|00|9 |EC 00|"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_09_12"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "ip",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$SHELLCODE_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2101424",
+    "msg": "GPL SHELLCODE x86 0xEB0C NOOP",
+    "rev": "8",
+    "classtype": "shellcode-detect",
+    "content": [
+      "|EB 0C EB 0C EB 0C EB 0C EB 0C EB 0C EB 0C EB 0C|"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2010_09_23",
+      "signature_severity": "Minor",
+      "updated_at": "2012_09_12"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2016714",
+    "msg": "ET SHELLCODE Possible Backslash Escaped UTF-8 0c0c Heap Spray",
+    "rev": "1",
+    "classtype": "bad-unknown",
+    "flow": "established,to_client",
+    "distance": "0",
+    "content": [
+      "|5C|0c|5C|0c"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2013_04_04",
+      "signature_severity": "Major",
+      "updated_at": "2013_04_04"
+    },
+    "other_options": {
+      "file_data": [
+        "true"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012111",
+    "msg": "ET SHELLCODE Possible UTF-16 %u9090 NOP SLED",
+    "rev": "3",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "pcre": "/^[a-f0-9]{4}/Ri",
+    "content": [
+      "%u9090%u"
+    ],
+    "reference": [
+      "url,cansecwest.com/slides07/csw07-nazario.pdf",
+      "url,www.sophos.com/security/technical-papers/malware_with_your_mocha.html",
+      "url,www.windowsecurity.com/articles/Obfuscated-Shellcode-Part1.html"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_12_28",
+      "signature_severity": "Major",
+      "tag": "possible_exploitation",
+      "updated_at": "2013_08_19"
+    },
+    "other_options": {
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2017345",
+    "msg": "ET SHELLCODE Possible UTF-16 u9090 NOP SLED",
+    "rev": "3",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "pcre": "/^[a-f0-9]{4}/Ri",
+    "content": [
+      "|5c|u9090|5c|"
+    ],
+    "reference": [
+      "url,cansecwest.com/slides07/csw07-nazario.pdf",
+      "url,www.sophos.com/security/technical-papers/malware_with_your_mocha.html",
+      "url,www.windowsecurity.com/articles/Obfuscated-Shellcode-Part1.html"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2013_08_19",
+      "signature_severity": "Major",
+      "tag": "possible_exploitation",
+      "updated_at": "2013_08_19"
+    },
+    "other_options": {
+      "file_data": [
+        "true"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "ip",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2024057",
+    "msg": "ET SHELLCODE Linux/x86-64 - Polymorphic Flush IPTables Shellcode",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "content": [
+      "|6a 52 58 99 52 66 68 2d 46 54 5b 52 48 b9 69 70 74 61 62 6c 65 73 51 d0 e0 28 c8 48 b9 2f 2f 73 62 69 6e 2f 2f 51 54 5f 52 53 57 54 5e 0f 05|"
+    ],
+    "reference": [
+      "url,a41l4.blogspot.ca/2017/03/polyflushiptables1434.html"
+    ],
+    "metadata": {
+      "affected_product": "Linux",
+      "attack_target": "Client_and_Server",
+      "confidence": "High",
+      "created_at": "2017_03_15",
+      "deployment": "Perimeter",
+      "performance_impact": "Low",
+      "signature_severity": "Critical",
+      "updated_at": "2017_03_15"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "ip",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2024058",
+    "msg": "ET SHELLCODE Linux/x86-64 - Polymorphic Setuid(0) \u0026 Execve(/bin/sh) Shellcode",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "content": [
+      "|31 ff 57 6a 69 58 48 bb 5e c4 d2 dc 5e 5e e6 d0 0f 05 48 d1 cb b0 3b 53 87 f7 54 99 5f 0f 05|"
+    ],
+    "reference": [
+      "url,a41l4.blogspot.ca/2017/03/polysetuidexecve1434.html"
+    ],
+    "metadata": {
+      "affected_product": "Linux",
+      "attack_target": "Client_and_Server",
+      "confidence": "High",
+      "created_at": "2017_03_15",
+      "deployment": "Perimeter",
+      "performance_impact": "Low",
+      "signature_severity": "Critical",
+      "updated_at": "2017_03_15"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "ip",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2024065",
+    "msg": "ET SHELLCODE Linux/x86-64 - Reverse Shell Shellcode",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "content": [
+      "|6a 02 6a 2a 6a 10 6a 29 6a 01 6a 02|",
+      "|48 bf 2f 2f 62 69 6e 2f 73 68|"
+    ],
+    "reference": [
+      "url,exploit-db.com/exploits/41477/"
+    ],
+    "metadata": {
+      "affected_product": "Linux",
+      "attack_target": "Client_and_Server",
+      "confidence": "High",
+      "created_at": "2017_03_16",
+      "deployment": "Perimeter",
+      "performance_impact": "Low",
+      "signature_severity": "Critical",
+      "updated_at": "2017_03_16"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "ip",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2025695",
+    "msg": "ET SHELLCODE Execve(/bin/sh) Shellcode",
+    "rev": "1",
+    "classtype": "shellcode-detect",
+    "content": [
+      "|31 c0 50 68 2f 2f 73 68 68 2f 62 69 6e 89 e3 50 53 89 e1 b0 0b cd 80|"
+    ],
+    "metadata": {
+      "affected_product": "Linux",
+      "attack_target": "Server",
+      "confidence": "High",
+      "created_at": "2018_07_13",
+      "deployment": "Perimeter",
+      "performance_impact": "Low",
+      "signature_severity": "Major",
+      "updated_at": "2018_07_13"
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012091",
+    "msg": "ET SHELLCODE Possible Call with No Offset UDP Shellcode",
+    "rev": "3",
+    "classtype": "shellcode-detect",
+    "content": [
+      "|E8 00 00 00 00 0F 1A|"
+    ],
+    "reference": [
+      "url,community.rsa.com/community/products/netwitness/blog/2012/08/22/network-detection-of-x86-buffer-overflow-shellcode"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_12_23",
+      "signature_severity": "Major",
+      "updated_at": "2019_01_07"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012093",
+    "msg": "ET SHELLCODE Possible Call with No Offset UDP Shellcode",
+    "rev": "3",
+    "classtype": "shellcode-detect",
+    "content": [
+      "|E8 00 00 00 00 0F A9|"
+    ],
+    "reference": [
+      "url,community.rsa.com/community/products/netwitness/blog/2012/08/22/network-detection-of-x86-buffer-overflow-shellcode"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_12_23",
+      "signature_severity": "Major",
+      "updated_at": "2019_01_07"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012092",
+    "msg": "ET SHELLCODE Possible Call with No Offset TCP Shellcode",
+    "rev": "2",
+    "classtype": "shellcode-detect",
+    "flow": "established",
+    "content": [
+      "|E8 00 00 00 00 0F A9|"
+    ],
+    "reference": [
+      "url,community.rsa.com/community/products/netwitness/blog/2012/08/22/network-detection-of-x86-buffer-overflow-shellcode"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2010_12_23",
+      "signature_severity": "Major",
+      "updated_at": "2019_01_07"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012252",
+    "msg": "ET SHELLCODE Common 0a0a0a0a Heap Spray String",
+    "rev": "2",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "content": [
+      "0a0a0a0a"
+    ],
+    "reference": [
+      "url,www.darkreading.com/vulnerabilities---threats/heap-spraying-attackers-latest-weapon-of-choice/d/d-id/1132487"
+    ],
+    "metadata": {
+      "confidence": "Low",
+      "created_at": "2011_02_03",
+      "deployment": "alert_only",
+      "signature_severity": "Major",
+      "updated_at": "2022_09_21"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012969",
+    "msg": "ET SHELLCODE Possible Vertical Slash Unicode Heap Spray Attempt",
+    "rev": "2",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "pcre": "/\\x7Cu0[a-d](\\x7Cu0|0)[a-d]/\\x7Cu0[a-d](\\x7Cu0|0)[a-d]/i",
+    "distance": "1",
+    "within": "4",
+    "content": [
+      "|7C|u0",
+      "|7C|u0"
+    ],
+    "reference": [
+      "url,www.darkreading.com/security/vulnerabilities/221901428/index.html"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2011_06_09",
+      "performance_impact": "Moderate",
+      "signature_severity": "Major",
+      "updated_at": "2024_04_09"
+    },
+    "other_options": {
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012970",
+    "msg": "ET SHELLCODE Possible Backslash Unicode Heap Spray Attempt",
+    "rev": "2",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "pcre": "/\\x5Cu0[a-d](\\x5Cu0|0)[a-d]/\\x5Cu0[a-d](\\x5Cu0|0)[a-d]/i",
+    "distance": "1",
+    "within": "4",
+    "content": [
+      "|5C|u0",
+      "|5C|u0"
+    ],
+    "reference": [
+      "url,www.darkreading.com/security/vulnerabilities/221901428/index.html"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2011_06_09",
+      "performance_impact": "Significant",
+      "signature_severity": "Major",
+      "updated_at": "2024_04_09"
+    },
+    "other_options": {
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2013272",
+    "msg": "ET SHELLCODE Unescape Hex Obfuscated Content",
+    "rev": "3",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "pcre": "/unescape\\x28(\\x22|\\x27)\\x5Cx[a-f,0-9]{2}\\x5Cx[a-f,0-9]{2}\\x5Cx[a-f,0-9]{2}/smi",
+    "distance": "1",
+    "within": "2",
+    "content": [
+      "unescape|28|",
+      "|5C|x",
+      "|5C|x",
+      "|5C|x",
+      "|5C|x"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2011_07_14",
+      "mitre_tactic_id": "TA0005",
+      "mitre_tactic_name": "Defense_Evasion",
+      "mitre_technique_id": "T1027",
+      "mitre_technique_name": "Obfuscated_Files_or_Information",
+      "performance_impact": "Significant",
+      "signature_severity": "Major",
+      "updated_at": "2024_04_09"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012196",
+    "msg": "ET SHELLCODE Possible Unescape Encoded Content With Split String Obfuscation",
+    "rev": "2",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "within": "100",
+    "content": [
+      "unescape|28 22|",
+      "!\"|29|\"",
+      "|22| +|0a|",
+      "|22| +|0a|",
+      "|22| ",
+      "|22| +|0a|"
+    ],
+    "reference": [
+      "url,cansecwest.com/slides07/csw07-nazario.pdf",
+      "url,www.sophos.com/security/technical-papers/malware_with_your_mocha.html"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2011_01_17",
+      "performance_impact": "Significant",
+      "signature_severity": "Major",
+      "updated_at": "2024_04_09"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012535",
+    "msg": "ET SHELLCODE Unescape Variable Unicode Shellcode",
+    "rev": "2",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "pcre": "/var\\x20[a-z,0-9]{1,30}\\x20\\x3D\\x20unescape\\x28.\\x5Cu[a-f,0-9]{2,4}\\x5Cu[a-f,0-9]{2,4}/i",
+    "within": "3",
+    "content": [
+      "= unescape|28|",
+      "|5C|u",
+      "|5C|u"
+    ],
+    "reference": [
+      "url,www.symantec.com/avcenter/reference/evolving.shell.code.pdf"
+    ],
+    "metadata": {
+      "confidence": "High",
+      "created_at": "2011_03_22",
+      "performance_impact": "Significant",
+      "signature_severity": "Major",
+      "updated_at": "2024_04_09"
+    },
+    "other_options": {
+      "nocase": [
+        "true",
+        "true",
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "$HTTP_PORTS",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2012197",
+    "msg": "ET SHELLCODE Possible Unescape Encoded Content With Split String Obfuscation 2",
+    "rev": "2",
+    "classtype": "shellcode-detect",
+    "flow": "established,to_client",
+    "within": "100",
+    "content": [
+      "unescape|28 27|",
+      "!\"|29|\"",
+      "|27| +|0a|",
+      "|27| +|0a|",
+      "|27| +|0a|",
+      "|27| +|0a|"
+    ],
+    "reference": [
+      "url,cansecwest.com/slides07/csw07-nazario.pdf",
+      "url,www.sophos.com/security/technical-papers/malware_with_your_mocha.html"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2011_01_17",
+      "performance_impact": "Significant",
+      "signature_severity": "Major",
+      "updated_at": "2024_04_09"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "true"
+      ]
+    }
+  }
+]

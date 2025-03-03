@@ -2,9 +2,9 @@
 package main
 
 import (
-	packetcapture "backend/go_backend/packet_capture"
-	"backend/go_backend/system_info"
-	"backend/go_backend/terminal"
+	packetcapture "NIDS/go_backend/packet_capture"
+	"NIDS/go_backend/system_info"
+	"NIDS/go_backend/terminal"
 	"fmt"
 	"log"
 	"net/http"

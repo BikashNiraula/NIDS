@@ -1,0 +1,17 @@
+[
+    {
+      "_comment": "Test for SQL injection payload with a custom marker; content provided as a string (which our system then converts to raw bytes).",
+      "_issues-comment": "Content is specified as a plain string but is ultimately interpreted as raw bytes for matching.",
+      "action": "alert",
+      "protocol": "tcp",
+      "source_ip": "$EXTERNAL_NET",
+      "source_port": "any",
+      "destination_ip": "$HOME_NET",
+      "destination_port": "any",
+      "sid": "3000001",
+      "msg": "Matched SQL injection payload (marker '--SQLiTest') from 192.168.1.100:54321 to vulnerable.example.com:80",
+      "rev": "1",
+      "content": "--SQLiTest"
+      
+    }
+]

@@ -95,7 +95,8 @@ class _NIDSDashboardState extends State<NIDSDashboard> {
                 DashboardView(),
                 AlertsView(),
                 NIDSRuleEditor(),
-                NetworkTrafficScreen(),
+                // NetworkTrafficScreen(),,
+                NetworkAnalyticsScreen(),
                 TerminalScreen(webSocketService: webSocketService),
                 WiresharkUI()
               ],
@@ -134,7 +135,8 @@ class DashboardView extends StatelessWidget {
               crossAxisSpacing: 16,
               children: [
                 SystemStatusCard(),
-                NetworkTrafficScreen(),
+                // NetworkTrafficScreen(),
+
                 AlertSummaryCard(),
                 RuleStatusCard(),
                 // NIDSDashboard(),

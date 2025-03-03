@@ -1,0 +1,536 @@
+[
+  {
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "161",
+    "sid": "2011011",
+    "msg": "ET SNMP Attempted UDP Access Attempt to Cisco IOS 12.1 Hidden Read/Write Community String ILMI",
+    "rev": "3",
+    "classtype": "attempted-admin",
+    "content": [
+      "ILMI"
+    ],
+    "reference": [
+      "url,www.cisco.com/warp/public/707/cisco-sa-20010228-ios-snmp-community.shtml",
+      "url,www.cisco.com/warp/public/707/cisco-sa-20010227-ios-snmp-ilmi.shtml"
+    ],
+    "metadata": {
+      "created_at": "2010_07_30",
+      "signature_severity": "Informational",
+      "updated_at": "2010_08_27"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "161",
+    "sid": "2011014",
+    "msg": "ET SNMP Attempted TCP Access Attempt to Cisco IOS 12.1 Hidden Read/Write Community String cable-docsis",
+    "rev": "3",
+    "classtype": "attempted-admin",
+    "flow": "to_server,established",
+    "content": [
+      "cable-docsis"
+    ],
+    "reference": [
+      "url,www.cisco.com/warp/public/707/cisco-sa-20010228-ios-snmp-community.shtml",
+      "url,www.iss.net/security_center/reference/vuln/cisco-ios-cable-docsis.htm",
+      "url,www.kb.cert.org/vuls/id/840665",
+      "cve,2004-1776"
+    ],
+    "metadata": {
+      "created_at": "2010_07_30",
+      "cve": "CVE_2004_1776",
+      "signature_severity": "Informational",
+      "updated_at": "2010_08_27"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "161",
+    "sid": "2011013",
+    "msg": "ET SNMP Attempted UDP Access Attempt to Cisco IOS 12.1 Hidden Read/Write Community String cable-docsis",
+    "rev": "4",
+    "classtype": "attempted-admin",
+    "content": [
+      "cable-docsis"
+    ],
+    "reference": [
+      "url,www.cisco.com/warp/public/707/cisco-sa-20010228-ios-snmp-community.shtml",
+      "url,www.iss.net/security_center/reference/vuln/cisco-ios-cable-docsis.htm",
+      "url,www.kb.cert.org/vuls/id/840665",
+      "cve,2004-1776"
+    ],
+    "metadata": {
+      "created_at": "2010_07_30",
+      "cve": "CVE_2004_1776",
+      "signature_severity": "Informational",
+      "updated_at": "2010_09_21"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ],
+      "nocase": [
+        "true"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "161",
+    "sid": "2101892",
+    "msg": "GPL SNMP null community string attempt",
+    "rev": "7",
+    "classtype": "misc-attack",
+    "depth": "15",
+    "offset": "5",
+    "content": [
+      "|04 01 00|"
+    ],
+    "reference": [
+      "bugtraq,2112",
+      "bugtraq,8974",
+      "cve,1999-0517"
+    ],
+    "metadata": {
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0517",
+      "signature_severity": "Major",
+      "updated_at": "2011_04_29"
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "161",
+    "sid": "2101413",
+    "msg": "GPL SNMP private access udp",
+    "rev": "12",
+    "classtype": "attempted-recon",
+    "content": [
+      "private"
+    ],
+    "reference": [
+      "bugtraq,4088",
+      "bugtraq,4089",
+      "bugtraq,4132",
+      "bugtraq,7212",
+      "cve,2002-0012",
+      "cve,2002-0013"
+    ],
+    "metadata": {
+      "created_at": "2010_09_23",
+      "cve": "CVE_2002_0012",
+      "signature_severity": "Informational",
+      "updated_at": "2012_07_27"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "161",
+    "sid": "2101411",
+    "msg": "GPL SNMP public access udp",
+    "rev": "12",
+    "classtype": "attempted-recon",
+    "content": [
+      "public"
+    ],
+    "reference": [
+      "bugtraq,2112",
+      "bugtraq,4088",
+      "bugtraq,4089",
+      "cve,1999-0517",
+      "cve,2002-0012",
+      "cve,2002-0013"
+    ],
+    "metadata": {
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0517",
+      "signature_severity": "Informational",
+      "updated_at": "2012_07_27"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "162",
+    "sid": "2101427",
+    "msg": "GPL SNMP PROTOS test-suite-trap-app attempt",
+    "rev": "6",
+    "classtype": "misc-attack",
+    "content": [
+      "08|02 01 00 04 06|public|A4|+|06|"
+    ],
+    "reference": [
+      "url,www.ee.oulu.fi/research/ouspg/protos/testing/c06/snmpv1/index.html"
+    ],
+    "metadata": {
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_07_27"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "161",
+    "sid": "2100516",
+    "msg": "GPL SNMP SNMP NT UserList",
+    "rev": "8",
+    "classtype": "attempted-recon",
+    "content": [
+      "+|06 10|@|14 D1 02 19|"
+    ],
+    "reference": [
+      "nessus,10546"
+    ],
+    "metadata": {
+      "created_at": "2010_09_23",
+      "signature_severity": "Informational",
+      "updated_at": "2012_07_27"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "161",
+    "sid": "2101414",
+    "msg": "GPL SNMP private access tcp",
+    "rev": "12",
+    "classtype": "attempted-recon",
+    "flow": "to_server,established",
+    "content": [
+      "private"
+    ],
+    "reference": [
+      "bugtraq,4088",
+      "bugtraq,4089",
+      "bugtraq,4132",
+      "cve,2002-0012",
+      "cve,2002-0013"
+    ],
+    "metadata": {
+      "created_at": "2010_09_23",
+      "cve": "CVE_2002_0012",
+      "signature_severity": "Informational",
+      "updated_at": "2012_07_30"
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "161",
+    "sid": "2101412",
+    "msg": "GPL SNMP public access tcp",
+    "rev": "14",
+    "classtype": "attempted-recon",
+    "flow": "to_server,established",
+    "content": [
+      "public"
+    ],
+    "reference": [
+      "bugtraq,2112",
+      "bugtraq,4088",
+      "bugtraq,4089",
+      "bugtraq,7212",
+      "cve,1999-0517",
+      "cve,2002-0012",
+      "cve,2002-0013"
+    ],
+    "metadata": {
+      "created_at": "2010_09_23",
+      "cve": "CVE_1999_0517",
+      "signature_severity": "Informational",
+      "updated_at": "2012_07_30"
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "any",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "any",
+    "destination_port": "161",
+    "sid": "2015856",
+    "msg": "ET SNMP Attempt to retrieve Cisco Config via TFTP (CISCO-CONFIG-COPY)",
+    "rev": "5",
+    "classtype": "policy-violation",
+    "content": [
+      "|2b 06 01 04 01 09 09 60 01 01 01 01|"
+    ],
+    "metadata": {
+      "confidence": "Medium",
+      "created_at": "2012_11_01",
+      "signature_severity": "Minor",
+      "updated_at": "2012_11_01"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "161",
+    "sid": "2015959",
+    "msg": "ET SNMP Samsung Printer SNMP Hardcode RW Community String",
+    "rev": "2",
+    "classtype": "attempted-admin",
+    "content": [
+      "s!a@m#n$p%c"
+    ],
+    "reference": [
+      "url,www.l8security.com/post/36715280176/vu-281284-samsung-printer-snmp-backdoor"
+    ],
+    "metadata": {
+      "created_at": "2012_11_29",
+      "signature_severity": "Minor",
+      "updated_at": "2012_11_29"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "161",
+    "sid": "2016178",
+    "msg": "ET SNMP missing community string attempt 1",
+    "rev": "2",
+    "classtype": "misc-attack",
+    "depth": "1",
+    "distance": "1",
+    "within": "1",
+    "content": [
+      "|30|",
+      "|02|",
+      "|04 00|"
+    ],
+    "reference": [
+      "bugtraq,2112",
+      "cve,1999-0517"
+    ],
+    "metadata": {
+      "created_at": "2013_01_09",
+      "cve": "CVE_1999_0517",
+      "signature_severity": "Informational",
+      "updated_at": "2013_01_10"
+    },
+    "other_options": {
+      "byte_jump": [
+        "1,0,relative"
+      ],
+      "byte_test": [
+        "1,!\u0026,0x80,0,relative,big",
+        "1,!\u0026,0x80,0,relative,big"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "161",
+    "sid": "2016179",
+    "msg": "ET SNMP missing community string attempt 2",
+    "rev": "2",
+    "classtype": "misc-attack",
+    "depth": "1",
+    "distance": "-129",
+    "within": "1",
+    "content": [
+      "|30|",
+      "|02|",
+      "|04 00|"
+    ],
+    "reference": [
+      "bugtraq,2112",
+      "cve,1999-0517"
+    ],
+    "metadata": {
+      "created_at": "2013_01_09",
+      "cve": "CVE_1999_0517",
+      "signature_severity": "Informational",
+      "updated_at": "2013_01_10"
+    },
+    "other_options": {
+      "byte_jump": [
+        "1,0,relative",
+        "1,0,relative"
+      ],
+      "byte_test": [
+        "1,\u0026,0x80,0,relative,big",
+        "1,\u0026,0x80,0,relative,big"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "161",
+    "sid": "2016181",
+    "msg": "ET SNMP missing community string attempt 4",
+    "rev": "2",
+    "classtype": "misc-attack",
+    "depth": "1",
+    "distance": "1",
+    "within": "1",
+    "content": [
+      "|30|",
+      "|02|",
+      "|04 00|"
+    ],
+    "reference": [
+      "bugtraq,2112",
+      "cve,1999-0517"
+    ],
+    "metadata": {
+      "created_at": "2013_01_09",
+      "cve": "CVE_1999_0517",
+      "signature_severity": "Informational",
+      "updated_at": "2013_01_10"
+    },
+    "other_options": {
+      "byte_jump": [
+        "1,0,relative"
+      ],
+      "byte_test": [
+        "1,!\u0026,0x80,0,relative,big",
+        "1,\u0026,0x80,0,relative,big"
+      ]
+    }
+  },
+  {
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "direction": "-\u003e",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "162",
+    "sid": "2100227",
+    "msg": "GPL SNMP SNMP trap Format String detected",
+    "rev": "5",
+    "classtype": "attempted-recon",
+    "content": [
+      "%s"
+    ],
+    "reference": [
+      "bugtraq,16267",
+      "cve,2006-0250",
+      "url,www.osvdb.org/displayvuln.php?osvdb_id=22493"
+    ],
+    "metadata": {
+      "created_at": "2010_09_23",
+      "cve": "CVE_2006_0250",
+      "signature_severity": "Informational",
+      "updated_at": "2014_10_30"
+    },
+    "other_options": {
+      "fast_pattern": [
+        "only"
+      ]
+    }
+  }
+]

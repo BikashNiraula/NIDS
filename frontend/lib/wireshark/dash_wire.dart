@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nidswebapp/wireshark/capture.dart';
-import 'package:nidswebapp/wireshark/packet.dart';
 
 // Wireshark-like Tab Bar
 class WiresharkTabBar extends StatelessWidget {
@@ -34,7 +33,6 @@ class WiresharkTabBar extends StatelessWidget {
     );
   }
 }
-
 
 // Capture Filter Input
 class CaptureFilterInput extends StatelessWidget {
