@@ -4,19 +4,22 @@ import (
 	"fmt"
 	"log"
 
+	"NIDS/core"
+	"NIDS/listnetworkinterfaces"
 	"NIDS/rulesparser"
+	"NIDS/sethomenet"
+
 	"github.com/spf13/cobra"
 )
 
-// homeNet is declared in the original code
-var homeNet []string
+
 
 func main() {
 	// Setup logging
 	log.SetFlags(log.Ldate | log.Ltime | log.Lmicroseconds)
 
 	// Initialize the IP blocker
-	initIPBlocker()
+	core.InitIPBlocker()
 
 	// Create the root command
 	var rootCmd = &cobra.Command{
@@ -38,12 +41,12 @@ func main() {
 			}
 
 			// Set HomeNet based on the interface
-			if err := SetHomeNet(iface); err != nil {
+			if err := sethomenet.SetHomeNet(iface); err != nil {
 				log.Fatalf("HomeNet IP not successfully set: %v", err)
 			}
 
 			// Call CaptureAndLogAllFields with the provided interface
-			if err := CaptureAndLogAllFields(iface, false, ""); err != nil {
+			if err := core.CaptureAndLogAllFields(iface, false, ""); err != nil {
 				log.Fatalf("Error capturing packets: %v", err)
 			}
 		},
@@ -68,12 +71,12 @@ func main() {
 			}
 
 			// Set HomeNet based on the specified interface
-			if err := SetHomeNet(iface); err != nil {
+			if err := sethomenet.SetHomeNet(iface); err != nil {
 				log.Fatalf("HomeNet IP not successfully set: %v", err)
 			}
 
 			// Perform matching using the provided rules file
-			if err := CaptureAndLogAllFields(iface, true, rulesFilePath); err != nil {
+			if err := core.CaptureAndLogAllFields(iface, true, rulesFilePath); err != nil {
 				log.Fatalf("Error matching packets: %v", err)
 			}
 		},
@@ -87,7 +90,7 @@ func main() {
 		Short: "List all available network interfaces",
 		Long:  "List all network interfaces on the system and their details.",
 		Run: func(cmd *cobra.Command, args []string) {
-			if err := ListNetworkInterfaces(); err != nil {
+			if err := listnetworkinterfaces.ListNetworkInterfaces(); err != nil {
 				log.Fatalf("Error listing interfaces: %v", err)
 			}
 		},
@@ -118,7 +121,7 @@ func main() {
 		Short: "List all currently blocked IPs",
 		Long:  "Display a list of all currently blocked IP addresses.",
 		Run: func(cmd *cobra.Command, args []string) {
-			blockedIPs := GetBlockedIPs()
+			blockedIPs := core.GetBlockedIPs()
 			if len(blockedIPs) == 0 {
 				fmt.Println("No IPs are currently blocked")
 				return
@@ -146,8 +149,8 @@ func main() {
 				return
 			}
 			
-			if ipBlocker != nil {
-				ipBlocker.BlockIP(ip)
+			if core.IpBlocker != nil {
+				core.IpBlocker.BlockIP(ip)
 				fmt.Printf("IP %s has been permanently blocked\n", ip)
 			} else {
 				fmt.Println("Error: IP blocker not initialized")
@@ -168,7 +171,7 @@ func main() {
 				return
 			}
 			
-			ManualUnblockIP(ip)
+			core.ManualUnblockIP(ip)
 			fmt.Printf("IP %s has been unblocked\n", ip)
 		},
 	}
