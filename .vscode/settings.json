@@ -1,4 +1,10 @@
 {
   "cmake.sourceDirectory": "/Users/gautam77/Desktop/NIDS_UI/frontend/linux",
-  "cSpell.words": ["packetcapture"]
+  "cSpell.words": [
+    "listnetworkinterfaces",
+    "NIDS",
+    "nidswebapp",
+    "packetcapture",
+    "wireshark"
+  ]
 }

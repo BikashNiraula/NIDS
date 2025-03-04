@@ -1,19 +1,12 @@
 // import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-import 'package:http/http.dart' as http;
 import 'package:nidswebapp/go_api/terminal.dart';
 import 'package:nidswebapp/go_api/web_socket.dart';
-import 'package:nidswebapp/screens/dashboard/dashboard%20screens/alert_summary_card.dart';
-import 'package:nidswebapp/screens/dashboard/dashboard%20screens/network_traffic_card.dart';
-import 'package:nidswebapp/screens/dashboard/dashboard%20screens/rule_status_card.dart';
-import 'dart:convert';
-
-import 'package:nidswebapp/screens/dashboard/dashboard%20screens/system_status_card.dart';
+import 'package:nidswebapp/screens/dashboard/dashboard%20screens/Dash_board/analytics.dart';
+import 'package:nidswebapp/screens/dashboard/dashboard%20screens/Dash_board/dashboard_final.dart';
 import 'package:nidswebapp/screens/rules_view.dart';
 
-import 'package:flutter/material.dart';
-import 'package:nidswebapp/go_api/web_socket.dart';
 import 'package:nidswebapp/wireshark/dash_wire.dart';
 
 class NIDSDashboard extends StatefulWidget {
@@ -37,7 +30,7 @@ class _NIDSDashboardState extends State<NIDSDashboard> {
   @override
   void dispose() {
     // Dispose of WebSocketService to avoid memory leaks
-    webSocketService.dispose();
+    // webSocketService.dispose();
     super.dispose();
   }
 
@@ -65,6 +58,14 @@ class _NIDSDashboardState extends State<NIDSDashboard> {
                 label: Text('Dashboard'),
               ),
               NavigationRailDestination(
+                icon: Icon(Icons.wifi_tethering),
+                label: Text('Packets'),
+              ),
+              NavigationRailDestination(
+                icon: Icon(Icons.analytics),
+                label: Text('Analytics'),
+              ),
+              NavigationRailDestination(
                 icon: Icon(Icons.warning),
                 label: Text('Alerts'),
               ),
@@ -73,16 +74,8 @@ class _NIDSDashboardState extends State<NIDSDashboard> {
                 label: Text('Rules'),
               ),
               NavigationRailDestination(
-                icon: Icon(Icons.analytics),
-                label: Text('Analytics'),
-              ),
-              NavigationRailDestination(
                 icon: Icon(Icons.terminal),
                 label: Text('CLI'),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.wifi_tethering),
-                label: Text('WireShark'),
               ),
             ],
           ),
@@ -92,13 +85,18 @@ class _NIDSDashboardState extends State<NIDSDashboard> {
             child: IndexedStack(
               index: _selectedIndex,
               children: [
-                DashboardView(),
+                // DashboardView(),
+                NetworkOverviewScreen(),
+                WiresharkUI(),
+                // NetworkDetailsScreen(networkData: networkData),
+                // NetworkAnalyticsScreen(),
+                NetworkDetailsScreen(),
+                // NetworkAnalyticsScreen(),
                 AlertsView(),
                 NIDSRuleEditor(),
                 // NetworkTrafficScreen(),,
-                NetworkAnalyticsScreen(),
+
                 TerminalScreen(webSocketService: webSocketService),
-                WiresharkUI()
               ],
             ),
           ),
@@ -108,46 +106,45 @@ class _NIDSDashboardState extends State<NIDSDashboard> {
   }
 }
 
-// Dashboard View
-class DashboardView extends StatelessWidget {
-  DashboardView({super.key});
+// // Dashboard View
+// class DashboardView extends StatelessWidget {
+//   DashboardView({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'NIDS Dashboard',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 24),
-          Expanded(
-            child: GridView.count(
-              crossAxisCount: MediaQuery.of(context).size.width > 1200 ? 4 : 2,
-              childAspectRatio: 1.5,
-              mainAxisSpacing: 16,
-              crossAxisSpacing: 16,
-              children: [
-                SystemStatusCard(),
-                // NetworkTrafficScreen(),
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.all(16.0),
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           const Text(
+//             'NIDS Dashboard',
+//             style: TextStyle(
+//               fontSize: 24,
+//               fontWeight: FontWeight.bold,
+//             ),
+//           ),
+//           const SizedBox(height: 24),
+//           Expanded(
+//             child: GridView.count(
+//               crossAxisCount: MediaQuery.of(context).size.width > 1200 ? 4 : 2,
+//               childAspectRatio: 1.5,
+//               mainAxisSpacing: 16,
+//               crossAxisSpacing: 16,
+//               children: [
+//                 SystemStatusCard(),
 
-                AlertSummaryCard(),
-                RuleStatusCard(),
-                // NIDSDashboard(),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//                 AlertSummaryCard(),
+//                 RuleStatusCard(),
+//                 // NIDSDashboard(),
+//               ],
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 // Placeholder views for other sections
 class AlertsView extends StatelessWidget {
@@ -159,11 +156,4 @@ class AlertsView extends StatelessWidget {
   }
 }
 
-class AnalyticsView extends StatelessWidget {
-  const AnalyticsView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: Text('Analytics View'));
-  }
-}
+//

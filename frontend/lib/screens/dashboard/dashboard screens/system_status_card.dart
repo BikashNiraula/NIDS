@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:nidswebapp/go_api/urls.dart';
+
 class SystemStatusController extends GetxController {
   var os = 'Loading...'.obs;
   var cpuUsage = 'Loading...'.obs;
@@ -18,8 +20,7 @@ class SystemStatusController extends GetxController {
   Future<void> fetchSystemStatus() async {
     while (true) {
       try {
-        final response =
-            await http.get(Uri.parse('http://localhost:8080/status'));
+        final response = await http.get(Uri.parse(statusURL));
 
         if (response.statusCode == 200) {
           final Map<String, dynamic> data = json.decode(response.body);
