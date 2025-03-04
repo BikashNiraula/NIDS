@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class PacketData {
   final int no;
   final String time;
@@ -33,5 +35,33 @@ class PacketData {
       type: json["Type"] ?? "normal",
       rawData: json,
     );
+  }
+
+  factory PacketData.fromMap(Map<String, dynamic> map) {
+    return PacketData(
+      no: map['no'],
+      time: map['time'],
+      source: map['source'],
+      destination: map['destination'],
+      protocol: map['protocol'],
+      length: map['length'],
+      info: map['info'],
+      type: map['type'],
+      rawData: jsonDecode(map['rawData']), // Convert JSON string back to Map
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'no': no,
+      'time': time,
+      'source': source,
+      'destination': destination,
+      'protocol': protocol,
+      'length': length,
+      'info': info,
+      'type': type,
+      'rawData': jsonEncode(rawData), // Convert Map to JSON string
+    };
   }
 }

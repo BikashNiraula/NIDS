@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:nidswebapp/db/sqlite.dart';
 import 'package:nidswebapp/go_api/urls.dart';
 import 'package:nidswebapp/wireshark/packet_data.dart';
 import 'package:nidswebapp/wireshark/web_socket_handler.dart';
 
 import 'packet_manager.dart';
 import 'ui_components.dart';
-import 'file_handler.dart';
 
 class PacketCaptureScreen extends StatefulWidget {
   const PacketCaptureScreen({Key? key}) : super(key: key);
@@ -19,11 +19,11 @@ class PacketCaptureScreen extends StatefulWidget {
 class _PacketCaptureScreenState extends State<PacketCaptureScreen> {
   late WebSocketHandler _webSocketHandler;
   late PacketManager _packetManager;
+  late SQLiteHandler _sqliteHandler;
   bool _isSaving = false;
   bool _isConnected = false;
   bool _isCapturing = false;
   bool _isSavingInProgress = false;
-  String? _currentSaveFilePath;
   PacketData? _selectedPacket;
   final ScrollController _scrollController = ScrollController();
   bool _autoScroll = true;
@@ -33,13 +33,22 @@ class _PacketCaptureScreenState extends State<PacketCaptureScreen> {
     super.initState();
     _webSocketHandler = WebSocketHandler(packetsURl);
     _packetManager = PacketManager(1000);
+    _sqliteHandler = SQLiteHandler();
+    _initializeDatabase();
     _connectWebSocket();
+  }
+
+  Future<void> _initializeDatabase() async {
+    await _sqliteHandler.init();
   }
 
   void _connectWebSocket() {
     _webSocketHandler.connect(
       (packet) {
         _packetManager.addPacket(packet, _isSaving);
+        if (_isSaving) {
+          _sqliteHandler.savePacket(packet);
+        }
         setState(() {});
       },
       () {
@@ -86,38 +95,19 @@ class _PacketCaptureScreenState extends State<PacketCaptureScreen> {
   }
 
   Future<void> _toggleSaveToFile() async {
-    if (_isSaving) {
-      setState(() {
-        _isSavingInProgress = true;
-      });
+    setState(() {
+      _isSaving = !_isSaving;
+      _isSavingInProgress = _isSaving;
+    });
 
-      await FileHandler.savePacketsToFile(
-          _currentSaveFilePath!, _packetManager.allPackets, context);
-
-      setState(() {
-        _isSaving = false;
-        _isSavingInProgress = false;
-      });
+    if (!_isSaving) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Stopped saving packets to database")),
+      );
     } else {
-      final String? filePath = await FileHandler.getSaveFilePath();
-      if (filePath != null) {
-        setState(() {
-          _isSaving = true;
-          _currentSaveFilePath = filePath;
-        });
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content:
-                Text("Recording packets to file: ${filePath.split('/').last}"),
-            duration: const Duration(seconds: 2),
-          ),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("File path not selected")),
-        );
-      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Started saving packets to database")),
+      );
     }
   }
 
@@ -152,8 +142,8 @@ class _PacketCaptureScreenState extends State<PacketCaptureScreen> {
               : IconButton(
                   icon: Icon(_isSaving ? Icons.save_alt : Icons.save_outlined),
                   tooltip: _isSaving
-                      ? 'Stop Saving and Save to File'
-                      : 'Start Saving to File',
+                      ? 'Stop Saving to Database'
+                      : 'Start Saving to Database',
                   onPressed: _isConnected ? _toggleSaveToFile : null,
                   color: _isSaving ? Colors.green : null,
                 ),
@@ -309,6 +299,10 @@ class _PacketCaptureScreenState extends State<PacketCaptureScreen> {
                         notification.dragDetails != null) {
                       setState(() {
                         _autoScroll = false;
+                      });
+                    } else if (notification is ScrollEndNotification) {
+                      setState(() {
+                        _autoScroll = true;
                       });
                     }
                     return true;

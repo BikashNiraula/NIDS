@@ -1,5 +1,6 @@
 // import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:nidswebapp/db/degub_screen.dart';
 
 import 'package:nidswebapp/go_api/terminal.dart';
 import 'package:nidswebapp/go_api/web_socket.dart';
@@ -77,6 +78,10 @@ class _NIDSDashboardState extends State<NIDSDashboard> {
                 icon: Icon(Icons.terminal),
                 label: Text('CLI'),
               ),
+              NavigationRailDestination(
+                icon: Icon(Icons.sd_storage_outlined),
+                label: Text('Database'),
+              ),
             ],
           ),
           const VerticalDivider(thickness: 1, width: 1),
@@ -88,15 +93,14 @@ class _NIDSDashboardState extends State<NIDSDashboard> {
                 // DashboardView(),
                 NetworkOverviewScreen(),
                 WiresharkUI(),
-                // NetworkDetailsScreen(networkData: networkData),
-                // NetworkAnalyticsScreen(),
+
                 NetworkDetailsScreen(),
-                // NetworkAnalyticsScreen(),
+
                 AlertsView(),
                 NIDSRuleEditor(),
-                // NetworkTrafficScreen(),,
 
                 TerminalScreen(webSocketService: webSocketService),
+                DebugScreen(),
               ],
             ),
           ),

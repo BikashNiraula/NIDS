@@ -40,16 +40,14 @@ dependencies:
   flutter_spinkit: ^5.2.1
   syncfusion_flutter_charts: ^28.2.3
   fl_chart: ^0.70.2
-  google_fonts: ^6.2.1
   flutter_code_editor: ^0.3.2
-  firebase_core: ^3.11.0
-  cloud_firestore: ^5.6.3
   web_socket_channel: ^3.0.2
-  sqflite: ^2.4.1
   synchronized: ^3.3.0+3
   permission_handler: ^11.4.0
   path_provider: ^2.1.5
   file_selector: ^1.0.3
+  sqflite_common_ffi_web: ^0.4.5+4
+  sqflite_common: ^2.5.4+6
 
 dev_dependencies:
   flutter_test:
