@@ -1,124 +1,3 @@
-// // // sqlite_handler.dart
-// // import 'package:nidswebapp/wireshark/packet_data.dart';
-// // import 'package:sqflite/sqflite.dart';
-// // import 'package:path/path.dart';
-
-// // class SQLiteHandler {
-// //   static final SQLiteHandler _instance = SQLiteHandler._internal();
-// //   late Database _database;
-
-// //   factory SQLiteHandler() {
-// //     return _instance;
-// //   }
-
-// //   SQLiteHandler._internal();
-
-// //   Future<void> init() async {
-// //     final databasePath = await getDatabasesPath();
-// //     final path = join(databasePath, 'packets.db');
-
-// //     _database = await openDatabase(
-// //       path,
-// //       version: 1,
-// //       onCreate: (db, version) async {
-// //         await db.execute('''
-// //           CREATE TABLE packets (
-// //             id INTEGER PRIMARY KEY AUTOINCREMENT,
-// //             no INTEGER,
-// //             time TEXT,
-// //             source TEXT,
-// //             destination TEXT,
-// //             protocol TEXT,
-// //             length INTEGER,
-// //             info TEXT,
-// //             rawData TEXT
-// //           )
-// //         ''');
-// //       },
-// //     );
-// //   }
-
-// //   Future<void> savePacket(PacketData packet) async {
-// //     await _database.insert(
-// //       'packets',
-// //       packet.toMap(),
-// //       conflictAlgorithm: ConflictAlgorithm.replace,
-// //     );
-// //   }
-
-// //   Future<List<PacketData>> getAllPackets() async {
-// //     final List<Map<String, dynamic>> maps = await _database.query('packets');
-// //     return List.generate(maps.length, (i) {
-// //       return PacketData.fromMap(maps[i]);
-// //     });
-// //   }
-
-// //   Future<void> clearPackets() async {
-// //     await _database.delete('packets');
-// //   }
-// // }
-// import 'package:nidswebapp/wireshark/packet_data.dart';
-// import 'package:sqflite_common/sqlite_api.dart';
-// import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
-
-// class SQLiteHandler {
-//   static final SQLiteHandler _instance = SQLiteHandler._internal();
-//   late Database _database;
-//   factory SQLiteHandler() {
-//     return _instance;
-//   }
-
-//   SQLiteHandler._internal();
-
-//   Future<void> init() async {
-//     // Initialize the web-compatible database factory
-//     var factory = databaseFactoryFfiWeb;
-
-//     // Open the database using the web factory
-//     _database = await factory.openDatabase('packets.db',
-//         options: OpenDatabaseOptions(
-//           version: 1,
-//           onCreate: (db, version) async {
-//             await db.execute('''
-//   CREATE TABLE packets (
-//     id INTEGER PRIMARY KEY AUTOINCREMENT,
-//     no INTEGER,
-//     time TEXT,
-//     source TEXT,
-//     destination TEXT,
-//     protocol TEXT,
-//     length INTEGER,
-//     info TEXT,
-//     type TEXT,
-//     rawData TEXT
-//   )
-// ''');
-//           },
-//         ));
-//     print('Database initialized on Web');
-//   }
-
-//   Future<void> savePacket(PacketData packet) async {
-//     await _database.insert(
-//       'packets',
-//       packet.toMap(),
-//       conflictAlgorithm: ConflictAlgorithm.replace,
-//     );
-//     print('Packet Saved');
-//   }
-
-//   Future<List<PacketData>> getAllPackets() async {
-//     final List<Map<String, dynamic>> maps = await _database.query('packets');
-//     return List.generate(maps.length, (i) {
-//       return PacketData.fromMap(maps[i]);
-//     });
-//   }
-
-//   Future<void> clearPackets() async {
-//     await _database.delete('packets');
-//     print('All packets deleted');
-//   }
-// }
 import 'package:nidswebapp/wireshark/packet_data.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
@@ -154,31 +33,76 @@ class SQLiteHandler {
     print('Switched to database: $_currentDbName');
   }
 
-  /// Initialize a database with the given name
+  // /// Initialize a database with the given name
+  // Future<void> _initDatabase(String dbName) async {
+  //   // Initialize the web-compatible database factory
+  //   var factory = databaseFactoryFfiWeb;
+
+  //   // Open the database using the web factory
+  //   Database db = await factory.openDatabase(
+  //     dbName,
+  //     options: OpenDatabaseOptions(
+  //       version: 1,
+  //       onCreate: (db, version) async {
+  //         await db.execute('''
+  //           CREATE TABLE packets (
+  //             id INTEGER PRIMARY KEY AUTOINCREMENT,
+  //             no INTEGER,
+  //             time TEXT,
+  //             source TEXT,
+  //             destination TEXT,
+  //             protocol TEXT,
+  //             length INTEGER,
+  //             info TEXT,
+  //             type TEXT,
+  //             rawData TEXT
+  //           )
+  //         ''');
+  //       },
+  //     ),
+  //   );
+
+  //   _databases[dbName] = db;
+  //   print('Database $dbName initialized on Web');
+  // }
   Future<void> _initDatabase(String dbName) async {
-    // Initialize the web-compatible database factory
     var factory = databaseFactoryFfiWeb;
 
-    // Open the database using the web factory
     Database db = await factory.openDatabase(
       dbName,
       options: OpenDatabaseOptions(
         version: 1,
         onCreate: (db, version) async {
+          // Create packets table
           await db.execute('''
-            CREATE TABLE packets (
-              id INTEGER PRIMARY KEY AUTOINCREMENT,
-              no INTEGER,
-              time TEXT,
-              source TEXT,
-              destination TEXT,
-              protocol TEXT,
-              length INTEGER,
-              info TEXT,
-              type TEXT,
-              rawData TEXT
-            )
-          ''');
+          CREATE TABLE packets (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            no INTEGER,
+            time TEXT,
+            source TEXT,
+            destination TEXT,
+            protocol TEXT,
+            length INTEGER,
+            info TEXT,
+            type TEXT,
+            rawData TEXT
+          )
+        ''');
+
+          // Create alerts table
+          await db.execute('''
+          CREATE TABLE alerts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            sid TEXT,
+            msg TEXT,
+            source_ip TEXT,
+            source_port TEXT,
+            destination_ip TEXT,
+            destination_port TEXT,
+            protocol TEXT,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+          )
+        ''');
         },
       ),
     );
@@ -258,5 +182,40 @@ class SQLiteHandler {
     }
     _databases.clear();
     print('All databases closed');
+  }
+
+  /// Save an alert to the current database
+  Future<void> saveAlert(Map<String, dynamic> alert) async {
+    if (!_databases.containsKey(_currentDbName)) {
+      await _initDatabase(_currentDbName);
+    }
+
+    await _databases[_currentDbName]!.insert(
+      'alerts',
+      alert,
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+
+    print('Alert saved to $_currentDbName');
+  }
+
+  /// Get all alerts from the current database
+  Future<List<Map<String, dynamic>>> getAllAlerts() async {
+    if (!_databases.containsKey(_currentDbName)) {
+      await _initDatabase(_currentDbName);
+    }
+
+    return await _databases[_currentDbName]!
+        .query('alerts', orderBy: 'timestamp DESC');
+  }
+
+  /// Clear all alerts from the current database
+  Future<void> clearAlerts() async {
+    if (!_databases.containsKey(_currentDbName)) {
+      await _initDatabase(_currentDbName);
+    }
+
+    await _databases[_currentDbName]!.delete('alerts');
+    print('All alerts deleted from $_currentDbName');
   }
 }

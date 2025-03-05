@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:nidswebapp/db/degub_screen.dart';
 
 import 'package:nidswebapp/go_api/terminal.dart';
+import 'package:nidswebapp/go_api/urls.dart';
 import 'package:nidswebapp/go_api/web_socket.dart';
+import 'package:nidswebapp/screens/alert/alert.dart';
 import 'package:nidswebapp/screens/dashboard/dashboard%20screens/Dash_board/analytics.dart';
 import 'package:nidswebapp/screens/dashboard/dashboard%20screens/Dash_board/dashboard_final.dart';
 import 'package:nidswebapp/screens/rules_view.dart';
@@ -25,7 +27,7 @@ class _NIDSDashboardState extends State<NIDSDashboard> {
   void initState() {
     super.initState();
     // Initialize WebSocketService in initState
-    webSocketService = WebSocketService('ws://localhost:8080/ws');
+    webSocketService = WebSocketService(terminalURL);
   }
 
   @override
@@ -95,8 +97,8 @@ class _NIDSDashboardState extends State<NIDSDashboard> {
                 WiresharkUI(),
 
                 NetworkDetailsScreen(),
-
-                AlertsView(),
+                AlertsPage(),
+                // AlertsView(),
                 NIDSRuleEditor(),
 
                 TerminalScreen(webSocketService: webSocketService),

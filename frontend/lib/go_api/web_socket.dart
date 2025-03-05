@@ -5,23 +5,22 @@ class WebSocketService {
   final WebSocketChannel _channel;
   final StreamController _streamController = StreamController.broadcast();
 
-WebSocketService(String url)
-    : _channel = WebSocketChannel.connect(Uri.parse(url)) {
-  _channel.stream.listen(
-    (data) {
-      print('Received data: $data'); // Log received data
-      _streamController.add(data);
-    },
-    onError: (error) {
-      print('WebSocket error: $error'); // Log errors
-      _streamController.addError(error);
-    },
-    onDone: () {
-      print('WebSocket connection closed.'); // Log connection closure
-      _streamController.close();
-    },
-  );
-
+  WebSocketService(String url)
+      : _channel = WebSocketChannel.connect(Uri.parse(url)) {
+    _channel.stream.listen(
+      (data) {
+        print('Received data: $data'); // Log received data
+        _streamController.add(data);
+      },
+      onError: (error) {
+        print('WebSocket error: $error'); // Log errors
+        _streamController.addError(error);
+      },
+      onDone: () {
+        print('WebSocket connection closed.'); // Log connection closure
+        _streamController.close();
+      },
+    );
   }
 
   Stream get stream => _streamController.stream;

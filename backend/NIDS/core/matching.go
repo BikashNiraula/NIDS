@@ -19,6 +19,14 @@ import (
 	_ "time"
 )
 
+//*For logging Matched rules and websocket channel
+func triggerMsg_UI_log(sid, message string) {
+    alert := "ALERT: Packet matched rule SID " + sid + " - " + message
+    log.Println(alert)
+    alertChannel <- alert // Send to WebSocket channel
+}
+
+
 // --- Snort Rule and Packet Definitions ---
 
 // SnortRule represents a complete JSON rule.
@@ -407,15 +415,21 @@ func Matching(rules []loadrulefiles.LoadedJsonRules, protocol *string, sip *stri
                 
                 // Perform flowbit actions (if defined)
                 if len(rule.Flowbits) > 0 {
+					
                     flowbitsActions(pkt, rule.Flowbits)
+					
                     // Log an alert unless "noalert" is specified
                     if !flowbitsNoAlert(rule.Flowbits) {
-                        log.Printf("ALERT: Packet matched rule SID %s - %s\n", rule.SID, rule.Message)
+						//*For logging and weabsocket channel
+						triggerMsg_UI_log(rule.SID, rule.Message)
+                        // log.Printf("ALERT: Packet matched rule SID %s - %s\n", rule.SID, rule.Message)
                         // Process IP blocking based on rule metadata
                         BlockOnMatch(pkt, rule)
                     }
                 } else {
-                    log.Printf("ALERT: Packet matched rule SID %s - %s\n", rule.SID, rule.Message)
+triggerMsg_UI_log(rule.SID, rule.Message)
+                    // log.Printf("ALERT: Packet matched rule SID %s - %s\n", rule.SID, rule.Message)
+					
                     // Process IP blocking based on rule metadata
                     BlockOnMatch(pkt, rule)
                 }

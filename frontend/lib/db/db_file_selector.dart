@@ -1,3 +1,111 @@
+// import 'package:flutter/material.dart';
+// import 'package:nidswebapp/db/sqlite.dart';
+
+// class DatabaseSelector extends StatefulWidget {
+//   final Function onDatabaseChanged;
+
+//   const DatabaseSelector({Key? key, required this.onDatabaseChanged})
+//       : super(key: key);
+
+//   @override
+//   _DatabaseSelectorState createState() => _DatabaseSelectorState();
+// }
+
+// class _DatabaseSelectorState extends State<DatabaseSelector> {
+//   final SQLiteHandler _dbHandler = SQLiteHandler();
+//   final TextEditingController _newDbController = TextEditingController();
+//   List<String> _availableDatabases = [];
+//   String _currentDatabase = 'packets.db';
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _loadDatabases();
+//   }
+
+//   @override
+//   void dispose() {
+//     _newDbController.dispose();
+//     super.dispose();
+//   }
+
+//   Future<void> _loadDatabases() async {
+//     List<String> databases = await _dbHandler.listDatabases();
+//     if (mounted) {
+//       setState(() {
+//         _availableDatabases = databases;
+//         _currentDatabase = _dbHandler.currentDatabaseName;
+//       });
+//     }
+//   }
+
+//   Future<void> _createNewDatabase() async {
+//     String newDbName = _newDbController.text.trim();
+//     if (newDbName.isEmpty) return;
+
+//     await _dbHandler.setDatabaseFile(newDbName);
+//     widget.onDatabaseChanged();
+//     _newDbController.clear();
+//     await _loadDatabases();
+//   }
+
+//   Future<void> _selectDatabase(String dbName) async {
+//     await _dbHandler.setDatabaseFile(dbName);
+//     widget.onDatabaseChanged();
+//     await _loadDatabases();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return ExpansionTile(
+//       title: Row(
+//         children: [
+//           Icon(Icons.storage),
+//           SizedBox(width: 8),
+//           Text('Current Database: $_currentDatabase'),
+//         ],
+//       ),
+//       children: [
+//         Padding(
+//           padding: const EdgeInsets.all(8.0),
+//           child: Row(
+//             children: [
+//               Expanded(
+//                 child: TextField(
+//                   controller: _newDbController,
+//                   decoration: InputDecoration(
+//                     hintText: 'Enter new database name',
+//                     border: OutlineInputBorder(),
+//                   ),
+//                 ),
+//               ),
+//               SizedBox(width: 8),
+//               ElevatedButton(
+//                 onPressed: _createNewDatabase,
+//                 child: Text('Create/Open'),
+//               ),
+//             ],
+//           ),
+//         ),
+//         if (_availableDatabases.isNotEmpty)
+//           ListView.builder(
+//             shrinkWrap: true,
+//             physics: NeverScrollableScrollPhysics(),
+//             itemCount: _availableDatabases.length,
+//             itemBuilder: (context, index) {
+//               final dbName = _availableDatabases[index];
+//               return ListTile(
+//                 title: Text(dbName),
+//                 selected: dbName == _currentDatabase,
+//                 leading: Icon(Icons.storage_rounded),
+//                 onTap: () => _selectDatabase(dbName),
+//               );
+//             },
+//           ),
+//       ],
+//     );
+//   }
+// }
 import 'package:flutter/material.dart';
 import 'package:nidswebapp/db/sqlite.dart';
 
@@ -14,8 +122,11 @@ class DatabaseSelector extends StatefulWidget {
 class _DatabaseSelectorState extends State<DatabaseSelector> {
   final SQLiteHandler _dbHandler = SQLiteHandler();
   final TextEditingController _newDbController = TextEditingController();
+  final TextEditingController _newAlertsDbController = TextEditingController();
   List<String> _availableDatabases = [];
+  List<String> _availableAlertsDatabases = [];
   String _currentDatabase = 'packets.db';
+  String _currentAlertsDatabase = 'alerts.db';
 
   @override
   void initState() {
@@ -26,6 +137,7 @@ class _DatabaseSelectorState extends State<DatabaseSelector> {
   @override
   void dispose() {
     _newDbController.dispose();
+    _newAlertsDbController.dispose();
     super.dispose();
   }
 
@@ -49,7 +161,23 @@ class _DatabaseSelectorState extends State<DatabaseSelector> {
     await _loadDatabases();
   }
 
+  Future<void> _createNewAlertsDatabase() async {
+    String newDbName = _newAlertsDbController.text.trim();
+    if (newDbName.isEmpty) return;
+
+    await _dbHandler.setDatabaseFile(newDbName);
+    widget.onDatabaseChanged();
+    _newAlertsDbController.clear();
+    await _loadDatabases();
+  }
+
   Future<void> _selectDatabase(String dbName) async {
+    await _dbHandler.setDatabaseFile(dbName);
+    widget.onDatabaseChanged();
+    await _loadDatabases();
+  }
+
+  Future<void> _selectAlertsDatabase(String dbName) async {
     await _dbHandler.setDatabaseFile(dbName);
     widget.onDatabaseChanged();
     await _loadDatabases();
@@ -68,21 +196,44 @@ class _DatabaseSelectorState extends State<DatabaseSelector> {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Row(
+          child: Column(
             children: [
-              Expanded(
-                child: TextField(
-                  controller: _newDbController,
-                  decoration: InputDecoration(
-                    hintText: 'Enter new database name',
-                    border: OutlineInputBorder(),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _newDbController,
+                      decoration: InputDecoration(
+                        hintText: 'Enter new packets database name',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
                   ),
-                ),
+                  SizedBox(width: 8),
+                  ElevatedButton(
+                    onPressed: _createNewDatabase,
+                    child: Text('Create/Open'),
+                  ),
+                ],
               ),
-              SizedBox(width: 8),
-              ElevatedButton(
-                onPressed: _createNewDatabase,
-                child: Text('Create/Open'),
+              SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _newAlertsDbController,
+                      decoration: InputDecoration(
+                        hintText: 'Enter new alerts database name',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  ElevatedButton(
+                    onPressed: _createNewAlertsDatabase,
+                    child: Text('Create/Open'),
+                  ),
+                ],
               ),
             ],
           ),
@@ -99,6 +250,21 @@ class _DatabaseSelectorState extends State<DatabaseSelector> {
                 selected: dbName == _currentDatabase,
                 leading: Icon(Icons.storage_rounded),
                 onTap: () => _selectDatabase(dbName),
+              );
+            },
+          ),
+        if (_availableAlertsDatabases.isNotEmpty)
+          ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: _availableAlertsDatabases.length,
+            itemBuilder: (context, index) {
+              final dbName = _availableAlertsDatabases[index];
+              return ListTile(
+                title: Text(dbName),
+                selected: dbName == _currentAlertsDatabase,
+                leading: Icon(Icons.warning_rounded),
+                onTap: () => _selectAlertsDatabase(dbName),
               );
             },
           ),
