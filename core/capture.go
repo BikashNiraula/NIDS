@@ -117,40 +117,48 @@ func CaptureAndLogAllFields(iface string, doMatch bool, rulePath string) error {
 			}
 		}
 
-		// Extract transport layer (TCP/UDP).
-		if transportLayer := packet.TransportLayer(); transportLayer != nil {
-			protocol = transportLayer.LayerType().String()
-			switch transLayer := transportLayer.(type) {
-			case *layers.TCP:
-				src, dst := transLayer.TransportFlow().Endpoints()
-				sourcePort = src.String()
-				destinationPort = dst.String()
-				if transLayer.FIN {
-					flagsBuilder.WriteString("F")
-				}
-				if transLayer.SYN {
-					flagsBuilder.WriteString("S")
-				}
-				if transLayer.RST {
-					flagsBuilder.WriteString("R")
-				}
-				if transLayer.PSH {
-					flagsBuilder.WriteString("P")
-				}
-				if transLayer.ACK {
-					flagsBuilder.WriteString("A")
-				}
-				if transLayer.URG {
-					flagsBuilder.WriteString("U")
-				}
-				tcpFlags = flagsBuilder.String()
-			case *layers.UDP:
-				src, dst := transLayer.TransportFlow().Endpoints()
-				sourcePort = src.String()
-				destinationPort = dst.String()
-			}
+// Extract transport layer (TCP/UDP).
+if transportLayer := packet.TransportLayer(); transportLayer != nil {
+    protocol = transportLayer.LayerType().String()
+    switch transLayer := transportLayer.(type) {
+    case *layers.TCP:
+        src, dst := transLayer.TransportFlow().Endpoints()
+        sourcePort = src.String()
+        destinationPort = dst.String()
+        if transLayer.FIN {
+            flagsBuilder.WriteString("F")
+        }
+        if transLayer.SYN {
+            flagsBuilder.WriteString("S")
+        }
+        if transLayer.RST {
+            flagsBuilder.WriteString("R")
+        }
+        if transLayer.PSH {
+            flagsBuilder.WriteString("P")
+        }
+        if transLayer.ACK {
+            flagsBuilder.WriteString("A")
+        }
+        if transLayer.URG {
+            flagsBuilder.WriteString("U")
+        }
+        tcpFlags = flagsBuilder.String()
+    case *layers.UDP:
+        src, dst := transLayer.TransportFlow().Endpoints()
+        sourcePort = src.String()
+        destinationPort = dst.String()
+    }
+} else if icmpLayer := packet.Layer(layers.LayerTypeICMPv4); icmpLayer != nil || packet.Layer(layers.LayerTypeICMPv6) != nil {
+    // Handle ICMP when there is no TCP/UDP.
+    protocol = "ICMP"
+    sourcePort = "N/A"
+    destinationPort = "N/A"
 
-		}
+
+} else {
+	protocol = ""
+}
 
 		// Extract application layer payload and try to infer the application protocol.
 		if applicationLayer := packet.ApplicationLayer(); applicationLayer != nil {

@@ -88,8 +88,8 @@ func (tt *ThresholdTracker) RecordEvent(ruleID, srcIP string, countThreshold, se
 	// Add the current event.
 	entry.timestamps = append(entry.timestamps, now)
 
-	log.Printf("DEBUG: Rule %s for %s has %d/%d events in %ds", 
-		ruleID, srcIP, len(entry.timestamps), entry.countThreshold, entry.secondsThreshold)
+	// log.Printf("DEBUG: Rule %s for %s has %d/%d events in %ds", 
+	// 	ruleID, srcIP, len(entry.timestamps), entry.countThreshold, entry.secondsThreshold)
 
 	// Check if the threshold is reached.
 	if len(entry.timestamps) >= entry.countThreshold {

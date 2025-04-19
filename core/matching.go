@@ -368,7 +368,7 @@ func Matching(rules []loadrulefiles.LoadedJsonRules, protocol *string, sip *stri
     for _, rule := range rules {
         // Skip processing if the source IP is already blocked
         if IpBlocker.IsBlocked(pkt.SourceIP) {
-            log.Printf("Skipping rule check for blocked source IP: %s", pkt.SourceIP)
+            //log.Printf("Skipping rule check for blocked source IP: %s", pkt.SourceIP)
             continue
         }
         
@@ -423,6 +423,6 @@ func Matching(rules []loadrulefiles.LoadedJsonRules, protocol *string, sip *stri
     }
     
     if !matched {
-        log.Println("No matching rules found for the given packet")
+        //log.Println("No matching rules found for the given packet")
     }
 }

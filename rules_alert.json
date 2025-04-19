@@ -1,0 +1,226 @@
+[
+    {
+      "_comment": "TCP SYN flood detection rule",
+      "action": "alert",
+      "protocol": "tcp",
+      "source_ip": "$EXTERNAL_NET",
+      "source_port": "any",
+      "destination_ip": "$HOME_NET",
+      "destination_port": "any",
+      "sid": "3000001",
+      "msg": "TCP SYN flood attack detected",
+      "rev": "1",
+      "flags": "S",
+      "threshold": {
+        "type": "threshold",
+        "count": "1000",
+        "seconds": "5",
+        "track": "by_src"
+      }
+    },
+    {
+      "_comment": "TCP SYN flood detection rule",
+      "action": "alert",
+      "protocol": "tcp",
+      "source_ip": "$EXTERNAL_NET",
+      "source_port": "any",
+      "destination_ip": "$HOME_NET",
+      "destination_port": "any",
+      "sid": "3000013",
+      "msg": "TCP SYN ACK flood attack detected",
+      "rev": "1",
+      "flags": "SA",
+      "threshold": {
+        "type": "threshold",
+        "count": "1000",
+        "seconds": "5",
+        "track": "by_src"
+      }
+    },
+    {
+      "_comment": "TCP ACK flood detection rule",
+      "action": "alert",
+      "protocol": "tcp",
+      "source_ip": "$EXTERNAL_NET",
+      "source_port": "any",
+      "destination_ip": "$HOME_NET",
+      "destination_port": "any",
+      "sid": "3000002",
+      "msg": "TCP ACK flood attack detected",
+      "rev": "1",
+      "flags": "A",
+      "threshold": {
+        "type": "threshold",
+        "count": "1000",
+        "seconds": "5",
+        "track": "by_src"
+      }
+    },
+    {
+      "_comment": "TCP RST flood detection rule",
+      "action": "alert",
+      "protocol": "tcp",
+      "source_ip": "$EXTERNAL_NET",
+      "source_port": "any",
+      "destination_ip": "$HOME_NET",
+      "destination_port": "any",
+      "sid": "3000003",
+      "msg": "TCP RST flood attack detected",
+      "rev": "1",
+      "flags": "R",
+      "threshold": {
+        "type": "threshold",
+        "count": "1200",
+        "seconds": "5",
+        "track": "by_src"
+      }
+    },
+    {
+      "_comment": "TCP FIN flood detection rule",
+      "action": "alert",
+      "protocol": "tcp",
+      "source_ip": "$EXTERNAL_NET",
+      "source_port": "any",
+      "destination_ip": "$HOME_NET",
+      "destination_port": "any",
+      "sid": "3000004",
+      "msg": "TCP FIN flood attack detected",
+      "rev": "1",
+      "flags": "F",
+      "threshold": {
+        "type": "threshold",
+        "count": "800",
+        "seconds": "5",
+        "track": "by_src"
+      }
+    },
+    {
+      "_comment": "TCP XMAS flood detection rule",
+      "action": "alert",
+      "protocol": "tcp",
+      "source_ip": "$EXTERNAL_NET",
+      "source_port": "any",
+      "destination_ip": "$HOME_NET",
+      "destination_port": "any",
+      "sid": "3000005",
+      "msg": "TCP XMAS flood attack detected",
+      "rev": "1",
+      "flags": "FPU",
+      "threshold": {
+        "type": "threshold",
+        "count": "700",
+        "seconds": "5",
+        "track": "by_src"
+      }
+    },
+    {
+      "_comment": "TCP PSH flood detection rule",
+      "action": "alert",
+      "protocol": "tcp",
+      "source_ip": "$EXTERNAL_NET",
+      "source_port": "any",
+      "destination_ip": "$HOME_NET",
+      "destination_port": "any",
+      "sid": "3000007",
+      "msg": "TCP PSH flood attack detected",
+      "rev": "1",
+      "flags": "P",
+      "threshold": {
+        "type": "threshold",
+        "count": "1100",
+        "seconds": "5",
+        "track": "by_src"
+      }
+    },
+    {
+    "_comment": "UDP flood detection rule",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2000003",
+    "msg": "UDP flood attack detected",
+    "rev": "1",
+    "threshold": {
+      "type": "threshold",
+      "count": "2000",
+      "seconds": "10",
+      "track": "by_src"
+    }
+  },
+  {
+    "_comment": "ICMP flood detection rule",
+    "action": "alert",
+    "protocol": "icmp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "any",
+    "sid": "2000004",
+    "msg": "ICMP flood attack detected",
+    "rev": "1",
+    "threshold": {
+      "type": "threshold",
+      "count": "500",
+      "seconds": "10",
+      "track": "by_src"
+    }
+  },
+  {
+    "_comment": "HTTP GET flood detection rule",
+    "action": "alert",
+    "protocol": "tcp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "80",
+    "sid": "2000005",
+    "msg": "HTTP GET flood attack detected",
+    "rev": "1",
+    "content": "GET",
+    "threshold": {
+      "type": "threshold",
+      "count": "150",
+      "seconds": "10",
+      "track": "by_src"
+    }
+  },
+  {
+    "_comment": "DNS amplification attack detection rule",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "53",
+    "sid": "2000006",
+    "msg": "DNS amplification attack detected",
+    "rev": "1",
+    "threshold": {
+      "type": "threshold",
+      "count": "1000",
+      "seconds": "10",
+      "track": "by_src"
+    }
+  },
+  {
+    "_comment": "NTP amplification attack detection rule",
+    "action": "alert",
+    "protocol": "udp",
+    "source_ip": "$EXTERNAL_NET",
+    "source_port": "any",
+    "destination_ip": "$HOME_NET",
+    "destination_port": "123",
+    "sid": "2000007",
+    "msg": "NTP amplification attack detected",
+    "rev": "1",
+    "threshold": {
+      "type": "threshold",
+      "count": "500",
+      "seconds": "10",
+      "track": "by_src"
+    }
+  }
+]
